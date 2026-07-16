@@ -142,3 +142,54 @@ footer {
     background:#111;
 
 }
+.logo {
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.u-logo {
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:35px;
+    font-weight:bold;
+
+    background:linear-gradient(135deg,#8a2be2,#4b0082);
+    box-shadow:0 0 20px #8a2be2;
+}
+
+
+body {
+    background:#08000f;
+}
+
+
+nav {
+    background:#120020;
+    border-bottom:2px solid #8a2be2;
+}
+
+
+nav a:hover {
+    color:#b76cff;
+}
+
+
+.discord {
+    background:#8a2be2;
+}
+
+
+.connect {
+    background:#5b00b5;
+}
+
+
+.cards div {
+    background:#16002b;
+    border:1px solid #8a2be2;
+}
