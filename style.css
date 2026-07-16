@@ -1,0 +1,28 @@
+body {
+    background:#111;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.hero {
+    padding:100px;
+    background:#1b1b1b;
+}
+
+h1 {
+    font-size:50px;
+}
+
+a {
+    background:#5865F2;
+    color:white;
+    padding:15px 30px;
+    text-decoration:none;
+    border-radius:10px;
+}
+
+li {
+    list-style:none;
+    padding:10px;
+}
