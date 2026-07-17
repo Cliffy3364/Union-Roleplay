@@ -9135,3 +9135,351 @@ body.application-modal-open {
     }
 
 }
+
+/* =========================================================
+   UNION ROLEPLAY — FINAL SHARED PAGE FIXES
+   Keeps About and Departments visually consistent with the
+   rest of the portal and supports their actual HTML classes.
+========================================================= */
+
+:root {
+    --text-muted: var(--grey);
+}
+
+/* Brand image safeguards */
+.logo img,
+.footer-logo {
+    display: block;
+    object-fit: contain;
+}
+
+.logo img {
+    width: 54px;
+    height: 54px;
+}
+
+.about-image {
+    min-height: 430px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid rgba(168, 85, 247, .22);
+    border-radius: 30px;
+    background:
+        radial-gradient(circle at 50% 45%, rgba(168, 85, 247, .32), transparent 34%),
+        linear-gradient(145deg, rgba(124, 58, 237, .15), rgba(255, 255, 255, .025));
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .38);
+}
+
+.about-image::before {
+    content: "UNION ROLEPLAY";
+    position: absolute;
+    bottom: 34px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,.28);
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .32em;
+    white-space: nowrap;
+}
+
+.about-image img {
+    width: min(260px, 56%);
+    height: auto;
+    border: 0;
+    border-radius: 0;
+    filter: drop-shadow(0 20px 40px rgba(124, 58, 237, .48));
+    image-rendering: auto;
+}
+
+.values {
+    background: #09090b;
+}
+
+/* Departments page */
+.department-section {
+    position: relative;
+    overflow: hidden;
+    background: #0d0d14;
+}
+
+.department-section:nth-of-type(even) {
+    background: #101018;
+}
+
+.department-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 70px;
+    align-items: center;
+}
+
+.department-layout.reverse .department-info {
+    order: 1;
+}
+
+.department-layout.reverse .department-banner {
+    order: 2;
+}
+
+.department-info h2 {
+    margin: 8px 0 22px;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.04;
+}
+
+.department-info p {
+    max-width: 700px;
+    margin-bottom: 17px;
+    color: var(--grey);
+    font-size: 1.04rem;
+    line-height: 1.85;
+}
+
+.department-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.department-banner {
+    position: relative;
+    min-height: 460px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 30px;
+    box-shadow: 0 35px 90px rgba(0,0,0,.38);
+}
+
+.department-banner::before,
+.department-banner::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.department-banner::before {
+    width: 320px;
+    height: 320px;
+    right: -70px;
+    top: -60px;
+    background: rgba(255,255,255,.10);
+    filter: blur(5px);
+}
+
+.department-banner::after {
+    width: 220px;
+    height: 220px;
+    left: -65px;
+    bottom: -55px;
+    background: rgba(255,255,255,.07);
+}
+
+.police-banner {
+    background:
+        linear-gradient(145deg, rgba(17, 24, 57, .18), rgba(0,0,0,.35)),
+        radial-gradient(circle at 65% 30%, rgba(91, 113, 255, .6), transparent 28%),
+        linear-gradient(135deg, #111934, #202b5d 52%, #0b0d16);
+}
+
+.police-banner::before {
+    content: "UCPD";
+    display: grid;
+    place-items: center;
+    width: 250px;
+    height: 250px;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    border: 2px solid rgba(255,255,255,.22);
+    background: rgba(7, 11, 27, .44);
+    color: rgba(255,255,255,.88);
+    font-size: 3.2rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    backdrop-filter: blur(15px);
+}
+
+.ambulance-banner {
+    background:
+        radial-gradient(circle at 67% 32%, rgba(34, 197, 94, .34), transparent 30%),
+        linear-gradient(135deg, #062e35, #0f6471 55%, #07161a);
+}
+
+.ambulance-banner::before {
+    content: "+";
+    display: grid;
+    place-items: center;
+    width: 230px;
+    height: 230px;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    border: 2px solid rgba(255,255,255,.22);
+    background: rgba(4, 35, 40, .46);
+    color: rgba(255,255,255,.9);
+    font-size: 8rem;
+    font-weight: 300;
+    backdrop-filter: blur(15px);
+}
+
+.business-banner {
+    background:
+        radial-gradient(circle at 68% 28%, rgba(192, 132, 252, .46), transparent 29%),
+        linear-gradient(135deg, #23113d, #552783 55%, #13091f);
+}
+
+.business-banner::before {
+    content: "BUSINESS";
+    display: grid;
+    place-items: center;
+    width: 290px;
+    height: 190px;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    border: 2px solid rgba(255,255,255,.2);
+    border-radius: 28px;
+    background: rgba(31, 12, 50, .46);
+    color: rgba(255,255,255,.88);
+    font-size: 1.7rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    backdrop-filter: blur(15px);
+}
+
+#police-divisions,
+#civilian,
+.rank-structure,
+.requirements {
+    background: #09090b;
+}
+
+#police-divisions .feature-card,
+#civilian .feature-card,
+.requirements .feature-card {
+    min-height: 260px;
+}
+
+.rank-structure {
+    position: relative;
+    overflow: hidden;
+}
+
+.rank-structure::before {
+    content: "";
+    position: absolute;
+    width: 620px;
+    height: 620px;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: rgba(124,58,237,.10);
+    filter: blur(100px);
+    pointer-events: none;
+}
+
+.rank-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.rank-card {
+    padding: 38px;
+    border: 1px solid rgba(168,85,247,.22);
+    border-radius: 25px;
+    background:
+        linear-gradient(145deg, rgba(124,58,237,.12), rgba(255,255,255,.025));
+    box-shadow: 0 25px 65px rgba(0,0,0,.25);
+}
+
+.rank-card h3 {
+    margin-bottom: 24px;
+    font-size: 1.55rem;
+}
+
+.rank-card ul {
+    display: grid;
+    gap: 10px;
+    counter-reset: rank;
+}
+
+.rank-card li {
+    position: relative;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 10px 16px 10px 52px;
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 13px;
+    background: rgba(255,255,255,.026);
+    color: var(--grey);
+    counter-increment: rank;
+}
+
+.rank-card li::before {
+    content: counter(rank, decimal-leading-zero);
+    position: absolute;
+    left: 14px;
+    color: #c084fc;
+    font-size: .76rem;
+    font-weight: 800;
+}
+
+.requirements {
+    background: #101018;
+}
+
+/* Make every main page start below the fixed navigation */
+main > .page-hero:first-child {
+    margin-top: 0;
+}
+
+@media (max-width: 1050px) {
+    .department-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .department-layout.reverse .department-info,
+    .department-layout.reverse .department-banner {
+        order: initial;
+    }
+
+    .department-banner {
+        min-height: 370px;
+    }
+}
+
+@media (max-width: 760px) {
+    .about-image {
+        min-height: 330px;
+    }
+
+    .rank-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rank-card {
+        padding: 25px;
+    }
+
+    .department-banner {
+        min-height: 300px;
+    }
+
+    .department-buttons {
+        flex-direction: column;
+    }
+
+    .department-buttons a {
+        text-align: center;
+    }
+}
