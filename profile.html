@@ -1,1 +1,1236 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#9d55ff"><meta name="description" content="Union Roleplay — British economy whitelist FiveM roleplay."><title>Profile | Union Roleplay</title><link rel="icon" href="assets/union-logo.png"><link rel="stylesheet" href="css/style.css"></head><body><header class="topbar"><div class="wrap nav"><a class="brand" href="index.html"><img src="assets/union-logo.png" alt="Union Roleplay"><span>UNION ROLEPLAY</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><nav class="navlinks"><a href="index.html">About</a><a href="applications.html">Applications</a><a href="rules.html">Rules</a><a href="support.html">Support</a><a href="profile.html">Profile</a><a href="staff.html">Staff Panel</a></nav><div class="navcta"><a class="button ghost" href="https://discord.gg/YNkMWPuD62" target="_blank">Discord</a><a class="button" href="fivem://connect/185.223.29.112:30120">Play</a></div></div></header><main><section class="pagehero"><div class="wrap"><span class="kicker">Player account</span><h1>FiveM Profile</h1><p class="lead">Connect Discord to view linked characters, playtime, employment, vehicles and application history once the profile API is connected to your FiveM database.</p></div></section><section><div class="wrap grid2" style="padding-bottom:80px"><article class="card"><span class="tag">Account connection</span><h2>Link your identity</h2><p>The profile page is ready for secure server-side data. Database passwords and FiveM identifiers must never be placed in GitHub Pages JavaScript.</p><div class="actions"><button class="button" disabled>Connect Discord — setup required</button></div></article><article class="card"><span class="tag">Profile preview</span><h2>Not connected</h2><div class="statrow"><div class="stat"><strong>—</strong><span>Playtime</span></div><div class="stat"><strong>—</strong><span>Characters</span></div><div class="stat"><strong>—</strong><span>Primary job</span></div></div></article></div></section></main><footer><div class="wrap footer"><div><img src="assets/union-logo.png" alt=""><strong>Union Roleplay</strong><p>British economy • Whitelist • Strict roleplay</p></div><div><a href="applications.html">Applications</a><a href="rules.html">Rules</a><a href="support.html">Support</a></div><small>© 2026 Union Roleplay. Not affiliated with Rockstar Games or Cfx.re.</small></div></footer><script src="js/config.js"></script><script src="js/main.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Manage your Union Roleplay profile, Discord account and application status."
+    >
+
+    <title>Profile | Union Roleplay</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+</head>
+
+<body class="profile-page">
+
+    <!-- ================================= -->
+    <!-- NAVIGATION -->
+    <!-- ================================= -->
+
+    <header class="site-header">
+        <div class="container nav-container">
+
+            <a
+                class="site-logo"
+                href="index.html"
+                aria-label="Union Roleplay home"
+            >
+                <span class="site-logo-mark">U</span>
+
+                <span class="site-logo-text">
+                    Union Roleplay
+                </span>
+            </a>
+
+            <button
+                class="mobile-menu-button"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav
+                class="main-navigation"
+                aria-label="Main navigation"
+            >
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="rules.html">Rules</a>
+                <a href="departments.html">Departments</a>
+                <a href="whitelist.html">Get Whitelisted</a>
+                <a href="recruitment.html">Recruitment</a>
+                <a href="support.html">Support</a>
+
+                <a
+                    class="active"
+                    href="profile.html"
+                    aria-current="page"
+                >
+                    Profile
+                </a>
+            </nav>
+
+            <a
+                class="nav-connect-button"
+                href="fivem://connect/185.223.29.112:30120"
+            >
+                Connect
+            </a>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- ================================= -->
+        <!-- PROFILE HERO -->
+        <!-- ================================= -->
+
+        <section class="page-hero profile-hero">
+
+            <div class="container">
+
+                <span class="section-eyebrow">
+                    PLAYER ACCOUNT
+                </span>
+
+                <h1>
+                    Your Union
+                    <span>profile</span>
+                </h1>
+
+                <p>
+                    View your account information, Discord connection,
+                    whitelist progress and recent applications from one place.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================= -->
+        <!-- PROFILE OVERVIEW -->
+        <!-- ================================= -->
+
+        <section class="profile-overview-section">
+
+            <div class="container profile-overview-grid">
+
+                <!-- PROFILE IDENTITY -->
+
+                <article class="profile-identity-card">
+
+                    <div class="profile-avatar-wrap">
+
+                        <div
+                            class="profile-avatar"
+                            aria-label="Player avatar"
+                        >
+                            U
+                        </div>
+
+                        <span
+                            class="profile-online-indicator"
+                            title="Online"
+                        ></span>
+
+                    </div>
+
+                    <div class="profile-identity-content">
+
+                        <span class="profile-account-label">
+                            UNION ACCOUNT
+                        </span>
+
+                        <h2 id="profileDisplayName">
+                            Guest Player
+                        </h2>
+
+                        <p id="profileDiscordHandle">
+                            Discord account not connected
+                        </p>
+
+                        <div class="profile-identity-badges">
+
+                            <span class="profile-badge profile-badge-neutral">
+                                Guest
+                            </span>
+
+                            <span class="profile-badge profile-badge-warning">
+                                Not Whitelisted
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="profile-edit-button"
+                        type="button"
+                        disabled
+                        title="Profile editing will be available after Discord login"
+                    >
+                        Edit Profile
+                    </button>
+
+                </article>
+
+
+                <!-- ACCOUNT STATUS -->
+
+                <aside class="profile-status-card">
+
+                    <div class="profile-status-heading">
+
+                        <span class="profile-account-label">
+                            ACCOUNT STATUS
+                        </span>
+
+                        <span class="profile-status-dot"></span>
+
+                    </div>
+
+                    <h2>
+                        Account setup incomplete
+                    </h2>
+
+                    <p>
+                        Connect Discord to unlock applications, account
+                        tracking and department access.
+                    </p>
+
+                    <div class="profile-completion-row">
+
+                        <span>Profile completion</span>
+
+                        <strong id="profileCompletionValue">
+                            25%
+                        </strong>
+
+                    </div>
+
+                    <div
+                        class="profile-completion-track"
+                        role="progressbar"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="25"
+                    >
+                        <span
+                            id="profileCompletionBar"
+                            style="width: 25%;"
+                        ></span>
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================= -->
+        <!-- ACCOUNT DETAILS -->
+        <!-- ================================= -->
+
+        <section class="profile-account-section">
+
+            <div class="container profile-account-grid">
+
+                <!-- DISCORD CONNECTION -->
+
+                <article class="profile-panel discord-connect-panel">
+
+                    <div class="profile-panel-heading">
+
+                        <div>
+
+                            <span class="profile-account-label">
+                                CONNECTION
+                            </span>
+
+                            <h2>
+                                Discord account
+                            </h2>
+
+                        </div>
+
+                        <span class="discord-connect-icon">
+                            D
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Link your Discord account to verify your identity and
+                        access whitelist and recruitment applications.
+                    </p>
+
+                    <div class="discord-account-state">
+
+                        <div class="discord-account-avatar">
+                            ?
+                        </div>
+
+                        <div>
+
+                            <strong id="discordConnectionName">
+                                Not connected
+                            </strong>
+
+                            <span id="discordConnectionStatus">
+                                Connect Discord to continue
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="discord-login-button"
+                        id="discordLoginButton"
+                        type="button"
+                    >
+                        Connect Discord
+                    </button>
+
+                    <small>
+                        By connecting, you agree to allow Union Roleplay to
+                        access your Discord username, avatar and account ID.
+                    </small>
+
+                </article>
+
+
+                <!-- ACCOUNT INFORMATION -->
+
+                <article class="profile-panel">
+
+                    <div class="profile-panel-heading">
+
+                        <div>
+
+                            <span class="profile-account-label">
+                                DETAILS
+                            </span>
+
+                            <h2>
+                                Account information
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                    <dl class="profile-information-list">
+
+                        <div>
+                            <dt>Player ID</dt>
+                            <dd id="profilePlayerId">Not assigned</dd>
+                        </div>
+
+                        <div>
+                            <dt>Discord ID</dt>
+                            <dd id="profileDiscordId">Not connected</dd>
+                        </div>
+
+                        <div>
+                            <dt>Member since</dt>
+                            <dd id="profileMemberSince">Not available</dd>
+                        </div>
+
+                        <div>
+                            <dt>Whitelist status</dt>
+                            <dd>
+                                <span class="profile-inline-status pending">
+                                    Not submitted
+                                </span>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>Primary department</dt>
+                            <dd id="profileDepartment">
+                                Civilian
+                            </dd>
+                        </div>
+
+                    </dl>
+
+                </article>
+
+
+                <!-- PLAYER STATUS -->
+
+                <article class="profile-panel player-status-panel">
+
+                    <div class="profile-panel-heading">
+
+                        <div>
+
+                            <span class="profile-account-label">
+                                SERVER
+                            </span>
+
+                            <h2>
+                                Player status
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                    <div class="player-status-display">
+
+                        <span class="player-status-indicator offline"></span>
+
+                        <div>
+
+                            <strong id="playerOnlineStatus">
+                                Offline
+                            </strong>
+
+                            <span>
+                                Union Roleplay
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="player-status-details">
+
+                        <div>
+                            <span>Character</span>
+                            <strong id="profileCharacterName">
+                                No character found
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Last connected</span>
+                            <strong id="profileLastConnected">
+                                Never
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Playtime</span>
+                            <strong id="profilePlaytime">
+                                0 hours
+                            </strong>
+                        </div>
+
+                    </div>
+
+                    <a
+                        class="profile-server-button"
+                        href="fivem://connect/185.223.29.112:30120"
+                    >
+                        Connect to Server
+                    </a>
+
+                </article>
+
+            </div>
+
+        </section>
+                <!-- ================================= -->
+        <!-- PROFILE PROGRESS -->
+        <!-- ================================= -->
+
+        <section class="profile-progress-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-eyebrow">
+                        YOUR PROGRESS
+                    </span>
+
+                    <h2>
+                        Track your journey
+                    </h2>
+
+                    <p>
+                        Keep up with your whitelist application, department
+                        memberships and recent account activity.
+                    </p>
+
+                </div>
+
+                <div class="profile-progress-grid">
+
+                    <!-- WHITELIST PROGRESS -->
+
+                    <article class="profile-panel profile-whitelist-panel">
+
+                        <div class="profile-panel-heading">
+
+                            <div>
+
+                                <span class="profile-account-label">
+                                    WHITELIST
+                                </span>
+
+                                <h2>
+                                    Application progress
+                                </h2>
+
+                            </div>
+
+                            <span class="profile-inline-status pending">
+                                Not submitted
+                            </span>
+
+                        </div>
+
+                        <div class="profile-whitelist-steps">
+
+                            <div class="profile-whitelist-step complete">
+
+                                <span class="profile-step-number">
+                                    01
+                                </span>
+
+                                <div>
+                                    <strong>Create account</strong>
+                                    <p>
+                                        Your website profile has been created.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <div class="profile-whitelist-step current">
+
+                                <span class="profile-step-number">
+                                    02
+                                </span>
+
+                                <div>
+                                    <strong>Connect Discord</strong>
+                                    <p>
+                                        Verify your Discord account before
+                                        starting an application.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <div class="profile-whitelist-step">
+
+                                <span class="profile-step-number">
+                                    03
+                                </span>
+
+                                <div>
+                                    <strong>Submit application</strong>
+                                    <p>
+                                        Complete the full Union Roleplay
+                                        whitelist form.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <div class="profile-whitelist-step">
+
+                                <span class="profile-step-number">
+                                    04
+                                </span>
+
+                                <div>
+                                    <strong>Staff review</strong>
+                                    <p>
+                                        A member of the applications team will
+                                        review your answers.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <div class="profile-whitelist-step">
+
+                                <span class="profile-step-number">
+                                    05
+                                </span>
+
+                                <div>
+                                    <strong>Decision</strong>
+                                    <p>
+                                        Your result will appear here and in
+                                        Discord.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <a
+                            class="profile-primary-button"
+                            href="whitelist.html"
+                        >
+                            Start Whitelist Application
+                        </a>
+
+                    </article>
+
+
+                    <!-- APPLICATION HISTORY -->
+
+                    <article class="profile-panel profile-applications-panel">
+
+                        <div class="profile-panel-heading">
+
+                            <div>
+
+                                <span class="profile-account-label">
+                                    APPLICATIONS
+                                </span>
+
+                                <h2>
+                                    Recent applications
+                                </h2>
+
+                            </div>
+
+                            <a
+                                class="profile-panel-link"
+                                href="applications.html"
+                            >
+                                View all
+                            </a>
+
+                        </div>
+
+                        <div
+                            class="profile-empty-state"
+                            id="profileApplicationsEmpty"
+                        >
+
+                            <div class="profile-empty-icon">
+                                A
+                            </div>
+
+                            <h3>
+                                No applications yet
+                            </h3>
+
+                            <p>
+                                Your whitelist and recruitment applications
+                                will appear here after submission.
+                            </p>
+
+                            <a
+                                href="recruitment.html"
+                            >
+                                Explore open roles
+                            </a>
+
+                        </div>
+
+                        <div
+                            class="profile-application-list"
+                            id="profileApplicationList"
+                            hidden
+                        >
+
+                            <article class="profile-application-item">
+
+                                <div>
+
+                                    <span class="profile-application-type">
+                                        WHITELIST
+                                    </span>
+
+                                    <h3>
+                                        Union Roleplay Whitelist
+                                    </h3>
+
+                                    <p>
+                                        Submitted 12 July 2026
+                                    </p>
+
+                                </div>
+
+                                <span class="profile-inline-status review">
+                                    In review
+                                </span>
+
+                            </article>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================= -->
+        <!-- DEPARTMENT MEMBERSHIPS -->
+        <!-- ================================= -->
+
+        <section class="profile-departments-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-eyebrow">
+                        MEMBERSHIPS
+                    </span>
+
+                    <h2>
+                        Your departments
+                    </h2>
+
+                    <p>
+                        Department roles and permissions connected to your
+                        Union Roleplay account.
+                    </p>
+
+                </div>
+
+                <div class="profile-department-grid">
+
+                    <article class="profile-department-card active">
+
+                        <div class="profile-department-icon">
+                            C
+                        </div>
+
+                        <div>
+
+                            <span class="profile-account-label">
+                                DEFAULT ROLE
+                            </span>
+
+                            <h3>
+                                Civilian
+                            </h3>
+
+                            <p>
+                                Create characters, build stories and explore
+                                civilian careers across Union City.
+                            </p>
+
+                        </div>
+
+                        <span class="profile-inline-status approved">
+                            Active
+                        </span>
+
+                    </article>
+
+
+                    <article class="profile-department-card locked">
+
+                        <div class="profile-department-icon">
+                            P
+                        </div>
+
+                        <div>
+
+                            <span class="profile-account-label">
+                                DEPARTMENT
+                            </span>
+
+                            <h3>
+                                Union City Police Department
+                            </h3>
+
+                            <p>
+                                Requires a successful police recruitment
+                                application and department training.
+                            </p>
+
+                        </div>
+
+                        <span class="profile-inline-status locked">
+                            Locked
+                        </span>
+
+                    </article>
+
+
+                    <article class="profile-department-card locked">
+
+                        <div class="profile-department-icon">
+                            U
+                        </div>
+
+                        <div>
+
+                            <span class="profile-account-label">
+                                DEPARTMENT
+                            </span>
+
+                            <h3>
+                                Union Hospital Service
+                            </h3>
+
+                            <p>
+                                Requires a successful medical application and
+                                completion of department induction.
+                            </p>
+
+                        </div>
+
+                        <span class="profile-inline-status locked">
+                            Locked
+                        </span>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================= -->
+        <!-- ACCOUNT ACTIVITY -->
+        <!-- ================================= -->
+
+        <section class="profile-activity-section">
+
+            <div class="container profile-activity-grid">
+
+                <div class="profile-activity-introduction">
+
+                    <span class="section-eyebrow">
+                        ACCOUNT ACTIVITY
+                    </span>
+
+                    <h2>
+                        Recent activity
+                    </h2>
+
+                    <p>
+                        Important account events, application updates and
+                        department changes will be recorded here.
+                    </p>
+
+                </div>
+
+                <div class="profile-activity-timeline">
+
+                    <article class="profile-activity-item">
+
+                        <span class="profile-activity-marker"></span>
+
+                        <div>
+
+                            <span class="profile-activity-date">
+                                Today
+                            </span>
+
+                            <h3>
+                                Profile accessed
+                            </h3>
+
+                            <p>
+                                Your Union Roleplay player profile was opened.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="profile-activity-item muted">
+
+                        <span class="profile-activity-marker"></span>
+
+                        <div>
+
+                            <span class="profile-activity-date">
+                                Pending
+                            </span>
+
+                            <h3>
+                                Connect Discord
+                            </h3>
+
+                            <p>
+                                Discord verification has not yet been
+                                completed.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="profile-activity-item muted">
+
+                        <span class="profile-activity-marker"></span>
+
+                        <div>
+
+                            <span class="profile-activity-date">
+                                Pending
+                            </span>
+
+                            <h3>
+                                Submit whitelist application
+                            </h3>
+
+                            <p>
+                                Start your whitelist application after
+                                connecting Discord.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+                <!-- ================================= -->
+        <!-- PRIVACY & SECURITY -->
+        <!-- ================================= -->
+
+        <section class="profile-security-section">
+
+            <div class="container profile-security-grid">
+
+                <!-- SECURITY -->
+
+                <article class="profile-panel">
+
+                    <div class="profile-panel-heading">
+
+                        <div>
+
+                            <span class="profile-account-label">
+                                SECURITY
+                            </span>
+
+                            <h2>
+                                Account security
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                    <div class="profile-security-list">
+
+                        <div class="profile-security-item">
+
+                            <div>
+
+                                <strong>
+                                    Discord Authentication
+                                </strong>
+
+                                <p>
+                                    Secure login using Discord OAuth2.
+                                </p>
+
+                            </div>
+
+                            <span class="profile-inline-status approved">
+                                Secure
+                            </span>
+
+                        </div>
+
+                        <div class="profile-security-item">
+
+                            <div>
+
+                                <strong>
+                                    Data Encryption
+                                </strong>
+
+                                <p>
+                                    All sensitive account information is stored
+                                    securely.
+                                </p>
+
+                            </div>
+
+                            <span class="profile-inline-status approved">
+                                Enabled
+                            </span>
+
+                        </div>
+
+                        <div class="profile-security-item">
+
+                            <div>
+
+                                <strong>
+                                    Session Status
+                                </strong>
+
+                                <p>
+                                    No active authenticated session detected.
+                                </p>
+
+                            </div>
+
+                            <span class="profile-inline-status pending">
+                                Guest
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ACCOUNT ACTIONS -->
+
+                <article class="profile-panel">
+
+                    <div class="profile-panel-heading">
+
+                        <div>
+
+                            <span class="profile-account-label">
+                                ACTIONS
+                            </span>
+
+                            <h2>
+                                Quick actions
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                    <div class="profile-actions">
+
+                        <a
+                            class="profile-action-card"
+                            href="whitelist.html"
+                        >
+                            <span>✓</span>
+
+                            <div>
+
+                                <strong>
+                                    Whitelist Application
+                                </strong>
+
+                                <p>
+                                    Start your journey into Union Roleplay.
+                                </p>
+
+                            </div>
+
+                        </a>
+
+                        <a
+                            class="profile-action-card"
+                            href="recruitment.html"
+                        >
+                            <span>★</span>
+
+                            <div>
+
+                                <strong>
+                                    Recruitment
+                                </strong>
+
+                                <p>
+                                    Apply for police, NHS or staff teams.
+                                </p>
+
+                            </div>
+
+                        </a>
+
+                        <a
+                            class="profile-action-card"
+                            href="support.html"
+                        >
+                            <span>?</span>
+
+                            <div>
+
+                                <strong>
+                                    Support Centre
+                                </strong>
+
+                                <p>
+                                    Need help? Open a support ticket.
+                                </p>
+
+                            </div>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================= -->
+        <!-- CALL TO ACTION -->
+        <!-- ================================= -->
+
+        <section class="cta-section profile-page-cta">
+
+            <div class="container">
+
+                <span class="section-eyebrow">
+                    READY TO PLAY?
+                </span>
+
+                <h2>
+                    Join Union Roleplay today
+                </h2>
+
+                <p>
+                    Connect your Discord account, complete your whitelist
+                    application and start your story in Union City.
+                </p>
+
+                <div class="cta-actions">
+
+                    <a
+                        class="button button-primary"
+                        href="fivem://connect/185.223.29.112:30120"
+                    >
+                        Connect to Server
+                    </a>
+
+                    <a
+                        class="button button-secondary"
+                        href="https://discord.gg/7xDPyf9jYQ"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        Join Discord
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================================= -->
+    <!-- FOOTER -->
+    <!-- ================================= -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div>
+
+                    <h3>
+                        Union Roleplay
+                    </h3>
+
+                    <p>
+                        A serious British Qbox roleplay community focused on
+                        immersive stories, quality roleplay and an active,
+                        friendly community.
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h4>
+                        Navigation
+                    </h4>
+
+                    <ul>
+
+                        <li><a href="index.html">Home</a></li>
+
+                        <li><a href="about.html">About</a></li>
+
+                        <li><a href="rules.html">Rules</a></li>
+
+                        <li><a href="support.html">Support</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <h4>
+                        Community
+                    </h4>
+
+                    <ul>
+
+                        <li>
+
+                            <a
+                                href="https://discord.gg/7xDPyf9jYQ"
+                                target="_blank"
+                            >
+                                Discord
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a
+                                href="fivem://connect/185.223.29.112:30120"
+                            >
+                                Connect
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 Union Roleplay. All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <script src="js/main.js"></script>
+
+</body>
+</html>

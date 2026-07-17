@@ -1,1 +1,1186 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#9d55ff"><meta name="description" content="Union Roleplay — British economy whitelist FiveM roleplay."><title>Support | Union Roleplay</title><link rel="icon" href="assets/union-logo.png"><link rel="stylesheet" href="css/style.css"></head><body><header class="topbar"><div class="wrap nav"><a class="brand" href="index.html"><img src="assets/union-logo.png" alt="Union Roleplay"><span>UNION ROLEPLAY</span></a><button class="nav-toggle" aria-label="Toggle menu">☰</button><nav class="navlinks"><a href="index.html">About</a><a href="applications.html">Applications</a><a href="rules.html">Rules</a><a href="support.html">Support</a><a href="profile.html">Profile</a><a href="staff.html">Staff Panel</a></nav><div class="navcta"><a class="button ghost" href="https://discord.gg/YNkMWPuD62" target="_blank">Discord</a><a class="button" href="fivem://connect/185.223.29.112:30120">Play</a></div></div></header><main><section class="pagehero"><div class="wrap"><span class="kicker">Union support centre</span><h1>Need help?</h1><p class="lead">Choose the correct support route and complete the form. The ticket will appear in the protected staff panel and the relevant Discord channel will be notified.</p></div></section><section><div class="wrap"><div class="grid3 support-types"><article class="card support-type selected" data-type="general"><div class="icon">?</div><h3>General Support</h3><p>Questions, account help and issues that do not fit another category.</p></article><article class="card support-type" data-type="technical"><div class="icon">⚙</div><h3>Technical Issue</h3><p>Crashes, script errors, missing items, vehicle or character problems.</p></article><article class="card support-type" data-type="player_report"><div class="icon">!</div><h3>Player Report</h3><p>Report a serious rule breach with clear evidence and scene details.</p></article><article class="card support-type" data-type="ban_appeal"><div class="icon">↺</div><h3>Ban Appeal</h3><p>Appeal a sanction honestly and explain what you have learned.</p></article><article class="card support-type" data-type="store"><div class="icon">£</div><h3>Store Support</h3><p>Help with purchases, package delivery or account matching.</p></article><article class="card support-type" data-type="department"><div class="icon">♜</div><h3>Department Support</h3><p>Confidential concerns involving a whitelisted department.</p></article></div><div class="form-shell"><aside class="form-info card"><h2>Before opening a ticket</h2><p>Include dates, approximate times, character names and evidence wherever possible. Do not contact multiple staff members about the same issue.</p><div class="notice">False reports, edited evidence or abusive tickets may lead to action against your account.</div></aside><form class="form-card" data-union-form="support"><input type="hidden" name="supportType" id="supportType" value="general"><h2 id="supportTitle">General Support</h2><div class="form-grid"><div class="field"><label>Your name</label><input name="name" required></div><div class="field"><label>Discord username</label><input name="discord" required></div><div class="field"><label>FiveM / character name</label><input name="fivemName"></div><div class="field"><label>Date and approximate time</label><input name="incidentTime"></div><div class="field full"><label>Subject</label><input name="subject" required maxlength="120"></div><div class="field full"><label>Explain what happened</label><textarea name="details" required></textarea></div><div class="field full"><label>Evidence links</label><textarea name="evidence" placeholder="Clips, screenshots or other relevant links"></textarea></div><div class="field full"><label>What outcome are you requesting?</label><textarea name="requestedOutcome"></textarea></div></div><button class="button" type="submit">Create support ticket →</button></form></div></div></section></main><footer><div class="wrap footer"><div><img src="assets/union-logo.png" alt=""><strong>Union Roleplay</strong><p>British economy • Whitelist • Strict roleplay</p></div><div><a href="applications.html">Applications</a><a href="rules.html">Rules</a><a href="support.html">Support</a></div><small>© 2026 Union Roleplay. Not affiliated with Rockstar Games or Cfx.re.</small></div></footer><script src="js/config.js"></script><script src="js/main.js"></script><script>document.querySelectorAll('.support-type').forEach(x=>x.onclick=()=>{document.querySelectorAll('.support-type').forEach(y=>y.classList.remove('selected'));x.classList.add('selected');document.querySelector('#supportType').value=x.dataset.type;document.querySelector('#supportTitle').textContent=x.querySelector('h3').textContent})</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Get help with Union Roleplay, report problems and find answers to common server questions."
+    >
+
+    <title>Support | Union Roleplay</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+<body>
+
+<!-- ================================= -->
+<!-- NAVIGATION -->
+<!-- ================================= -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+
+            <img
+                src="assets/images/logo.png"
+                alt="Union Roleplay"
+            >
+
+            <span>Union Roleplay</span>
+
+        </a>
+
+        <button
+            class="mobile-menu-button"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+        >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+        <nav class="nav-links">
+
+            <a href="index.html">Home</a>
+
+            <a href="about.html">About</a>
+
+            <a href="rules.html">Rules</a>
+
+            <a href="departments.html">Departments</a>
+
+            <a href="whitelist.html">Get Whitelisted</a>
+
+            <a href="recruitment.html">Recruitment</a>
+
+            <a
+                href="support.html"
+                class="active"
+            >
+                Support
+            </a>
+
+        </nav>
+
+        <div class="nav-buttons">
+
+            <a
+                href="profile.html"
+                class="profile-button"
+            >
+                Profile
+            </a>
+
+            <a
+                href="https://discord.gg/7xDPyf9jYQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="discord-button"
+            >
+                Join Discord
+            </a>
+
+            <a
+                href="fivem://connect/185.223.29.112:30120"
+                class="connect-button"
+            >
+                Connect
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- ================================= -->
+<!-- SUPPORT HERO -->
+<!-- ================================= -->
+
+<section class="page-hero support-hero">
+
+    <div class="container">
+
+        <span class="section-tag">
+            UNION SUPPORT
+        </span>
+
+        <h1>
+            How Can We Help?
+        </h1>
+
+        <p>
+            Find answers to common questions, troubleshoot connection issues
+            or contact the Union Roleplay support team.
+        </p>
+
+        <div class="support-hero-actions">
+
+            <a
+                href="#support-options"
+                class="primary-button"
+            >
+                Get Support
+            </a>
+
+            <a
+                href="#common-solutions"
+                class="secondary-button"
+            >
+                Common Solutions
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================================= -->
+<!-- SERVER STATUS -->
+<!-- ================================= -->
+
+<section class="support-status-section">
+
+    <div class="container">
+
+        <div class="support-status-grid">
+
+            <article class="support-status-card">
+
+                <div class="support-status-icon">
+                    ●
+                </div>
+
+                <div>
+
+                    <span>
+                        SERVER STATUS
+                    </span>
+
+                    <h2>
+                        Union Roleplay Online
+                    </h2>
+
+                    <p>
+                        The FiveM server is currently available for approved
+                        community members.
+                    </p>
+
+                </div>
+
+                <a
+                    href="fivem://connect/185.223.29.112:30120"
+                    class="support-status-action"
+                >
+                    Connect
+                </a>
+
+            </article>
+
+            <article class="support-server-details">
+
+                <div>
+
+                    <span>
+                        SERVER ADDRESS
+                    </span>
+
+                    <strong>
+                        185.223.29.112:30120
+                    </strong>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="copy-server-button"
+                    data-copy-value="185.223.29.112:30120"
+                >
+                    Copy Address
+                </button>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================================= -->
+<!-- SUPPORT OPTIONS -->
+<!-- ================================= -->
+
+<section
+    id="support-options"
+    class="support-options-section"
+>
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <span class="section-tag">
+                SUPPORT CATEGORIES
+            </span>
+
+            <h2>
+                Choose a Support Option
+            </h2>
+
+            <p>
+                Select the category that best matches the issue you need help
+                with.
+            </p>
+
+        </div>
+
+        <div class="support-options-grid">
+
+            <article class="support-option-card">
+
+                <div class="support-option-icon">
+                    TS
+                </div>
+
+                <span class="support-option-label">
+                    TECHNICAL SUPPORT
+                </span>
+
+                <h3>
+                    Server or FiveM Issues
+                </h3>
+
+                <p>
+                    Get help with crashes, connection errors, missing textures,
+                    loading problems or script-related issues.
+                </p>
+
+                <ul>
+                    <li>Connection failures</li>
+                    <li>Game crashes</li>
+                    <li>Missing assets</li>
+                    <li>Performance problems</li>
+                </ul>
+
+                <a
+                    href="https://discord.gg/7xDPyf9jYQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="support-option-button"
+                >
+                    Open Technical Ticket
+                </a>
+
+            </article>
+
+            <article class="support-option-card">
+
+                <div class="support-option-icon">
+                    PR
+                </div>
+
+                <span class="support-option-label">
+                    PLAYER REPORTS
+                </span>
+
+                <h3>
+                    Report a Player
+                </h3>
+
+                <p>
+                    Submit evidence of rule-breaking, harassment, exploiting or
+                    unacceptable conduct.
+                </p>
+
+                <ul>
+                    <li>Rule violations</li>
+                    <li>Combat logging</li>
+                    <li>Exploiting</li>
+                    <li>Harassment</li>
+                </ul>
+
+                <a
+                    href="https://discord.gg/7xDPyf9jYQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="support-option-button"
+                >
+                    Submit Player Report
+                </a>
+
+            </article>
+
+            <article class="support-option-card">
+
+                <div class="support-option-icon">
+                    AP
+                </div>
+
+                <span class="support-option-label">
+                    APPLICATION SUPPORT
+                </span>
+
+                <h3>
+                    Whitelist or Recruitment
+                </h3>
+
+                <p>
+                    Ask for help with whitelist applications, recruitment
+                    applications, interviews or application outcomes.
+                </p>
+
+                <ul>
+                    <li>Application questions</li>
+                    <li>Interview support</li>
+                    <li>Status enquiries</li>
+                    <li>Application appeals</li>
+                </ul>
+
+                <a
+                    href="https://discord.gg/7xDPyf9jYQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="support-option-button"
+                >
+                    Application Support
+                </a>
+
+            </article>
+
+            <article class="support-option-card">
+
+                <div class="support-option-icon">
+                    SA
+                </div>
+
+                <span class="support-option-label">
+                    SANCTION APPEALS
+                </span>
+
+                <h3>
+                    Appeal a Punishment
+                </h3>
+
+                <p>
+                    Request a review of a warning, kick, temporary ban or
+                    permanent ban issued by the staff team.
+                </p>
+
+                <ul>
+                    <li>Warning appeals</li>
+                    <li>Ban appeals</li>
+                    <li>Evidence review</li>
+                    <li>Staff decision review</li>
+                </ul>
+
+                <a
+                    href="https://discord.gg/7xDPyf9jYQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="support-option-button"
+                >
+                    Submit an Appeal
+                </a>
+
+            </article>
+
+            <article class="support-option-card">
+
+                <div class="support-option-icon">
+                    ST
+                </div>
+
+                <span class="support-option-label">
+                    STORE SUPPORT
+                </span>
+
+                <h3>
+                    Tebex or Purchase Support
+                </h3>
+
+                <p>
+                    Get assistance with purchased packages, tokens, vehicle
+                    imports, clothing imports or missing benefits.
+                </p>
+
+                <ul>
+                    <li>Missing purchases</li>
+                    <li>Package questions</li>
+                    <li>Import support</li>
+                    <li>Account problems</li>
+                </ul>
+
+                <a
+                    href="https://discord.gg/7xDPyf9jYQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="support-option-button"
+                >
+                    Purchase Support
+                </a>
+
+            </article>
+
+            <article class="support-option-card">
+
+                <div class="support-option-icon">
+                    GM
+                </div>
+
+                <span class="support-option-label">
+                    GENERAL SUPPORT
+                </span>
+
+                <h3>
+                    General Enquiries
+                </h3>
+
+                <p>
+                    Contact the team about anything that does not fit into one
+                    of the other support categories.
+                </p>
+
+                <ul>
+                    <li>Community questions</li>
+                    <li>Server information</li>
+                    <li>Department enquiries</li>
+                    <li>Other assistance</li>
+                </ul>
+
+                <a
+                    href="https://discord.gg/7xDPyf9jYQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="support-option-button"
+                >
+                    Open General Ticket
+                </a>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================================= -->
+<!-- BEFORE OPENING A TICKET -->
+<!-- ================================= -->
+
+<section class="ticket-guidance-section">
+
+    <div class="container">
+
+        <div class="ticket-guidance-grid">
+
+            <div>
+
+                <span class="section-tag">
+                    BEFORE CONTACTING STAFF
+                </span>
+
+                <h2>
+                    Help Us Resolve Your Issue Faster
+                </h2>
+
+                <p>
+                    Providing the correct information in your first message
+                    helps the support team investigate your problem quickly.
+                </p>
+
+            </div>
+
+            <div class="ticket-guidance-list">
+
+                <article>
+
+                    <span>
+                        01
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Explain the issue clearly
+                        </h3>
+
+                        <p>
+                            Describe what happened, what you expected to happen
+                            and when the problem started.
+                        </p>
+
+                    </div>
+
+                </article>
+
+                <article>
+
+                    <span>
+                        02
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Include evidence
+                        </h3>
+
+                        <p>
+                            Attach screenshots, videos, clips or error messages
+                            whenever they are relevant.
+                        </p>
+
+                    </div>
+
+                </article>
+
+                <article>
+
+                    <span>
+                        03
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Provide account details
+                        </h3>
+
+                        <p>
+                            Include your Discord username, FiveM name and
+                            character name where applicable.
+                        </p>
+
+                    </div>
+
+                </article>
+
+                <article>
+
+                    <span>
+                        04
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Remain patient
+                        </h3>
+
+                        <p>
+                            Do not repeatedly tag staff or open duplicate
+                            tickets while waiting for a response.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================================= -->
+<!-- COMMON SOLUTIONS -->
+<!-- ================================= -->
+
+<section
+    id="common-solutions"
+    class="common-solutions-section"
+>
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <span class="section-tag">
+                TROUBLESHOOTING
+            </span>
+
+            <h2>
+                Common Solutions
+            </h2>
+
+            <p>
+                Try these steps before opening a technical support ticket.
+            </p>
+
+        </div>
+
+        <div class="support-search-wrapper">
+
+            <label
+                class="support-search"
+                for="support-search-input"
+            >
+
+                <span aria-hidden="true">
+                    ⌕
+                </span>
+
+        <input
+         id="supportTroubleshootingSearch"
+        type="search"
+        placeholder="Search connection, crashes, voice chat..."
+        autocomplete="off"
+        aria-label="Search troubleshooting answers"
+        >
+
+            </label>
+
+            <p
+                id="support-search-empty"
+                class="support-search-empty"
+                hidden
+            >
+                No support answers matched your search.
+            </p>
+
+        </div>
+
+        <div class="support-faq-list">
+
+            <details class="support-faq-item">
+
+                <summary>
+
+                    FiveM cannot connect to the server
+
+                    <span>+</span>
+
+                </summary>
+
+                <div>
+
+                    <p>
+                        Confirm that FiveM is running correctly and use the
+                        direct server address:
+                        <strong>185.223.29.112:30120</strong>.
+                    </p>
+
+                    <p>
+                        Restart FiveM, check your internet connection and make
+                        sure no VPN or firewall is blocking FiveM.
+                    </p>
+
+                </div>
+
+            </details>
+
+            <details class="support-faq-item">
+
+                <summary>
+
+                    I am stuck on the loading screen
+
+                    <span>+</span>
+
+                </summary>
+
+                <div>
+
+                    <p>
+                        Close FiveM completely and clear your FiveM cache. Do
+                        not delete the game folder or the folder named
+                        <strong>game</strong>.
+                    </p>
+
+                    <p>
+                        Restart your computer and reconnect after clearing the
+                        cache.
+                    </p>
+
+                </div>
+
+            </details>
+
+            <details class="support-faq-item">
+
+                <summary>
+
+                    Textures or clothing are missing
+
+                    <span>+</span>
+
+                </summary>
+
+                <div>
+
+                    <p>
+                        Increase the Extended Texture Budget within the GTA V
+                        graphics settings and ensure your graphics drivers are
+                        current.
+                    </p>
+
+                    <p>
+                        Restart FiveM after changing the setting. Lowering other
+                        graphics settings may also help if your graphics memory
+                        is limited.
+                    </p>
+
+                </div>
+
+            </details>
+
+            <details class="support-faq-item">
+
+                <summary>
+
+                    My game keeps crashing
+
+                    <span>+</span>
+
+                </summary>
+
+                <div>
+
+                    <p>
+                        Verify your GTA V files, update your graphics drivers
+                        and remove unsupported graphics modifications.
+                    </p>
+
+                    <p>
+                        Take a screenshot of the FiveM crash message before
+                        opening a technical ticket.
+                    </p>
+
+                </div>
+
+            </details>
+
+            <details class="support-faq-item">
+
+                <summary>
+
+                    My microphone does not work in game
+
+                    <span>+</span>
+
+                </summary>
+
+                <div>
+
+                    <p>
+                        Confirm that the correct input device is selected in
+                        Windows, GTA V and FiveM.
+                    </p>
+
+                    <p>
+                        Reconnect to the server after changing your microphone
+                        settings and check that push-to-talk is correctly bound.
+                    </p>
+
+                </div>
+
+            </details>
+
+            <details class="support-faq-item">
+
+                <summary>
+
+                    I lost money, items or a vehicle
+
+                    <span>+</span>
+
+                </summary>
+
+                <div>
+
+                    <p>
+                        Open a support ticket and provide evidence showing what
+                        was lost and how the loss occurred.
+                    </p>
+
+                    <p>
+                        Compensation is not guaranteed and may only be issued
+                        when sufficient evidence is available.
+                    </p>
+
+                </div>
+
+            </details>
+
+            <details class="support-faq-item">
+
+                <summary>
+
+                    My whitelist role is missing
+
+                    <span>+</span>
+
+                </summary>
+
+                <div>
+
+                    <p>
+                        Confirm that you are using the same Discord account that
+                        was approved and that you have not left and rejoined the
+                        Discord server.
+                    </p>
+
+                    <p>
+                        Open an application support ticket if your role has not
+                        been restored.
+                    </p>
+
+                </div>
+
+            </details>
+
+            <details class="support-faq-item">
+
+                <summary>
+
+                    I cannot access a department
+
+                    <span>+</span>
+
+                </summary>
+
+                <div>
+
+                    <p>
+                        Department access may require specific Discord roles,
+                        training completion or character permissions.
+                    </p>
+
+                    <p>
+                        Contact the relevant department leadership before
+                        opening a general staff ticket.
+                    </p>
+
+                </div>
+
+            </details>
+
+            <details class="support-faq-item">
+
+                <summary>
+
+                    A purchased package has not appeared
+
+                    <span>+</span>
+
+                </summary>
+
+                <div>
+
+                    <p>
+                        Allow time for the purchase to process and confirm that
+                        the correct FiveM or CFX account was used.
+                    </p>
+
+                    <p>
+                        Open a purchase support ticket with the transaction
+                        reference. Do not post receipts publicly.
+                    </p>
+
+                </div>
+
+            </details>
+
+            <details class="support-faq-item">
+
+                <summary>
+
+                    How do I appeal a ban?
+
+                    <span>+</span>
+
+                </summary>
+
+                <div>
+
+                    <p>
+                        Join the Union Roleplay Discord and use the designated
+                        sanction appeal ticket category.
+                    </p>
+
+                    <p>
+                        Be honest, explain what happened and avoid blaming
+                        others or arguing with staff.
+                    </p>
+
+                </div>
+
+            </details>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================================= -->
+<!-- SUPPORT RULES -->
+<!-- ================================= -->
+
+<section class="support-rules-section">
+
+    <div class="container">
+
+        <div class="support-rules-card">
+
+            <div>
+
+                <span class="section-tag">
+                    SUPPORT CONDUCT
+                </span>
+
+                <h2>
+                    Ticket Rules
+                </h2>
+
+                <p>
+                    Support tickets are treated as formal contact with the
+                    Union Roleplay staff team.
+                </p>
+
+            </div>
+
+            <ul>
+
+                <li>
+                    Do not open duplicate tickets for the same issue.
+                </li>
+
+                <li>
+                    Do not tag individual staff members unless asked.
+                </li>
+
+                <li>
+                    Do not insult, threaten or pressure support staff.
+                </li>
+
+                <li>
+                    Do not submit edited or misleading evidence.
+                </li>
+
+                <li>
+                    Keep confidential ticket information private.
+                </li>
+
+                <li>
+                    Follow staff instructions while an issue is investigated.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================================= -->
+<!-- SUPPORT CTA -->
+<!-- ================================= -->
+
+<section class="cta">
+
+    <div class="container">
+
+        <div class="cta-card">
+
+            <span class="section-tag">
+                STILL NEED HELP?
+            </span>
+
+            <h2>
+                Contact the Support Team
+            </h2>
+
+            <p>
+                Join the Union Roleplay Discord and open the correct ticket
+                category for your issue.
+            </p>
+
+            <div class="cta-buttons">
+
+                <a
+                    href="https://discord.gg/7xDPyf9jYQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="primary-button"
+                >
+                    Join Discord
+                </a>
+
+                <a
+                    href="rules.html"
+                    class="secondary-button"
+                >
+                    Read the Rules
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================================= -->
+<!-- FOOTER -->
+<!-- ================================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-column">
+
+                <img
+                    src="assets/images/logo.png"
+                    class="footer-logo"
+                    alt="Union Roleplay"
+                >
+
+                <h3>
+                    Union Roleplay
+                </h3>
+
+                <p>
+                    A British whitelisted economy roleplay community focused
+                    on realism, professionalism and unforgettable experiences.
+                </p>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+                    Navigation
+                </h4>
+
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="rules.html">Rules</a></li>
+                    <li><a href="departments.html">Departments</a></li>
+                    <li><a href="whitelist.html">Whitelist</a></li>
+                    <li><a href="recruitment.html">Recruitment</a></li>
+                    <li><a href="support.html">Support</a></li>
+                </ul>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+                    Community
+                </h4>
+
+                <ul>
+
+                    <li>
+                        <a
+                            href="https://discord.gg/7xDPyf9jYQ"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Discord
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="profile.html">
+                            My Profile
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="applications.html">
+                            Applications
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+                    Join The Server
+                </h4>
+
+                <p>
+                    Ready to begin your story?
+                </p>
+
+                <a
+                    href="fivem://connect/185.223.29.112:30120"
+                    class="footer-connect"
+                >
+                    Connect to FiveM
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Union Roleplay. All Rights Reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>
