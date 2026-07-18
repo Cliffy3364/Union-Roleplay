@@ -1044,3 +1044,22 @@ function initialiseLocalTicketCentre() {
 function escapeTicketText(value) {
     return String(value).replace(/[&<>'"]/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[char]));
 }
+
+/* ================================= */
+/* FUTURE INTERFACE ENHANCEMENTS     */
+/* ================================= */
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("interface-ready");
+
+    const interactiveCards = document.querySelectorAll(
+        ".org-path-card, .application-list-card, .feature-card, .value-card, .department-card"
+    );
+
+    interactiveCards.forEach((card) => {
+        card.addEventListener("pointermove", (event) => {
+            const bounds = card.getBoundingClientRect();
+            card.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
+            card.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
+        });
+    });
+});
