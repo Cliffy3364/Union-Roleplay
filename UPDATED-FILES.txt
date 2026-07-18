@@ -9,3 +9,5 @@ UPDATED IN THIS BUILD
 - apply-vehicle-dev.html: new.
 - every HTML page: navigation now includes Get Whitelisted and Staff, including Support.
 - css/style.css: public-sector application controls and development-card accents.
+- Replaced generic Command Application with separate UPD Command and UHS Command applications.
+- Added department-specific ranks, questions, and staff-panel submission types.
