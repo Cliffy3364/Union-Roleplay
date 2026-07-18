@@ -9942,3 +9942,15 @@ a{transition:.25s ease}.navbar{background:rgba(7,6,13,.78);border-bottom:1px sol
 /* Organisation information labels and closed application state */
 .org-info-label{display:inline-flex;align-items:center;padding:.55rem .8rem;border:1px solid rgba(180,93,255,.35);border-radius:999px;background:rgba(135,51,255,.1);color:#d8b4fe;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .application-card-action.is-disabled{opacity:.58;cursor:not-allowed;pointer-events:none}
+
+/* Organisations information-only panels */
+.org-information-panel { cursor: default; }
+.org-information-panel > span:last-child {
+  color: #c9a7ff;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.crime-framework { margin-top: 1rem; }
