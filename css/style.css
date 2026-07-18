@@ -9591,3 +9591,95 @@ main > .page-hero:first-child {
     .rule-toggle { grid-column: 3; grid-row: 1 / span 2; }
     .rule-body { padding-left: 24px; }
 }
+
+
+/* ================================================== */
+/* UNION NAVIGATION / ORGANISATIONS / APPLICATIONS V4 */
+/* ================================================== */
+
+.nav-links { gap: 5px; }
+.nav-links a { padding: 10px 12px; border-radius: 9px; }
+.nav-links a.active { background: rgba(65, 185, 255, .11); color: #fff; box-shadow: inset 0 0 0 1px rgba(76,190,255,.18); }
+.profile-button.active { box-shadow: inset 0 0 0 1px rgba(76,190,255,.55), 0 0 22px rgba(48,173,255,.18); color:#fff; }
+
+.about-welcome-section { padding: 96px 0; background: linear-gradient(180deg, rgba(5,14,23,.2), rgba(13,33,48,.55)); border-bottom:1px solid rgba(255,255,255,.06); }
+.about-welcome-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:70px; align-items:start; }
+.about-welcome-grid h2 { margin:18px 0 0; font-size:clamp(38px,5vw,72px); line-height:.98; max-width:620px; }
+.about-welcome-copy { color:#aabbd0; font-size:18px; line-height:1.8; }
+.about-welcome-copy p:first-child { margin-top:0; color:#e7f3ff; font-size:21px; }
+.about-welcome-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:32px; }
+
+.org-hero,.applications-directory-hero,.support-ticket-hero { padding:150px 0 70px; background:radial-gradient(circle at 65% 10%,rgba(43,160,222,.17),transparent 38%),linear-gradient(180deg,#06131e,#050c13); }
+.org-hero h1,.applications-directory-hero h1,.support-ticket-hero h1 { max-width:950px; margin:18px 0; font-size:clamp(50px,7vw,96px); line-height:.92; letter-spacing:-.055em; }
+.org-hero h1 span,.applications-directory-hero h1 span,.support-ticket-hero h1 span { color:#63c9ff; }
+.org-hero p,.applications-directory-hero p,.support-ticket-hero p { max-width:720px; color:#9db1c8; font-size:19px; }
+.org-paths-section { padding:24px 0 100px; background:#050c13; }
+.org-path-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.org-path-card { min-height:520px; position:relative; overflow:hidden; border-radius:28px; border:1px solid rgba(255,255,255,.13); color:#fff; background:#122334; isolation:isolate; transition:.3s ease; box-shadow:0 24px 70px rgba(0,0,0,.28); }
+.org-path-card:hover { transform:translateY(-7px); border-color:rgba(105,205,255,.45); }
+.org-path-card::before { content:""; position:absolute; inset:0; z-index:-2; background-size:cover; background-position:center; filter:saturate(.9); }
+.org-path-card.public::before { background:linear-gradient(140deg,rgba(19,78,113,.25),rgba(3,9,15,.25)),radial-gradient(circle at 35% 20%,#77b9dc 0,transparent 30%),linear-gradient(155deg,#8297aa 0 35%,#172f42 36% 60%,#07111b 61%); }
+.org-path-card.business::before { background:radial-gradient(circle at 50% 25%,#d24949 0 12%,transparent 13%),linear-gradient(150deg,#d3cbc0 0 34%,#b4964d 35% 46%,#172f31 47% 72%,#241017 73%); }
+.org-path-card.crime::before { background:radial-gradient(circle at 35% 25%,#8c6456 0 10%,transparent 11%),radial-gradient(circle at 70% 35%,#5f473e 0 11%,transparent 12%),linear-gradient(155deg,#3c7087 0 33%,#44533a 34% 61%,#111923 62%); }
+.org-card-overlay { position:absolute; inset:0; background:linear-gradient(180deg,rgba(1,6,10,.02) 15%,rgba(2,8,13,.9) 76%,#03080d); z-index:-1; }
+.org-card-label { position:absolute; top:28px; left:28px; padding:9px 15px; border-radius:5px; font-size:12px; font-weight:900; letter-spacing:.08em; background:#071621; border:1px solid rgba(91,202,255,.35); box-shadow:0 8px 18px rgba(0,0,0,.4); }
+.org-path-card.business .org-card-label { color:#ffd978; border-color:rgba(255,191,61,.35); }
+.org-path-card.crime .org-card-label { color:#ff8ba1; border-color:rgba(255,74,112,.38); }
+.org-card-content { position:absolute; left:28px; right:28px; bottom:28px; }
+.org-card-content h2 { font-size:31px; line-height:1; margin:0 0 15px; }
+.org-card-content p { color:#a9c6e6; line-height:1.65; margin:0 0 18px; }
+.org-card-content span { font-weight:800; color:#fff; }
+.org-detail-section { padding:110px 0; background:#07111a; border-top:1px solid rgba(255,255,255,.06); }
+.org-detail-section.alternate { background:#0a1219; }
+.org-detail-section.crime-section { background:linear-gradient(135deg,#160b13,#071018 58%); }
+.org-section-heading { max-width:750px; margin-bottom:44px; }
+.org-section-heading>span,.my-tickets-heading span,.ticket-panel-heading>span { color:#62c9ff; font-size:12px; font-weight:900; letter-spacing:.16em; }
+.org-section-heading h2 { margin:12px 0; font-size:clamp(38px,5vw,64px); }
+.org-section-heading p { color:#9cafc3; font-size:18px; }
+.org-detail-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.org-detail-card { padding:28px; border:1px solid rgba(255,255,255,.09); border-radius:20px; background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018)); }
+.org-icon { display:grid; place-items:center; width:52px; height:52px; margin-bottom:40px; border-radius:14px; background:rgba(58,183,247,.12); border:1px solid rgba(58,183,247,.25); color:#76d0ff; font-weight:900; }
+.org-detail-card h3 { margin:0 0 12px; font-size:23px; }
+.org-detail-card p { min-height:105px; color:#99abc0; line-height:1.65; }
+.org-detail-card a { color:#fff; font-weight:800; }
+.org-chip-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:22px; }
+.org-chip-grid span { padding:21px; border-radius:14px; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.08); font-weight:700; }
+.org-wide-action,.org-crime-panel { display:flex; justify-content:space-between; align-items:center; gap:25px; padding:30px; border-radius:20px; background:linear-gradient(90deg,rgba(38,161,221,.14),rgba(255,255,255,.02)); border:1px solid rgba(79,194,249,.22); color:#fff; }
+.org-wide-action strong { font-size:22px; }.org-wide-action p { margin:6px 0 0;color:#9eb2c8; }.org-wide-action>span{font-weight:800;}
+.org-crime-panel { background:linear-gradient(90deg,rgba(173,34,68,.19),rgba(255,255,255,.025)); border-color:rgba(255,68,112,.22); }
+.org-crime-panel h3 { margin:0 0 10px; font-size:28px; }.org-crime-panel p{max-width:760px;color:#bba8b2;line-height:1.7;}
+
+.application-filter-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:34px; }
+.application-filter-row button { padding:10px 16px; border-radius:999px; border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.035); color:#91a5ba; font-weight:800; cursor:pointer; }
+.application-filter-row button.active { color:#fff; background:rgba(58,183,247,.14); border-color:rgba(58,183,247,.38); }
+.application-list-section { padding:15px 0 100px; background:#050c13; }
+.application-list { display:grid; gap:16px; }
+.application-list-card { position:relative; min-height:240px; padding:28px 48px; overflow:hidden; border-radius:24px; border:1px solid rgba(255,255,255,.1); background:#0a1118; display:grid; grid-template-columns:1fr auto; grid-template-rows:auto 1fr; isolation:isolate; }
+.application-list-card::before { content:""; position:absolute; inset:0; z-index:-2; opacity:.68; background:radial-gradient(circle at 20% 25%,rgba(59,181,243,.28),transparent 28%),linear-gradient(100deg,rgba(17,49,68,.9),rgba(5,11,16,.7) 64%); }
+.application-list-card.application-staff::before { background:radial-gradient(circle at 26% 15%,rgba(240,171,80,.26),transparent 35%),linear-gradient(100deg,#45302c,#071019 70%); }
+.application-list-card.application-police::before { background:linear-gradient(100deg,rgba(5,29,61,.94),rgba(13,66,93,.6),#070c12); }
+.application-list-card.application-health::before { background:linear-gradient(100deg,rgba(7,71,69,.85),rgba(19,88,116,.45),#070c12); }
+.application-list-card.application-fire::before { background:linear-gradient(100deg,rgba(91,32,13,.78),rgba(84,45,16,.42),#070c12); }
+.application-list-card.application-court::before { background:linear-gradient(100deg,rgba(75,54,16,.75),rgba(47,44,25,.38),#070c12); }
+.application-list-card.application-business::before { background:linear-gradient(100deg,rgba(89,47,10,.75),rgba(67,50,20,.35),#070c12); }
+.application-list-card.application-crime::before { background:linear-gradient(100deg,rgba(90,9,34,.72),rgba(59,13,33,.4),#070c12); }
+.application-list-card.application-developer::before { background:linear-gradient(100deg,rgba(72,28,99,.72),rgba(42,25,69,.4),#070c12); }
+.application-card-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,transparent,rgba(2,7,11,.15) 55%,rgba(2,7,11,.82)); }
+.application-card-top { grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.application-type { padding:8px 13px; border-radius:999px; border:1px solid rgba(255,205,101,.35); background:rgba(0,0,0,.4); color:#ffd77c; font-size:11px; font-weight:900; letter-spacing:.12em; }
+.application-status { display:flex; align-items:center; padding:5px; border-radius:999px; background:rgba(4,12,18,.85); border:1px solid rgba(255,255,255,.1); }
+.application-status small { padding:0 12px;color:#77899c;font-weight:800;letter-spacing:.1em; }.application-status strong{padding:8px 13px;border-radius:999px;font-size:12px;letter-spacing:.06em}.application-status .open{background:#12392e;color:#a6e7c4}.application-status .closed{background:#421d22;color:#ffb7be}
+.application-card-body { align-self:end; max-width:760px; }.application-card-body h2{margin:26px 0 8px;font-size:33px}.application-card-body p{margin:0;color:#a9bace;line-height:1.65;font-size:17px}
+.application-card-action { align-self:end; color:#fff; font-weight:900; padding:15px 0 3px 40px; }.application-card-action[aria-disabled="true"]{opacity:.55;pointer-events:none}.application-list-card.app-hidden{display:none}
+
+.support-ticket-hero { padding-bottom:80px; }
+.ticket-centre-section { padding:20px 0 90px; background:#050c13; }
+.ticket-centre-grid { display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:22px; align-items:start; }
+.ticket-create-panel,.ticket-help-card,.my-tickets-section .container { border:1px solid rgba(255,255,255,.09); background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015)); border-radius:24px; }
+.ticket-create-panel { padding:36px; }.ticket-panel-heading h2{font-size:38px;margin:12px 0}.ticket-panel-heading p{color:#98abc0;}
+.ticket-form { display:grid; gap:18px; margin-top:30px; }.ticket-form label{display:grid;gap:8px;color:#dbe8f5;font-weight:700;font-size:14px}.ticket-form input,.ticket-form select,.ticket-form textarea{width:100%;padding:14px 15px;border-radius:11px;border:1px solid rgba(255,255,255,.1);background:#08121b;color:#fff;font:inherit;outline:none}.ticket-form input:focus,.ticket-form select:focus,.ticket-form textarea:focus{border-color:rgba(74,194,255,.55);box-shadow:0 0 0 3px rgba(57,180,243,.1)}.ticket-form-row{display:grid;grid-template-columns:1fr 220px;gap:14px}.ticket-consent{grid-template-columns:auto 1fr!important;align-items:start!important;color:#91a5ba!important;font-weight:500!important}.ticket-consent input{width:auto;margin-top:4px}.ticket-form-message{min-height:22px;margin:0;color:#8de4b5}.ticket-form-message.error{color:#ff9da8}
+.ticket-sidebar{display:grid;gap:16px}.ticket-help-card{padding:26px}.ticket-help-card>span{font-size:11px;letter-spacing:.15em;font-weight:900;color:#67caff}.ticket-help-card h3{margin:12px 0;font-size:24px}.ticket-help-card p{color:#96a9bd;line-height:1.65}.ticket-help-card a,.ticket-help-card button{color:#fff;font-weight:800}.ticket-help-card button{background:none;border:0;padding:0;cursor:pointer}
+.my-tickets-section { padding:0 0 100px; background:#050c13; }.my-tickets-section .container{padding:30px}.my-tickets-heading{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:22px}.my-tickets-heading h2{margin:8px 0 0}.my-tickets-heading button{background:none;border:1px solid rgba(255,255,255,.1);color:#91a5ba;border-radius:10px;padding:10px 13px;cursor:pointer}.local-ticket-list{display:grid;gap:10px}.local-ticket-card{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:17px;border-radius:14px;background:#08121a;border:1px solid rgba(255,255,255,.07)}.local-ticket-ref{color:#64caff;font-weight:900}.local-ticket-card h3{margin:0 0 4px;font-size:17px}.local-ticket-card p{margin:0;color:#879aae;font-size:14px}.local-ticket-status{padding:7px 11px;border-radius:999px;background:#17362c;color:#9ee2bd;font-size:12px;font-weight:800}.ticket-empty-state{text-align:center;padding:45px;color:#8ea2b6}.ticket-empty-state strong{display:block;color:#fff;font-size:20px;margin-bottom:7px}.ticket-empty-state p{margin:0}
+
+@media(max-width:1100px){.org-path-grid{grid-template-columns:1fr 1fr}.org-path-card:last-child{grid-column:1/-1;min-height:440px}.org-detail-grid{grid-template-columns:1fr 1fr}.ticket-centre-grid{grid-template-columns:1fr}.ticket-sidebar{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.about-welcome-grid{grid-template-columns:1fr;gap:30px}.org-path-grid,.org-detail-grid,.org-chip-grid,.ticket-sidebar{grid-template-columns:1fr}.org-path-card,.org-path-card:last-child{grid-column:auto;min-height:440px}.org-wide-action,.org-crime-panel{align-items:flex-start;flex-direction:column}.application-list-card{padding:24px;grid-template-columns:1fr;min-height:300px}.application-card-top{align-items:flex-start}.application-status small{display:none}.application-card-action{padding:18px 0 0}.ticket-form-row{grid-template-columns:1fr}.ticket-create-panel{padding:24px}.my-tickets-heading{align-items:flex-start;flex-direction:column}.local-ticket-card{grid-template-columns:1fr}.local-ticket-status{justify-self:start}}

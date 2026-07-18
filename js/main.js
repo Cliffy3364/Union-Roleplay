@@ -967,3 +967,80 @@ function initialiseSupportAccordions() {
         });
     });
 }
+
+
+/* ================================= */
+/* APPLICATION DIRECTORY FILTERS */
+/* ================================= */
+document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll("[data-app-filter]");
+    const cards = document.querySelectorAll(".application-list-card");
+    if (!buttons.length || !cards.length) return;
+    const groups = {
+        public: ["application-police", "application-health", "application-fire", "application-court"],
+        community: ["application-staff", "application-business", "application-crime"],
+        development: ["application-developer"]
+    };
+    buttons.forEach(button => button.addEventListener("click", () => {
+        buttons.forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        const filter = button.dataset.appFilter;
+        cards.forEach(card => {
+            const visible = filter === "all" || (groups[filter] || []).some(className => card.classList.contains(className));
+            card.classList.toggle("app-hidden", !visible);
+        });
+    }));
+});
+
+/* ================================= */
+/* LOCAL SUPPORT TICKET CENTRE */
+/* ================================= */
+document.addEventListener("DOMContentLoaded", initialiseLocalTicketCentre);
+function initialiseLocalTicketCentre() {
+    const form = document.querySelector("#support-ticket-form");
+    const list = document.querySelector("#local-ticket-list");
+    if (!form || !list) return;
+    const storageKey = "unionRoleplaySupportTickets";
+    const getTickets = () => {
+        try { return JSON.parse(localStorage.getItem(storageKey) || "[]"); }
+        catch { return []; }
+    };
+    const saveTickets = tickets => localStorage.setItem(storageKey, JSON.stringify(tickets));
+    const render = () => {
+        const tickets = getTickets();
+        if (!tickets.length) {
+            list.innerHTML = '<div class="ticket-empty-state"><strong>No tickets yet</strong><p>Your submitted tickets will appear here.</p></div>';
+            return;
+        }
+        list.innerHTML = tickets.map(ticket => `
+            <article class="local-ticket-card">
+                <span class="local-ticket-ref">${escapeTicketText(ticket.reference)}</span>
+                <div><h3>${escapeTicketText(ticket.subject)}</h3><p>${escapeTicketText(ticket.category)} · ${escapeTicketText(ticket.created)}</p></div>
+                <span class="local-ticket-status">${escapeTicketText(ticket.status)}</span>
+            </article>`).join("");
+    };
+    form.addEventListener("submit", event => {
+        event.preventDefault();
+        const message = document.querySelector("#ticket-form-message");
+        const ticket = {
+            reference: `URP-${Date.now().toString().slice(-7)}`,
+            category: document.querySelector("#ticket-category").value,
+            name: document.querySelector("#ticket-name").value.trim(),
+            priority: document.querySelector("#ticket-priority").value,
+            subject: document.querySelector("#ticket-subject").value.trim(),
+            details: document.querySelector("#ticket-details").value.trim(),
+            created: new Date().toLocaleString(),
+            status: "Awaiting Discord Submission"
+        };
+        const tickets = getTickets();
+        tickets.unshift(ticket); saveTickets(tickets); render(); form.reset();
+        message.classList.remove("error");
+        message.textContent = `Ticket ${ticket.reference} created. Copy this reference into the Union Discord support channel.`;
+    });
+    const clear = document.querySelector("#clear-local-tickets");
+    if (clear) clear.addEventListener("click", () => { localStorage.removeItem(storageKey); render(); });
+    render();
+}
+function escapeTicketText(value) {
+    return String(value).replace(/[&<>'"]/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[char]));
+}
