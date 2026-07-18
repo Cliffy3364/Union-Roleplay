@@ -1,0 +1,18 @@
+ADVANCED TICKET SYSTEM UPDATE
+
+Updated files:
+- support.html
+- staff-panel.html
+- css/style.css
+- js/portal.js
+
+Features:
+- Live-style player/staff ticket conversations
+- Multiple replies in each ticket
+- Image attachments and full-screen image viewer
+- Unread message counts in staff panel
+- Ticket inbox and conversation workspace
+- Open, In Progress, Awaiting Player and Closed statuses
+- Discord alert hooks prepared but disabled
+
+Important: This static GitHub Pages version stores test tickets in browser localStorage. A shared backend/database and authentication will be required at final setup for different users and staff devices to see the same live conversations.
