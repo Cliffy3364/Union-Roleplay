@@ -1,18 +1,12 @@
-UNION ROLEPLAY — FUTURE INTERFACE UPDATE
+UPDATED IN THIS BUILD
 
-Updated files:
-- applications.html
-  Removed Business Ownership and Organised Crime Group applications.
-  Updated the application-centre description and removed the unused Community filter.
-
-- css/style.css
-  Added the global Future Interface Upgrade block at the bottom.
-  This upgrades the entire website while retaining the existing organisation and application layouts.
-
-- js/main.js
-  Added lightweight card interaction enhancements.
-
-COPYING INTO YOUR EXISTING GITHUB REPOSITORY
-1. Do not copy a .git folder.
-2. Replace applications.html, css/style.css and js/main.js in your existing repository.
-3. Commit the three normal file changes in GitHub Desktop and push.
+- Home navigation removed from every page
+- index.html now redirects directly to About Us
+- Welcome content remains integrated into about.html
+- Staff section added to the main navigation
+- staff-panel.html retained and updated as the central staff area
+- applications.html now contains only Whitelist, Staff, Police, Ambulance/UHS, Fire (closed), and Courts
+- Development application removed
+- Business and organised-crime application links removed from organisations.html
+- Organisations page now provides information only for Businesses and Organised Crime
+- CSS updated for information labels and closed application styling
