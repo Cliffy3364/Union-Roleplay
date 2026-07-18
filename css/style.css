@@ -9955,3 +9955,17 @@ a{transition:.25s ease}.navbar{background:rgba(7,6,13,.78);border-bottom:1px sol
 .org-info-label.open{color:#b9f6cf;border-color:rgba(62,207,142,.3);background:rgba(62,207,142,.08)}
 .org-info-label.closed{color:#ffadb5;border-color:rgba(255,83,103,.3);background:rgba(255,83,103,.08)}
 .application-eup{--application-accent:#d97cff}.application-script{--application-accent:#a86cff}.application-vehicle{--application-accent:#f06cff}
+
+/* 48-hour ticket transcripts and conditional Ban ID field */
+.ticket-conditional-field[hidden] { display: none !important; }
+.ticket-conditional-field small { display: block; margin-top: 8px; color: var(--muted, #a8a8b3); }
+.transcript-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+.transcript-actions > span { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }
+.chat-message.system { margin-left: auto; margin-right: auto; max-width: 86%; opacity: 0.85; border-style: dashed; }
+.chat-closed-notice p { margin: 8px 0 16px; }
+.application-media .application-card-glow,
+.application-command .application-card-glow,
+.application-events .application-card-glow { opacity: 0.65; }
+@media (max-width: 700px) {
+  .transcript-actions { justify-content: flex-start; }
+}
