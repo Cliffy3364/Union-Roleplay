@@ -1,0 +1,18 @@
+UNION ROLEPLAY — FUTURE INTERFACE UPDATE
+
+Updated files:
+- applications.html
+  Removed Business Ownership and Organised Crime Group applications.
+  Updated the application-centre description and removed the unused Community filter.
+
+- css/style.css
+  Added the global Future Interface Upgrade block at the bottom.
+  This upgrades the entire website while retaining the existing organisation and application layouts.
+
+- js/main.js
+  Added lightweight card interaction enhancements.
+
+COPYING INTO YOUR EXISTING GITHUB REPOSITORY
+1. Do not copy a .git folder.
+2. Replace applications.html, css/style.css and js/main.js in your existing repository.
+3. Commit the three normal file changes in GitHub Desktop and push.

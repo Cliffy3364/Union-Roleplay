@@ -1,0 +1,22 @@
+UNION ROLEPLAY PORTAL
+
+New pages:
+- staff-panel.html
+- apply-whitelist.html
+- apply-staff.html
+- apply-police.html
+- apply-uhs.html
+- apply-court.html
+- apply-development.html
+
+Current behaviour:
+- Tickets and applications save to browser localStorage.
+- Staff panel reads and updates those records on the same browser/device.
+- Discord messages are prepared but disabled.
+
+Later Discord setup:
+1. Open js/portal-config.js
+2. Paste your Discord webhook URL
+3. Set discordEnabled to true
+
+Important: GitHub Pages alone cannot provide secure shared staff data or authentication. A backend/database will be needed for production use across different devices.
