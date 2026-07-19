@@ -1,255 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Login | Union Roleplay</title>
-
-    <link rel="stylesheet" href="css/style.css">
-
-    <style>
-
-        *{
-            box-sizing:border-box;
-        }
-
-        body{
-
-            margin:0;
-            min-height:100vh;
-
-            display:flex;
-            justify-content:center;
-            align-items:center;
-
-            background:
-                radial-gradient(circle at top,#5d2fd4 0%,transparent 45%),
-                linear-gradient(135deg,#10131c,#171c28,#22193f);
-
-            font-family:Outfit,Arial,Helvetica,sans-serif;
-
-            color:#fff;
-
-        }
-
-        .login-card{
-
-            width:430px;
-            max-width:92%;
-
-            padding:45px;
-
-            border-radius:22px;
-
-            background:rgba(255,255,255,.06);
-
-            backdrop-filter:blur(22px);
-
-            border:1px solid rgba(255,255,255,.08);
-
-            text-align:center;
-
-            box-shadow:0 25px 60px rgba(0,0,0,.45);
-
-        }
-
-        .login-card img{
-
-            width:140px;
-
-            margin-bottom:25px;
-
-        }
-
-        h1{
-
-            margin:0;
-
-            font-size:34px;
-
-            font-weight:700;
-
-        }
-
-        .subtitle{
-
-            margin-top:10px;
-            margin-bottom:35px;
-
-            color:#b8bfd8;
-
-            line-height:1.6;
-
-        }
-
-        .discord-btn{
-
-            width:100%;
-
-            padding:16px;
-
-            border:none;
-
-            border-radius:14px;
-
-            background:#5865F2;
-
-            color:#fff;
-
-            font-size:17px;
-
-            font-weight:600;
-
-            cursor:pointer;
-
-            transition:.25s;
-
-        }
-
-        .discord-btn:hover{
-
-            transform:translateY(-2px);
-
-            background:#6f7cff;
-
-        }
-
-        .info{
-
-            margin-top:28px;
-
-            color:#9ba4bf;
-
-            font-size:14px;
-
-            line-height:1.6;
-
-        }
-
-        .back-link{
-
-            display:inline-block;
-
-            margin-top:20px;
-
-            color:#8f6fff;
-
-            text-decoration:none;
-
-            font-weight:600;
-
-        }
-
-        .back-link:hover{
-
-            color:#b59dff;
-
-        }
-
-        .version{
-
-            margin-top:28px;
-
-            color:#777;
-
-            font-size:13px;
-
-        }
-
-    </style>
-
-</head>
-
-<body>
-
-<div class="login-card">
-
-    <img
-        src="assets/images/logo.png"
-        alt="Union Roleplay Logo"
-    >
-
-    <h1>Union Roleplay</h1>
-
-    <p class="subtitle">
-
-        Sign in with Discord to access your profile,
-        applications, staff permissions and future website
-        features.
-
-    </p>
-
-    <button
-        class="discord-btn"
-        type="button"
-        onclick="login()">
-
-        Continue with Discord
-
-    </button>
-
-    <div class="info">
-
-        ✔ Secure Discord Authentication<br>
-        ✔ Automatic role detection<br>
-        ✔ Staff permissions synced automatically
-
-    </div>
-
-    <a
-        href="about.html"
-        class="back-link">
-
-        ← Return to Website
-
-    </a>
-
-    <div class="version">
-
-        Union Roleplay v1.0
-
-    </div>
-
-</div>
-
-<script src="js/config.js"></script>
-<script src="js/auth.js"></script>
-
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Sign in to Union Roleplay with Discord."><title>Login | Union Roleplay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"><link rel="icon" href="favicon.ico"></head>
+<body class="login-page"><main class="login-card">
+<img src="assets/images/logo.png" alt="Union Roleplay logo"><div class="eyebrow">SECURE ACCOUNT ACCESS</div>
+<h1>Continue with Discord</h1><p class="subtitle">Sign in to view your profile, applications and support requests. Staff permissions are read from your Union Roleplay Discord roles.</p>
+<button class="discord-btn" id="discordLogin" type="button">Continue with Discord</button>
+<p id="loginMessage" class="portal-form-message" aria-live="polite"></p>
+<a href="index.html" class="back-link">← Return to website</a></main>
+<script src="js/config.js"></script><script src="js/auth.js"></script>
 <script>
-
-function login() {
-
-    /*
-        Temporary login.
-        This will later be replaced with
-        Discord OAuth.
-    */
-
-    Auth.saveUser({
-
-        id: "123456789",
-
-        username: "Livify",
-
-        avatar: "",
-
-        roles: [
-
-            UNION_CONFIG.DISCORD.ROLES.FOUNDER
-
-        ]
-
-    });
-
-    window.location.href = "about.html";
-
-}
-
-</script>
-
-</body>
-
-</html>
+(() => {
+ const button=document.getElementById('discordLogin'); const message=document.getElementById('loginMessage');
+ if(Auth.isLoggedIn()){ location.replace(new URLSearchParams(location.search).get('returnTo') || 'profile.html'); return; }
+ button.addEventListener('click',()=>{
+   const base=String(UNION_CONFIG.API_BASE||'').replace(/\/$/,'');
+   if(!base || base.includes('YOUR-WORKER')){
+     message.textContent='Discord login needs the backend Worker URL added in js/config.js first.';
+     return;
+   }
+   const returnTo=new URLSearchParams(location.search).get('returnTo') || 'profile.html';
+   sessionStorage.setItem('union_return_to', returnTo);
+   location.href=base + '/auth/discord?redirect_uri=' + encodeURIComponent(UNION_CONFIG.DISCORD.CALLBACK_URL);
+ });
+})();
+</script></body></html>

@@ -249,8 +249,8 @@
 
     </main>
 
-    <script src="js/config.js"></script>
-    <script src="js/auth.js"></script>
+    
+    
 
     <script>
         (function protectStaffPanel() {
@@ -413,9 +413,21 @@
         })();
     </script>
 
-    <script src="js/main.js"></script>
+    <script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
     <script src="js/portal-config.js"></script>
     <script src="js/portal.js"></script>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const placeholder = document.getElementById('navbar');
+  if (!placeholder) return;
+  fetch('components/navbar.html')
+    .then(response => { if (!response.ok) throw new Error('Navigation failed to load'); return response.text(); })
+    .then(html => { placeholder.outerHTML = html; })
+    .catch(error => console.error(error));
+});
+</script>
 </body>
 </html>

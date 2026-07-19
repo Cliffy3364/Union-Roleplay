@@ -1,1 +1,14 @@
-window.UNION_PORTAL_CONFIG={discordWebhook:'https://discord.com/api/webhooks/1528375545673416814/CTiGnpgdUOUmShmZMY2NQDV9DkHYmI5wSok7wzdZpk88Zf2JnIUeeIvWNfocQUDldhqt',discordEnabled:true};
+window.UNION_PORTAL_CONFIG = {
+  discordEnabled: false,
+  discordWebhook: '',
+  api: {
+    enabled: false,
+    baseUrl: 'https://YOUR-WORKER.workers.dev'
+  },
+  tickets: {
+    allowReopenHours: 48,
+    autoDeleteHours: 48,
+    maxAttachments: 4,
+    maxAttachmentSizeMB: 2
+  }
+};

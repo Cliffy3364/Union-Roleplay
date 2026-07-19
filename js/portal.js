@@ -2,9 +2,9 @@
   const cfg = window.UNION_PORTAL_CONFIG || { discordWebhook: '', discordEnabled: false };
   const TICKETS_KEY = 'unionTickets';
   const APPS_KEY = 'unionApplications';
-  const MAX_FILES = 4;
-  const MAX_FILE_SIZE = 2 * 1024 * 1024;
-  const CLOSED_RETENTION_MS = 48 * 60 * 60 * 1000;
+  const MAX_FILES = Number(cfg.tickets?.maxAttachments) || 4;
+  const MAX_FILE_SIZE = (Number(cfg.tickets?.maxAttachmentSizeMB) || 2) * 1024 * 1024;
+  const CLOSED_RETENTION_MS = (Number(cfg.tickets?.autoDeleteHours) || 48) * 60 * 60 * 1000;
   let activePlayerTicket = null;
   let activeStaffTicket = null;
 
@@ -42,9 +42,11 @@
   purgeExpiredTickets();
 
   async function discord(content, embed) {
-    if (!cfg.discordEnabled || !cfg.discordWebhook) return;
+    if (!cfg.discordEnabled) return;
+    const endpoint = cfg.api?.enabled && cfg.api?.baseUrl ? `${String(cfg.api.baseUrl).replace(/\/$/, '')}/portal/notify` : cfg.discordWebhook;
+    if (!endpoint) return;
     try {
-      await fetch(cfg.discordWebhook, {
+      await fetch(endpoint, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content, embeds: embed ? [embed] : [] })
       });
@@ -82,7 +84,8 @@
   document.querySelectorAll('[data-application-form]').forEach(form => form.addEventListener('submit', async e => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form));
-    const record = { id: uid('APP'), type: form.dataset.applicationType, createdAt: new Date().toISOString(), status: 'Pending Review', response: '', data };
+    const currentUser = window.Auth?.getUser?.();
+    const record = { id: uid('APP'), ownerId: currentUser?.id || 'guest', ownerName: currentUser?.username || '', type: form.dataset.applicationType, createdAt: new Date().toISOString(), status: 'Pending Review', response: '', data };
     const all = read(APPS_KEY); all.unshift(record); write(APPS_KEY, all);
     await discord(record.type === 'Whitelist Application' ? 'A new whitelist application has been submitted.' : `A new ${record.type} has been submitted.`, { title: `New application: ${record.type}`, description: `Reference: ${record.id}`, color: 10833386 });
     const msg = form.querySelector('.portal-form-message'); if (msg) msg.textContent = `Application submitted. Reference: ${record.id}`;
@@ -119,7 +122,7 @@
       const now = new Date().toISOString();
       const details = document.getElementById('ticket-details').value.trim();
       const record = {
-        id: uid('TKT'), createdAt: now, updatedAt: now, status: 'Open', category, banId,
+        id: uid('TKT'), ownerId: window.Auth?.getUser?.()?.id || 'guest', createdAt: now, updatedAt: now, status: 'Open', category, banId,
         name: document.getElementById('ticket-name').value,
         priority: document.getElementById('ticket-priority').value,
         subject: document.getElementById('ticket-subject').value,
@@ -143,7 +146,8 @@
 
   function renderMyTickets() {
     const el = document.getElementById('local-ticket-list'); if (!el) return;
-    const all = purgeExpiredTickets();
+    const userId = window.Auth?.getUser?.()?.id || 'guest';
+    const all = purgeExpiredTickets().filter(t => (t.ownerId || 'guest') === userId);
     el.innerHTML = all.length ? all.map(t => {
       const msgs = normalizedMessages(t), last = msgs[msgs.length - 1];
       const closedHint = t.status === 'Closed' ? ` · deletes in ${durationText(remainingClosedTime(t))}` : '';
@@ -164,7 +168,8 @@
 
   function renderPlayerThread() {
     const panel = document.getElementById('player-ticket-thread'); if (!panel) return;
-    const all = purgeExpiredTickets(), ticket = all.find(t => t.id === activePlayerTicket);
+    const userId = window.Auth?.getUser?.()?.id || 'guest';
+    const all = purgeExpiredTickets(), ticket = all.find(t => t.id === activePlayerTicket && (t.ownerId || 'guest') === userId);
     if (!ticket) { activePlayerTicket = null; panel.innerHTML = '<div class="ticket-empty-state"><strong>Select a ticket</strong><p>Open one of your tickets to view the conversation.</p></div>'; return; }
     const messages = normalizedMessages(ticket);
     const banInfo = ticket.banId ? ` · Ban ID: ${esc(ticket.banId)}` : '';

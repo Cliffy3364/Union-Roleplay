@@ -1,117 +1,80 @@
 class Auth {
-
     static STORAGE_KEY = "union_user";
+    static TOKEN_KEY = "union_access_token";
 
     static getUser() {
-
         try {
-            return JSON.parse(localStorage.getItem(this.STORAGE_KEY));
+            const value = localStorage.getItem(this.STORAGE_KEY);
+            return value ? JSON.parse(value) : null;
         } catch {
             return null;
         }
-
     }
 
     static saveUser(user) {
-
-        localStorage.setItem(
-            this.STORAGE_KEY,
-            JSON.stringify(user)
-        );
-
+        if (!user || typeof user !== "object" || !user.id) {
+            throw new Error("A valid authenticated Discord user is required.");
+        }
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
+        localStorage.setItem("union_logged_in", "true");
     }
 
-    static isLoggedIn() {
-
-        return this.getUser() !== null;
-
+    static saveSession(user, token = "") {
+        this.saveUser(user);
+        if (token) sessionStorage.setItem(this.TOKEN_KEY, token);
     }
 
-    static getRoles() {
-
-        const user = this.getUser();
-
-        return user?.roles || [];
-
-    }
-
-    static hasRole(roleId) {
-
-        return this.getRoles().includes(roleId);
-
-    }
+    static isLoggedIn() { return this.getUser() !== null; }
+    static getRoles() { return this.getUser()?.roles || []; }
+    static hasRole(roleId) { return Boolean(roleId) && this.getRoles().includes(String(roleId)); }
+    static hasAnyRole(roleIds = []) { return roleIds.some(role => this.hasRole(role)); }
+    static isStaff() { return this.hasAnyRole(window.UNION_CONFIG?.STAFF_ROLES || []); }
 
     static logout() {
-
         localStorage.removeItem(this.STORAGE_KEY);
-
-        window.location.href = "login.html";
-
+        localStorage.removeItem("union_logged_in");
+        sessionStorage.removeItem(this.TOKEN_KEY);
+        window.location.replace("login.html");
     }
 
     static requireLogin() {
-
         if (!this.isLoggedIn()) {
-
-            window.location.href = "login.html";
-
+            const returnTo = encodeURIComponent(location.pathname.split('/').pop() || 'index.html');
+            window.location.replace(`login.html?returnTo=${returnTo}`);
+            return false;
         }
-
+        return true;
     }
 
-    static updateNavigation() {
+    static requireStaff() {
+        if (!this.requireLogin()) return false;
+        return this.isStaff();
+    }
 
-        const accountArea = document.getElementById("accountArea");
-        const staffNav = document.getElementById("staffNav");
+    static escape(value = "") {
+        return String(value).replace(/[&<>"']/g, character => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+        })[character]);
+    }
 
+    static updateNavigation(scope = document) {
+        const accountArea = scope.getElementById?.("accountArea") || document.getElementById("accountArea");
+        const staffNav = scope.getElementById?.("staffNav") || document.getElementById("staffNav");
         if (!accountArea) return;
 
-        if (!this.isLoggedIn()) {
-
-            accountArea.innerHTML = `
-                <a href="login.html" class="profile-button">
-                    Login
-                </a>
-            `;
-
-            if (staffNav) {
-                staffNav.hidden = true;
-            }
-
+        const user = this.getUser();
+        if (!user) {
+            accountArea.innerHTML = '<a href="login.html" class="profile-button">Login</a>';
+            if (staffNav) staffNav.hidden = true;
             return;
-
         }
 
-        const user = this.getUser();
-
-        accountArea.innerHTML = `
-            <a href="profile.html" class="profile-button">
-                ${user.username}
-            </a>
-        `;
-
-        if (!staffNav) return;
-
-        const staffRoles = [
-
-            UNION_CONFIG.DISCORD.ROLES.FOUNDER,
-            UNION_CONFIG.DISCORD.ROLES.MANAGEMENT,
-            UNION_CONFIG.DISCORD.ROLES.STAFF,
-            UNION_CONFIG.DISCORD.ROLES.TRIAL_STAFF,
-            UNION_CONFIG.DISCORD.ROLES.SENIOR_DEVELOPER,
-            UNION_CONFIG.DISCORD.ROLES.DEVELOPER,
-            UNION_CONFIG.DISCORD.ROLES.TRAINEE_DEVELOPER
-
-        ];
-
-        staffNav.hidden = !staffRoles.some(role => this.hasRole(role));
-
+        const displayName = this.escape(user.global_name || user.displayName || user.username || "Profile");
+        accountArea.innerHTML = `<a href="profile.html" class="profile-button">${displayName}</a>`;
+        if (staffNav) staffNav.hidden = !this.isStaff();
     }
-
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-
-    Auth.updateNavigation();
-
-});
+window.Auth = Auth;
+document.addEventListener("DOMContentLoaded", () => Auth.updateNavigation());
+window.addEventListener("union:navbar-ready", () => Auth.updateNavigation());

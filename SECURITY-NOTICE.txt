@@ -1,0 +1,5 @@
+IMPORTANT SECURITY NOTICE
+
+The Discord webhook previously stored in js/portal-config.js was exposed in public browser code. It has been removed from this build. Delete/rotate that webhook in Discord before deploying.
+
+Discord OAuth and shared tickets/applications require a backend. Set API_BASE in js/config.js to your Cloudflare Worker/API URL, then enable the API section in js/portal-config.js. GitHub Pages alone cannot safely store OAuth secrets, webhook tokens, or shared portal data.

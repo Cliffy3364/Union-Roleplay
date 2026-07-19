@@ -26,6 +26,7 @@ function initialiseNavigationWhenReady() {
         initialiseMobileNavigation(navbar);
         initialiseActiveNavigation(navbar);
         initialiseAccountButton(navbar);
+        window.dispatchEvent(new CustomEvent("union:navbar-ready"));
 
         return true;
     };
@@ -99,8 +100,9 @@ function initialiseAccountButton(navbar) {
         return;
     }
 
-    const isLoggedIn =
-        localStorage.getItem("union_logged_in") === "true";
+    const isLoggedIn = window.Auth
+        ? Auth.isLoggedIn()
+        : Boolean(localStorage.getItem("union_user"));
 
     profileButton.textContent = isLoggedIn ? "Profile" : "Login";
     profileButton.setAttribute(
