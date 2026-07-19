@@ -12,49 +12,55 @@
 
     <style>
 
+        *{
+            box-sizing:border-box;
+        }
+
         body{
 
             margin:0;
-            height:100vh;
+            min-height:100vh;
 
             display:flex;
             justify-content:center;
             align-items:center;
 
             background:
-                linear-gradient(135deg,#12131b,#1b1d2b,#2c1f4a);
+                radial-gradient(circle at top,#5d2fd4 0%,transparent 45%),
+                linear-gradient(135deg,#10131c,#171c28,#22193f);
 
-            font-family:Arial,Helvetica,sans-serif;
+            font-family:Outfit,Arial,Helvetica,sans-serif;
+
+            color:#fff;
 
         }
 
         .login-card{
 
-            width:420px;
+            width:430px;
+            max-width:92%;
 
-            padding:40px;
+            padding:45px;
 
-            border-radius:20px;
+            border-radius:22px;
 
-            background:rgba(255,255,255,.05);
+            background:rgba(255,255,255,.06);
 
-            backdrop-filter:blur(20px);
+            backdrop-filter:blur(22px);
 
-            border:1px solid rgba(255,255,255,.1);
+            border:1px solid rgba(255,255,255,.08);
 
             text-align:center;
 
-            color:white;
-
-            box-shadow:0 15px 50px rgba(0,0,0,.45);
+            box-shadow:0 25px 60px rgba(0,0,0,.45);
 
         }
 
         .login-card img{
 
-            width:130px;
+            width:140px;
 
-            margin-bottom:20px;
+            margin-bottom:25px;
 
         }
 
@@ -64,13 +70,18 @@
 
             font-size:34px;
 
+            font-weight:700;
+
         }
 
-        p{
+        .subtitle{
 
-            color:#c7c7d8;
+            margin-top:10px;
+            margin-bottom:35px;
 
-            margin-bottom:30px;
+            color:#b8bfd8;
+
+            line-height:1.6;
 
         }
 
@@ -82,13 +93,15 @@
 
             border:none;
 
-            border-radius:12px;
+            border-radius:14px;
 
             background:#5865F2;
 
-            color:white;
+            color:#fff;
 
-            font-size:18px;
+            font-size:17px;
+
+            font-weight:600;
 
             cursor:pointer;
 
@@ -100,17 +113,49 @@
 
             transform:translateY(-2px);
 
-            background:#6b76f7;
+            background:#6f7cff;
 
         }
 
-        .footer{
+        .info{
 
-            margin-top:25px;
+            margin-top:28px;
+
+            color:#9ba4bf;
 
             font-size:14px;
 
-            color:#999;
+            line-height:1.6;
+
+        }
+
+        .back-link{
+
+            display:inline-block;
+
+            margin-top:20px;
+
+            color:#8f6fff;
+
+            text-decoration:none;
+
+            font-weight:600;
+
+        }
+
+        .back-link:hover{
+
+            color:#b59dff;
+
+        }
+
+        .version{
+
+            margin-top:28px;
+
+            color:#777;
+
+            font-size:13px;
 
         }
 
@@ -122,43 +167,84 @@
 
 <div class="login-card">
 
-    <img src="assets/images/logo.png">
+    <img
+        src="assets/images/logo.png"
+        alt="Union Roleplay Logo"
+    >
 
     <h1>Union Roleplay</h1>
 
-    <p>
-        Serious UK FiveM Roleplay
+    <p class="subtitle">
+
+        Sign in with Discord to access your profile,
+        applications, staff permissions and future website
+        features.
+
     </p>
 
-    <button class="discord-btn" onclick="login()">
+    <button
+        class="discord-btn"
+        type="button"
+        onclick="login()">
 
         Continue with Discord
 
     </button>
 
-    <div class="footer">
+    <div class="info">
 
-        Version 1.0
+        ✔ Secure Discord Authentication<br>
+        ✔ Automatic role detection<br>
+        ✔ Staff permissions synced automatically
+
+    </div>
+
+    <a
+        href="about.html"
+        class="back-link">
+
+        ← Return to Website
+
+    </a>
+
+    <div class="version">
+
+        Union Roleplay v1.0
 
     </div>
 
 </div>
 
+<script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+
 <script>
 
 function login() {
 
-    localStorage.setItem("union_logged_in", "true");
+    /*
+        Temporary login.
+        This will later be replaced with
+        Discord OAuth.
+    */
 
-    // Temporary roles for testing
-    localStorage.setItem(
-        "union_roles",
-        JSON.stringify([
-            "Founder"
-        ])
-    );
+    Auth.saveUser({
 
-    window.location = "about.html";
+        id: "123456789",
+
+        username: "Livify",
+
+        avatar: "",
+
+        roles: [
+
+            UNION_CONFIG.DISCORD.ROLES.FOUNDER
+
+        ]
+
+    });
+
+    window.location.href = "about.html";
 
 }
 

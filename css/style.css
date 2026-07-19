@@ -9969,3 +9969,45 @@ a{transition:.25s ease}.navbar{background:rgba(7,6,13,.78);border-bottom:1px sol
 @media (max-width: 700px) {
   .transcript-actions { justify-content: flex-start; }
 }
+
+
+/* ==========================================
+   NAVBAR IMPROVEMENTS (Phase 1)
+========================================== */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    background:rgba(10,10,18,.82);
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.nav-links a.active,
+.nav-links a[aria-current="page"]{
+    color:var(--white);
+    background:rgba(124,58,237,.18);
+    border-radius:10px;
+}
+
+.account-area{
+    display:flex;
+    align-items:center;
+    gap:.75rem;
+}
+
+.staff-navigation-link[hidden]{
+    display:none!important;
+}
+
+.mobile-menu-button{
+    cursor:pointer;
+}
+
+.profile-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+}

@@ -20,6 +20,21 @@
         href="css/style.css"
     >
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        .profile-logout-action {
+            width: 100%;
+            text-align: left;
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .profile-logout-action div {
+            text-align: left;
+        }
+    </style>
+
 </head>
 
 <body class="profile-page">
@@ -102,7 +117,7 @@
                             Discord account not connected
                         </p>
 
-                        <div class="profile-identity-badges">
+                        <div class="profile-identity-badges" id="profileRoleBadges">
 
                             <span class="profile-badge profile-badge-neutral">
                                 Guest
@@ -334,7 +349,7 @@
 
                     <div class="player-status-display">
 
-                        <span class="player-status-indicator offline"></span>
+                        <span class="player-status-indicator offline" id="playerStatusIndicator"></span>
 
                         <div>
 
@@ -1176,21 +1191,151 @@
 
     </footer>
 
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof Auth === "undefined") {
+                console.error("Union authentication failed to load.");
+                window.location.href = "login.html";
+                return;
+            }
 
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
- const ph=document.getElementById('navbar');
- if(ph){
- fetch('components/navbar.html').then(r=>r.text()).then(h=>ph.outerHTML=h).catch(console.error);
- }
-});
-</script>
-<script src="js/auth.js"></script>
+            Auth.requireLogin();
 
-<script>
-Auth.requireLogin();
-</script>
+            const user = Auth.getUser();
+
+            if (!user) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            const roleNames = {
+                [UNION_CONFIG.DISCORD.ROLES.FOUNDER]: "Founder",
+                [UNION_CONFIG.DISCORD.ROLES.MANAGEMENT]: "Management",
+                [UNION_CONFIG.DISCORD.ROLES.STAFF]: "Staff",
+                [UNION_CONFIG.DISCORD.ROLES.TRIAL_STAFF]: "Trial Staff",
+                [UNION_CONFIG.DISCORD.ROLES.SENIOR_DEVELOPER]: "Senior Developer",
+                [UNION_CONFIG.DISCORD.ROLES.DEVELOPER]: "Developer",
+                [UNION_CONFIG.DISCORD.ROLES.TRAINEE_DEVELOPER]: "Trainee Developer",
+                [UNION_CONFIG.DISCORD.ROLES.VEHICLE_DEVELOPER]: "Vehicle Developer",
+                [UNION_CONFIG.DISCORD.ROLES.CLOTHING_DEVELOPER]: "Clothing Developer",
+                [UNION_CONFIG.DISCORD.ROLES.SCRIPT_DEVELOPER]: "Script Developer",
+                [UNION_CONFIG.DISCORD.ROLES.MLO_DEVELOPER]: "MLO Developer"
+            };
+
+            const roles = Array.isArray(user.roles) ? user.roles : [];
+            const username = user.global_name || user.displayName || user.username || "Union Member";
+            const discordHandle = user.username ? `@${user.username}` : "Discord connected";
+            const avatarUrl = user.avatarUrl || (
+                user.id && user.avatar
+                    ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`
+                    : ""
+            );
+
+            const setText = (id, value) => {
+                const element = document.getElementById(id);
+                if (element) element.textContent = value;
+            };
+
+            setText("profileDisplayName", username);
+            setText("profileDiscordHandle", discordHandle);
+            setText("discordConnectionName", username);
+            setText("discordConnectionStatus", "Discord account connected");
+            setText("profileDiscordId", user.id || "Unavailable");
+            setText("profilePlayerId", user.playerId || user.id || "Not assigned");
+            setText("profileMemberSince", user.memberSince || "Discord connected");
+            setText("profileStatusTitle", "Account connected");
+            setText("profileStatusText", "Your Discord account is connected and your Union Roleplay permissions are active.");
+            setText("profileCompletionValue", "100%");
+            setText("profileSessionText", `Signed in as ${username}.`);
+            setText("profileSessionStatus", "Active");
+
+            const completionBar = document.getElementById("profileCompletionBar");
+            const completionTrack = document.querySelector(".profile-completion-track");
+            if (completionBar) completionBar.style.width = "100%";
+            if (completionTrack) completionTrack.setAttribute("aria-valuenow", "100");
+
+            const avatar = document.getElementById("profileAvatar");
+            const connectionAvatar = document.getElementById("discordConnectionAvatar");
+
+            const renderAvatar = (element) => {
+                if (!element) return;
+                if (avatarUrl) {
+                    element.textContent = "";
+                    element.style.backgroundImage = `url(${avatarUrl})`;
+                    element.style.backgroundSize = "cover";
+                    element.style.backgroundPosition = "center";
+                } else {
+                    element.textContent = username.charAt(0).toUpperCase();
+                }
+            };
+
+            renderAvatar(avatar);
+            renderAvatar(connectionAvatar);
+
+            const loginButton = document.getElementById("discordLoginButton");
+            if (loginButton) {
+                loginButton.textContent = "Discord Connected";
+                loginButton.disabled = true;
+                loginButton.setAttribute("aria-disabled", "true");
+            }
+
+            const roleBadges = document.getElementById("profileRoleBadges");
+            if (roleBadges) {
+                roleBadges.innerHTML = "";
+                const matchedRoles = roles
+                    .map((roleId) => roleNames[roleId])
+                    .filter(Boolean);
+
+                if (matchedRoles.length === 0) {
+                    matchedRoles.push("Member");
+                }
+
+                matchedRoles.forEach((roleName) => {
+                    const badge = document.createElement("span");
+                    badge.className = "profile-badge profile-badge-neutral";
+                    badge.textContent = roleName;
+                    roleBadges.appendChild(badge);
+                });
+            }
+
+            const department = roles.includes(UNION_CONFIG.DISCORD.ROLES.FOUNDER)
+                ? "Founder"
+                : roles.includes(UNION_CONFIG.DISCORD.ROLES.MANAGEMENT)
+                    ? "Management"
+                    : roles.some((roleId) => [
+                        UNION_CONFIG.DISCORD.ROLES.SENIOR_DEVELOPER,
+                        UNION_CONFIG.DISCORD.ROLES.DEVELOPER,
+                        UNION_CONFIG.DISCORD.ROLES.TRAINEE_DEVELOPER,
+                        UNION_CONFIG.DISCORD.ROLES.VEHICLE_DEVELOPER,
+                        UNION_CONFIG.DISCORD.ROLES.CLOTHING_DEVELOPER,
+                        UNION_CONFIG.DISCORD.ROLES.SCRIPT_DEVELOPER,
+                        UNION_CONFIG.DISCORD.ROLES.MLO_DEVELOPER
+                    ].includes(roleId))
+                        ? "Development Team"
+                        : roles.includes(UNION_CONFIG.DISCORD.ROLES.STAFF)
+                            ? "Staff Team"
+                            : roles.includes(UNION_CONFIG.DISCORD.ROLES.TRIAL_STAFF)
+                                ? "Trial Staff"
+                                : "Civilian";
+
+            setText("profileDepartment", department);
+
+            const sessionStatus = document.getElementById("profileSessionStatus");
+            if (sessionStatus) {
+                sessionStatus.classList.remove("pending");
+                sessionStatus.classList.add("approved");
+            }
+
+            const logoutButton = document.getElementById("profileLogoutButton");
+            if (logoutButton) {
+                logoutButton.addEventListener("click", () => Auth.logout());
+            }
+        });
+    </script>
+
 </body>
 </html>

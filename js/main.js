@@ -1,18 +1,122 @@
 document.addEventListener("DOMContentLoaded", () => {
-    initialiseMobileNavigation();
+    initialiseNavigationWhenReady();
     initialiseRulesSearch();
     initialiseRulesNavigation();
     initialiseRuleAccordions();
 });
 
 /* ================================= */
+/* SHARED NAVIGATION */
+/* ================================= */
+
+function initialiseNavigationWhenReady() {
+    const initialiseNavigation = () => {
+        const navbar = document.querySelector(".navbar");
+
+        if (!navbar) {
+            return false;
+        }
+
+        if (navbar.dataset.unionInitialised === "true") {
+            return true;
+        }
+
+        navbar.dataset.unionInitialised = "true";
+
+        initialiseMobileNavigation(navbar);
+        initialiseActiveNavigation(navbar);
+        initialiseAccountButton(navbar);
+
+        return true;
+    };
+
+    if (initialiseNavigation()) {
+        return;
+    }
+
+    /*
+     * The navbar is loaded from components/navbar.html after the page has
+     * already started loading. Watch for it so navigation features are
+     * attached as soon as the shared component appears.
+     */
+    const observer = new MutationObserver(() => {
+        if (initialiseNavigation()) {
+            observer.disconnect();
+        }
+    });
+
+    observer.observe(document.documentElement, {
+        childList: true,
+        subtree: true
+    });
+
+    window.setTimeout(() => {
+        observer.disconnect();
+    }, 10000);
+}
+
+function initialiseActiveNavigation(navbar) {
+    const currentUrl = new URL(window.location.href);
+    const currentFile =
+        decodeURIComponent(currentUrl.pathname.split("/").pop() || "index.html")
+            .toLowerCase();
+
+    const links = navbar.querySelectorAll(
+        ".nav-links a, .nav-buttons a"
+    );
+
+    links.forEach((link) => {
+        link.classList.remove("active");
+        link.removeAttribute("aria-current");
+
+        const rawHref = link.getAttribute("href");
+
+        if (
+            !rawHref ||
+            rawHref.startsWith("#") ||
+            rawHref.startsWith("fivem:") ||
+            link.target === "_blank"
+        ) {
+            return;
+        }
+
+        const linkUrl = new URL(rawHref, window.location.href);
+        const linkFile =
+            decodeURIComponent(linkUrl.pathname.split("/").pop() || "index.html")
+                .toLowerCase();
+
+        if (linkFile === currentFile) {
+            link.classList.add("active");
+            link.setAttribute("aria-current", "page");
+        }
+    });
+}
+
+function initialiseAccountButton(navbar) {
+    const profileButton = navbar.querySelector(".profile-button");
+
+    if (!profileButton) {
+        return;
+    }
+
+    const isLoggedIn =
+        localStorage.getItem("union_logged_in") === "true";
+
+    profileButton.textContent = isLoggedIn ? "Profile" : "Login";
+    profileButton.setAttribute(
+        "href",
+        isLoggedIn ? "profile.html" : "login.html"
+    );
+}
+
+/* ================================= */
 /* MOBILE NAVIGATION */
 /* ================================= */
 
-function initialiseMobileNavigation() {
-    const menuButton = document.querySelector(".mobile-menu-button");
-    const navigation = document.querySelector(".nav-links");
-    const navButtons = document.querySelector(".nav-buttons");
+function initialiseMobileNavigation(navbar = document) {
+    const menuButton = navbar.querySelector(".mobile-menu-button");
+    const navigation = navbar.querySelector(".nav-links");
+    const navButtons = navbar.querySelector(".nav-buttons");
 
     if (!menuButton || !navigation) {
         return;
@@ -32,7 +136,7 @@ function initialiseMobileNavigation() {
         document.body.classList.toggle("menu-open", !isOpen);
     });
 
-    const navigationLinks = document.querySelectorAll(
+    const navigationLinks = navbar.querySelectorAll(
         ".nav-links a, .nav-buttons a"
     );
 

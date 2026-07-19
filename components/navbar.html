@@ -1,22 +1,38 @@
 <header class="navbar">
     <div class="container nav-container">
 
-        <!-- Logo -->
-        <a href="about.html" class="logo">
-            <img src="assets/images/logo.png" alt="Union Roleplay">
+        <!-- Union Roleplay logo -->
+        <a
+            href="about.html"
+            class="logo"
+            aria-label="Go to the Union Roleplay about page"
+        >
+            <img
+                src="assets/images/logo.png"
+                alt="Union Roleplay logo"
+            >
             <span>Union Roleplay</span>
         </a>
 
-        <!-- Mobile -->
-        <button class="mobile-menu-button" type="button">
-            <span></span>
-            <span></span>
-            <span></span>
+        <!-- Mobile navigation toggle -->
+        <button
+            class="mobile-menu-button"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-controls="main-navigation"
+            aria-expanded="false"
+        >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
         </button>
 
-        <!-- Navigation -->
-        <nav class="nav-links">
-
+        <!-- Main navigation -->
+        <nav
+            class="nav-links"
+            id="main-navigation"
+            aria-label="Main navigation"
+        >
             <a href="about.html">About</a>
             <a href="organisations.html">Departments</a>
             <a href="whitelist.html">Whitelist</a>
@@ -24,37 +40,49 @@
             <a href="rules.html">Rules</a>
             <a href="support.html">Support</a>
 
-            <!-- Hidden unless staff -->
-            <a href="staff-panel.html"
-               id="staffNav"
-               style="display:none;">
-               Staff Panel
+            <!-- Shown by the authentication system for authorised staff -->
+            <a
+                href="staff-panel.html"
+                id="staffNav"
+                class="staff-navigation-link"
+                hidden
+            >
+                Staff Panel
             </a>
-
         </nav>
 
-        <!-- Right Side -->
+        <!-- Navigation actions -->
         <div class="nav-buttons">
 
-            <a class="connect-button"
-               href="fivem://connect/185.223.29.112:30120">
-                ▶ Play
+            <a
+                class="connect-button"
+                href="fivem://connect/185.223.29.112:30120"
+                aria-label="Connect to the Union Roleplay FiveM server"
+            >
+                <span aria-hidden="true">▶</span>
+                Play
             </a>
 
-            <a class="discord-button"
-               href="https://discord.gg/7xDPyf9jYQ"
-               target="_blank">
+            <a
+                class="discord-button"
+                href="https://discord.gg/7xDPyf9jYQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Join the Union Roleplay Discord server"
+            >
                 Discord
             </a>
 
-            <!-- Changes after login -->
-            <div id="accountArea">
-
-                <button id="loginButton"
-                        class="profile-button">
+            <!-- Updated by main.js and the future Discord login system -->
+            <div id="accountArea" class="account-area">
+                <a
+                    id="loginButton"
+                    class="profile-button"
+                    href="login.html"
+                    aria-label="Log in to your Union Roleplay account"
+                >
                     Login
-                </button>
-
+                </a>
             </div>
 
         </div>
