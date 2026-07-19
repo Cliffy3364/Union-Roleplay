@@ -1,1 +1,11 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0; url=organisations.html"><title>Organisations | Union Roleplay</title></head><body><p>Redirecting to <a href="organisations.html">Organisations</a>…</p></body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0; url=organisations.html"><title>Organisations | Union Roleplay</title></head><body><p>Redirecting to <a href="organisations.html">Organisations</a>…</p>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const ph=document.getElementById('navbar');
+ if(ph){
+ fetch('components/navbar.html').then(r=>r.text()).then(h=>ph.outerHTML=h).catch(console.error);
+ }
+});
+</script>
+
+</body></html>

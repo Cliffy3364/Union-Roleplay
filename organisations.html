@@ -9,31 +9,7 @@
 <link rel="stylesheet" href="css/style.css"><link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body class="organisations-page">
-<header class="navbar">
-    <div class="container nav-container">
-        <a href="about.html" class="logo" aria-label="Union Roleplay about us">
-            <img src="assets/images/logo.png" alt="Union Roleplay">
-            <span>Union Roleplay</span>
-        </a>
-        <button class="mobile-menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
-        <nav class="nav-links" aria-label="Main navigation">
-<a href="about.html">About Us</a>
-<a href="organisations.html" class="active">Organisations</a>
-<a href="whitelist.html">Get Whitelisted</a>
-<a href="applications.html">Applications</a>
-<a href="rules.html">Rules</a>
-<a href="support.html">Support</a>
-<a href="staff-panel.html">Staff</a>
-</nav>
-        <div class="nav-buttons">
-            <a href="profile.html" class="profile-button">Profile</a>
-            <a href="https://discord.gg/7xDPyf9jYQ" target="_blank" rel="noopener noreferrer" class="discord-button">Discord</a>
-            <a href="fivem://connect/185.223.29.112:30120" class="connect-button">Connect</a>
-        </div>
-    </div>
-</header>
+<header id="navbar"></header>
 <main>
 <section class="org-hero">
  <div class="container org-hero-inner">
@@ -81,4 +57,14 @@
 </section>
 </main>
 <script src="js/main.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const ph=document.getElementById('navbar');
+ if(ph){
+ fetch('components/navbar.html').then(r=>r.text()).then(h=>ph.outerHTML=h).catch(console.error);
+ }
+});
+</script>
+
 </body></html>
