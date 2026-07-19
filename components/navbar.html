@@ -1,25 +1,63 @@
 <header class="navbar">
     <div class="container nav-container">
-        <a href="about.html" class="logo" aria-label="Union Roleplay about us">
+
+        <!-- Logo -->
+        <a href="about.html" class="logo">
             <img src="assets/images/logo.png" alt="Union Roleplay">
             <span>Union Roleplay</span>
         </a>
-        <button class="mobile-menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false">
-            <span></span><span></span><span></span>
+
+        <!-- Mobile -->
+        <button class="mobile-menu-button" type="button">
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
-        <nav class="nav-links" aria-label="Main navigation">
-<a href="about.html" class="active">About Us</a>
-<a href="organisations.html">Organisations</a>
-<a href="whitelist.html">Get Whitelisted</a>
-<a href="applications.html">Applications</a>
-<a href="rules.html">Rules</a>
-<a href="support.html">Support</a>
-<a href="staff-panel.html">Staff</a>
-</nav>
+
+        <!-- Navigation -->
+        <nav class="nav-links">
+
+            <a href="about.html">About</a>
+            <a href="organisations.html">Departments</a>
+            <a href="whitelist.html">Whitelist</a>
+            <a href="applications.html">Applications</a>
+            <a href="rules.html">Rules</a>
+            <a href="support.html">Support</a>
+
+            <!-- Hidden unless staff -->
+            <a href="staff-panel.html"
+               id="staffNav"
+               style="display:none;">
+               Staff Panel
+            </a>
+
+        </nav>
+
+        <!-- Right Side -->
         <div class="nav-buttons">
-            <a href="profile.html" class="profile-button">Profile</a>
-            <a href="https://discord.gg/7xDPyf9jYQ" target="_blank" rel="noopener noreferrer" class="discord-button">Discord</a>
-            <a href="fivem://connect/185.223.29.112:30120" class="connect-button">Connect</a>
+
+            <a class="connect-button"
+               href="fivem://connect/185.223.29.112:30120">
+                ▶ Play
+            </a>
+
+            <a class="discord-button"
+               href="https://discord.gg/7xDPyf9jYQ"
+               target="_blank">
+                Discord
+            </a>
+
+            <!-- Changes after login -->
+            <div id="accountArea">
+
+                <button id="loginButton"
+                        class="profile-button">
+                    Login
+                </button>
+
+            </div>
+
         </div>
+
     </div>
 </header>

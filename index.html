@@ -1,11 +1,31 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=about.html"><link rel="canonical" href="about.html"><title>Union Roleplay</title></head><body><p>Redirecting to <a href="about.html">About Us</a>…</p>
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
- const ph=document.getElementById('navbar');
- if(ph){
- fetch('components/navbar.html').then(r=>r.text()).then(h=>ph.outerHTML=h).catch(console.error);
- }
-});
-</script>
+<!DOCTYPE html>
+<html lang="en">
 
-</body></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Union Roleplay</title>
+
+    <script>
+        // Temporary authentication check.
+        // Later this will be replaced with Discord OAuth.
+
+        if (localStorage.getItem("union_logged_in") === "true") {
+            window.location.replace("about.html");
+        } else {
+            window.location.replace("login.html");
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <noscript>
+        <p>This website requires JavaScript to run.</p>
+    </noscript>
+
+</body>
+
+</html>
