@@ -21,7 +21,11 @@ class Auth {
 
     static saveSession(user, token = "") {
         this.saveUser(user);
-        if (token) sessionStorage.setItem(this.TOKEN_KEY, token);
+
+        if (token) {
+            localStorage.setItem(this.TOKEN_KEY, token);
+            sessionStorage.setItem(this.TOKEN_KEY, token);
+        }
     }
 
     static isLoggedIn() { return this.getUser() !== null; }
@@ -33,6 +37,7 @@ class Auth {
     static logout() {
         localStorage.removeItem(this.STORAGE_KEY);
         localStorage.removeItem("union_logged_in");
+        localStorage.removeItem(this.TOKEN_KEY);
         sessionStorage.removeItem(this.TOKEN_KEY);
         window.location.replace("login.html");
     }
