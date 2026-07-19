@@ -6,7 +6,7 @@ window.UNION_CONFIG = {
 
     WEBSITE_NAME: "Union Roleplay",
 
-    API_BASE: "https://YOUR-WORKER.workers.dev",
+    API_BASE: "https://union-roleplay-api.danielclifford2808.workers.dev",
     API_VERSION: "v1",
     ENVIRONMENT: "production",
 
