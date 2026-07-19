@@ -91,6 +91,7 @@
 
                         <div
                             class="profile-avatar"
+                            id="profileAvatar"
                             aria-label="Player avatar"
                         >
                             U
@@ -157,11 +158,11 @@
 
                     </div>
 
-                    <h2>
+                    <h2 id="profileStatusTitle">
                         Account setup incomplete
                     </h2>
 
-                    <p>
+                    <p id="profileStatusText">
                         Connect Discord to unlock applications, account
                         tracking and department access.
                     </p>
@@ -235,7 +236,11 @@
 
                     <div class="discord-account-state">
 
-                        <div class="discord-account-avatar">
+                        <div
+                            class="discord-account-avatar"
+                            id="discordConnectionAvatar"
+                            aria-label="Discord avatar"
+                        >
                             ?
                         </div>
 
@@ -1228,12 +1233,13 @@
                 [UNION_CONFIG.DISCORD.ROLES.MLO_DEVELOPER]: "MLO Developer"
             };
 
-            const roles = Array.isArray(user.roles) ? user.roles : [];
+            const roles = Array.isArray(user.roles) ? user.roles.map(String) : [];
             const username = user.global_name || user.displayName || user.username || "Union Member";
             const discordHandle = user.username ? `@${user.username}` : "Discord connected";
-            const avatarUrl = user.avatarUrl || (
-                user.id && user.avatar
-                    ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`
+            const discordId = user.discord_id || user.discordId || user.id || "";
+            const avatarUrl = user.avatarUrl || user.avatar_url || (
+                discordId && user.avatar
+                    ? `https://cdn.discordapp.com/avatars/${discordId}/${user.avatar}.png?size=256`
                     : ""
             );
 
@@ -1246,8 +1252,8 @@
             setText("profileDiscordHandle", discordHandle);
             setText("discordConnectionName", username);
             setText("discordConnectionStatus", "Discord account connected");
-            setText("profileDiscordId", user.id || "Unavailable");
-            setText("profilePlayerId", user.playerId || user.id || "Not assigned");
+            setText("profileDiscordId", discordId || "Unavailable");
+            setText("profilePlayerId", user.playerId || "Not assigned");
             setText("profileMemberSince", user.memberSince || "Discord connected");
             setText("profileStatusTitle", "Account connected");
             setText("profileStatusText", "Your Discord account is connected and your Union Roleplay permissions are active.");
