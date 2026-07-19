@@ -146,13 +146,19 @@
 
 <script>
 
-function login(){
+function login() {
 
-    // Temporary
+    localStorage.setItem("union_logged_in", "true");
 
-    localStorage.setItem("union_logged_in","true");
+    // Temporary roles for testing
+    localStorage.setItem(
+        "union_roles",
+        JSON.stringify([
+            "Founder"
+        ])
+    );
 
-    window.location="about.html";
+    window.location = "about.html";
 
 }
 
