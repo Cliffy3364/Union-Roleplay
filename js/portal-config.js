@@ -1,1 +1,1 @@
-window.UNION_PORTAL_CONFIG={discordWebhook:'',discordEnabled:false};
+window.UNION_PORTAL_CONFIG={discordWebhook:'https://discord.com/api/webhooks/1528375545673416814/CTiGnpgdUOUmShmZMY2NQDV9DkHYmI5wSok7wzdZpk88Zf2JnIUeeIvWNfocQUDldhqt',discordEnabled:true};
