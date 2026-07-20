@@ -81,16 +81,298 @@
     }));
   }
 
-  document.querySelectorAll('[data-application-form]').forEach(form => form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(form));
-    const currentUser = window.Auth?.getUser?.();
-    const record = { id: uid('APP'), ownerId: currentUser?.id || 'guest', ownerName: currentUser?.username || '', type: form.dataset.applicationType, createdAt: new Date().toISOString(), status: 'Pending Review', response: '', data };
-    const all = read(APPS_KEY); all.unshift(record); write(APPS_KEY, all);
-    await discord(record.type === 'Whitelist Application' ? 'A new whitelist application has been submitted.' : `A new ${record.type} has been submitted.`, { title: `New application: ${record.type}`, description: `Reference: ${record.id}`, color: 10833386 });
-    const msg = form.querySelector('.portal-form-message'); if (msg) msg.textContent = `Application submitted. Reference: ${record.id}`;
-    form.reset();
-  }));
+function getFormData(form) {
+  const data = {};
+
+  form.querySelectorAll("[name]").forEach(field => {
+    if (field.type === "checkbox") {
+      data[field.name] = field.checked;
+    } else {
+      data[field.name] = field.value;
+    }
+  });
+
+  return data;
+}
+
+function calculateFormProgress(form) {
+  const requiredFields = [...form.querySelectorAll("[required]")];
+
+  if (!requiredFields.length) {
+    return 0;
+  }
+
+  const completedFields = requiredFields.filter(field => {
+    if (field.type === "checkbox") {
+      return field.checked;
+    }
+
+    return String(field.value || "").trim() !== "";
+  }).length;
+
+  return Math.round(
+    (completedFields / requiredFields.length) * 100
+  );
+}
+
+async function saveWhitelistDraft(form, showMessage = false) {
+  const token = getAccessToken();
+
+  if (!token) {
+    return false;
+  }
+
+  const response = await fetch(
+    `${API_BASE}/api/applications/save`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        progress: calculateFormProgress(form),
+        data: getFormData(form)
+      })
+    }
+  );
+
+  const result = await response.json();
+
+  if (!response.ok || !result.success) {
+    throw new Error(
+      result.error || "The application draft could not be saved."
+    );
+  }
+
+  if (showMessage) {
+    const message =
+      form.querySelector(".portal-form-message");
+
+    if (message) {
+      message.textContent = "Application draft saved.";
+    }
+  }
+
+  return true;
+}
+
+async function loadWhitelistDraft(form) {
+  const token = getAccessToken();
+
+  if (!token) {
+    return;
+  }
+
+  let response = await fetch(
+    `${API_BASE}/api/applications/me`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+
+  let result = await response.json();
+
+  if (!response.ok || !result.success) {
+    throw new Error(
+      result.error || "The application draft could not be loaded."
+    );
+  }
+
+  if (!result.application) {
+    const createResponse = await fetch(
+      `${API_BASE}/api/applications/create`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    const createResult = await createResponse.json();
+
+    if (!createResponse.ok || !createResult.success) {
+      throw new Error(
+        createResult.error ||
+        "The application draft could not be created."
+      );
+    }
+
+    result = createResult;
+  }
+
+  let savedData = {};
+
+  try {
+    savedData =
+      typeof result.application?.data === "string"
+        ? JSON.parse(result.application.data || "{}")
+        : result.application?.data || {};
+  } catch {
+    savedData = {};
+  }
+
+  Object.entries(savedData).forEach(([name, value]) => {
+    const field = form.elements.namedItem(name);
+
+    if (!field) {
+      return;
+    }
+
+    if (field.type === "checkbox") {
+      field.checked = Boolean(value);
+    } else {
+      field.value = value ?? "";
+    }
+  });
+
+  const user = window.Auth?.getUser?.();
+  const discordField =
+    form.elements.namedItem("discordName");
+
+  if (
+    discordField &&
+    !discordField.value &&
+    user
+  ) {
+    discordField.value =
+      user.discord_username ||
+      user.discordUsername ||
+      user.username ||
+      "";
+  }
+
+  if (discordField) {
+    discordField.readOnly = true;
+  }
+
+  const message =
+    form.querySelector(".portal-form-message");
+
+  if (message && result.application?.last_saved_at) {
+    message.textContent =
+      `Draft restored. Last saved: ${
+        new Date(
+          Number(result.application.last_saved_at)
+        ).toLocaleString()
+      }`;
+  }
+}
+
+document
+  .querySelectorAll("[data-application-form]")
+  .forEach(form => {
+    const isWhitelist =
+      form.dataset.applicationType ===
+      "Whitelist Application";
+
+    let saveTimer = null;
+
+    if (isWhitelist) {
+      loadWhitelistDraft(form).catch(error => {
+        const message =
+          form.querySelector(".portal-form-message");
+
+        if (message) {
+          message.textContent = error.message;
+        }
+      });
+
+      form.addEventListener("input", () => {
+        clearTimeout(saveTimer);
+
+        saveTimer = setTimeout(() => {
+          saveWhitelistDraft(form).catch(error => {
+            const message =
+              form.querySelector(".portal-form-message");
+
+            if (message) {
+              message.textContent = error.message;
+            }
+          });
+        }, 1000);
+      });
+
+      form.addEventListener("change", () => {
+        clearTimeout(saveTimer);
+
+        saveTimer = setTimeout(() => {
+          saveWhitelistDraft(form).catch(error => {
+            const message =
+              form.querySelector(".portal-form-message");
+
+            if (message) {
+              message.textContent = error.message;
+            }
+          });
+        }, 500);
+      });
+    }
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      const message =
+        form.querySelector(".portal-form-message");
+
+      try {
+        if (isWhitelist) {
+          await saveWhitelistDraft(form, false);
+        }
+
+        const data =
+          Object.fromEntries(new FormData(form));
+
+        const currentUser =
+          window.Auth?.getUser?.();
+
+        const record = {
+          id: uid("APP"),
+          ownerId: currentUser?.id || "guest",
+          ownerName: currentUser?.username || "",
+          type: form.dataset.applicationType,
+          createdAt: new Date().toISOString(),
+          status: "Pending Review",
+          response: "",
+          data
+        };
+
+        const all = read(APPS_KEY);
+        all.unshift(record);
+        write(APPS_KEY, all);
+
+        await discord(
+          record.type === "Whitelist Application"
+            ? "A new whitelist application has been submitted."
+            : `A new ${record.type} has been submitted.`,
+          {
+            title: `New application: ${record.type}`,
+            description: `Reference: ${record.id}`,
+            color: 10833386
+          }
+        );
+
+        if (message) {
+          message.textContent =
+            `Application submitted. Reference: ${record.id}`;
+        }
+
+        if (!isWhitelist) {
+          form.reset();
+        }
+      } catch (error) {
+        if (message) {
+          message.textContent =
+            error.message ||
+            "The application could not be saved.";
+        }
+      }
+    });
+  });
 
   const ticketForm = document.getElementById('support-ticket-form');
   const categoryInput = document.getElementById('ticket-category');
