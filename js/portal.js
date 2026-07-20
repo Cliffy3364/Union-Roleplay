@@ -520,10 +520,56 @@ document
 
   renderMyTickets(); renderPlayerThread();
 
+
+  async function renderProfileApplicationStatus() {
+    const empty = document.getElementById('profileApplicationsEmpty');
+    const list = document.getElementById('profileApplicationList');
+    if (!empty || !list) return;
+
+    const token = getAccessToken();
+    if (!token) return;
+
+    try {
+      const response = await fetch(`${API_BASE}/api/applications/me`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success || !result.application) return;
+
+      const app = result.application;
+      const status = String(app.status || 'Draft');
+      const statusClass = status.toLowerCase().replace(/\s+/g, '-');
+      const submitted = app.submitted_at || app.updated_at || app.created_at;
+      const responseText = String(app.staff_response || '').trim();
+
+      empty.hidden = true;
+      list.hidden = false;
+      list.innerHTML = `
+        <article class="profile-application-item profile-application-database">
+          <div>
+            <span class="profile-application-type">WHITELIST</span>
+            <h3>Union Roleplay Whitelist</h3>
+            <p>${status === 'Draft' ? `Draft saved at ${submitted ? esc(fmt(Number(submitted) || submitted)) : 'an unknown time'}` : `Submitted ${submitted ? esc(fmt(Number(submitted) || submitted)) : 'date unavailable'}`}</p>
+            <small>${esc(app.union_id || '')}</small>
+          </div>
+          <span class="profile-inline-status ${esc(statusClass)}">${esc(status)}</span>
+        </article>
+        ${responseText ? `<div class="profile-staff-response"><strong>Staff response</strong><p>${esc(responseText).replace(/\n/g, '<br>')}</p></div>` : ''}
+      `;
+    } catch (error) {
+      console.warn('Application status could not be loaded', error);
+    }
+  }
+
+  renderProfileApplicationStatus();
+
   const panel = document.getElementById('staff-panel-content');
   if (panel) {
     let tab = 'tickets';
     let staffApplications = [];
+    let applicationSearch = '';
+    let applicationStatus = '';
+    let applicationSort = 'newest';
     document.querySelectorAll('[data-staff-tab]').forEach(b => b.addEventListener('click', () => {
       document.querySelectorAll('[data-staff-tab]').forEach(x => x.classList.remove('active')); b.classList.add('active'); tab = b.dataset.staffTab; activeStaffTicket = null; renderStaff();
     }));
@@ -631,21 +677,67 @@ document
       try {
         await loadStaffApplications();
         stats();
-        const arr = staffApplications;
-        panel.innerHTML = `<div class="staff-record-list">${arr.length ? arr.map(x => {
-          const data = parseApplicationData(x);
-          const submitted = x.submitted_at || x.updated_at || x.created_at;
-          const applicant = x.discord_display_name || x.discord_username || x.discord_id || 'Unknown applicant';
-          return `<article class="staff-record">
-            <header><div><span>${esc(x.union_id || `Application #${x.id}`)}</span><h3>${esc(applicant)}</h3><p>${submitted ? fmt(Number(submitted) || submitted) : 'Unknown date'}</p></div>
-            <select data-status="${esc(x.id)}">${['Submitted','Pending Review','Interview','Accepted','Declined'].map(s => `<option ${x.status===s?'selected':''}>${s}</option>`).join('')}</select></header>
-            <div class="staff-record-data">${Object.entries(data).map(([k,v]) => `<p><strong>${esc(k.replace(/([A-Z])/g,' $1'))}</strong><span>${esc(typeof v === 'boolean' ? (v ? 'Yes' : 'No') : v)}</span></p>`).join('')}</div>
-            <label>Internal reviewer notes<textarea data-notes="${esc(x.id)}" rows="3">${esc(x.reviewer_notes || '')}</textarea></label>
-            <label>Response shown to player<textarea data-response="${esc(x.id)}" rows="4">${esc(x.staff_response || '')}</textarea></label>
-            <button class="primary-button" data-app-save="${esc(x.id)}">Save Update</button>
-          </article>`;
-        }).join('') : '<div class="ticket-empty-state"><strong>No submitted applications</strong><p>New whitelist submissions will appear here.</p></div>'}</div>`;
-        panel.querySelectorAll('[data-app-save]').forEach(b => b.addEventListener('click', () => saveApplication(b.dataset.appSave)));
+
+        let arr = [...staffApplications];
+        if (applicationSearch) {
+          const q = applicationSearch.toLowerCase();
+          arr = arr.filter(x => [
+            x.union_id,
+            x.discord_id,
+            x.discord_username,
+            x.discord_display_name,
+            x.status
+          ].some(value => String(value || '').toLowerCase().includes(q)));
+        }
+        if (applicationStatus) {
+          arr = arr.filter(x => String(x.status || '').toLowerCase() === applicationStatus.toLowerCase());
+        }
+        arr.sort((a, b) => {
+          const aTime = Number(a.submitted_at || a.updated_at || a.created_at || 0);
+          const bTime = Number(b.submitted_at || b.updated_at || b.created_at || 0);
+          return applicationSort === 'oldest' ? aTime - bTime : bTime - aTime;
+        });
+
+        panel.innerHTML = `
+          <div class="staff-application-toolbar">
+            <label><span>Search</span><input id="application-search" type="search" placeholder="Union ID or Discord username" value="${esc(applicationSearch)}"></label>
+            <label><span>Status</span><select id="application-filter">
+              <option value="">All statuses</option>
+              ${['Submitted','Pending Review','Interview','Accepted','Declined'].map(status => `<option value="${status}" ${applicationStatus===status?'selected':''}>${status}</option>`).join('')}
+            </select></label>
+            <label><span>Sort</span><select id="application-sort">
+              <option value="newest" ${applicationSort==='newest'?'selected':''}>Newest first</option>
+              <option value="oldest" ${applicationSort==='oldest'?'selected':''}>Oldest first</option>
+            </select></label>
+            <strong>${arr.length} result${arr.length === 1 ? '' : 's'}</strong>
+          </div>
+          <div class="staff-record-list">${arr.length ? arr.map(x => {
+            const data = parseApplicationData(x);
+            const submitted = x.submitted_at || x.updated_at || x.created_at;
+            const applicant = x.discord_display_name || x.discord_username || x.discord_id || 'Unknown applicant';
+            return `<article class="staff-record">
+              <header><div><span>${esc(x.union_id || `Application #${x.id}`)}</span><h3>${esc(applicant)}</h3><p>${submitted ? fmt(Number(submitted) || submitted) : 'Unknown date'} · ${esc(x.discord_id || '')}</p></div>
+              <select data-status="${esc(x.id)}">${['Submitted','Pending Review','Interview','Accepted','Declined'].map(status => `<option ${x.status===status?'selected':''}>${status}</option>`).join('')}</select></header>
+              <div class="staff-record-data">${Object.entries(data).map(([key,value]) => `<p><strong>${esc(key.replace(/([A-Z])/g,' $1'))}</strong><span>${esc(typeof value === 'boolean' ? (value ? 'Yes' : 'No') : value)}</span></p>`).join('')}</div>
+              <label>Internal reviewer notes<textarea data-notes="${esc(x.id)}" rows="3">${esc(x.reviewer_notes || '')}</textarea></label>
+              <label>Response shown to player<textarea data-response="${esc(x.id)}" rows="4">${esc(x.staff_response || '')}</textarea></label>
+              <button class="primary-button" data-app-save="${esc(x.id)}">Save Update</button>
+            </article>`;
+          }).join('') : '<div class="ticket-empty-state"><strong>No matching applications</strong><p>Change the search or status filter to see more results.</p></div>'}</div>`;
+
+        panel.querySelectorAll('[data-app-save]').forEach(button => button.addEventListener('click', () => saveApplication(button.dataset.appSave)));
+        panel.querySelector('#application-search')?.addEventListener('input', event => {
+          applicationSearch = event.target.value;
+          renderApplications();
+        });
+        panel.querySelector('#application-filter')?.addEventListener('change', event => {
+          applicationStatus = event.target.value;
+          renderApplications();
+        });
+        panel.querySelector('#application-sort')?.addEventListener('change', event => {
+          applicationSort = event.target.value;
+          renderApplications();
+        });
       } catch (error) {
         panel.innerHTML = `<div class="ticket-empty-state"><strong>Applications unavailable</strong><p>${esc(error.message)}</p></div>`;
         stats();
@@ -654,7 +746,7 @@ document
 
     async function renderStaff(){
       stats();
-      if(tab==='settings'){panel.innerHTML=`<div class="settings-panel"><span>STAFF ACCESS</span><h2>Database-backed applications enabled</h2><p>Authorised Discord IDs are controlled by the Worker variable <code>STAFF_DISCORD_IDS</code>.</p></div>`;return;}
+      if(tab==='settings'){panel.innerHTML=`<div class="settings-panel"><span>STAFF ACCESS</span><h2>Database-backed applications enabled</h2><p>Staff access can be controlled with <code>STAFF_ROLE_IDS</code> and <code>DISCORD_GUILD_ID</code>. <code>STAFF_DISCORD_IDS</code> remains available as an owner fallback.</p></div>`;return;}
       if(tab==='tickets'){renderTicketInbox(false);return;}
       if(tab==='transcripts'){renderTicketInbox(true);return;}
       await renderApplications();

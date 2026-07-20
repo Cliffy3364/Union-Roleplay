@@ -10011,3 +10011,47 @@ a{transition:.25s ease}.navbar{background:rgba(7,6,13,.78);border-bottom:1px sol
     align-items:center;
     justify-content:center;
 }
+
+/* Step 4: D1 application management */
+.staff-application-toolbar {
+  display: grid;
+  grid-template-columns: minmax(220px, 2fr) minmax(170px, 1fr) minmax(150px, 1fr) auto;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 22px;
+  padding: 18px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 18px;
+  background: rgba(255,255,255,.035);
+}
+.staff-application-toolbar label { display: grid; gap: 7px; }
+.staff-application-toolbar label span { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; opacity: .68; }
+.staff-application-toolbar input,
+.staff-application-toolbar select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 13px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 11px;
+  color: inherit;
+  background: rgba(5,7,14,.72);
+}
+.staff-application-toolbar > strong { padding: 12px 4px; white-space: nowrap; }
+.profile-application-database small { display: block; margin-top: 7px; opacity: .55; }
+.profile-staff-response {
+  margin-top: 14px;
+  padding: 18px;
+  border: 1px solid rgba(122,92,255,.28);
+  border-radius: 14px;
+  background: rgba(122,92,255,.08);
+}
+.profile-staff-response strong { display: block; margin-bottom: 7px; }
+.profile-inline-status.submitted,
+.profile-inline-status.pending-review { background: rgba(245,166,35,.14); color: #ffc25d; }
+.profile-inline-status.interview { background: rgba(64,156,255,.14); color: #76b8ff; }
+.profile-inline-status.accepted { background: rgba(61,210,142,.14); color: #62dda1; }
+.profile-inline-status.declined { background: rgba(255,83,102,.14); color: #ff7c8c; }
+.profile-inline-status.draft { background: rgba(255,255,255,.08); color: rgba(255,255,255,.72); }
+@media (max-width: 850px) {
+  .staff-application-toolbar { grid-template-columns: 1fr; }
+}

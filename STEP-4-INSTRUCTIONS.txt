@@ -1,0 +1,36 @@
+UNION ROLEPLAY — STEP 4
+
+FILES INCLUDED
+- Complete updated website
+- worker-step4.js (replace the currently deployed Worker code with this file)
+
+WHAT STEP 4 ADDS
+- Player whitelist status and staff response on profile.html
+- Staff application search by Union ID, Discord ID or username
+- Status filtering and newest/oldest sorting
+- Discord notification when a whitelist application is submitted
+- Discord notification when an application decision/status is saved
+- Discord role-based staff access, with Discord ID fallback
+
+CLOUDFLARE WORKER VARIABLES / SECRETS
+Required for role-based access:
+- DISCORD_GUILD_ID = your Union Discord server ID
+- STAFF_ROLE_IDS = comma-separated Discord role IDs allowed into the staff panel
+- DISCORD_BOT_TOKEN = existing bot token secret
+
+Owner fallback (optional but recommended):
+- STAFF_DISCORD_IDS = comma-separated Discord user IDs
+
+Discord application notifications:
+- APPLICATION_WEBHOOK = Discord webhook URL for new submissions
+- APPLICATION_REVIEW_WEBHOOK = optional separate webhook URL for review updates
+  If omitted, review updates use APPLICATION_WEBHOOK.
+
+DEPLOYMENT
+1. Replace your GitHub Pages files with this website build.
+2. In Cloudflare, replace the Worker source with worker-step4.js.
+3. Add/check the variables above.
+4. Deploy the Worker.
+5. Push the website to GitHub and hard refresh with Ctrl + F5.
+
+No D1 migration is required for this step.
