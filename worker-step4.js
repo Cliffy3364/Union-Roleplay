@@ -347,7 +347,13 @@ async function ensureApplicationSchema(env) {
         ["reference", "TEXT"],
         ["assigned_to", "TEXT"],
         ["interview_at", "INTEGER"],
-        ["interview_notes", "TEXT"]
+        ["interview_notes", "TEXT"],
+        ["priority", "TEXT NOT NULL DEFAULT 'Normal'"],
+        ["assigned_to", "TEXT"],
+        ["assigned_at", "INTEGER"],
+        ["last_action", "TEXT"],
+        ["last_action_by", "TEXT"],
+        ["last_action_at", "INTEGER"]
     ];
 
     for (const [column, definition] of additions) {
@@ -365,6 +371,33 @@ async function ensureApplicationSchema(env) {
         SET application_type = 'Whitelist Application'
         WHERE application_type IS NULL OR TRIM(application_type) = ''
     `).run();
+}
+
+async function ensureApplicationAudit(env) {
+    await env.DB.prepare(`CREATE TABLE IF NOT EXISTS application_audit (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        application_id INTEGER NOT NULL,
+        actor_discord_id TEXT,
+        actor_name TEXT,
+        action TEXT NOT NULL,
+        details TEXT,
+        created_at INTEGER NOT NULL
+    )`).run();
+}
+
+async function addApplicationAudit(env, applicationId, staffUser, action, details = '') {
+    await ensureApplicationAudit(env);
+    await env.DB.prepare(`
+        INSERT INTO application_audit (application_id, actor_discord_id, actor_name, action, details, created_at)
+        VALUES (?, ?, ?, ?, ?, ?)
+    `).bind(
+        applicationId,
+        staffUser?.discord_id || null,
+        staffUser?.displayName || staffUser?.username || 'Union Staff',
+        action,
+        String(details || '').slice(0, 2000),
+        Date.now()
+    ).run();
 }
 
 function applicationCode(type) {
@@ -1133,6 +1166,92 @@ export default {
             }
         }
 
+        /* Step 6 Module 2: staff recruitment dashboard summary. */
+        if (url.pathname === "/api/staff/applications/dashboard" && request.method === "GET") {
+            try {
+                const staff = await requireStaff(request, env);
+                if (staff.error) return staff.error;
+                await ensureApplicationSchema(env);
+                await ensureApplicationAudit(env);
+                const summary = await env.DB.prepare(`
+                    SELECT
+                        COUNT(*) AS total,
+                        SUM(CASE WHEN LOWER(status) IN ('submitted','pending review') THEN 1 ELSE 0 END) AS pending,
+                        SUM(CASE WHEN LOWER(status) = 'interview' THEN 1 ELSE 0 END) AS interviews,
+                        SUM(CASE WHEN LOWER(status) = 'accepted' THEN 1 ELSE 0 END) AS accepted,
+                        SUM(CASE WHEN LOWER(status) = 'declined' THEN 1 ELSE 0 END) AS declined,
+                        SUM(CASE WHEN submitted_at >= ? THEN 1 ELSE 0 END) AS this_week,
+                        SUM(CASE WHEN submitted_at >= ? THEN 1 ELSE 0 END) AS this_month
+                    FROM applications
+                    WHERE LOWER(COALESCE(status,'')) <> 'draft'
+                `).bind(Date.now() - 7*86400000, Date.now() - 30*86400000).first();
+                const activity = await env.DB.prepare(`
+                    SELECT * FROM application_audit ORDER BY id DESC LIMIT 20
+                `).all();
+                return json({ success: true, summary: summary || {}, activity: activity.results || [] });
+            } catch (error) {
+                return json({ success:false, error:error instanceof Error ? error.message : String(error) }, 500);
+            }
+        }
+
+        const assignmentMatch = url.pathname.match(/^\/api\/staff\/applications?\/(\d+)\/assignment$/);
+        if (assignmentMatch && request.method === "POST") {
+            try {
+                const staff = await requireStaff(request, env);
+                if (staff.error) return staff.error;
+                await ensureApplicationSchema(env);
+                const body = await readJsonBody(request);
+                const applicationId = Number(assignmentMatch[1]);
+                let assignedTo = String(body?.assigned_to ?? body?.assignedTo ?? '').trim();
+                if (body?.claim === true) assignedTo = staff.user.discord_id;
+                const now = Date.now();
+                await env.DB.prepare(`UPDATE applications SET assigned_to=?, assigned_at=?, last_action=?, last_action_by=?, last_action_at=?, updated_at=CURRENT_TIMESTAMP WHERE id=?`)
+                    .bind(assignedTo || null, assignedTo ? now : null, assignedTo ? 'Assigned' : 'Unassigned', staff.user.discord_id, now, applicationId).run();
+                await addApplicationAudit(env, applicationId, staff.user, assignedTo ? 'Application assigned' : 'Application unassigned', assignedTo || '');
+                const application = await env.DB.prepare(`SELECT * FROM applications WHERE id=?`).bind(applicationId).first();
+                return json({ success:true, application });
+            } catch (error) {
+                return json({ success:false, error:error instanceof Error ? error.message : String(error) }, 500);
+            }
+        }
+
+        const noteMatch = url.pathname.match(/^\/api\/staff\/applications?\/(\d+)\/notes$/);
+        if (noteMatch && request.method === "POST") {
+            try {
+                const staff = await requireStaff(request, env);
+                if (staff.error) return staff.error;
+                await ensureApplicationSchema(env);
+                const body = await readJsonBody(request);
+                const applicationId = Number(noteMatch[1]);
+                const note = String(body?.note || '').trim();
+                if (!note) return json({success:false,error:'Write an internal note first.'},400);
+                const existing = await env.DB.prepare(`SELECT reviewer_notes FROM applications WHERE id=?`).bind(applicationId).first();
+                if (!existing) return json({success:false,error:'Application not found.'},404);
+                const line = `[${new Date().toISOString()}] ${staff.user.displayName || staff.user.username}: ${note}`;
+                const combined = [existing.reviewer_notes, line].filter(Boolean).join('\n');
+                const now = Date.now();
+                await env.DB.prepare(`UPDATE applications SET reviewer_notes=?, last_action='Internal note added', last_action_by=?, last_action_at=?, updated_at=CURRENT_TIMESTAMP WHERE id=?`)
+                    .bind(combined, staff.user.discord_id, now, applicationId).run();
+                await addApplicationAudit(env, applicationId, staff.user, 'Internal note added', note);
+                return json({success:true,message:'Internal note added.'});
+            } catch (error) {
+                return json({success:false,error:error instanceof Error ? error.message : String(error)},500);
+            }
+        }
+
+        const activityMatch = url.pathname.match(/^\/api\/staff\/applications?\/(\d+)\/activity$/);
+        if (activityMatch && request.method === "GET") {
+            try {
+                const staff = await requireStaff(request, env);
+                if (staff.error) return staff.error;
+                await ensureApplicationAudit(env);
+                const result = await env.DB.prepare(`SELECT * FROM application_audit WHERE application_id=? ORDER BY id DESC LIMIT 50`).bind(Number(activityMatch[1])).all();
+                return json({success:true,activity:result.results || []});
+            } catch (error) {
+                return json({success:false,error:error instanceof Error ? error.message : String(error)},500);
+            }
+        }
+
         /*
          * Staff: list database-backed whitelist applications.
          * Requires the logged-in Discord ID to be listed in STAFF_DISCORD_IDS.
@@ -1293,6 +1412,9 @@ export default {
                 const reviewedAt = Date.now();
                 const reviewerNotes = String(body?.reviewer_notes ?? body?.reviewerNotes ?? "").trim();
                 const staffResponse = String(body?.staff_response ?? body?.staffResponse ?? "").trim();
+                const allowedPriorities = ['Urgent','High','Normal','Low'];
+                const requestedPriority = String(body?.priority || 'Normal');
+                const priority = allowedPriorities.find(item => item.toLowerCase() === requestedPriority.toLowerCase()) || 'Normal';
 
                 const existing = await env.DB.prepare(`
                     SELECT id
@@ -1318,6 +1440,10 @@ export default {
                         reviewed_by = ?,
                         reviewer_notes = ?,
                         staff_response = ?,
+                        priority = ?,
+                        last_action = ?,
+                        last_action_by = ?,
+                        last_action_at = ?,
                         updated_at = CURRENT_TIMESTAMP,
                         version = COALESCE(version, 0) + 1
                     WHERE id = ?
@@ -1328,9 +1454,15 @@ export default {
                     staff.user.discord_id,
                     reviewerNotes,
                     staffResponse,
+                    priority,
+                    `Status changed to ${status}`,
+                    staff.user.discord_id,
+                    reviewedAt,
                     applicationId
                 )
                 .run();
+
+                await addApplicationAudit(env, applicationId, staff.user, `Status changed to ${status}`, staffResponse || reviewerNotes);
 
                 const application = await env.DB.prepare(`
                     SELECT

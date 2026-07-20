@@ -516,12 +516,17 @@ document
 
   const panel = document.getElementById('staff-panel-content');
   if (panel) {
-    let tab = 'tickets';
+    let tab = 'dashboard';
     let staffApplications = [];
     let applicationSearch = '';
     let applicationStatus = '';
     let applicationType = '';
     let applicationSort = 'newest';
+    let applicationAssigned = '';
+    let applicationPriority = '';
+    let applicationPage = 1;
+    const applicationPageSize = 8;
+    let dashboardData = { summary: {}, activity: [] };
     document.querySelectorAll('[data-staff-tab]').forEach(b => b.addEventListener('click', () => {
       document.querySelectorAll('[data-staff-tab]').forEach(x => x.classList.remove('active')); b.classList.add('active'); tab = b.dataset.staffTab; activeStaffTicket = null; renderStaff();
     }));
@@ -575,6 +580,64 @@ document
       holder.querySelector('#staff-chat-form')?.addEventListener('submit',async e=>{e.preventDefault();const status=holder.querySelector('#staff-chat-message');try{const message=holder.querySelector('#staff-chat-text').value.trim(),attachments=await filesToData(files?.files||[]);if(!message&&!attachments.length)throw new Error('Write a reply or attach an image first.');await apiRequest(`/api/staff/tickets/${encodeURIComponent(t.reference)}/messages`,{method:'POST',body:JSON.stringify({text:message,attachments})});await renderTicketInbox(false);}catch(error){if(status)status.textContent=error.message;}});
     }
 
+    async function loadApplicationDashboard() {
+      const result = await apiRequest('/api/staff/applications/dashboard');
+      dashboardData = result || { summary: {}, activity: [] };
+      return dashboardData;
+    }
+
+    async function setApplicationAssignment(id, mode) {
+      const body = mode === 'claim' ? { claim: true } : { assigned_to: '' };
+      await apiRequest(`/api/staff/application/${id}/assignment`, { method: 'POST', body: JSON.stringify(body) });
+      await renderApplications();
+    }
+
+    async function addInternalNote(id) {
+      const input = panel.querySelector(`[data-new-note="${id}"]`);
+      const note = input?.value.trim() || '';
+      if (!note) return alert('Write an internal note first.');
+      await apiRequest(`/api/staff/application/${id}/notes`, { method: 'POST', body: JSON.stringify({ note }) });
+      await renderApplications();
+    }
+
+    function renderDashboardCards(summary) {
+      const cards = [
+        ['TOTAL APPLICATIONS', summary.total || 0],
+        ['PENDING REVIEW', summary.pending || 0],
+        ['INTERVIEWS', summary.interviews || 0],
+        ['ACCEPTED', summary.accepted || 0],
+        ['DECLINED', summary.declined || 0],
+        ['LAST 7 DAYS', summary.this_week || 0],
+        ['LAST 30 DAYS', summary.this_month || 0]
+      ];
+      return `<div class="recruitment-summary-grid">${cards.map(([label,value]) => `<article><span>${label}</span><strong>${Number(value)}</strong></article>`).join('')}</div>`;
+    }
+
+    async function renderDashboard() {
+      panel.innerHTML = '<div class="ticket-empty-state"><strong>Loading dashboard...</strong><p>Building the latest recruitment overview.</p></div>';
+      try {
+        const result = await loadApplicationDashboard();
+        const activity = result.activity || [];
+        panel.innerHTML = `${renderDashboardCards(result.summary || {})}
+          <div class="recruitment-dashboard-columns">
+            <section class="recruitment-dashboard-card"><header><span>RECENT ACTIVITY</span><h2>Recruitment timeline</h2></header>
+              <div class="recruitment-activity-list">${activity.length ? activity.map(item => `<article><strong>${esc(item.action)}</strong><p>${esc(item.actor_name || 'Union Staff')}${item.details ? ` · ${esc(item.details).slice(0,140)}` : ''}</p><time>${fmt(Number(item.created_at))}</time></article>`).join('') : '<div class="ticket-empty-state"><strong>No activity yet</strong><p>Assignments, notes and review decisions will appear here.</p></div>'}</div>
+            </section>
+            <section class="recruitment-dashboard-card recruitment-quick-actions"><header><span>QUICK ACTIONS</span><h2>Application management</h2></header>
+              <button class="primary-button" data-open-applications>Open application queue</button>
+              <p>Search, claim, prioritise and review every department application from one queue.</p>
+            </section>
+          </div>`;
+        panel.querySelector('[data-open-applications]')?.addEventListener('click', () => {
+          tab = 'applications';
+          document.querySelectorAll('[data-staff-tab]').forEach(x => x.classList.toggle('active', x.dataset.staffTab === 'applications'));
+          renderStaff();
+        });
+      } catch (error) {
+        panel.innerHTML = `<div class="ticket-empty-state"><strong>Dashboard unavailable</strong><p>${esc(error.message)}</p></div>`;
+      }
+    }
+
     async function loadStaffApplications() {
       const token = getAccessToken();
       if (!token) throw new Error("Please log in with an authorised staff account.");
@@ -604,6 +667,7 @@ document
       const token = getAccessToken();
       const status = document.querySelector(`[data-status="${id}"]`)?.value || 'Pending Review';
       const reviewerNotes = document.querySelector(`[data-notes="${id}"]`)?.value.trim() || '';
+      const priority = document.querySelector(`[data-priority="${id}"]`)?.value || 'Normal';
       const staffResponse = document.querySelector(`[data-response="${id}"]`)?.value.trim() || '';
       const button = document.querySelector(`[data-app-save="${id}"]`);
       if (button) { button.disabled = true; button.textContent = 'Saving...'; }
@@ -618,7 +682,8 @@ document
           body: JSON.stringify({
             status,
             reviewer_notes: reviewerNotes,
-            staff_response: staffResponse
+            staff_response: staffResponse,
+            priority
           })
         });
         const result = await response.json();
@@ -651,11 +716,20 @@ document
         if (applicationStatus) {
           arr = arr.filter(x => String(x.status || '').toLowerCase() === applicationStatus.toLowerCase());
         }
+        if (applicationType) arr = arr.filter(x => String(x.application_type || 'Whitelist Application') === applicationType);
+        if (applicationAssigned === 'assigned') arr = arr.filter(x => x.assigned_to);
+        if (applicationAssigned === 'unassigned') arr = arr.filter(x => !x.assigned_to);
+        if (applicationPriority) arr = arr.filter(x => String(x.priority || 'Normal') === applicationPriority);
         arr.sort((a, b) => {
           const aTime = Number(a.submitted_at || a.updated_at || a.created_at || 0);
           const bTime = Number(b.submitted_at || b.updated_at || b.created_at || 0);
+          if (applicationSort === 'priority') { const rank={Urgent:3,High:2,Normal:1,Low:0}; return (rank[b.priority||'Normal']||0)-(rank[a.priority||'Normal']||0); }
           return applicationSort === 'oldest' ? aTime - bTime : bTime - aTime;
         });
+        const totalResults = arr.length;
+        const totalPages = Math.max(1, Math.ceil(totalResults / applicationPageSize));
+        applicationPage = Math.min(applicationPage, totalPages);
+        arr = arr.slice((applicationPage - 1) * applicationPageSize, applicationPage * applicationPageSize);
 
         panel.innerHTML = `
           <div class="staff-application-toolbar">
@@ -668,39 +742,51 @@ document
               <option value="">All application types</option>
               ${[...new Set(staffApplications.map(x => x.application_type || 'Whitelist Application'))].sort().map(type => `<option value="${esc(type)}" ${applicationType===type?'selected':''}>${esc(type)}</option>`).join('')}
             </select></label>
+            <label><span>Assignment</span><select id="application-assigned-filter"><option value="">All</option><option value="assigned" ${applicationAssigned==='assigned'?'selected':''}>Assigned</option><option value="unassigned" ${applicationAssigned==='unassigned'?'selected':''}>Unassigned</option></select></label>
+            <label><span>Priority</span><select id="application-priority-filter"><option value="">All</option>${['Urgent','High','Normal','Low'].map(v=>`<option value="${v}" ${applicationPriority===v?'selected':''}>${v}</option>`).join('')}</select></label>
             <label><span>Sort</span><select id="application-sort">
               <option value="newest" ${applicationSort==='newest'?'selected':''}>Newest first</option>
               <option value="oldest" ${applicationSort==='oldest'?'selected':''}>Oldest first</option>
+              <option value="priority" ${applicationSort==='priority'?'selected':''}>Priority</option>
             </select></label>
-            <strong>${arr.length} result${arr.length === 1 ? '' : 's'}</strong>
+            <strong>${totalResults} result${totalResults === 1 ? '' : 's'}</strong>
           </div>
           <div class="staff-record-list">${arr.length ? arr.map(x => {
             const data = parseApplicationData(x);
             const submitted = x.submitted_at || x.updated_at || x.created_at;
             const applicant = x.discord_display_name || x.discord_username || x.discord_id || 'Unknown applicant';
             return `<article class="staff-record">
-              <header><div><span>${esc(x.union_id || `Application #${x.id}`)}</span><h3>${esc(applicant)}</h3><p>${submitted ? fmt(Number(submitted) || submitted) : 'Unknown date'} · ${esc(x.discord_id || '')}</p></div>
-              <select data-status="${esc(x.id)}">${['Submitted','Pending Review','Interview','Accepted','Declined'].map(status => `<option ${x.status===status?'selected':''}>${status}</option>`).join('')}</select></header>
+              <header><div><span>${esc(x.reference || x.union_id || `Application #${x.id}`)}</span><h3>${esc(applicant)}</h3><p>${esc(x.application_type || 'Whitelist Application')} · ${submitted ? fmt(Number(submitted) || submitted) : 'Unknown date'}</p><p><b>${esc(x.priority || 'Normal')} priority</b> · ${x.assigned_to ? `Assigned to ${esc(x.assigned_to)}` : 'Unassigned'}</p></div>
+              <div class="application-review-controls"><select data-priority="${esc(x.id)}">${['Urgent','High','Normal','Low'].map(priority => `<option ${String(x.priority||'Normal')===priority?'selected':''}>${priority}</option>`).join('')}</select><select data-status="${esc(x.id)}">${['Submitted','Pending Review','Interview','Accepted','Declined'].map(status => `<option ${x.status===status?'selected':''}>${status}</option>`).join('')}</select></div></header>
               <div class="staff-record-data">${Object.entries(data).map(([key,value]) => `<p><strong>${esc(key.replace(/([A-Z])/g,' $1'))}</strong><span>${esc(typeof value === 'boolean' ? (value ? 'Yes' : 'No') : value)}</span></p>`).join('')}</div>
+              <div class="application-assignment-actions"><button type="button" data-claim-app="${esc(x.id)}">Claim application</button><button type="button" data-unassign-app="${esc(x.id)}">Unassign</button></div>
+              <label>Add internal note<textarea data-new-note="${esc(x.id)}" rows="2" placeholder="Add a timestamped staff-only note..."></textarea></label><button type="button" data-add-note="${esc(x.id)}">Add Note</button>
               <label>Internal reviewer notes<textarea data-notes="${esc(x.id)}" rows="3">${esc(x.reviewer_notes || '')}</textarea></label>
               <label>Response shown to player<textarea data-response="${esc(x.id)}" rows="4">${esc(x.staff_response || '')}</textarea></label>
               <button class="primary-button" data-app-save="${esc(x.id)}">Save Update</button>
             </article>`;
-          }).join('') : '<div class="ticket-empty-state"><strong>No matching applications</strong><p>Change the search or status filter to see more results.</p></div>'}</div>`;
+          }).join('') : '<div class="ticket-empty-state"><strong>No matching applications</strong><p>Change the search or status filter to see more results.</p></div>'}</div><nav class="application-pagination"><button id="application-prev" ${applicationPage<=1?'disabled':''}>Previous</button><span>Page ${applicationPage} of ${totalPages}</span><button id="application-next" ${applicationPage>=totalPages?'disabled':''}>Next</button></nav>`;
 
         panel.querySelectorAll('[data-app-save]').forEach(button => button.addEventListener('click', () => saveApplication(button.dataset.appSave)));
+        panel.querySelectorAll('[data-claim-app]').forEach(b => b.addEventListener('click', () => setApplicationAssignment(b.dataset.claimApp, 'claim')));
+        panel.querySelectorAll('[data-unassign-app]').forEach(b => b.addEventListener('click', () => setApplicationAssignment(b.dataset.unassignApp, 'unassign')));
+        panel.querySelectorAll('[data-add-note]').forEach(b => b.addEventListener('click', () => addInternalNote(b.dataset.addNote)));
+        panel.querySelector('#application-prev')?.addEventListener('click', () => { applicationPage--; renderApplications(); });
+        panel.querySelector('#application-next')?.addEventListener('click', () => { applicationPage++; renderApplications(); });
         panel.querySelector('#application-search')?.addEventListener('input', event => {
-          applicationSearch = event.target.value;
+          applicationSearch = event.target.value; applicationPage = 1;
           renderApplications();
         });
         panel.querySelector('#application-filter')?.addEventListener('change', event => {
-          applicationStatus = event.target.value;
+          applicationStatus = event.target.value; applicationPage = 1;
           renderApplications();
         });
         panel.querySelector('#application-type-filter')?.addEventListener('change', event => {
-          applicationType = event.target.value;
+          applicationType = event.target.value; applicationPage = 1;
           renderApplications();
         });
+        panel.querySelector('#application-assigned-filter')?.addEventListener('change', event => { applicationAssigned = event.target.value; applicationPage=1; renderApplications(); });
+        panel.querySelector('#application-priority-filter')?.addEventListener('change', event => { applicationPriority = event.target.value; applicationPage=1; renderApplications(); });
         panel.querySelector('#application-sort')?.addEventListener('change', event => {
           applicationSort = event.target.value;
           renderApplications();
@@ -713,6 +799,7 @@ document
 
     async function renderStaff(){
       stats();
+      if(tab==='dashboard'){await renderDashboard();return;}
       if(tab==='settings'){panel.innerHTML=`<div class="settings-panel"><span>STAFF ACCESS</span><h2>Database-backed applications enabled</h2><p>Staff access can be controlled with <code>STAFF_ROLE_IDS</code> and <code>DISCORD_GUILD_ID</code>. <code>STAFF_DISCORD_IDS</code> remains available as an owner fallback.</p></div>`;return;}
       if(tab==='tickets'){renderTicketInbox(false);return;}
       if(tab==='transcripts'){renderTicketInbox(true);return;}

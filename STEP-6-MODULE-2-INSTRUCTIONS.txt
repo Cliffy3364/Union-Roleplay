@@ -1,0 +1,27 @@
+UNION ROLEPLAY — STEP 6 MODULE 2
+================================
+
+This build keeps all Module 1 and Step 5 features and adds the advanced recruitment staff dashboard.
+
+DEPLOYMENT
+1. Upload every website file in the Union-Roleplay folder to the GitHub Pages repository.
+2. Replace the Cloudflare Worker code with worker-step6.js.
+3. Deploy the Worker. The Worker automatically adds the required D1 columns and creates application_audit.
+4. Keep the existing DB binding named DB and existing Discord/auth environment variables.
+
+NEW FEATURES
+- Recruitment dashboard totals and recent activity feed.
+- Application search, department, status, assignment and priority filters.
+- Newest, oldest and priority sorting.
+- Pagination.
+- Claim and unassign actions.
+- Urgent, High, Normal and Low priorities.
+- Timestamped internal staff notes.
+- Assignment, note and review audit records.
+- Existing tickets, transcripts and application review flow retained.
+
+NEW API ROUTES
+GET  /api/staff/applications/dashboard
+POST /api/staff/application/:id/assignment
+POST /api/staff/application/:id/notes
+GET  /api/staff/application/:id/activity
