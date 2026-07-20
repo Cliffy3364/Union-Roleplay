@@ -125,7 +125,7 @@ function calculateFormProgress(form) {
   );
 }
 
-function setWhitelistSubmittedState(form, application = {}) {
+function setApplicationSubmittedState(form, application = {}) {
   form.dataset.submitted = "true";
   form.querySelectorAll("input, textarea, select, button[type='submit']").forEach(field => {
     field.disabled = true;
@@ -141,7 +141,7 @@ function setWhitelistSubmittedState(form, application = {}) {
   }
 }
 
-async function saveWhitelistDraft(form, showMessage = false) {
+async function saveApplicationDraft(form, showMessage = false) {
   if (form.dataset.submitted === "true") return false;
 
   const token = getAccessToken();
@@ -159,6 +159,7 @@ async function saveWhitelistDraft(form, showMessage = false) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        application_type: form.dataset.applicationType || "General Application",
         progress: calculateFormProgress(form),
         data: getFormData(form)
       })
@@ -185,7 +186,7 @@ async function saveWhitelistDraft(form, showMessage = false) {
   return true;
 }
 
-async function loadWhitelistDraft(form) {
+async function loadApplicationDraft(form) {
   const token = getAccessToken();
 
   if (!token) {
@@ -193,7 +194,7 @@ async function loadWhitelistDraft(form) {
   }
 
   let response = await fetch(
-    `${API_BASE}/api/applications/me`,
+    `${API_BASE}/api/applications/me?type=${encodeURIComponent(form.dataset.applicationType || "General Application")}`,
     {
       headers: {
         Authorization: `Bearer ${token}`
@@ -217,7 +218,10 @@ async function loadWhitelistDraft(form) {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json"
-        }
+        },
+        body: JSON.stringify({
+          application_type: form.dataset.applicationType || "General Application"
+        })
       }
     );
 
@@ -282,7 +286,7 @@ async function loadWhitelistDraft(form) {
     form.querySelector(".portal-form-message");
 
   if (String(result.application?.status || "Draft").toLowerCase() !== "draft") {
-    setWhitelistSubmittedState(form, result.application);
+    setApplicationSubmittedState(form, result.application);
     return;
   }
 
@@ -299,117 +303,59 @@ async function loadWhitelistDraft(form) {
 document
   .querySelectorAll("[data-application-form]")
   .forEach(form => {
-    const isWhitelist =
-      form.dataset.applicationType ===
-      "Whitelist Application";
-
     let saveTimer = null;
 
-    if (isWhitelist) {
-      loadWhitelistDraft(form).catch(error => {
-        const message =
-          form.querySelector(".portal-form-message");
+    loadApplicationDraft(form).catch(error => {
+      const message = form.querySelector(".portal-form-message");
+      if (message) message.textContent = error.message;
+    });
 
-        if (message) {
-          message.textContent = error.message;
-        }
-      });
+    const queueSave = delay => {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        saveApplicationDraft(form).catch(error => {
+          const message = form.querySelector(".portal-form-message");
+          if (message) message.textContent = error.message;
+        });
+      }, delay);
+    };
 
-      form.addEventListener("input", () => {
-        clearTimeout(saveTimer);
-
-        saveTimer = setTimeout(() => {
-          saveWhitelistDraft(form).catch(error => {
-            const message =
-              form.querySelector(".portal-form-message");
-
-            if (message) {
-              message.textContent = error.message;
-            }
-          });
-        }, 1000);
-      });
-
-      form.addEventListener("change", () => {
-        clearTimeout(saveTimer);
-
-        saveTimer = setTimeout(() => {
-          saveWhitelistDraft(form).catch(error => {
-            const message =
-              form.querySelector(".portal-form-message");
-
-            if (message) {
-              message.textContent = error.message;
-            }
-          });
-        }, 500);
-      });
-    }
+    form.addEventListener("input", () => queueSave(1000));
+    form.addEventListener("change", () => queueSave(500));
 
     form.addEventListener("submit", async event => {
       event.preventDefault();
-
       const message = form.querySelector(".portal-form-message");
 
       try {
-        if (isWhitelist) {
-          if (form.dataset.submitted === "true") {
-            throw new Error("This application has already been submitted.");
-          }
-
-          const token = getAccessToken();
-          if (!token) throw new Error("Please log in before submitting your application.");
-
-          const submitResponse = await fetch(`${API_BASE}/api/applications/submit`, {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              progress: calculateFormProgress(form),
-              data: getFormData(form)
-            })
-          });
-
-          const submitResult = await submitResponse.json();
-          if (!submitResponse.ok || !submitResult.success) {
-            throw new Error(submitResult.error || "Application could not be submitted.");
-          }
-
-          setWhitelistSubmittedState(form, submitResult.application || {});
-          return;
+        if (form.dataset.submitted === "true") {
+          throw new Error("This application has already been submitted.");
         }
 
-        const data = Object.fromEntries(new FormData(form));
-        const currentUser = window.Auth?.getUser?.();
-        const record = {
-          id: uid("APP"),
-          ownerId: currentUser?.id || "guest",
-          ownerName: currentUser?.username || "",
-          type: form.dataset.applicationType,
-          createdAt: new Date().toISOString(),
-          status: "Pending Review",
-          response: "",
-          data
-        };
+        const token = getAccessToken();
+        if (!token) throw new Error("Please log in before submitting your application.");
 
-        const all = read(APPS_KEY);
-        all.unshift(record);
-        write(APPS_KEY, all);
-
-        await discord(`A new ${record.type} has been submitted.`, {
-          title: `New application: ${record.type}`,
-          description: `Reference: ${record.id}`,
-          color: 10833386
+        const submitResponse = await fetch(`${API_BASE}/api/applications/submit`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            application_type: form.dataset.applicationType || "General Application",
+            progress: calculateFormProgress(form),
+            data: getFormData(form)
+          })
         });
 
-        if (message) message.textContent = `Application submitted. Reference: ${record.id}`;
-        form.reset();
-      } catch (error) {
-        if (message) {
-          message.textContent = error.message || "The application could not be submitted.";
+        const submitResult = await submitResponse.json();
+        if (!submitResponse.ok || !submitResult.success) {
+          throw new Error(submitResult.error || "Application could not be submitted.");
         }
+
+        setApplicationSubmittedState(form, submitResult.application || {});
+      } catch (error) {
+        if (message) message.textContent = error.message || "The application could not be submitted.";
       }
     });
   });
@@ -574,6 +520,7 @@ document
     let staffApplications = [];
     let applicationSearch = '';
     let applicationStatus = '';
+    let applicationType = '';
     let applicationSort = 'newest';
     document.querySelectorAll('[data-staff-tab]').forEach(b => b.addEventListener('click', () => {
       document.querySelectorAll('[data-staff-tab]').forEach(x => x.classList.remove('active')); b.classList.add('active'); tab = b.dataset.staffTab; activeStaffTicket = null; renderStaff();
@@ -717,6 +664,10 @@ document
               <option value="">All statuses</option>
               ${['Submitted','Pending Review','Interview','Accepted','Declined'].map(status => `<option value="${status}" ${applicationStatus===status?'selected':''}>${status}</option>`).join('')}
             </select></label>
+            <label><span>Department / type</span><select id="application-type-filter">
+              <option value="">All application types</option>
+              ${[...new Set(staffApplications.map(x => x.application_type || 'Whitelist Application'))].sort().map(type => `<option value="${esc(type)}" ${applicationType===type?'selected':''}>${esc(type)}</option>`).join('')}
+            </select></label>
             <label><span>Sort</span><select id="application-sort">
               <option value="newest" ${applicationSort==='newest'?'selected':''}>Newest first</option>
               <option value="oldest" ${applicationSort==='oldest'?'selected':''}>Oldest first</option>
@@ -744,6 +695,10 @@ document
         });
         panel.querySelector('#application-filter')?.addEventListener('change', event => {
           applicationStatus = event.target.value;
+          renderApplications();
+        });
+        panel.querySelector('#application-type-filter')?.addEventListener('change', event => {
+          applicationType = event.target.value;
           renderApplications();
         });
         panel.querySelector('#application-sort')?.addEventListener('change', event => {

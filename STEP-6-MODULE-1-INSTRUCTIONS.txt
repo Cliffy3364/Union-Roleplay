@@ -1,0 +1,19 @@
+UNION ROLEPLAY — STEP 6 MODULE 1
+
+This build adds database-backed multi-department recruitment.
+
+DEPLOYMENT
+1. Upload all website files to GitHub Pages.
+2. Replace your Cloudflare Worker with worker-step6.js (worker-step4.js is also updated to the same code).
+3. Deploy the Worker. No manual D1 migration is required: the Worker creates/adds the required application columns safely.
+
+WHAT CHANGED
+- Every application form now saves a separate draft in D1.
+- Users can apply to multiple departments without overwriting their whitelist application.
+- Application references use department codes.
+- Staff can filter applications by department/type.
+- Added Fire & Rescue and Business application forms.
+- Added /api/applications/history for the player portal module.
+
+CURRENT WORKER VARIABLES RETAINED
+DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, DISCORD_REDIRECT_URI, DISCORD_BOT_TOKEN, DISCORD_GUILD_ID, STAFF_ROLE_IDS, STAFF_DISCORD_IDS, APPLICATION_WEBHOOK, APPLICATION_REVIEW_WEBHOOK
