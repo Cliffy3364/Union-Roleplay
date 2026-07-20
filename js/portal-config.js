@@ -3,7 +3,7 @@ window.UNION_PORTAL_CONFIG = {
   discordWebhook: '',
   api: {
     enabled: false,
-    baseUrl: 'https://YOUR-WORKER.workers.dev'
+    baseUrl: "https://union-roleplay-api.danielclifford2808.workers.dev"
   },
   tickets: {
     allowReopenHours: 48,
