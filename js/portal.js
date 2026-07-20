@@ -125,7 +125,25 @@ function calculateFormProgress(form) {
   );
 }
 
+function setWhitelistSubmittedState(form, application = {}) {
+  form.dataset.submitted = "true";
+  form.querySelectorAll("input, textarea, select, button[type='submit']").forEach(field => {
+    field.disabled = true;
+  });
+
+  const message = form.querySelector(".portal-form-message");
+  if (message) {
+    const status = application.status || "Submitted";
+    const reference = application.application_id || application.union_id || application.id || "";
+    message.textContent = reference
+      ? `Application submitted — ${status}. Reference: ${reference}`
+      : `Application submitted — ${status}.`;
+  }
+}
+
 async function saveWhitelistDraft(form, showMessage = false) {
+  if (form.dataset.submitted === "true") return false;
+
   const token = getAccessToken();
 
   if (!token) {
@@ -263,6 +281,11 @@ async function loadWhitelistDraft(form) {
   const message =
     form.querySelector(".portal-form-message");
 
+  if (String(result.application?.status || "Draft").toLowerCase() !== "draft") {
+    setWhitelistSubmittedState(form, result.application);
+    return;
+  }
+
   if (message && result.application?.last_saved_at) {
     message.textContent =
       `Draft restored. Last saved: ${
@@ -326,33 +349,40 @@ document
     form.addEventListener("submit", async event => {
       event.preventDefault();
 
-      const message =
-        form.querySelector(".portal-form-message");
+      const message = form.querySelector(".portal-form-message");
 
       try {
         if (isWhitelist) {
-          await saveWhitelistDraft(form, false);
+          if (form.dataset.submitted === "true") {
+            throw new Error("This application has already been submitted.");
+          }
 
           const token = getAccessToken();
+          if (!token) throw new Error("Please log in before submitting your application.");
+
           const submitResponse = await fetch(`${API_BASE}/api/applications/submit`, {
             method: "POST",
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify({
+              progress: calculateFormProgress(form),
+              data: getFormData(form)
+            })
           });
+
           const submitResult = await submitResponse.json();
           if (!submitResponse.ok || !submitResult.success) {
             throw new Error(submitResult.error || "Application could not be submitted.");
           }
+
+          setWhitelistSubmittedState(form, submitResult.application || {});
+          return;
         }
 
-        const data =
-          Object.fromEntries(new FormData(form));
-
-        const currentUser =
-          window.Auth?.getUser?.();
-
+        const data = Object.fromEntries(new FormData(form));
+        const currentUser = window.Auth?.getUser?.();
         const record = {
           id: uid("APP"),
           ownerId: currentUser?.id || "guest",
@@ -368,30 +398,17 @@ document
         all.unshift(record);
         write(APPS_KEY, all);
 
-        await discord(
-          record.type === "Whitelist Application"
-            ? "A new whitelist application has been submitted."
-            : `A new ${record.type} has been submitted.`,
-          {
-            title: `New application: ${record.type}`,
-            description: `Reference: ${record.id}`,
-            color: 10833386
-          }
-        );
+        await discord(`A new ${record.type} has been submitted.`, {
+          title: `New application: ${record.type}`,
+          description: `Reference: ${record.id}`,
+          color: 10833386
+        });
 
-        if (message) {
-          message.textContent =
-            `Application submitted. Reference: ${record.id}`;
-        }
-
-        if (!isWhitelist) {
-          form.reset();
-        }
+        if (message) message.textContent = `Application submitted. Reference: ${record.id}`;
+        form.reset();
       } catch (error) {
         if (message) {
-          message.textContent =
-            error.message ||
-            "The application could not be saved.";
+          message.textContent = error.message || "The application could not be submitted.";
         }
       }
     });
@@ -506,14 +523,17 @@ document
   const panel = document.getElementById('staff-panel-content');
   if (panel) {
     let tab = 'tickets';
+    let staffApplications = [];
     document.querySelectorAll('[data-staff-tab]').forEach(b => b.addEventListener('click', () => {
       document.querySelectorAll('[data-staff-tab]').forEach(x => x.classList.remove('active')); b.classList.add('active'); tab = b.dataset.staffTab; activeStaffTicket = null; renderStaff();
     }));
 
     function stats() {
-      const t = purgeExpiredTickets(), a = read(APPS_KEY);
+      const t = purgeExpiredTickets();
       const unread = t.filter(x=>x.status!=='Closed').reduce((n,x)=>n+normalizedMessages(x).filter(m=>m.sender==='player' && !m.readByStaff).length,0);
-      document.getElementById('staff-stats').innerHTML = `<article><span>OPEN TICKETS</span><strong>${t.filter(x=>x.status!=='Closed').length}</strong></article><article><span>UNREAD MESSAGES</span><strong>${unread}</strong></article><article><span>TRANSCRIPTS</span><strong>${t.filter(x=>x.status==='Closed').length}</strong></article><article><span>PENDING APPLICATIONS</span><strong>${a.filter(x=>x.status==='Pending Review').length}</strong></article>`;
+      const pending = staffApplications.filter(x => ['Submitted', 'Pending Review'].includes(x.status)).length;
+      const holder = document.getElementById('staff-stats');
+      if (holder) holder.innerHTML = `<article><span>OPEN TICKETS</span><strong>${t.filter(x=>x.status!=='Closed').length}</strong></article><article><span>UNREAD MESSAGES</span><strong>${unread}</strong></article><article><span>TRANSCRIPTS</span><strong>${t.filter(x=>x.status==='Closed').length}</strong></article><article><span>PENDING APPLICATIONS</span><strong>${pending}</strong></article>`;
     }
 
     function ticketRows(arr, emptyTitle, emptyText) {
@@ -550,17 +570,97 @@ document
       const form=holder.querySelector('#staff-chat-form');if(form)form.addEventListener('submit',async e=>{e.preventDefault();const status=holder.querySelector('#staff-chat-message');try{const text=holder.querySelector('#staff-chat-text').value.trim(),attachments=await filesToData(files.files);if(!text&&!attachments.length)throw new Error('Write a reply or attach an image first.');const data=purgeExpiredTickets(),item=data.find(x=>x.id===t.id);item.messages=normalizedMessages(item);item.messages.push({id:uid('MSG'),sender:'staff',senderName:'Union Staff',text,attachments,createdAt:new Date().toISOString(),readByStaff:true});item.updatedAt=new Date().toISOString();if(item.status==='Open')item.status='Awaiting Player';write(TICKETS_KEY,data);await discord(`Support Ticket ${item.id} has been responded to.`,{title:item.subject,description:text||'Image attachment added',color:10833386});renderTicketInbox(false);}catch(error){status.textContent=error.message;}});
     }
 
-    async function saveApplication(id){const arr=read(APPS_KEY),item=arr.find(x=>x.id===id);if(!item)return;item.status=document.querySelector(`[data-status="${id}"]`).value;item.response=document.querySelector(`[data-response="${id}"]`).value.trim();write(APPS_KEY,arr);await discord(`Application ${id} has been updated.`,{title:'Application update',description:item.response||item.status,color:10833386});renderStaff();}
+    async function loadStaffApplications() {
+      const token = getAccessToken();
+      if (!token) throw new Error("Please log in with an authorised staff account.");
 
-    function renderStaff(){
+      const response = await fetch(`${API_BASE}/api/staff/applications`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || "Applications could not be loaded.");
+      }
+      staffApplications = result.applications || [];
+      return staffApplications;
+    }
+
+    function parseApplicationData(application) {
+      try {
+        return typeof application.data === 'string'
+          ? JSON.parse(application.data || '{}')
+          : (application.data || {});
+      } catch {
+        return {};
+      }
+    }
+
+    async function saveApplication(id) {
+      const token = getAccessToken();
+      const status = document.querySelector(`[data-status="${id}"]`)?.value || 'Pending Review';
+      const reviewerNotes = document.querySelector(`[data-notes="${id}"]`)?.value.trim() || '';
+      const staffResponse = document.querySelector(`[data-response="${id}"]`)?.value.trim() || '';
+      const button = document.querySelector(`[data-app-save="${id}"]`);
+      if (button) { button.disabled = true; button.textContent = 'Saving...'; }
+
+      try {
+        const response = await fetch(`${API_BASE}/api/staff/application/${id}/review`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            status,
+            reviewer_notes: reviewerNotes,
+            staff_response: staffResponse
+          })
+        });
+        const result = await response.json();
+        if (!response.ok || !result.success) throw new Error(result.error || 'Review could not be saved.');
+        await loadStaffApplications();
+        await renderStaff();
+      } catch (error) {
+        if (button) { button.disabled = false; button.textContent = 'Save Update'; }
+        alert(error.message);
+      }
+    }
+
+    async function renderApplications() {
+      panel.innerHTML = '<div class="ticket-empty-state"><strong>Loading applications...</strong><p>Fetching submissions from the Union database.</p></div>';
+      try {
+        await loadStaffApplications();
+        stats();
+        const arr = staffApplications;
+        panel.innerHTML = `<div class="staff-record-list">${arr.length ? arr.map(x => {
+          const data = parseApplicationData(x);
+          const submitted = x.submitted_at || x.updated_at || x.created_at;
+          const applicant = x.discord_display_name || x.discord_username || x.discord_id || 'Unknown applicant';
+          return `<article class="staff-record">
+            <header><div><span>${esc(x.union_id || `Application #${x.id}`)}</span><h3>${esc(applicant)}</h3><p>${submitted ? fmt(Number(submitted) || submitted) : 'Unknown date'}</p></div>
+            <select data-status="${esc(x.id)}">${['Submitted','Pending Review','Interview','Accepted','Declined'].map(s => `<option ${x.status===s?'selected':''}>${s}</option>`).join('')}</select></header>
+            <div class="staff-record-data">${Object.entries(data).map(([k,v]) => `<p><strong>${esc(k.replace(/([A-Z])/g,' $1'))}</strong><span>${esc(typeof v === 'boolean' ? (v ? 'Yes' : 'No') : v)}</span></p>`).join('')}</div>
+            <label>Internal reviewer notes<textarea data-notes="${esc(x.id)}" rows="3">${esc(x.reviewer_notes || '')}</textarea></label>
+            <label>Response shown to player<textarea data-response="${esc(x.id)}" rows="4">${esc(x.staff_response || '')}</textarea></label>
+            <button class="primary-button" data-app-save="${esc(x.id)}">Save Update</button>
+          </article>`;
+        }).join('') : '<div class="ticket-empty-state"><strong>No submitted applications</strong><p>New whitelist submissions will appear here.</p></div>'}</div>`;
+        panel.querySelectorAll('[data-app-save]').forEach(b => b.addEventListener('click', () => saveApplication(b.dataset.appSave)));
+      } catch (error) {
+        panel.innerHTML = `<div class="ticket-empty-state"><strong>Applications unavailable</strong><p>${esc(error.message)}</p></div>`;
+        stats();
+      }
+    }
+
+    async function renderStaff(){
       stats();
-      if(tab==='settings'){panel.innerHTML=`<div class="settings-panel"><span>DISCORD INTEGRATION</span><h2>Prepared for final setup</h2><p>Open <code>js/portal-config.js</code> when you are ready. Add the webhook URL and change <code>discordEnabled</code> to <code>true</code>. No Discord role restrictions or authentication are active yet.</p><pre>window.UNION_PORTAL_CONFIG = {\n  discordWebhook: '',\n  discordEnabled: false\n};</pre></div>`;return;}
+      if(tab==='settings'){panel.innerHTML=`<div class="settings-panel"><span>STAFF ACCESS</span><h2>Database-backed applications enabled</h2><p>Authorised Discord IDs are controlled by the Worker variable <code>STAFF_DISCORD_IDS</code>.</p></div>`;return;}
       if(tab==='tickets'){renderTicketInbox(false);return;}
       if(tab==='transcripts'){renderTicketInbox(true);return;}
-      const arr=read(APPS_KEY);panel.innerHTML=`<div class="staff-record-list">${arr.length?arr.map(x=>`<article class="staff-record"><header><div><span>${esc(x.id)}</span><h3>${esc(x.type)}</h3><p>${fmt(x.createdAt)}</p></div><select data-status="${esc(x.id)}">${['Pending Review','Interview','Accepted','Declined'].map(s=>`<option ${x.status===s?'selected':''}>${s}</option>`).join('')}</select></header><div class="staff-record-data">${Object.entries(x.data||{}).map(([k,v])=>`<p><strong>${esc(k.replace(/([A-Z])/g,' $1'))}</strong><span>${esc(v)}</span></p>`).join('')}</div><label>Staff response<textarea data-response="${esc(x.id)}" rows="4">${esc(x.response||'')}</textarea></label><button class="primary-button" data-app-save="${esc(x.id)}">Save Update</button></article>`).join(''):'<div class="ticket-empty-state"><strong>No applications yet</strong><p>New submissions will appear here.</p></div>'}</div>`;panel.querySelectorAll('[data-app-save]').forEach(b=>b.addEventListener('click',()=>saveApplication(b.dataset.appSave)));
+      await renderApplications();
     }
     renderStaff();
-    setInterval(() => { purgeExpiredTickets(); renderStaff(); }, 60000);
+    setInterval(() => { purgeExpiredTickets(); if (tab !== 'applications') renderStaff(); }, 60000);
   }
 
   window.addEventListener('storage', e => { if ([TICKETS_KEY,APPS_KEY].includes(e.key)) { purgeExpiredTickets(); renderMyTickets(); renderPlayerThread(); if(panel) location.reload(); } });
