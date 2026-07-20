@@ -23,7 +23,7 @@
    }
    const returnTo=new URLSearchParams(location.search).get('returnTo') || 'profile.html';
    sessionStorage.setItem('union_return_to', returnTo);
-   location.href=base + '/auth/discord?redirect_uri=' + encodeURIComponent(UNION_CONFIG.DISCORD.CALLBACK_URL);
+   location.href=base + '/api/auth/discord';
  });
 })();
 </script></body></html>
