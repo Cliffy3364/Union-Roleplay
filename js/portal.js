@@ -8,6 +8,16 @@
   let activePlayerTicket = null;
   let activeStaffTicket = null;
 
+  const API_BASE =
+    String(cfg.api?.baseUrl || "https://union-roleplay-api.danielclifford2808.workers.dev")
+      .replace(/\/$/, "");
+
+  const getAccessToken = () =>
+    localStorage.getItem("union_access_token") ||
+    sessionStorage.getItem("union_access_token") ||
+    "";
+
+
   const read = (key) => { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } };
   const write = (key, value) => localStorage.setItem(key, JSON.stringify(value));
   const uid = (prefix) => `${prefix}-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
