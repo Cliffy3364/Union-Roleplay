@@ -1,0 +1,19 @@
+UNION ROLEPLAY STEP 5
+
+Included:
+- D1-backed support tickets
+- Ban Appeals with required Ban ID
+- Tebex Support category
+- Player/staff live replies
+- Staff ticket statuses
+- Closed transcripts retained for 48 hours
+- Player reopen within 48 hours
+- Automatic permanent deletion after 48 hours
+- Ticket audit records
+- Discord support webhook notifications
+
+DEPLOY:
+1. Upload the Union-Roleplay website folder to GitHub Pages.
+2. Replace your Cloudflare Worker with worker-step4.js from this package.
+3. Keep SUPPORT_WEBHOOK configured as a Worker secret for notifications.
+4. The Worker creates ticket tables automatically. STEP-5-D1-MIGRATION.sql is included for manual setup if preferred.
