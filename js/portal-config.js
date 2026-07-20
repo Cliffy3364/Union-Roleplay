@@ -2,7 +2,7 @@ window.UNION_PORTAL_CONFIG = {
   discordEnabled: false,
   discordWebhook: '',
   api: {
-    enabled: false,
+    enabled: true,
     baseUrl: "https://union-roleplay-api.danielclifford2808.workers.dev"
   },
   tickets: {
