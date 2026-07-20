@@ -332,6 +332,19 @@ document
       try {
         if (isWhitelist) {
           await saveWhitelistDraft(form, false);
+
+          const token = getAccessToken();
+          const submitResponse = await fetch(`${API_BASE}/api/applications/submit`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json"
+            }
+          });
+          const submitResult = await submitResponse.json();
+          if (!submitResponse.ok || !submitResult.success) {
+            throw new Error(submitResult.error || "Application could not be submitted.");
+          }
         }
 
         const data =
