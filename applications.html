@@ -1,34 +1,24 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Applications | Union Roleplay"><title>Applications | Union Roleplay</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><link rel="icon" href="favicon.ico"></head><body class="applications-directory-page"><header id="navbar"></header><main><section class="portal-hero"><div class="container"><div class="eyebrow">RECRUITMENT CENTRE</div><h1>Help build the <span>future of Union.</span></h1><p>Browse active staff and development opportunities. Public-sector recruitment is now managed through the Organisations page, while city access has its own Get Whitelisted section.</p></div></section><section class="application-list-section"><div class="container application-list">
-<article class="application-list-card application-staff"><div class="application-card-glow"></div><div class="application-card-top"><span class="application-type">STAFF TEAM</span><span class="application-status"><small>STATUS</small><strong class="open">OPEN</strong></span></div><div class="application-card-body"><h2>Staff Application</h2><p>Support players, handle reports and help maintain the high standards expected across Union Roleplay.</p></div><a href="apply-staff.html" class="application-card-action">Apply Now <span>→</span></a></article>
-<article class="application-list-card application-eup"><div class="application-card-glow"></div><div class="application-card-top"><span class="application-type">DEVELOPMENT TEAM</span><span class="application-status"><small>STATUS</small><strong class="open">OPEN</strong></span></div><div class="application-card-body"><h2>EUP Developer</h2><p>Create, optimise and maintain high-quality British uniforms, textures and clothing assets for the server.</p></div><a href="apply-eup-dev.html" class="application-card-action">Apply Now <span>→</span></a></article>
-<article class="application-list-card application-script"><div class="application-card-glow"></div><div class="application-card-top"><span class="application-type">DEVELOPMENT TEAM</span><span class="application-status"><small>STATUS</small><strong class="open">OPEN</strong></span></div><div class="application-card-body"><h2>Script Developer</h2><p>Build, maintain and optimise QBOX resources, integrations and immersive gameplay systems.</p></div><a href="apply-script-dev.html" class="application-card-action">Apply Now <span>→</span></a></article>
-<article class="application-list-card application-vehicle"><div class="application-card-glow"></div><div class="application-card-top"><span class="application-type">DEVELOPMENT TEAM</span><span class="application-status"><small>STATUS</small><strong class="open">OPEN</strong></span></div><div class="application-card-body"><h2>Vehicle Developer</h2><p>Configure, optimise and stream high-quality vehicles with balanced handling and polished metadata.</p></div><a href="apply-vehicle-dev.html" class="application-card-action">Apply Now <span>→</span></a></article>
-
-<article class="application-list-card application-media"><div class="application-card-glow"></div><div class="application-card-top"><span class="application-type">COMMUNITY TEAM</span><span class="application-status"><small>STATUS</small><strong class="open">OPEN</strong></span></div><div class="application-card-body"><h2>Media Application</h2><p>Create engaging videos, screenshots, announcements and promotional content for Union Roleplay.</p></div><a href="apply-media.html" class="application-card-action">Apply Now <span>→</span></a></article>
-<article class="application-list-card application-command"><div class="application-card-glow"></div><div class="application-card-top"><span class="application-type">UPD COMMAND</span><span class="application-status"><small>STATUS</small><strong class="open">OPEN</strong></span></div><div class="application-card-body"><h2>UPD Command Application</h2><p>Apply for a senior Union Police Department command position and help lead standards, training, discipline and operational performance.</p></div><a href="apply-upd-command.html" class="application-card-action">Apply Now <span>→</span></a></article>
-<article class="application-list-card application-command"><div class="application-card-glow"></div><div class="application-card-top"><span class="application-type">UHS COMMAND</span><span class="application-status"><small>STATUS</small><strong class="open">OPEN</strong></span></div><div class="application-card-body"><h2>UHS Command Application</h2><p>Apply for a senior Union Health Service command position and help lead clinical standards, staffing and major incident response.</p></div><a href="apply-uhs-command.html" class="application-card-action">Apply Now <span>→</span></a></article>
-<article class="application-list-card application-events"><div class="application-card-glow"></div><div class="application-card-top"><span class="application-type">COMMUNITY TEAM</span><span class="application-status"><small>STATUS</small><strong class="open">OPEN</strong></span></div><div class="application-card-body"><h2>Event Application</h2><p>Plan and deliver organised community events that create memorable roleplay across Union City.</p></div><a href="apply-events.html" class="application-card-action">Apply Now <span>→</span></a></article>
-<article class="application-list-card"><div class="application-card-body"><span class="application-type">FIRE & RESCUE</span><h2>Union Fire & Rescue</h2><p>Join the city's fire and rescue service.</p></div><a href="apply-fire.html" class="application-card-action">Apply Now <span>→</span></a></article><article class="application-list-card"><div class="application-card-body"><span class="application-type">BUSINESS</span><h2>Business Application</h2><p>Apply to operate a player-led business.</p></div><a href="apply-business.html" class="application-card-action">Apply Now <span>→</span></a></article></div></section></main><script src="js/config.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/main.js"></script><script src="js/portal-config.js"></script><script src="js/portal.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
- const ph=document.getElementById('navbar');
- if(ph){
- fetch('components/navbar.html').then(r=>r.text()).then(h=>ph.outerHTML=h).catch(console.error);
- }
-});
-</script>
-
-
-<script>
-Auth.requireLogin();
-
-document.addEventListener("DOMContentLoaded",()=>{
-const user=Auth.getUser?.();
-if(user){
-document.querySelectorAll(".application-card-action").forEach(a=>a.dataset.user=user.username||"");
-}
-});
-</script>
-</body></html>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Union Roleplay applications for whitelist, staff, development and command positions.">
+<title>Applications | Union Roleplay</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/refactor.css"><link rel="icon" href="favicon.ico"></head>
+<body class="application-hub-page"><header id="navbar"></header><main>
+<section class="refactor-hero"><div class="container"><span class="refactor-kicker">UNION RECRUITMENT</span><h1>One clear route into <span>Union Roleplay.</span></h1><p>Only applications managed by the website are shown here. Department recruitment, gangs and businesses are handled separately inside the community.</p><div class="hero-stat-row"><div><strong>7</strong><span>Application routes</span></div><div><strong>1</strong><span>Connected portal</span></div><div><strong>24/7</strong><span>Progress tracking</span></div></div></div></section>
+<section class="refactor-section"><div class="container">
+<div class="section-heading-clean"><div><span>GET STARTED</span><h2>Choose the correct application.</h2></div><p>Each submission is stored in your player portal and routed to the correct Discord review channel.</p></div>
+<div class="featured-application-grid">
+<a class="featured-application-card primary" href="apply-whitelist.html"><span class="app-index">01</span><div><small>SERVER ACCESS</small><h3>Whitelist Application</h3><p>Apply for access to Union Roleplay and demonstrate your understanding of serious roleplay.</p></div><b>Start application →</b></a>
+<a class="featured-application-card" href="apply-staff.html"><span class="app-index">02</span><div><small>COMMUNITY TEAM</small><h3>Staff Application</h3><p>Support players, uphold standards and help keep the community running smoothly.</p></div><b>Start application →</b></a>
+</div>
+<div class="application-group"><div class="application-group-heading"><span>DEVELOPMENT</span><h3>Build the city.</h3><p>Specialist applications are separated so each submission reaches the right reviewers.</p></div><div class="compact-application-grid">
+<a href="apply-script-dev.html"><span>03</span><div><small>QBOX & SYSTEMS</small><h4>Script Developer</h4><p>Resources, integrations, optimisation and gameplay systems.</p></div><b>→</b></a>
+<a href="apply-vehicle-dev.html"><span>04</span><div><small>VEHICLE ASSETS</small><h4>Vehicle Developer</h4><p>Vehicle setup, handling, metadata and asset optimisation.</p></div><b>→</b></a>
+<a href="apply-eup-dev.html"><span>05</span><div><small>CLOTHING & EUP</small><h4>EUP Developer</h4><p>British uniforms, textures and clothing asset maintenance.</p></div><b>→</b></a>
+</div></div>
+<div class="application-group"><div class="application-group-heading"><span>COMMAND</span><h3>Lead a department.</h3><p>These are senior command applications only. Standard police and health-service recruitment is not handled on this website.</p></div><div class="compact-application-grid two">
+<a href="apply-upd-command.html"><span>06</span><div><small>UNION POLICE DEPARTMENT</small><h4>UPD Command</h4><p>Lead standards, training, discipline and operational delivery.</p></div><b>→</b></a>
+<a href="apply-uhs-command.html"><span>07</span><div><small>UNION HEALTH SERVICE</small><h4>UHS Command</h4><p>Lead clinical standards, staffing and major incident readiness.</p></div><b>→</b></a>
+</div></div>
+<div class="application-scope-note"><strong>Not handled here</strong><span>Regular police, ambulance, fire, gang and business applications are intentionally excluded from the website.</span></div>
+</div></section></main><script src="js/config.js"></script><script src="js/auth.js"></script><script src="js/main.js"></script></body></html>

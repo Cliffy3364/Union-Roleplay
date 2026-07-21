@@ -1,0 +1,29 @@
+UNION ROLEPLAY — CLEANUP & ROUTING UPDATE
+
+APPLICATIONS KEPT
+- Whitelist Application
+- Staff Application
+- Script Developer Application
+- Vehicle Developer Application
+- EUP Developer Application
+- UPD Command Application
+- UHS Command Application
+
+REMOVED
+- Regular police, ambulance/UHS, fire, business, court, media and event application pages
+- Duplicate generic Development Team application
+- Duplicate support categories
+
+CLOUDFLARE WORKER VARIABLES
+Set these as Worker secrets/variables using Discord webhook URLs:
+- WHITELIST_APPLICATION_WEBHOOK
+- STAFF_APPLICATION_WEBHOOK
+- DEVELOPMENT_APPLICATION_WEBHOOK
+- UPD_COMMAND_APPLICATION_WEBHOOK
+- UHS_COMMAND_APPLICATION_WEBHOOK
+- SUPPORT_TICKET_WEBHOOK
+- PLAYER_REPORT_TICKET_WEBHOOK (optional; falls back to SUPPORT_TICKET_WEBHOOK)
+- BAN_APPEAL_TICKET_WEBHOOK
+- TEBEX_SUPPORT_TICKET_WEBHOOK
+
+Existing APPLICATION_WEBHOOK and TICKET_WEBHOOK remain fallback values, so deployment will not break while the new variables are being added.
