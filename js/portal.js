@@ -134,7 +134,7 @@ function setApplicationSubmittedState(form, application = {}) {
   const message = form.querySelector(".portal-form-message");
   if (message) {
     const status = application.status || "Submitted";
-    const reference = application.application_id || application.union_id || application.id || "";
+    const reference = application.reference || application.application_id || application.union_id || application.id || "";
     message.textContent = reference
       ? `Application submitted — ${status}. Reference: ${reference}`
       : `Application submitted — ${status}.`;
@@ -354,6 +354,9 @@ document
         }
 
         setApplicationSubmittedState(form, submitResult.application || {});
+        if (message && submitResult.discord && submitResult.discord.delivered === false) {
+          message.textContent += ` Discord notification warning: ${submitResult.discord.reason || "webhook not delivered"}`;
+        }
       } catch (error) {
         if (message) message.textContent = error.message || "The application could not be submitted.";
       }
