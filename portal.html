@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Union Roleplay player portal for applications, support tickets, announcements and account notifications.">
+  <title>Player Portal | Union Roleplay</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/player-portal.css">
+  <link rel="icon" href="favicon.ico">
+</head>
+<body class="player-portal-page">
+<header id="navbar"></header>
+<main class="player-portal-shell">
+  <aside class="player-portal-sidebar">
+    <div class="portal-brand-card">
+      <span class="portal-kicker">PLAYER PORTAL</span>
+      <h1>My Union</h1>
+      <p>Applications, support and account updates in one place.</p>
+    </div>
+    <nav class="portal-side-nav" aria-label="Player portal">
+      <button class="active" data-portal-tab="dashboard">Overview</button>
+      <button data-portal-tab="applications">My Applications <span id="appCountBadge">0</span></button>
+      <button data-portal-tab="tickets">My Tickets <span id="ticketCountBadge">0</span></button>
+      <button data-portal-tab="notifications">Notifications <span id="notificationBadge">0</span></button>
+      <button data-portal-tab="announcements">Announcements</button>
+      <button data-portal-tab="account">Account</button>
+    </nav>
+    <a class="portal-create-ticket" href="support.html">+ Open support ticket</a>
+  </aside>
+
+  <section class="player-portal-content">
+    <div id="portalLoading" class="portal-loading">Loading your Union account…</div>
+    <div id="portalError" class="portal-error" hidden></div>
+
+    <section class="portal-panel active" data-portal-panel="dashboard">
+      <div class="portal-topline">
+        <div><span class="portal-kicker">WELCOME BACK</span><h2 id="portalWelcome">Union Player</h2><p id="portalIdentity">Connecting your Discord account…</p></div>
+        <button class="portal-refresh" id="portalRefresh">Refresh</button>
+      </div>
+      <div class="portal-stat-grid">
+        <article><span>Applications</span><strong id="statApplications">0</strong><small id="statDrafts">0 drafts</small></article>
+        <article><span>Open tickets</span><strong id="statTickets">0</strong><small>Support conversations</small></article>
+        <article><span>Notifications</span><strong id="statNotifications">0</strong><small>Unread updates</small></article>
+        <article><span>Union ID</span><strong id="statUnionId">—</strong><small>Community identifier</small></article>
+      </div>
+      <div class="portal-two-column">
+        <article class="portal-card"><div class="portal-card-head"><div><span class="portal-kicker">RECENT</span><h3>Applications</h3></div><button data-jump="applications">View all</button></div><div id="dashboardApplications" class="portal-list"></div></article>
+        <article class="portal-card"><div class="portal-card-head"><div><span class="portal-kicker">RECENT</span><h3>Tickets</h3></div><button data-jump="tickets">View all</button></div><div id="dashboardTickets" class="portal-list"></div></article>
+      </div>
+      <article class="portal-card"><div class="portal-card-head"><div><span class="portal-kicker">LATEST NEWS</span><h3>Announcements</h3></div><button data-jump="announcements">View all</button></div><div id="dashboardAnnouncements" class="announcement-grid"></div></article>
+    </section>
+
+    <section class="portal-panel" data-portal-panel="applications">
+      <div class="portal-section-head"><div><span class="portal-kicker">APPLICATION CENTRE</span><h2>My Applications</h2><p>Track submitted applications and continue saved drafts.</p></div><a href="applications.html" class="portal-primary">Start an application</a></div>
+      <div class="portal-toolbar"><input id="applicationSearch" type="search" placeholder="Search applications"><select id="applicationStatus"><option value="">All statuses</option><option>Draft</option><option>Submitted</option><option>Under Review</option><option>Interview</option><option>Accepted</option><option>Declined</option></select></div>
+      <div id="applicationsList" class="portal-list portal-list-large"></div>
+    </section>
+
+    <section class="portal-panel" data-portal-panel="tickets">
+      <div class="portal-section-head"><div><span class="portal-kicker">SUPPORT CENTRE</span><h2>My Tickets</h2><p>Read replies, follow progress and reopen eligible closed tickets.</p></div><a href="support.html" class="portal-primary">Open a ticket</a></div>
+      <div class="portal-toolbar"><input id="ticketSearch" type="search" placeholder="Search ticket reference or subject"><select id="ticketStatus"><option value="">All statuses</option><option>Open</option><option>In Progress</option><option>Awaiting Player</option><option>Closed</option></select></div>
+      <div id="ticketsList" class="portal-list portal-list-large"></div>
+    </section>
+
+    <section class="portal-panel" data-portal-panel="notifications">
+      <div class="portal-section-head"><div><span class="portal-kicker">INBOX</span><h2>Notifications</h2><p>Application decisions, ticket replies and community news.</p></div><button id="markAllRead" class="portal-primary">Mark all read</button></div>
+      <div id="notificationsList" class="portal-list portal-list-large"></div>
+    </section>
+
+    <section class="portal-panel" data-portal-panel="announcements">
+      <div class="portal-section-head"><div><span class="portal-kicker">COMMUNITY NEWS</span><h2>Announcements</h2><p>Server updates, events, maintenance and recruitment news.</p></div></div>
+      <div id="announcementsList" class="announcement-grid announcement-grid-large"></div>
+    </section>
+
+    <section class="portal-panel" data-portal-panel="account">
+      <div class="portal-section-head"><div><span class="portal-kicker">ACCOUNT</span><h2>Your Profile</h2><p>Discord connection and notification preferences.</p></div><a href="profile.html" class="portal-primary">Full profile</a></div>
+      <div class="portal-two-column">
+        <article class="portal-card account-card"><div id="accountAvatar" class="account-avatar">U</div><h3 id="accountName">Union Player</h3><p id="accountDiscord">Discord account</p><dl><div><dt>Union ID</dt><dd id="accountUnionId">—</dd></div><div><dt>Discord ID</dt><dd id="accountDiscordId">—</dd></div><div><dt>Member since</dt><dd id="accountCreated">—</dd></div></dl></article>
+        <article class="portal-card"><span class="portal-kicker">PREFERENCES</span><h3>Notifications</h3><form id="preferencesForm" class="preferences-form"><label><input type="checkbox" name="browser_notifications"> Browser notifications</label><label><input type="checkbox" name="application_updates"> Application updates</label><label><input type="checkbox" name="ticket_updates"> Ticket updates</label><label><input type="checkbox" name="announcement_updates"> Announcement updates</label><label><input type="checkbox" name="email_updates"> Email updates (reserved)</label><button class="portal-primary" type="submit">Save preferences</button><p id="preferencesMessage"></p></form></article>
+      </div>
+    </section>
+  </section>
+</main>
+<script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+<script src="js/player-portal.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{const p=document.getElementById('navbar');if(p)fetch('components/navbar.html').then(r=>r.text()).then(h=>p.outerHTML=h)});
+</script>
+</body>
+</html>

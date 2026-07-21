@@ -1,0 +1,11 @@
+PHASE 4 — PLAYER PORTAL
+
+Added portal.html with:
+- Player overview and account identity
+- Application tracking and draft visibility
+- Ticket tracking and reopen-window indicator
+- Notification centre with read state
+- Server announcements
+- Account notification preferences
+
+Deploy the Worker first, then upload the website contents to GitHub Pages.
