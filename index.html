@@ -1,32 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Union Roleplay</title>
-
-    <script>
-        // Temporary authentication check.
-        // Later this will be replaced with Discord OAuth.
-
-        if (localStorage.getItem("union_logged_in") === "true") {
-            window.location.replace("about.html");
-        } else {
-            window.location.replace("login.html");
-        }
-    </script>
-
-<link rel="stylesheet" href="css/design-system.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Union Roleplay | British FiveM Roleplay</title>
+<meta name="description" content="Union Roleplay is a serious British FiveM community launching 1 September 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/refactor.css"><link rel="stylesheet" href="css/design-system.css"><link rel="stylesheet" href="css/premium-v2.css"><link rel="icon" href="favicon.ico">
 </head>
-
 <body>
-
-    <noscript>
-        <p>This website requires JavaScript to run.</p>
-    </noscript>
-
-</body>
-
-</html>
+<header id="navbar"></header>
+<main>
+<section class="premium-hero"><div class="container premium-hero-grid">
+<div class="premium-hero-copy"><span class="premium-badge">BRITISH ROLEPLAY • LAUNCHING SOON</span><h1>Your character.<span>Your city.</span></h1><p>Step into a detailed, player-driven British city where careers matter, actions have consequences and every session can become part of a bigger story.</p><div class="premium-actions"><a class="premium-btn primary" href="applications.html">Apply for whitelist</a><a class="premium-btn secondary" href="https://discord.gg/7xDPyf9jYQ" target="_blank" rel="noopener">Join the community</a><a class="premium-btn secondary" href="about.html">Discover Union</a></div></div>
+<aside class="launch-card" aria-label="Server release countdown"><div class="launch-card-top"><span class="launch-label">SERVER RELEASE</span><span class="launch-date">01 · 09 · 2026</span></div><div class="countdown-grid"><div class="countdown-unit"><strong data-countdown-days>00</strong><span>Days</span></div><div class="countdown-unit"><strong data-countdown-hours>00</strong><span>Hours</span></div><div class="countdown-unit"><strong data-countdown-minutes>00</strong><span>Minutes</span></div><div class="countdown-unit"><strong data-countdown-seconds>00</strong><span>Seconds</span></div></div><div class="launch-status" data-release-state><b>Launching 1 September 2026.</b> Secure your place before the city opens.</div><div class="mini-stat-grid"><div class="mini-stat"><strong>British</strong><span>Authentic setting</span></div><div class="mini-stat"><strong>QBOX</strong><span>Modern framework</span></div><div class="mini-stat"><strong>Serious RP</strong><span>Story first</span></div></div></aside>
+</div></section>
+<section class="premium-section"><div class="container"><div class="premium-section-head"><div><span class="section-tag">BUILT DIFFERENTLY</span><h2>A city with purpose.</h2></div><p>Union is designed around connected systems and player interaction rather than isolated menus and repetitive grinding.</p></div><div class="premium-grid"><article class="premium-feature"><span class="premium-feature-number">01</span><h3>Living British city</h3><p>Recognisable public services, businesses, careers and everyday life built for believable roleplay.</p></article><article class="premium-feature"><span class="premium-feature-number">02</span><h3>Player-driven stories</h3><p>Your reputation, relationships and decisions shape what happens next instead of disappearing after one scene.</p></article><article class="premium-feature"><span class="premium-feature-number">03</span><h3>Active development</h3><p>Purpose-built systems, regular improvements and community feedback keep Union moving forward.</p></article></div></div></section>
+<div class="container premium-cta"><div><span class="section-tag">BE READY FOR RELEASE</span><h2>Your story begins September 1st.</h2><p>Join Discord, read the rules and submit your whitelist application before the city opens.</p></div><div class="premium-actions"><a class="premium-btn primary" href="applications.html">Start application</a><a class="premium-btn secondary" href="rules.html">Read the rules</a></div></div>
+</main>
+<footer><div class="container" style="padding:34px 0;color:#77859a;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap"><span>© 2026 Union Roleplay</span><span>Your character. Your story. Your city.</span></div></footer>
+<script src="js/config.js"></script><script src="js/auth.js"></script><script src="js/main.js"></script><script src="js/premium-v2.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{const p=document.getElementById('navbar');if(p)fetch('components/navbar.html').then(r=>r.text()).then(h=>{p.outerHTML=h;setTimeout(()=>document.dispatchEvent(new Event('union-nav-ready')),50)})});</script>
+</body></html>
