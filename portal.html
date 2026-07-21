@@ -1,15 +1,16 @@
 <!doctype html>
 <html lang="en">
-<head>
+<head><meta name="robots" content="noindex,nofollow">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Union Roleplay player portal for applications, support tickets, announcements and account notifications.">
-  <title>Player Portal | Union Roleplay</title>
+  <title>Player Portal | Union Roleplay</title><meta property="og:site_name" content="Union Roleplay"><meta property="og:type" content="website"><meta property="og:title" content="Player Portal | Union Roleplay"><meta property="og:description" content="Union Roleplay player portal for applications, support tickets, announcements and account notifications."><meta property="og:image" content="https://cliffy3364.github.io/Union-Roleplay/assets/images/logo.png"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#07111f">
   <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/refactor.css">
   <link rel="stylesheet" href="css/player-portal.css">
   <link rel="icon" href="favicon.ico">
 <link rel="stylesheet" href="css/design-system.css">
 <link rel="stylesheet" href="css/premium-v2.css">
+<link rel="stylesheet" href="css/public-production.css">
 </head>
 <body class="player-portal-page">
 <header id="navbar"></header>
@@ -92,5 +93,6 @@
 document.addEventListener('DOMContentLoaded',()=>{const p=document.getElementById('navbar');if(p)fetch('components/navbar.html').then(r=>r.text()).then(h=>p.outerHTML=h)});
 </script>
 <script src="js/premium-v2.js"></script>
+<script src="js/public-production.js"></script>
 </body>
 </html>
