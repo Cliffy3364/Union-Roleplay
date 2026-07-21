@@ -1,0 +1,21 @@
+UNION ROLEPLAY – PHASE 3 ADMINISTRATION HUB
+
+Added:
+- Administration tab in the staff panel
+- Website-only control centre (no MDT integration)
+- Live administration metrics
+- Staff activity leaderboard
+- Combined application/ticket audit feed
+- Player search by Union ID, Discord ID, username or database ID
+- Player support/application counts
+- Internal staff notes that players cannot see
+- Responsive desktop/mobile design
+
+DEPLOYMENT ORDER
+1. Deploy the Phase 3 Worker first.
+2. Upload the website ZIP contents to the GitHub repository.
+3. Wait for GitHub Pages to finish deploying.
+4. Open the staff panel and press Ctrl + F5.
+5. Select Administration.
+
+The Worker creates the player_staff_notes table automatically.
