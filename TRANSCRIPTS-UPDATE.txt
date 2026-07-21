@@ -1,0 +1,22 @@
+UNION ROLEPLAY — PROFESSIONAL TRANSCRIPTS UPDATE
+
+WEBSITE
+1. Upload all files in this ZIP to the GitHub repository, replacing existing files.
+2. Keep the existing folder structure.
+3. Wait for GitHub Pages to deploy, then hard refresh with Ctrl+F5.
+
+WORKER
+1. Open Union-Roleplay-Worker-Professional-Transcripts.js from the separate Worker ZIP.
+2. Replace the complete Cloudflare Worker code.
+3. Save and Deploy.
+
+ADDED
+- Search transcripts by reference, name, Union ID, Discord ID, subject or category.
+- Today, 7-day, 30-day and all-time filters.
+- Pagination.
+- Full audit history and closure details.
+- HTML transcript download and clipboard copy.
+- Reopen within 48 hours.
+- Staff permanent deletion for closed tickets.
+- Closed-by staff tracking.
+- Support for Open, In Progress, Awaiting Player and Closed statuses.
