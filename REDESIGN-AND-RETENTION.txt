@@ -1,0 +1,17 @@
+UNION ROLEPLAY — FULL WEBSITE REDESIGN
+
+This package applies the new Union design system to every website page.
+It standardises navigation, typography, colours, cards, forms, tables,
+staff tools, the player portal, applications, support tickets and mobile layouts.
+
+APPLICATION RETENTION
+- Accepted applications automatically delete 48 hours after the decision.
+- Declined applications automatically delete 48 hours after the decision.
+- Staff can permanently delete a completed application immediately.
+- Draft, submitted, pending and interview applications are not automatically deleted.
+- Application audit records are removed with the application.
+
+DEPLOYMENT ORDER
+1. Deploy the included Cloudflare Worker.
+2. Replace the GitHub Pages website files.
+3. Hard-refresh the browser with Ctrl + F5.

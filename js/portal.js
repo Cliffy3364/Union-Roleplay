@@ -716,6 +716,17 @@ document
       }
     }
 
+    async function permanentlyDeleteApplication(id) {
+      if (!confirm('Permanently delete this completed application? This cannot be undone.')) return;
+      try {
+        await apiRequest(`/api/staff/application/${id}`, { method: 'DELETE' });
+        staffApplications = staffApplications.filter(item => String(item.id) !== String(id));
+        renderApplications();
+      } catch (error) {
+        alert(error.message || 'The application could not be deleted.');
+      }
+    }
+
     async function renderApplications() {
       panel.innerHTML = '<div class="ticket-empty-state"><strong>Loading applications...</strong><p>Fetching submissions from the Union database.</p></div>';
       try {
@@ -783,11 +794,13 @@ document
               <label>Add internal note<textarea data-new-note="${esc(x.id)}" rows="2" placeholder="Add a timestamped staff-only note..."></textarea></label><button type="button" data-add-note="${esc(x.id)}">Add Note</button>
               <label>Internal reviewer notes<textarea data-notes="${esc(x.id)}" rows="3">${esc(x.reviewer_notes || '')}</textarea></label>
               <label>Response shown to player<textarea data-response="${esc(x.id)}" rows="4">${esc(x.staff_response || '')}</textarea></label>
-              <button class="primary-button" data-app-save="${esc(x.id)}">Save Update</button>
+              <div class="application-final-actions"><button class="primary-button" data-app-save="${esc(x.id)}">Save Update</button>${['accepted','declined','withdrawn'].includes(String(x.status||'').toLowerCase()) ? `<button class="danger-button" type="button" data-delete-app="${esc(x.id)}">Permanently Delete</button>` : ''}</div>
+              ${['accepted','declined'].includes(String(x.status||'').toLowerCase()) ? `<div class="retention-note">Completed applications automatically delete 48 hours after the decision.${x.delete_at ? ` Scheduled: ${fmt(Number(x.delete_at))}.` : ''}</div>` : ''}
             </article>`;
           }).join('') : '<div class="ticket-empty-state"><strong>No matching applications</strong><p>Change the search or status filter to see more results.</p></div>'}</div><nav class="application-pagination"><button id="application-prev" ${applicationPage<=1?'disabled':''}>Previous</button><span>Page ${applicationPage} of ${totalPages}</span><button id="application-next" ${applicationPage>=totalPages?'disabled':''}>Next</button></nav>`;
 
         panel.querySelectorAll('[data-app-save]').forEach(button => button.addEventListener('click', () => saveApplication(button.dataset.appSave)));
+        panel.querySelectorAll('[data-delete-app]').forEach(button => button.addEventListener('click', () => permanentlyDeleteApplication(button.dataset.deleteApp)));
         panel.querySelectorAll('[data-claim-app]').forEach(b => b.addEventListener('click', () => setApplicationAssignment(b.dataset.claimApp, 'claim')));
         panel.querySelectorAll('[data-unassign-app]').forEach(b => b.addEventListener('click', () => setApplicationAssignment(b.dataset.unassignApp, 'unassign')));
         panel.querySelectorAll('[data-add-note]').forEach(b => b.addEventListener('click', () => addInternalNote(b.dataset.addNote)));
