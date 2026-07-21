@@ -1,0 +1,11 @@
+Union Roleplay staff panel fix
+
+Changes made:
+- Loads js/config.js and js/auth.js before the staff access guard runs.
+- Uses UNION_CONFIG.STAFF_ROLES as the canonical staff-role list.
+- Uses discord_id/discordId for Discord avatar URLs.
+- Updated legacy js/permissions.js to read the current union_user/Auth role data rather than the removed union_roles key.
+- Syntax-checked the JavaScript files with Node.js.
+
+Deployment:
+Upload the contents of the Union-Roleplay folder to the root of the GitHub Pages repository, replacing existing files. Then wait for GitHub Pages to deploy and use Ctrl+F5.

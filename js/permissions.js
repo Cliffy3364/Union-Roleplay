@@ -1,28 +1,33 @@
 class Permissions {
-
     static getRoles() {
-        return JSON.parse(localStorage.getItem("union_roles") || "[]");
+        if (window.Auth && typeof Auth.getRoles === "function") {
+            return Auth.getRoles().map(String);
+        }
+
+        try {
+            const user = JSON.parse(localStorage.getItem("union_user") || "null");
+            return Array.isArray(user?.roles) ? user.roles.map(String) : [];
+        } catch {
+            return [];
+        }
     }
 
-    static hasRole(role) {
-        return this.getRoles().includes(role);
+    static hasRole(roleId) {
+        return Boolean(roleId) && this.getRoles().includes(String(roleId));
     }
 
     static isFounder() {
-        return this.hasRole("Founder");
+        return this.hasRole(window.UNION_CONFIG?.DISCORD?.ROLES?.FOUNDER);
     }
 
     static isManagement() {
-        return this.hasRole("Management");
+        return this.hasRole(window.UNION_CONFIG?.DISCORD?.ROLES?.MANAGEMENT);
     }
 
     static isStaff() {
-        return (
-            this.isFounder() ||
-            this.isManagement() ||
-            this.hasRole("Staff") ||
-            this.hasRole("Trial Staff")
-        );
+        const staffRoles = window.UNION_CONFIG?.STAFF_ROLES || [];
+        return staffRoles.some(roleId => this.hasRole(roleId));
     }
-
 }
+
+window.Permissions = Permissions;

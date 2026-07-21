@@ -274,14 +274,16 @@
                     ? UNION_CONFIG.DISCORD.ROLES
                     : {};
 
-            const permittedRoles = [
-                roleConfig.FOUNDER,
-                roleConfig.MANAGEMENT,
-                roleConfig.STAFF,
-                roleConfig.TRIAL_STAFF,
-                roleConfig.SENIOR_DEVELOPER,
-                roleConfig.DEVELOPER
-            ].filter(Boolean);
+            const permittedRoles = Array.isArray(UNION_CONFIG.STAFF_ROLES)
+                ? UNION_CONFIG.STAFF_ROLES.map(String)
+                : [
+                    roleConfig.FOUNDER,
+                    roleConfig.MANAGEMENT,
+                    roleConfig.STAFF,
+                    roleConfig.TRIAL_STAFF,
+                    roleConfig.SENIOR_DEVELOPER,
+                    roleConfig.DEVELOPER
+                ].filter(Boolean).map(String);
 
             const user =
                 window.Auth && typeof Auth.getUser === "function"
@@ -385,7 +387,7 @@
                 }
 
                 if (avatar) {
-                    const discordId = user.discord_id || user.discordId || user.id;
+                    const discordId = user.discord_id || user.discordId;
                     if (user.avatar && discordId) {
                         const image = document.createElement("img");
                         image.src =
