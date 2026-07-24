@@ -389,91 +389,41 @@ function initialiseWhitelistForm() {
         submitButton.disabled = true;
         submitButton.textContent = "Submitting...";
 
-        const apiBase = String(window.UNION_CONFIG?.API_BASE || "").replace(/\/$/, "");
-        const accessToken =
-            localStorage.getItem("union_access_token") ||
-            sessionStorage.getItem("union_access_token") ||
-            "";
+        /*
+        ===========================================
+        BACKEND GOES HERE LATER
+        ===========================================
 
-        if (!apiBase) {
-            submitButton.disabled = false;
-            submitButton.textContent = "Submit Application";
-            message.hidden = false;
-            message.classList.add("error");
-            message.innerHTML =
-                "<strong>The application service is not configured.</strong><br>Please contact Union Roleplay management.";
-            return;
-        }
-
-        if (!accessToken) {
-            submitButton.disabled = false;
-            submitButton.textContent = "Submit Application";
-            message.hidden = false;
-            message.classList.add("error");
-            message.innerHTML =
-                "<strong>Please log in with Discord before submitting your application.</strong>";
-            return;
-        }
-
-        const applicationData = Object.fromEntries(new FormData(form).entries());
-
-        fetch(`${apiBase}/api/applications/submit`, {
+        fetch("/api/whitelist", {
             method: "POST",
-            headers: {
-                "Authorization": `Bearer ${accessToken}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                application_type: "Whitelist",
-                progress: 100,
-                data: applicationData
-            })
-        })
-            .then(async response => {
-                let result = {};
+            body: new FormData(form)
+        });
 
-                try {
-                    result = await response.json();
-                } catch (_) {
-                    // The error below gives the user a useful message when the API
-                    // returns an unexpected non-JSON response.
-                }
+        */
 
-                if (!response.ok || !result.success) {
-                    throw new Error(
-                        result.error ||
-                        result.message ||
-                        `Application submission failed (${response.status}).`
-                    );
-                }
+        setTimeout(() => {
 
-                const reference = result.application?.reference || "";
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit Application";
 
-                message.hidden = false;
-                message.classList.add("success");
-                message.innerHTML =
-                    "<strong>Your application has been submitted successfully.</strong>" +
-                    (reference ? `<br>Reference: <strong>${reference}</strong>` : "") +
-                    "<br>Our staff team will review it and contact you through Discord.";
+            message.hidden = false;
+            message.classList.add("success");
 
-                form.reset();
-                updateProgress();
+            message.innerHTML =
+                "<strong>Your application has been submitted successfully.</strong><br>Our staff team will review it and contact you through Discord.";
 
-                window.scrollTo({
-                    top: form.offsetTop - 120,
-                    behavior: "smooth"
-                });
-            })
-            .catch(error => {
-                message.hidden = false;
-                message.classList.add("error");
-                message.innerHTML =
-                    `<strong>Your application could not be submitted.</strong><br>${error.message || "Please try again or contact Union Roleplay management."}`;
-            })
-            .finally(() => {
-                submitButton.disabled = false;
-                submitButton.textContent = "Submit Application";
+            form.reset();
+
+            updateProgress();
+
+            window.scrollTo({
+
+                top: form.offsetTop - 120,
+                behavior: "smooth"
+
             });
+
+        }, 1400);
 
     });
 
