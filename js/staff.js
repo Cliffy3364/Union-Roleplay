@@ -164,6 +164,30 @@ async function loadApplicationOverview() {
                 count: pending.length,
                 oldest: pending[0] || null
             });
+            const badgeMap = {
+    "Whitelist Application": "nav-count-whitelist",
+    "Staff Application": "nav-count-staff",
+    "QA Tester Application": "nav-count-qa",
+    "Social Media Manager Application": "nav-count-social",
+    "Media Application": "nav-count-media",
+    "Script Developer Application": "nav-count-script",
+    "Vehicle Developer Application": "nav-count-vehicle",
+    "EUP Developer Application": "nav-count-eup",
+    "UPD Command Application": "nav-count-upd",
+    "UHS Command Application": "nav-count-uhs"
+};
+
+const badge = document.getElementById(badgeMap[type]);
+
+if (badge) {
+    badge.textContent = pending.length;
+
+    if (pending.length > 0) {
+        badge.classList.add("has-applications");
+    } else {
+        badge.classList.remove("has-applications");
+    }
+}
 
         } catch (error) {
             rows.push({
@@ -174,7 +198,9 @@ async function loadApplicationOverview() {
         }
     }
 
-    overview.innerHTML = rows
+   rows.sort((a, b) => b.count - a.count);
+
+overview.innerHTML = rows
         .map(row => {
 
             const oldestTime =
