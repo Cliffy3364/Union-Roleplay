@@ -66,20 +66,135 @@
 
                 </div>
 
-                <section class="staff-queue">
+<section class="staff-applications">
 
-                    <div class="staff-section-header">
-                        <div>
-                            <span class="card-label">APPLICATION QUEUE</span>
-                            <h2>Pending Applications</h2>
-                        </div>
-                    </div>
+    <div class="staff-section-header">
+        <div>
+            <span class="card-label">APPLICATION SECTIONS</span>
+            <h2>Application Queues</h2>
+            <p>
+                Select an application type to review its queue.
+                Oldest submissions are shown first.
+            </p>
+        </div>
+    </div>
 
-                    <div id="applicationQueue">
-                        <p>No applications loaded yet.</p>
-                    </div>
+    <div class="application-section-grid">
 
-                </section>
+        <button class="application-section-card" data-type="Whitelist Application">
+            <span class="application-section-icon">WL</span>
+            <div>
+                <h3>Whitelist</h3>
+                <p>General server whitelist applications.</p>
+            </div>
+            <span class="application-section-count" id="count-whitelist">0</span>
+        </button>
+
+        <button class="application-section-card" data-type="Staff Application">
+            <span class="application-section-icon">ST</span>
+            <div>
+                <h3>Staff</h3>
+                <p>Community staff applications.</p>
+            </div>
+            <span class="application-section-count" id="count-staff">0</span>
+        </button>
+
+        <button class="application-section-card" data-type="QA Tester Application">
+            <span class="application-section-icon">QA</span>
+            <div>
+                <h3>QA Tester</h3>
+                <p>Pre-release testing applications.</p>
+            </div>
+            <span class="application-section-count" id="count-qa">0</span>
+        </button>
+
+        <button class="application-section-card" data-type="Social Media Manager Application">
+            <span class="application-section-icon">SM</span>
+            <div>
+                <h3>Social Media Manager</h3>
+                <p>Social media team applications.</p>
+            </div>
+            <span class="application-section-count" id="count-social">0</span>
+        </button>
+
+        <button class="application-section-card" data-type="Media Application">
+            <span class="application-section-icon">ME</span>
+            <div>
+                <h3>Media</h3>
+                <p>Media team applications.</p>
+            </div>
+            <span class="application-section-count" id="count-media">0</span>
+        </button>
+
+        <button class="application-section-card" data-type="Script Developer Application">
+            <span class="application-section-icon">SD</span>
+            <div>
+                <h3>Script Developer</h3>
+                <p>Development team applications.</p>
+            </div>
+            <span class="application-section-count" id="count-script">0</span>
+        </button>
+
+        <button class="application-section-card" data-type="Vehicle Developer Application">
+            <span class="application-section-icon">VD</span>
+            <div>
+                <h3>Vehicle Developer</h3>
+                <p>Vehicle development applications.</p>
+            </div>
+            <span class="application-section-count" id="count-vehicle">0</span>
+        </button>
+
+        <button class="application-section-card" data-type="EUP Developer Application">
+            <span class="application-section-icon">EU</span>
+            <div>
+                <h3>EUP Developer</h3>
+                <p>EUP development applications.</p>
+            </div>
+            <span class="application-section-count" id="count-eup">0</span>
+        </button>
+
+        <button class="application-section-card" data-type="UPD Command Application">
+            <span class="application-section-icon">PD</span>
+            <div>
+                <h3>UPD Command</h3>
+                <p>Police command applications.</p>
+            </div>
+            <span class="application-section-count" id="count-upd">0</span>
+        </button>
+
+        <button class="application-section-card" data-type="UHS Command Application">
+            <span class="application-section-icon">HS</span>
+            <div>
+                <h3>UHS Command</h3>
+                <p>Health service command applications.</p>
+            </div>
+            <span class="application-section-count" id="count-uhs">0</span>
+        </button>
+
+    </div>
+
+    <section class="selected-application-queue" id="selectedQueue" hidden>
+
+        <div class="staff-section-header">
+
+            <div>
+                <span class="card-label">SELECTED QUEUE</span>
+                <h2 id="selectedQueueTitle">Applications</h2>
+            </div>
+
+            <button class="queue-close-button" id="closeQueue">
+                Close
+            </button>
+
+        </div>
+
+        <div id="applicationQueue">
+            <p>Select an application section above.</p>
+        </div>
+
+    </section>
+
+</section>
 
             </div>
 
