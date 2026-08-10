@@ -15,160 +15,324 @@
 
     <div id="navbar"></div>
 
-    <main class="staff-shell">
+    <main class="staff-shell review-shell">
 
         <aside class="staff-sidebar">
 
             <div class="staff-sidebar-header">
-                <span class="staff-sidebar-label">STAFF PANEL</span>
+                <span class="staff-sidebar-label">
+                    STAFF PANEL
+                </span>
+
                 <h2>Union Roleplay</h2>
             </div>
 
             <nav class="staff-sidebar-nav">
 
-                <a href="staff.html" class="staff-nav-item">
-                    Dashboard
+                <a
+                    href="staff.html"
+                    class="staff-nav-item"
+                >
+                    <span>Dashboard</span>
                 </a>
 
                 <div class="staff-nav-section">
+
                     <span>APPLICATIONS</span>
 
-                    <a href="staff.html" class="staff-nav-item">
-                        Back to Queues
+                    <a
+                        href="staff.html"
+                        class="staff-nav-item active"
+                    >
+                        <span>Application Queues</span>
                     </a>
+
                 </div>
 
             </nav>
 
         </aside>
 
-        <section class="staff-main">
+        <section class="staff-main review-main">
 
-            <div id="reviewLoading" class="staff-access-state">
+            <div
+                id="reviewLoading"
+                class="staff-access-state"
+            >
                 <h1>Loading application...</h1>
-                <p>Please wait while the application is loaded.</p>
+
+                <p>
+                    Please wait while the application
+                    is loaded.
+                </p>
             </div>
 
-            <div id="reviewDenied" class="staff-access-state" hidden>
+            <div
+                id="reviewDenied"
+                class="staff-access-state"
+                hidden
+            >
                 <h1>Access Denied</h1>
-                <p>You do not have permission to review applications.</p>
 
-                <a href="dashboard.html" class="staff-review-button">
+                <p>
+                    You do not have permission to
+                    review applications.
+                </p>
+
+                <a
+                    href="dashboard.html"
+                    class="staff-review-button"
+                >
                     Return to Dashboard
                 </a>
             </div>
 
-            <div id="reviewWorkspace" hidden>
+            <div
+                id="reviewWorkspace"
+                hidden
+            >
 
-                <header class="staff-topbar">
+                <header class="review-header">
 
-                    <div>
-                        <span class="staff-eyebrow">APPLICATION REVIEW</span>
-                        <h1 id="reviewTitle">Application</h1>
+                    <div class="review-header-main">
+
+                        <a
+                            href="staff.html"
+                            class="review-back-link"
+                        >
+                            ← Application Queues
+                        </a>
+
+                        <span class="staff-eyebrow">
+                            APPLICATION REVIEW
+                        </span>
+
+                        <div class="review-title-row">
+
+                            <h1 id="reviewTitle">
+                                Application
+                            </h1>
+
+                            <span
+                                class="review-header-status"
+                                id="reviewHeaderStatus"
+                            >
+                                Submitted
+                            </span>
+
+                        </div>
+
+                        <p id="reviewReference">
+                            Loading application information...
+                        </p>
+
                     </div>
 
-                    <a href="staff.html" class="staff-review-button">
-                        Back to Queue
-                    </a>
+                    <div class="review-header-actions">
+
+                        <button
+                            type="button"
+                            class="review-header-button"
+                            id="claimApplication"
+                        >
+                            Claim Application
+                        </button>
+
+                    </div>
 
                 </header>
-
-                <div class="review-layout">
+                                <div class="review-layout">
 
                     <section class="review-main-column">
 
-                        <article class="review-card">
+                        <!-- APPLICANT INFORMATION -->
+                        <article class="review-card review-applicant-card">
 
                             <div class="staff-section-heading">
                                 <span>APPLICANT</span>
                                 <h2>Applicant Information</h2>
                             </div>
 
-                            <div id="reviewApplicant">
-                                <p class="staff-muted">Loading applicant...</p>
+                            <div
+                                id="reviewApplicant"
+                                class="review-applicant-content"
+                            >
+                                <div class="review-applicant-loading">
+                                    <p class="staff-muted">
+                                        Loading applicant information...
+                                    </p>
+                                </div>
                             </div>
 
                         </article>
 
-                        <article class="review-card">
 
-                            <div class="staff-section-heading">
-                                <span>APPLICATION</span>
-                                <h2>Questions & Answers</h2>
+                        <!-- QUESTIONS AND ANSWERS -->
+                        <article class="review-card review-answers-card">
+
+                            <div class="review-card-header">
+
+                                <div class="staff-section-heading">
+                                    <span>APPLICATION</span>
+                                    <h2>Questions & Answers</h2>
+                                </div>
+
+                                <div
+                                    class="review-question-count"
+                                    id="reviewQuestionCount"
+                                >
+                                    Loading...
+                                </div>
+
                             </div>
 
-                            <div id="reviewAnswers">
-                                <p class="staff-muted">Loading answers...</p>
+                            <div
+                                id="reviewAnswers"
+                                class="review-answers-list"
+                            >
+                                <div class="review-empty-state">
+
+                                    <div class="review-empty-icon">
+                                        ...
+                                    </div>
+
+                                    <p class="staff-muted">
+                                        Loading application answers...
+                                    </p>
+
+                                </div>
                             </div>
 
                         </article>
 
                     </section>
+                                        <aside class="review-side-column">
 
-                    <aside class="review-side-column">
-
-                        <article class="review-card">
+                        <!-- REVIEW STATUS / ACTIONS -->
+                        <article class="review-card review-actions-card">
 
                             <div class="staff-section-heading">
-                                <span>STATUS</span>
-                                <h2>Review Actions</h2>
+                                <span>REVIEW</span>
+                                <h2>Application Decision</h2>
                             </div>
 
-                            <div id="reviewStatus">
-                                <p class="staff-muted">Loading status...</p>
+                            <div
+                                id="reviewStatus"
+                                class="review-status-grid"
+                            >
+                                <p class="staff-muted">
+                                    Loading application status...
+                                </p>
                             </div>
 
                             <div class="review-action-stack">
 
-                                <button class="review-action approve" id="approveApplication">
-                                    Approve
+                                <button
+                                    type="button"
+                                    class="review-action review-action-primary"
+                                    id="startReviewApplication"
+                                >
+                                    Start Review
                                 </button>
 
-                                <button class="review-action interview" id="interviewApplication">
-                                    Interview
+                                <button
+                                    type="button"
+                                    class="review-action review-action-interview"
+                                    id="interviewApplication"
+                                >
+                                    Move to Interview
                                 </button>
 
-                                <button class="review-action hold" id="holdApplication">
+                                <button
+                                    type="button"
+                                    class="review-action review-action-approve"
+                                    id="approveApplication"
+                                >
+                                    Accept Application
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="review-action review-action-hold"
+                                    id="holdApplication"
+                                >
                                     Put On Hold
                                 </button>
 
-                                <button class="review-action deny" id="denyApplication">
-                                    Deny
+                                <button
+                                    type="button"
+                                    class="review-action review-action-deny"
+                                    id="denyApplication"
+                                >
+                                    Deny Application
                                 </button>
 
                             </div>
 
                         </article>
 
-                        <article class="review-card">
+
+                        <!-- INTERNAL NOTES -->
+                        <article class="review-card review-notes-card">
 
                             <div class="staff-section-heading">
                                 <span>INTERNAL</span>
                                 <h2>Staff Notes</h2>
                             </div>
 
+                            <p class="review-card-description">
+                                Notes are only visible to authorised staff.
+                            </p>
+
                             <textarea
                                 id="staffNote"
-                                placeholder="Add an internal note..."
+                                class="review-note-input"
+                                rows="5"
+                                placeholder="Write an internal note about this application..."
                             ></textarea>
 
-                            <button class="staff-review-button" id="saveStaffNote">
-                                Add Note
+                            <button
+                                type="button"
+                                class="review-note-button"
+                                id="saveStaffNote"
+                            >
+                                Add Internal Note
                             </button>
 
-                            <div id="reviewNotes"></div>
+                            <div
+                                id="reviewNotes"
+                                class="review-notes-list"
+                            ></div>
 
                         </article>
-
-                        <article class="review-card">
+                                                <!-- ACTIVITY HISTORY -->
+                        <article class="review-card review-activity-card">
 
                             <div class="staff-section-heading">
                                 <span>HISTORY</span>
-                                <h2>Activity</h2>
+                                <h2>Application Activity</h2>
                             </div>
 
-                            <div id="reviewActivity">
-                                <p class="staff-muted">No activity loaded.</p>
+                            <p class="review-card-description">
+                                Staff actions and status changes will appear here.
+                            </p>
+
+                            <div
+                                id="reviewActivity"
+                                class="review-activity-list"
+                            >
+                                <div class="review-activity-empty">
+
+                                    <span class="review-activity-dot"></span>
+
+                                    <div>
+                                        <strong>No activity yet</strong>
+                                        <p class="staff-muted">
+                                            Activity will appear when staff begin reviewing this application.
+                                        </p>
+                                    </div>
+
+                                </div>
                             </div>
 
                         </article>
@@ -183,10 +347,94 @@
 
     </main>
 
+
+    <!-- DECISION MODAL -->
+    <div
+        class="review-modal-backdrop"
+        id="reviewDecisionModal"
+        hidden
+    >
+
+        <div class="review-modal">
+
+            <div class="review-modal-header">
+
+                <div>
+                    <span class="staff-eyebrow">
+                        APPLICATION DECISION
+                    </span>
+
+                    <h2 id="decisionModalTitle">
+                        Confirm Decision
+                    </h2>
+                </div>
+
+                <button
+                    type="button"
+                    class="review-modal-close"
+                    id="closeDecisionModal"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <p
+                class="review-modal-description"
+                id="decisionModalDescription"
+            >
+                Confirm the action you want to take on this application.
+            </p>
+
+            <label
+                class="review-modal-label"
+                for="decisionReason"
+            >
+                Staff Reason / Notes
+            </label>
+
+            <textarea
+                id="decisionReason"
+                class="review-note-input"
+                rows="5"
+                placeholder="Enter the reason for this decision..."
+            ></textarea>
+
+            <p
+                class="review-modal-error"
+                id="decisionModalError"
+                hidden
+            ></p>
+
+            <div class="review-modal-actions">
+
+                <button
+                    type="button"
+                    class="review-modal-cancel"
+                    id="cancelDecisionModal"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="button"
+                    class="review-modal-confirm"
+                    id="confirmDecision"
+                >
+                    Confirm
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
     <script src="../js/auth.js"></script>
     <script src="../js/review-application.js"></script>
     <script src="../js/components.js"></script>
 
 </body>
-
 </html>
