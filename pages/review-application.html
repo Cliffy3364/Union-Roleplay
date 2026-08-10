@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Review Application | Union Roleplay</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/staff.css">
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <main class="staff-shell">
+
+        <aside class="staff-sidebar">
+
+            <div class="staff-sidebar-header">
+                <span class="staff-sidebar-label">STAFF PANEL</span>
+                <h2>Union Roleplay</h2>
+            </div>
+
+            <nav class="staff-sidebar-nav">
+
+                <a href="staff.html" class="staff-nav-item">
+                    Dashboard
+                </a>
+
+                <div class="staff-nav-section">
+                    <span>APPLICATIONS</span>
+
+                    <a href="staff.html" class="staff-nav-item">
+                        Back to Queues
+                    </a>
+                </div>
+
+            </nav>
+
+        </aside>
+
+        <section class="staff-main">
+
+            <div id="reviewLoading" class="staff-access-state">
+                <h1>Loading application...</h1>
+                <p>Please wait while the application is loaded.</p>
+            </div>
+
+            <div id="reviewDenied" class="staff-access-state" hidden>
+                <h1>Access Denied</h1>
+                <p>You do not have permission to review applications.</p>
+
+                <a href="dashboard.html" class="staff-review-button">
+                    Return to Dashboard
+                </a>
+            </div>
+
+            <div id="reviewWorkspace" hidden>
+
+                <header class="staff-topbar">
+
+                    <div>
+                        <span class="staff-eyebrow">APPLICATION REVIEW</span>
+                        <h1 id="reviewTitle">Application</h1>
+                    </div>
+
+                    <a href="staff.html" class="staff-review-button">
+                        Back to Queue
+                    </a>
+
+                </header>
+
+                <div class="review-layout">
+
+                    <section class="review-main-column">
+
+                        <article class="review-card">
+
+                            <div class="staff-section-heading">
+                                <span>APPLICANT</span>
+                                <h2>Applicant Information</h2>
+                            </div>
+
+                            <div id="reviewApplicant">
+                                <p class="staff-muted">Loading applicant...</p>
+                            </div>
+
+                        </article>
+
+                        <article class="review-card">
+
+                            <div class="staff-section-heading">
+                                <span>APPLICATION</span>
+                                <h2>Questions & Answers</h2>
+                            </div>
+
+                            <div id="reviewAnswers">
+                                <p class="staff-muted">Loading answers...</p>
+                            </div>
+
+                        </article>
+
+                    </section>
+
+                    <aside class="review-side-column">
+
+                        <article class="review-card">
+
+                            <div class="staff-section-heading">
+                                <span>STATUS</span>
+                                <h2>Review Actions</h2>
+                            </div>
+
+                            <div id="reviewStatus">
+                                <p class="staff-muted">Loading status...</p>
+                            </div>
+
+                            <div class="review-action-stack">
+
+                                <button class="review-action approve" id="approveApplication">
+                                    Approve
+                                </button>
+
+                                <button class="review-action interview" id="interviewApplication">
+                                    Interview
+                                </button>
+
+                                <button class="review-action hold" id="holdApplication">
+                                    Put On Hold
+                                </button>
+
+                                <button class="review-action deny" id="denyApplication">
+                                    Deny
+                                </button>
+
+                            </div>
+
+                        </article>
+
+                        <article class="review-card">
+
+                            <div class="staff-section-heading">
+                                <span>INTERNAL</span>
+                                <h2>Staff Notes</h2>
+                            </div>
+
+                            <textarea
+                                id="staffNote"
+                                placeholder="Add an internal note..."
+                            ></textarea>
+
+                            <button class="staff-review-button" id="saveStaffNote">
+                                Add Note
+                            </button>
+
+                            <div id="reviewNotes"></div>
+
+                        </article>
+
+                        <article class="review-card">
+
+                            <div class="staff-section-heading">
+                                <span>HISTORY</span>
+                                <h2>Activity</h2>
+                            </div>
+
+                            <div id="reviewActivity">
+                                <p class="staff-muted">No activity loaded.</p>
+                            </div>
+
+                        </article>
+
+                    </aside>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/review-application.js"></script>
+    <script src="../js/components.js"></script>
+
+</body>
+
+</html>
