@@ -1576,3 +1576,6 @@
 
     color: #d3c8ff;
 }
+.review-modal-backdrop[hidden] {
+    display: none !important;
+}
