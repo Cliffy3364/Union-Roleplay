@@ -422,3 +422,42 @@
         display: none;
     }
 }
+.staff-nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.staff-nav-badge {
+    min-width: 22px;
+    height: 22px;
+    padding: 0 7px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    background: rgba(135, 92, 255, 0.12);
+    border: 1px solid rgba(135, 92, 255, 0.16);
+
+    color: #bdaaff;
+
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.staff-nav-item.active .staff-nav-badge {
+    background: rgba(135, 92, 255, 0.22);
+    border-color: rgba(135, 92, 255, 0.3);
+    color: #ffffff;
+}
+
+.staff-nav-badge.has-applications {
+    background: rgba(135, 92, 255, 0.2);
+    border-color: rgba(135, 92, 255, 0.3);
+    color: #d2c5ff;
+}
