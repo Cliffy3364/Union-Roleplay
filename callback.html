@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signing In | Union Roleplay</title>
+</head>
+
+<body>
+
+<script>
+const API_URL = "https://union-roleplay-api.danielclifford2808.workers.dev";
+
+async function handleLogin() {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+
+    if (!code) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/api/auth/callback`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ code })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success || !data.token) {
+            throw new Error(data.error || "Login failed.");
+        }
+
+        localStorage.setItem("union_session", data.token);
+
+        window.location.href = "pages/dashboard.html";
+    } catch (error) {
+        console.error(error);
+        document.body.innerHTML = `
+            <h2>Login failed</h2>
+            <p>${error.message}</p>
+            <a href="index.html">Return Home</a>
+        `;
+    }
+}
+
+handleLogin();
+</script>
+
+</body>
+</html>
