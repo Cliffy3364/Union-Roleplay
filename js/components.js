@@ -9,9 +9,39 @@ async function loadNavbar() {
         path = "../components/navbar.html";
     }
 
-    const response = await fetch(path);
+    try {
+        const response = await fetch(path);
 
-    navbar.innerHTML = await response.text();
+        if (!response.ok) {
+            throw new Error("Navbar could not be loaded.");
+        }
+
+        navbar.innerHTML = await response.text();
+
+        setupDiscordLogin();
+
+    } catch (error) {
+        console.error("Navbar error:", error);
+    }
 }
+
+
+function setupDiscordLogin() {
+
+    const loginButton = document.getElementById("discordLogin");
+
+    if (!loginButton) return;
+
+    loginButton.addEventListener("click", function(event) {
+
+        event.preventDefault();
+
+        window.location.href =
+            "https://union-roleplay-api.danielclifford2808.workers.dev/api/auth/discord";
+
+    });
+
+}
+
 
 document.addEventListener("DOMContentLoaded", loadNavbar);
