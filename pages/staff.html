@@ -14,187 +14,152 @@
 
     <div id="navbar"></div>
 
-    <main class="staff-page">
+    <main class="staff-shell">
 
-        <section class="staff-loading" id="staffLoading">
-            <h1>Checking permissions...</h1>
-            <p>Please wait while we verify your Discord roles.</p>
-        </section>
+        <aside class="staff-sidebar">
 
-        <section class="staff-denied" id="staffDenied" hidden>
-            <h1>Access Denied</h1>
-            <p>You do not have permission to access the Union Roleplay Staff Panel.</p>
+            <div class="staff-sidebar-header">
+                <span class="staff-sidebar-label">STAFF PANEL</span>
+                <h2>Union Roleplay</h2>
+            </div>
 
-            <a href="dashboard.html" class="btn primary">
-                Return to Dashboard
-            </a>
-        </section>
+            <nav class="staff-sidebar-nav">
 
-        <section class="staff-panel" id="staffPanel" hidden>
+                <button class="staff-nav-item active" data-view="dashboard">
+                    Dashboard
+                </button>
 
-            <div class="dashboard-container">
+                <div class="staff-nav-section">
+                    <span>APPLICATIONS</span>
 
-                <div class="staff-header">
-                    <span class="dashboard-eyebrow">STAFF PORTAL</span>
+                    <button class="staff-nav-item" data-type="Whitelist Application">
+                        Whitelist
+                    </button>
 
-                    <h1>Application Management</h1>
+                    <button class="staff-nav-item" data-type="Staff Application">
+                        Staff
+                    </button>
 
-                    <p>
-                        Review and manage Union Roleplay applications.
-                    </p>
+                    <button class="staff-nav-item" data-type="QA Tester Application">
+                        QA Tester
+                    </button>
+
+                    <button class="staff-nav-item" data-type="Social Media Manager Application">
+                        Social Media
+                    </button>
+
+                    <button class="staff-nav-item" data-type="Media Application">
+                        Media
+                    </button>
+
+                    <button class="staff-nav-item" data-type="Script Developer Application">
+                        Script Developer
+                    </button>
+
+                    <button class="staff-nav-item" data-type="Vehicle Developer Application">
+                        Vehicle Developer
+                    </button>
+
+                    <button class="staff-nav-item" data-type="EUP Developer Application">
+                        EUP Developer
+                    </button>
+
+                    <button class="staff-nav-item" data-type="UPD Command Application">
+                        UPD Command
+                    </button>
+
+                    <button class="staff-nav-item" data-type="UHS Command Application">
+                        UHS Command
+                    </button>
+
                 </div>
 
-                <div class="staff-grid">
+            </nav>
 
-                    <article class="dashboard-card">
-                        <span class="card-label">PENDING</span>
-                        <h2 id="pendingCount">0</h2>
-                        <p>Applications waiting for review.</p>
-                    </article>
+        </aside>
 
-                    <article class="dashboard-card">
-                        <span class="card-label">INTERVIEWS</span>
-                        <h2 id="interviewCount">0</h2>
-                        <p>Applications currently awaiting interview.</p>
-                    </article>
+        <section class="staff-main">
 
-                    <article class="dashboard-card">
-                        <span class="card-label">REVIEWED TODAY</span>
-                        <h2 id="reviewedCount">0</h2>
-                        <p>Applications processed today.</p>
-                    </article>
-
-                </div>
-
-<section class="staff-applications">
-
-    <div class="staff-section-header">
-        <div>
-            <span class="card-label">APPLICATION SECTIONS</span>
-            <h2>Application Queues</h2>
-            <p>
-                Select an application type to review its queue.
-                Oldest submissions are shown first.
-            </p>
-        </div>
-    </div>
-
-    <div class="application-section-grid">
-
-        <button class="application-section-card" data-type="Whitelist Application">
-            <span class="application-section-icon">WL</span>
-            <div>
-                <h3>Whitelist</h3>
-                <p>General server whitelist applications.</p>
-            </div>
-            <span class="application-section-count" id="count-whitelist">0</span>
-        </button>
-
-        <button class="application-section-card" data-type="Staff Application">
-            <span class="application-section-icon">ST</span>
-            <div>
-                <h3>Staff</h3>
-                <p>Community staff applications.</p>
-            </div>
-            <span class="application-section-count" id="count-staff">0</span>
-        </button>
-
-        <button class="application-section-card" data-type="QA Tester Application">
-            <span class="application-section-icon">QA</span>
-            <div>
-                <h3>QA Tester</h3>
-                <p>Pre-release testing applications.</p>
-            </div>
-            <span class="application-section-count" id="count-qa">0</span>
-        </button>
-
-        <button class="application-section-card" data-type="Social Media Manager Application">
-            <span class="application-section-icon">SM</span>
-            <div>
-                <h3>Social Media Manager</h3>
-                <p>Social media team applications.</p>
-            </div>
-            <span class="application-section-count" id="count-social">0</span>
-        </button>
-
-        <button class="application-section-card" data-type="Media Application">
-            <span class="application-section-icon">ME</span>
-            <div>
-                <h3>Media</h3>
-                <p>Media team applications.</p>
-            </div>
-            <span class="application-section-count" id="count-media">0</span>
-        </button>
-
-        <button class="application-section-card" data-type="Script Developer Application">
-            <span class="application-section-icon">SD</span>
-            <div>
-                <h3>Script Developer</h3>
-                <p>Development team applications.</p>
-            </div>
-            <span class="application-section-count" id="count-script">0</span>
-        </button>
-
-        <button class="application-section-card" data-type="Vehicle Developer Application">
-            <span class="application-section-icon">VD</span>
-            <div>
-                <h3>Vehicle Developer</h3>
-                <p>Vehicle development applications.</p>
-            </div>
-            <span class="application-section-count" id="count-vehicle">0</span>
-        </button>
-
-        <button class="application-section-card" data-type="EUP Developer Application">
-            <span class="application-section-icon">EU</span>
-            <div>
-                <h3>EUP Developer</h3>
-                <p>EUP development applications.</p>
-            </div>
-            <span class="application-section-count" id="count-eup">0</span>
-        </button>
-
-        <button class="application-section-card" data-type="UPD Command Application">
-            <span class="application-section-icon">PD</span>
-            <div>
-                <h3>UPD Command</h3>
-                <p>Police command applications.</p>
-            </div>
-            <span class="application-section-count" id="count-upd">0</span>
-        </button>
-
-        <button class="application-section-card" data-type="UHS Command Application">
-            <span class="application-section-icon">HS</span>
-            <div>
-                <h3>UHS Command</h3>
-                <p>Health service command applications.</p>
-            </div>
-            <span class="application-section-count" id="count-uhs">0</span>
-        </button>
-
-    </div>
-
-    <section class="selected-application-queue" id="selectedQueue" hidden>
-
-        <div class="staff-section-header">
-
-            <div>
-                <span class="card-label">SELECTED QUEUE</span>
-                <h2 id="selectedQueueTitle">Applications</h2>
+            <div id="staffLoading" class="staff-access-state">
+                <h1>Checking permissions...</h1>
+                <p>Verifying your Discord roles.</p>
             </div>
 
-            <button class="queue-close-button" id="closeQueue">
-                Close
-            </button>
+            <div id="staffDenied" class="staff-access-state" hidden>
+                <h1>Access Denied</h1>
+                <p>You do not have permission to access the staff panel.</p>
+                <a href="dashboard.html" class="btn primary">Return to Dashboard</a>
+            </div>
 
-        </div>
+            <div id="staffPanel" hidden>
 
-        <div id="applicationQueue">
-            <p>Select an application section above.</p>
-        </div>
+                <header class="staff-topbar">
 
-    </section>
+                    <div>
+                        <span class="staff-eyebrow">STAFF CONTROL CENTRE</span>
+                        <h1 id="staffPageTitle">Dashboard</h1>
+                    </div>
 
-</section>
+                    <div class="staff-topbar-actions">
+                        <input
+                            type="search"
+                            id="staffSearch"
+                            placeholder="Search applications..."
+                        >
+                    </div>
+
+                </header>
+
+                <section id="staffDashboardView">
+
+                    <div class="staff-stat-grid">
+
+                        <article class="staff-stat">
+                            <span>Pending</span>
+                            <strong id="pendingCount">0</strong>
+                        </article>
+
+                        <article class="staff-stat">
+                            <span>In Review</span>
+                            <strong id="reviewCount">0</strong>
+                        </article>
+
+                        <article class="staff-stat">
+                            <span>Interviews</span>
+                            <strong id="interviewCount">0</strong>
+                        </article>
+
+                        <article class="staff-stat">
+                            <span>Reviewed Today</span>
+                            <strong id="reviewedCount">0</strong>
+                        </article>
+
+                    </div>
+
+                    <section class="staff-dashboard-panel">
+
+                        <div class="staff-section-heading">
+                            <span>APPLICATION OVERVIEW</span>
+                            <h2>Queues</h2>
+                        </div>
+
+                        <div id="applicationOverview"></div>
+
+                    </section>
+
+                </section>
+
+                <section id="staffQueueView" hidden>
+
+                    <div class="staff-section-heading">
+                        <span>APPLICATION QUEUE</span>
+                        <h2 id="queueTitle">Applications</h2>
+                        <p>Oldest submissions are shown first.</p>
+                    </div>
+
+                    <div id="applicationQueue"></div>
+
+                </section>
 
             </div>
 

@@ -160,9 +160,11 @@ img {
 }
 
 .hero h1 span {
-    display: block;
-    background: linear-gradient(135deg, #ffffff, #b46cff);
+    display: inline-block;
+    background: linear-gradient(135deg, #ffffff 0%, #b46cff 100%);
+    background-clip: text;
     -webkit-background-clip: text;
+    color: transparent;
     -webkit-text-fill-color: transparent;
 }
 
@@ -504,5 +506,215 @@ footer p {
 @media (max-width: 900px) {
     .dashboard-grid {
         grid-template-columns: 1fr;
+    }
+}
+/* =========================
+   STAFF PANEL
+========================= */
+
+.staff-shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    padding-top: 76px;
+    background: #09090d;
+    color: #f5f5f7;
+}
+
+.staff-sidebar {
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+    background: #0d0d12;
+    padding: 28px 18px;
+    position: sticky;
+    top: 76px;
+    height: calc(100vh - 76px);
+    overflow-y: auto;
+}
+
+.staff-sidebar-header {
+    padding: 0 10px 24px;
+}
+
+.staff-sidebar-label,
+.staff-eyebrow,
+.staff-nav-section > span,
+.staff-section-heading > span {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #8b8b95;
+}
+
+.staff-sidebar-header h2 {
+    margin: 6px 0 0;
+    font-size: 20px;
+}
+
+.staff-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.staff-nav-section {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.staff-nav-section > span {
+    padding: 0 10px 8px;
+}
+
+.staff-nav-item {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: #b6b6c0;
+    text-align: left;
+    padding: 11px 12px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.18s ease;
+}
+
+.staff-nav-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+.staff-nav-item.active {
+    background: rgba(139, 92, 246, 0.12);
+    color: #ffffff;
+    box-shadow: inset 3px 0 0 #8b5cf6;
+}
+
+.staff-main {
+    min-width: 0;
+    padding: 34px 38px 60px;
+}
+
+.staff-access-state {
+    padding-top: 60px;
+}
+
+.staff-topbar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.staff-topbar h1 {
+    margin: 6px 0 0;
+    font-size: 34px;
+    letter-spacing: -1px;
+}
+
+.staff-topbar-actions input {
+    width: 280px;
+    max-width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #121218;
+    color: #ffffff;
+    outline: none;
+}
+
+.staff-topbar-actions input:focus {
+    border-color: rgba(139, 92, 246, 0.7);
+}
+
+.staff-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.staff-stat {
+    padding: 20px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: #111117;
+}
+
+.staff-stat span {
+    display: block;
+    color: #8d8d98;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.staff-stat strong {
+    font-size: 30px;
+    line-height: 1;
+}
+
+.staff-dashboard-panel,
+#staffQueueView {
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    background: #101015;
+    padding: 22px;
+}
+
+.staff-section-heading {
+    margin-bottom: 18px;
+}
+
+.staff-section-heading h2 {
+    margin: 5px 0 0;
+    font-size: 22px;
+}
+
+.staff-section-heading p {
+    margin-top: 6px;
+    color: #8f8f99;
+    font-size: 14px;
+}
+
+@media (max-width: 1000px) {
+    .staff-shell {
+        grid-template-columns: 210px 1fr;
+    }
+
+    .staff-stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 760px) {
+    .staff-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-sidebar {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .staff-main {
+        padding: 24px 18px 50px;
+    }
+
+    .staff-topbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .staff-topbar-actions input {
+        width: 100%;
+    }
+
+    .staff-stat-grid {
+        grid-template-columns: 1fr 1fr;
     }
 }
