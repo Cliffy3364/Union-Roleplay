@@ -1,0 +1,218 @@
+/* ========================================
+   UNION ROLEPLAY - APPLICATIONS
+======================================== */
+
+.applications-page {
+    min-height: 100vh;
+    padding-top: 76px;
+    background:
+        radial-gradient(circle at top left, rgba(124, 58, 237, 0.08), transparent 30%),
+        #09090d;
+    color: #f5f5f7;
+}
+
+.applications-container {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+.applications-hero {
+    padding: 72px 0 34px;
+}
+
+.applications-eyebrow,
+.applications-section-heading > span {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #8f8f9a;
+}
+
+.applications-hero h1 {
+    margin: 9px 0 0;
+    font-size: clamp(42px, 6vw, 64px);
+    letter-spacing: -2px;
+    line-height: 1;
+}
+
+.applications-hero p {
+    max-width: 660px;
+    margin: 18px 0 0;
+    color: #8d8d98;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.applications-content {
+    padding: 8px 0 90px;
+}
+
+.applications-section-heading {
+    margin-bottom: 22px;
+}
+
+.applications-section-heading h2 {
+    margin: 6px 0 0;
+    font-size: 27px;
+    letter-spacing: -0.8px;
+}
+
+.applications-section-heading p {
+    margin: 7px 0 0;
+    color: #7f7f89;
+    font-size: 13px;
+}
+
+.applications-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.application-card {
+    min-height: 220px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 15px;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.018),
+            rgba(255, 255, 255, 0.006)
+        ),
+        #111117;
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        background 0.18s ease;
+}
+
+.application-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(135, 92, 255, 0.28);
+    background: #13131a;
+}
+
+.application-card.featured {
+    border-color: rgba(135, 92, 255, 0.24);
+    box-shadow: inset 0 0 0 1px rgba(135, 92, 255, 0.04);
+}
+
+.application-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.application-code {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(135, 92, 255, 0.11);
+    border: 1px solid rgba(135, 92, 255, 0.16);
+    color: #c5b5ff;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+}
+
+.application-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 750;
+}
+
+.application-status::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.application-status.open {
+    background: rgba(34, 197, 94, 0.07);
+    border: 1px solid rgba(34, 197, 94, 0.12);
+    color: #9ae6b4;
+}
+
+.application-status.open::before {
+    background: #4ade80;
+}
+
+.application-card h3 {
+    margin: 22px 0 0;
+    font-size: 20px;
+    letter-spacing: -0.4px;
+}
+
+.application-card > p {
+    margin: 10px 0 0;
+    color: #85858f;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.application-card-footer {
+    margin-top: auto;
+    padding-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.application-card-footer > span {
+    color: #696974;
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.application-card-footer a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #c8b7ff;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    transition:
+        color 0.16s ease,
+        transform 0.16s ease;
+}
+
+.application-card-footer a:hover {
+    color: #ffffff;
+    transform: translateX(2px);
+}
+
+@media (max-width: 980px) {
+    .applications-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .applications-container {
+        width: min(100% - 28px, 1180px);
+    }
+
+    .applications-hero {
+        padding-top: 48px;
+    }
+
+    .applications-grid {
+        grid-template-columns: 1fr;
+    }
+}
