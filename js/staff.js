@@ -2,16 +2,16 @@ const STAFF_API =
     "https://union-roleplay-api.danielclifford2808.workers.dev";
 
 const APPLICATION_TYPES = [
-    { type: "Whitelist Application", countId: "count-whitelist" },
-    { type: "Staff Application", countId: "count-staff" },
-    { type: "QA Tester Application", countId: "count-qa" },
-    { type: "Social Media Manager Application", countId: "count-social" },
-    { type: "Media Application", countId: "count-media" },
-    { type: "Script Developer Application", countId: "count-script" },
-    { type: "Vehicle Developer Application", countId: "count-vehicle" },
-    { type: "EUP Developer Application", countId: "count-eup" },
-    { type: "UPD Command Application", countId: "count-upd" },
-    { type: "UHS Command Application", countId: "count-uhs" }
+    "Whitelist Application",
+    "Staff Application",
+    "QA Tester Application",
+    "Social Media Manager Application",
+    "Media Application",
+    "Script Developer Application",
+    "Vehicle Developer Application",
+    "EUP Developer Application",
+    "UPD Command Application",
+    "UHS Command Application"
 ];
 
 function getToken() {
@@ -40,157 +40,308 @@ async function staffFetch(path) {
     return data;
 }
 
+function isPendingStatus(status) {
+    const value = String(status || "").toLowerCase();
+
+    return [
+        "submitted",
+        "pending",
+        "pending review"
+    ].includes(value);
+}
+
 function formatWaitTime(timestamp) {
     if (!timestamp) return "Unknown";
 
-    const diff = Date.now() - Number(timestamp);
+    const diff = Math.max(
+        0,
+        Date.now() - Number(timestamp)
+    );
 
     const minutes = Math.floor(diff / 60000);
     const hours = Math.floor(diff / 3600000);
     const days = Math.floor(diff / 86400000);
 
-    if (days > 0) return `${days}d ${hours % 24}h`;
-    if (hours > 0) return `${hours}h ${minutes % 60}m`;
+    if (days > 0) {
+        return `${days}d ${hours % 24}h`;
+    }
 
-    return `${Math.max(minutes, 0)}m`;
+    if (hours > 0) {
+        return `${hours}h ${minutes % 60}m`;
+    }
+
+    return `${minutes}m`;
 }
 
-function getWaitClass(timestamp) {
-    const diff = Date.now() - Number(timestamp || Date.now());
-
-    if (diff >= 7 * 86400000) return "wait-critical";
-    if (diff >= 3 * 86400000) return "wait-high";
-    if (diff >= 86400000) return "wait-medium";
-
-    return "wait-normal";
+function applicantName(app) {
+    return (
+        app.discord_display_name ||
+        app.discord_username ||
+        app.discord_id ||
+        "Unknown Applicant"
+    );
 }
 
-async function loadApplicationCounts() {
-    for (const item of APPLICATION_TYPES) {
-        try {
-            const data = await staffFetch(
-                `/api/staff/applications?type=${encodeURIComponent(item.type)}`
-            );
+function setActiveNav(button) {
+    document
+        .querySelectorAll(".staff-nav-item")
+        .forEach(item => item.classList.remove("active"));
 
-            const pending = (data.applications || []).filter(app => {
-                const status = String(app.status || "").toLowerCase();
+    button.classList.add("active");
+}
 
-                return (
-                    status === "submitted" ||
-                    status === "pending review" ||
-                    status === "pending"
-                );
-            });
+function showDashboard() {
+    const dashboard =
+        document.getElementById("staffDashboardView");
 
-            const count = document.getElementById(item.countId);
+    const queue =
+        document.getElementById("staffQueueView");
 
-            if (count) {
-                count.textContent = pending.length;
-            }
+    const title =
+        document.getElementById("staffPageTitle");
 
-        } catch (error) {
-            console.error(`Failed to load ${item.type} count:`, error);
+    if (dashboard) dashboard.hidden = false;
+    if (queue) queue.hidden = true;
+    if (title) title.textContent = "Dashboard";
+}
+
+async function loadDashboardStats() {
+    try {
+        const data = await staffFetch(
+            "/api/staff/applications/dashboard"
+        );
+
+        const summary = data.summary || {};
+
+        const pending =
+            document.getElementById("pendingCount");
+
+        const interviews =
+            document.getElementById("interviewCount");
+
+        if (pending) {
+            pending.textContent =
+                Number(summary.pending || 0);
         }
+
+        if (interviews) {
+            interviews.textContent =
+                Number(summary.interviews || 0);
+        }
+
+    } catch (error) {
+        console.error(
+            "Failed to load staff dashboard:",
+            error
+        );
     }
 }
 
-function renderApplicationQueue(applications) {
-    const queue = document.getElementById("applicationQueue");
+async function loadApplicationOverview() {
+    const overview =
+        document.getElementById("applicationOverview");
+
+    if (!overview) return;
+
+    overview.innerHTML =
+        '<p class="staff-muted">Loading application queues...</p>';
+
+    const rows = [];
+
+    for (const type of APPLICATION_TYPES) {
+        try {
+            const data = await staffFetch(
+                `/api/staff/applications?type=${encodeURIComponent(type)}`
+            );
+
+            const pending = (data.applications || [])
+                .filter(app =>
+                    isPendingStatus(app.status)
+                );
+
+            rows.push({
+                type,
+                count: pending.length,
+                oldest: pending[0] || null
+            });
+
+        } catch (error) {
+            rows.push({
+                type,
+                count: 0,
+                oldest: null
+            });
+        }
+    }
+
+    overview.innerHTML = rows
+        .map(row => {
+
+            const oldestTime =
+                row.oldest?.submitted_at ||
+                row.oldest?.created_at;
+
+            return `
+                <button
+                    class="staff-overview-row"
+                    data-overview-type="${row.type}"
+                >
+                    <div>
+                        <strong>${row.type.replace(" Application", "")}</strong>
+                        <span>
+                            ${
+                                row.oldest
+                                    ? `Oldest waiting ${formatWaitTime(oldestTime)}`
+                                    : "No applications waiting"
+                            }
+                        </span>
+                    </div>
+
+                    <div class="staff-overview-count">
+                        ${row.count}
+                    </div>
+                </button>
+            `;
+        })
+        .join("");
+
+    document
+        .querySelectorAll("[data-overview-type]")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                async () => {
+
+                    const type =
+                        button.dataset.overviewType;
+
+                    await openQueue(type);
+                }
+            );
+
+        });
+}
+
+function renderQueue(applications) {
+    const queue =
+        document.getElementById("applicationQueue");
 
     if (!queue) return;
 
     if (!applications.length) {
         queue.innerHTML = `
-            <div class="queue-empty">
-                <h3>No applications waiting</h3>
-                <p>There are currently no applications in this queue.</p>
+            <div class="staff-empty-state">
+                <h3>Queue clear</h3>
+                <p>
+                    There are currently no applications
+                    waiting in this section.
+                </p>
             </div>
         `;
+
         return;
     }
 
-    queue.innerHTML = applications.map((app, index) => {
+    queue.innerHTML = applications
+        .map((app, index) => {
 
-        const submittedAt =
-            app.submitted_at ||
-            app.created_at ||
-            Date.now();
+            const submitted =
+                app.submitted_at ||
+                app.created_at ||
+                Date.now();
 
-        const name =
-            app.discord_display_name ||
-            app.discord_username ||
-            app.discord_id ||
-            "Unknown Applicant";
+            const name =
+                applicantName(app);
 
-        return `
-            <article class="application-queue-item">
+            const avatar = app.avatar
+                ? `
+                    <img
+                        src="https://cdn.discordapp.com/avatars/${app.discord_id}/${app.avatar}.png?size=96"
+                        alt=""
+                    >
+                `
+                : name.charAt(0).toUpperCase();
 
-                <div class="queue-position">
-                    ${index + 1}
-                </div>
+            return `
+                <article class="staff-application-row">
 
-                <div class="queue-applicant">
-
-                    <div class="queue-avatar">
-                        ${
-                            app.avatar
-                                ? `<img src="https://cdn.discordapp.com/avatars/${app.discord_id}/${app.avatar}.png?size=96" alt="">`
-                                : name.charAt(0).toUpperCase()
-                        }
+                    <div class="staff-queue-number">
+                        ${index + 1}
                     </div>
 
-                    <div>
-                        <h3>${name}</h3>
-                        <p>
+                    <div class="staff-applicant-avatar">
+                        ${avatar}
+                    </div>
+
+                    <div class="staff-applicant-info">
+                        <strong>${name}</strong>
+
+                        <span>
                             ${app.union_id || "No Union ID"}
                             ·
                             ${app.reference || `#${app.id}`}
-                        </p>
+                        </span>
                     </div>
 
-                </div>
+                    <div class="staff-application-meta">
+                        <span>Waiting</span>
+                        <strong>
+                            ${formatWaitTime(submitted)}
+                        </strong>
+                    </div>
 
-                <div class="queue-waiting">
-                    <span class="${getWaitClass(submittedAt)}">
-                        Waiting ${formatWaitTime(submittedAt)}
-                    </span>
+                    <div class="staff-application-meta">
+                        <span>Status</span>
+                        <strong>
+                            ${app.status || "Submitted"}
+                        </strong>
+                    </div>
 
-                    <small>
-                        ${new Date(Number(submittedAt)).toLocaleString("en-GB")}
-                    </small>
-                </div>
+                    <a
+                        class="staff-review-button"
+                        href="review-application.html?id=${app.id}"
+                    >
+                        Review
+                    </a>
 
-                <div class="queue-status">
-                    ${app.status || "Submitted"}
-                </div>
-
-                <a
-                    class="queue-review-button"
-                    href="review-application.html?id=${app.id}"
-                >
-                    Review
-                </a>
-
-            </article>
-        `;
-    }).join("");
+                </article>
+            `;
+        })
+        .join("");
 }
 
-async function openApplicationQueue(type) {
-    const selectedQueue = document.getElementById("selectedQueue");
-    const title = document.getElementById("selectedQueueTitle");
-    const queue = document.getElementById("applicationQueue");
+async function openQueue(type) {
+    const dashboard =
+        document.getElementById("staffDashboardView");
 
-    if (selectedQueue) {
-        selectedQueue.hidden = false;
+    const queueView =
+        document.getElementById("staffQueueView");
+
+    const pageTitle =
+        document.getElementById("staffPageTitle");
+
+    const queueTitle =
+        document.getElementById("queueTitle");
+
+    const queue =
+        document.getElementById("applicationQueue");
+
+    if (dashboard) dashboard.hidden = true;
+    if (queueView) queueView.hidden = false;
+
+    if (pageTitle) {
+        pageTitle.textContent =
+            type.replace(" Application", "");
     }
 
-    if (title) {
-        title.textContent = type;
+    if (queueTitle) {
+        queueTitle.textContent = type;
     }
 
     if (queue) {
-        queue.innerHTML = "<p>Loading applications...</p>";
+        queue.innerHTML =
+            '<p class="staff-muted">Loading queue...</p>';
     }
 
     try {
@@ -198,24 +349,19 @@ async function openApplicationQueue(type) {
             `/api/staff/applications?type=${encodeURIComponent(type)}`
         );
 
-        const applications = (data.applications || []).filter(app => {
-            const status = String(app.status || "").toLowerCase();
-
-            return (
-                status === "submitted" ||
-                status === "pending review" ||
-                status === "pending"
+        const applications =
+            (data.applications || [])
+            .filter(app =>
+                isPendingStatus(app.status)
             );
-        });
 
-        renderApplicationQueue(applications);
+        renderQueue(applications);
 
     } catch (error) {
-
         if (queue) {
             queue.innerHTML = `
-                <div class="queue-empty">
-                    <h3>Unable to load applications</h3>
+                <div class="staff-empty-state">
+                    <h3>Unable to load queue</h3>
                     <p>${error.message}</p>
                 </div>
             `;
@@ -223,61 +369,84 @@ async function openApplicationQueue(type) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener(
+    "DOMContentLoaded",
+    async () => {
 
-    const loading = document.getElementById("staffLoading");
-    const denied = document.getElementById("staffDenied");
-    const panel = document.getElementById("staffPanel");
+        const loading =
+            document.getElementById("staffLoading");
 
-    if (!window.UnionAuth) {
-        if (loading) loading.hidden = true;
-        if (denied) denied.hidden = false;
-        return;
-    }
+        const denied =
+            document.getElementById("staffDenied");
 
-    const user = await UnionAuth.getCurrentUser();
+        const panel =
+            document.getElementById("staffPanel");
 
-    if (loading) {
-        loading.hidden = true;
-    }
+        if (!window.UnionAuth) {
+            if (loading) loading.hidden = true;
+            if (denied) denied.hidden = false;
+            return;
+        }
 
-    if (!user || user.is_staff !== true) {
-        if (denied) denied.hidden = false;
-        return;
-    }
+        const user =
+            await UnionAuth.getCurrentUser();
 
-    if (panel) {
-        panel.hidden = false;
-    }
+        if (loading) {
+            loading.hidden = true;
+        }
 
-    document
-        .querySelectorAll(".application-section-card")
-        .forEach(button => {
+        if (!user || user.is_staff !== true) {
+            if (denied) {
+                denied.hidden = false;
+            }
 
-            button.addEventListener("click", () => {
-                const type = button.dataset.type;
+            return;
+        }
 
-                if (type) {
-                    openApplicationQueue(type);
-                }
+        if (panel) {
+            panel.hidden = false;
+        }
+
+        document
+            .querySelectorAll(
+                ".staff-nav-item[data-type]"
+            )
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    async () => {
+
+                        setActiveNav(button);
+
+                        await openQueue(
+                            button.dataset.type
+                        );
+                    }
+                );
+
             });
 
-        });
+        const dashboardButton =
+            document.querySelector(
+                '.staff-nav-item[data-view="dashboard"]'
+            );
 
-    const closeQueue =
-        document.getElementById("closeQueue");
+        if (dashboardButton) {
+            dashboardButton.addEventListener(
+                "click",
+                () => {
 
-    if (closeQueue) {
-        closeQueue.addEventListener("click", () => {
-            const selectedQueue =
-                document.getElementById("selectedQueue");
+                    setActiveNav(
+                        dashboardButton
+                    );
 
-            if (selectedQueue) {
-                selectedQueue.hidden = true;
-            }
-        });
+                    showDashboard();
+                }
+            );
+        }
+
+        await loadDashboardStats();
+        await loadApplicationOverview();
     }
-
-    await loadApplicationCounts();
-
-});
+);
