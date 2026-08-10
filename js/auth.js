@@ -21,8 +21,11 @@ async function getCurrentUser() {
             localStorage.removeItem("union_session");
             return null;
         }
+const user = data.user;
 
-        return data.user;
+user.is_staff = data.is_staff === true;
+
+return user;
 
     } catch (error) {
         console.error("Failed to load current user:", error);
