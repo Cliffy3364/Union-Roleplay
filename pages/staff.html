@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Staff Panel | Union Roleplay</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <main class="staff-page">
+
+        <section class="staff-loading" id="staffLoading">
+            <h1>Checking permissions...</h1>
+            <p>Please wait while we verify your Discord roles.</p>
+        </section>
+
+        <section class="staff-denied" id="staffDenied" hidden>
+            <h1>Access Denied</h1>
+            <p>You do not have permission to access the Union Roleplay Staff Panel.</p>
+
+            <a href="dashboard.html" class="btn primary">
+                Return to Dashboard
+            </a>
+        </section>
+
+        <section class="staff-panel" id="staffPanel" hidden>
+
+            <div class="dashboard-container">
+
+                <div class="staff-header">
+                    <span class="dashboard-eyebrow">STAFF PORTAL</span>
+
+                    <h1>Application Management</h1>
+
+                    <p>
+                        Review and manage Union Roleplay applications.
+                    </p>
+                </div>
+
+                <div class="staff-grid">
+
+                    <article class="dashboard-card">
+                        <span class="card-label">PENDING</span>
+                        <h2 id="pendingCount">0</h2>
+                        <p>Applications waiting for review.</p>
+                    </article>
+
+                    <article class="dashboard-card">
+                        <span class="card-label">INTERVIEWS</span>
+                        <h2 id="interviewCount">0</h2>
+                        <p>Applications currently awaiting interview.</p>
+                    </article>
+
+                    <article class="dashboard-card">
+                        <span class="card-label">REVIEWED TODAY</span>
+                        <h2 id="reviewedCount">0</h2>
+                        <p>Applications processed today.</p>
+                    </article>
+
+                </div>
+
+                <section class="staff-queue">
+
+                    <div class="staff-section-header">
+                        <div>
+                            <span class="card-label">APPLICATION QUEUE</span>
+                            <h2>Pending Applications</h2>
+                        </div>
+                    </div>
+
+                    <div id="applicationQueue">
+                        <p>No applications loaded yet.</p>
+                    </div>
+
+                </section>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/staff.js"></script>
+    <script src="../js/components.js"></script>
+
+</body>
+
+</html>
