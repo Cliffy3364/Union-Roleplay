@@ -40,6 +40,182 @@ function getApplicationStatus(application) {
 }
 
 
+function formatApplicationDate(timestamp) {
+
+    if (!timestamp) {
+        return "Unknown date";
+    }
+
+    const date =
+        new Date(
+            Number(timestamp)
+        );
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+        return "Unknown date";
+    }
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    );
+}
+
+
+function statusClass(status) {
+
+    const value =
+        String(status || "")
+            .trim()
+            .toLowerCase();
+
+    if (
+        value === "submitted" ||
+        value === "pending" ||
+        value === "pending review"
+    ) {
+        return "pending";
+    }
+
+    if (value === "interview") {
+        return "interview";
+    }
+
+    if (value === "on hold") {
+        return "on-hold";
+    }
+
+    if (value === "accepted") {
+        return "accepted";
+    }
+
+    if (value === "declined") {
+        return "declined";
+    }
+
+    return "pending";
+}
+
+
+function renderRecentApplications(
+    applications
+) {
+
+    const container =
+        document.getElementById(
+            "dashboardRecentApplications"
+        );
+
+    if (!container) {
+        return;
+    }
+
+
+    if (!applications.length) {
+
+        container.innerHTML = `
+            <div class="dashboard-applications-empty">
+
+                <h3>
+                    No applications yet
+                </h3>
+
+                <p>
+                    You have not submitted any applications.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    const recent =
+        applications
+            .slice(0, 5);
+
+
+    container.innerHTML =
+        recent
+            .map(
+                application => {
+
+                    const title =
+                        application.application_type ||
+                        "Application";
+
+                    const reference =
+                        application.reference ||
+                        `#${application.id || ""}`;
+
+                    const status =
+                        getApplicationStatus(
+                            application
+                        ) || "Submitted";
+
+                    const submitted =
+                        application.submitted_at ||
+                        application.created_at;
+
+
+                    return `
+                        <article class="dashboard-application-row">
+
+                            <div class="dashboard-application-main">
+
+                                <div class="dashboard-application-icon">
+                                    ${String(title)
+                                        .charAt(0)
+                                        .toUpperCase()}
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        ${title}
+                                    </h3>
+
+                                    <p>
+                                        ${reference}
+                                        ·
+                                        ${formatApplicationDate(submitted)}
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="dashboard-application-status">
+
+                                <span
+                                    class="
+                                        dashboard-status-badge
+                                        ${statusClass(status)}
+                                    "
+                                >
+                                    ${status}
+                                </span>
+
+                            </div>
+
+                        </article>
+                    `;
+                }
+            )
+            .join("");
+}
+
+
 document.addEventListener(
     "DOMContentLoaded",
     async () => {
@@ -58,9 +234,11 @@ document.addEventListener(
                     "dashboardAccountButton"
                 );
 
+
             if (!user) {
 
                 if (accountButton) {
+
                     accountButton.textContent =
                         "Login with Discord";
 
@@ -91,7 +269,9 @@ document.addEventListener(
                     ".profile-avatar"
                 );
 
+
             if (title) {
+
                 title.textContent =
                     user.discord_display_name ||
                     user.discord_username ||
@@ -99,11 +279,14 @@ document.addEventListener(
                     "Union Member";
             }
 
+
             if (subtitle) {
+
                 subtitle.textContent =
                     user.union_id ||
                     "Union Roleplay Member";
             }
+
 
             if (avatar) {
 
@@ -139,7 +322,9 @@ document.addEventListener(
                 }
             }
 
+
             if (accountButton) {
+
                 accountButton.textContent =
                     "Account Connected";
 
@@ -149,6 +334,7 @@ document.addEventListener(
                 accountButton.addEventListener(
                     "click",
                     event => {
+
                         event.preventDefault();
                     }
                 );
@@ -165,7 +351,9 @@ document.addEventListener(
                 );
 
             const applications =
-                Array.isArray(data.applications)
+                Array.isArray(
+                    data.applications
+                )
                     ? data.applications
                     : [];
 
@@ -184,6 +372,7 @@ document.addEventListener(
                     "dashboardApplicationDescription"
                 );
 
+
             if (applicationCount) {
 
                 applicationCount.textContent =
@@ -193,6 +382,7 @@ document.addEventListener(
                             : "Applications"
                     }`;
             }
+
 
             if (applicationDescription) {
 
@@ -223,6 +413,7 @@ document.addEventListener(
                     "dashboardWhitelistDescription"
                 );
 
+
             const whitelistApplications =
                 applications.filter(
                     application =>
@@ -234,18 +425,22 @@ document.addEventListener(
                         "whitelist application"
                 );
 
+
             const latestWhitelist =
-                whitelistApplications[0] || null;
+                whitelistApplications[0] ||
+                null;
 
 
             if (!latestWhitelist) {
 
                 if (whitelistStatus) {
+
                     whitelistStatus.textContent =
                         "Not Applied";
                 }
 
                 if (whitelistDescription) {
+
                     whitelistDescription.textContent =
                         "You have not submitted a whitelist application yet.";
                 }
@@ -255,12 +450,16 @@ document.addEventListener(
                 const status =
                     getApplicationStatus(
                         latestWhitelist
-                    ) || "Submitted";
+                    ) ||
+                    "Submitted";
+
 
                 if (whitelistStatus) {
+
                     whitelistStatus.textContent =
                         status;
                 }
+
 
                 if (whitelistDescription) {
 
@@ -275,6 +474,7 @@ document.addEventListener(
 
                             break;
 
+
                         case "pending":
                         case "pending review":
 
@@ -283,12 +483,14 @@ document.addEventListener(
 
                             break;
 
+
                         case "interview":
 
                             whitelistDescription.textContent =
                                 "Your whitelist application has progressed to the interview stage.";
 
                             break;
+
 
                         case "on hold":
 
@@ -297,6 +499,7 @@ document.addEventListener(
 
                             break;
 
+
                         case "accepted":
 
                             whitelistDescription.textContent =
@@ -304,12 +507,14 @@ document.addEventListener(
 
                             break;
 
+
                         case "declined":
 
                             whitelistDescription.textContent =
                                 "Your whitelist application was not successful.";
 
                             break;
+
 
                         default:
 
@@ -321,12 +526,46 @@ document.addEventListener(
                 }
             }
 
+
+            /* =========================
+               RECENT APPLICATIONS
+            ========================= */
+
+            renderRecentApplications(
+                applications
+            );
+
+
         } catch (error) {
 
             console.error(
                 "Dashboard error:",
                 error
             );
+
+
+            const container =
+                document.getElementById(
+                    "dashboardRecentApplications"
+                );
+
+
+            if (container) {
+
+                container.innerHTML = `
+                    <div class="dashboard-applications-empty">
+
+                        <h3>
+                            Unable to load applications
+                        </h3>
+
+                        <p>
+                            Please refresh the page and try again.
+                        </p>
+
+                    </div>
+                `;
+            }
         }
     }
 );

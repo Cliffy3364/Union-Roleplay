@@ -1,31 +1,74 @@
-<title>Dashboard | Union Roleplay</title>
+<!DOCTYPE html>
+<html lang="en">
 
-<link rel="stylesheet" href="../css/style.css">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard | Union Roleplay</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+<body>
 
 <div id="navbar"></div>
 
+
 <main class="dashboard-page">
 
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
     <section class="dashboard-header">
+
         <div class="dashboard-container">
 
             <div>
-                <span class="dashboard-eyebrow">MEMBER PORTAL</span>
 
-                <h1>Your Dashboard</h1>
+                <span class="dashboard-eyebrow">
+                    MEMBER PORTAL
+                </span>
+
+                <h1>
+                    Your Dashboard
+                </h1>
 
                 <p>
-                    Manage your Union Roleplay applications and account from one place.
+                    Manage your Union Roleplay applications
+                    and account from one place.
                 </p>
+
             </div>
 
         </div>
+
     </section>
 
+
+    <!-- =========================
+         DASHBOARD CONTENT
+    ========================== -->
 
     <section class="dashboard-content">
 
         <div class="dashboard-container">
+
+
+            <!-- =========================
+                 TOP CARDS
+            ========================== -->
 
             <div class="dashboard-grid">
 
@@ -45,11 +88,15 @@
                         </div>
 
                         <div>
-                            <h2>Not signed in</h2>
+
+                            <h2>
+                                Not signed in
+                            </h2>
 
                             <p>
                                 Login with Discord to view your account.
                             </p>
+
                         </div>
 
                     </div>
@@ -104,7 +151,8 @@
                     </h2>
 
                     <p id="dashboardApplicationDescription">
-                        Your submitted applications and their current status will appear here.
+                        Your submitted applications and their current status
+                        will appear here.
                     </p>
 
                     <a
@@ -119,9 +167,58 @@
 
             </div>
 
+
+            <!-- =========================
+                 RECENT APPLICATIONS
+            ========================== -->
+
+            <section class="dashboard-applications-panel">
+
+                <div class="dashboard-panel-heading">
+
+                    <div>
+
+                        <span class="card-label">
+                            YOUR APPLICATIONS
+                        </span>
+
+                        <h2>
+                            Recent Applications
+                        </h2>
+
+                        <p>
+                            Track the current status of your submitted applications.
+                        </p>
+
+                    </div>
+
+                    <a
+                        href="applications.html"
+                        class="dashboard-link"
+                    >
+                        New Application →
+                    </a>
+
+                </div>
+
+
+                <div id="dashboardRecentApplications">
+
+                    <div class="dashboard-applications-loading">
+
+                        Loading your applications...
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
         </div>
 
     </section>
+
 
 </main>
 
@@ -129,3 +226,7 @@
 <script src="../js/auth.js"></script>
 <script src="../js/dashboard.js"></script>
 <script src="../js/components.js"></script>
+
+</body>
+
+</html>
