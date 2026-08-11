@@ -69,7 +69,10 @@ function getToken() {
 }
 
 
-async function staffFetch(path) {
+async function staffFetch(
+    path,
+    options = {}
+) {
 
     const token =
         getToken();
@@ -87,10 +90,17 @@ async function staffFetch(path) {
         await fetch(
             `${STAFF_API}${path}`,
             {
+                ...options,
+
                 headers: {
 
+                    "Content-Type":
+                        "application/json",
+
                     Authorization:
-                        `Bearer ${token}`
+                        `Bearer ${token}`,
+
+                    ...(options.headers || {})
                 }
             }
         );
@@ -337,6 +347,33 @@ function formatWaitTime(timestamp) {
 }
 
 
+function formatMemberDate(timestamp) {
+
+    if (!timestamp) {
+
+        return "Unknown";
+    }
+
+
+    const value =
+        Number(timestamp);
+
+
+    if (
+        !Number.isFinite(value)
+    ) {
+
+        return "Unknown";
+    }
+
+
+    return new Date(value)
+        .toLocaleString(
+            "en-GB"
+        );
+}
+
+
 function applicantName(app) {
 
     return (
@@ -360,6 +397,19 @@ function reviewerName(app) {
         app.assigned_reviewer_display_name ||
         app.assigned_reviewer_username ||
         app.assigned_to
+    );
+}
+
+
+function memberDisplayName(member) {
+
+    return (
+        member.display_name ||
+        member.discord_display_name ||
+        member.discord_username ||
+        member.username ||
+        member.discord_id ||
+        "Unknown Member"
     );
 }
 
@@ -468,6 +518,10 @@ function showDashboard() {
     hideAllViews();
 
 
+    currentQueueType =
+        null;
+
+
     const dashboard =
         document.getElementById(
             "staffDashboardView"
@@ -505,6 +559,10 @@ function showDashboard() {
 function showMemberManagement() {
 
     hideAllViews();
+
+
+    currentQueueType =
+        null;
 
 
     const members =
@@ -1280,6 +1338,860 @@ function setupApplicationSearch() {
 
 
 /* ========================================
+   MEMBER SEARCH RESULTS
+======================================== */
+
+function renderMemberSearchResults(
+    members
+) {
+
+    const target =
+        document.getElementById(
+            "memberSearchResults"
+        );
+
+
+    if (!target) {
+
+        return;
+    }
+
+
+    if (!members.length) {
+
+        target.innerHTML = `
+            <div class="member-management-empty">
+
+                <h3>
+                    No members found
+                </h3>
+
+                <p>
+                    Try searching with a Union ID,
+                    Discord username or Discord ID.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    target.innerHTML =
+        members
+            .map(
+                member => {
+
+                    const name =
+                        memberDisplayName(
+                            member
+                        );
+
+
+                    const initial =
+                        name
+                            .charAt(0)
+                            .toUpperCase();
+
+
+                    return `
+                        <button
+                            type="button"
+                            class="member-result-row"
+                            data-member-id="${Number(member.id)}"
+                        >
+
+                            <div class="member-result-avatar">
+                                ${escapeHtml(initial)}
+                            </div>
+
+
+                            <div class="member-result-main">
+
+                                <strong>
+                                    ${escapeHtml(name)}
+                                </strong>
+
+                                <span>
+                                    ${escapeHtml(
+                                        member.union_id ||
+                                        "No Union ID"
+                                    )}
+                                </span>
+
+                                <small>
+                                    ${escapeHtml(
+                                        member.discord_id ||
+                                        "No Discord ID"
+                                    )}
+                                </small>
+
+                            </div>
+
+
+                            <div class="member-result-meta">
+
+                                <span>
+                                    Applications
+                                </span>
+
+                                <strong>
+                                    ${Number(
+                                        member.application_count ||
+                                        0
+                                    )}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="member-result-meta">
+
+                                <span>
+                                    Tickets
+                                </span>
+
+                                <strong>
+                                    ${Number(
+                                        member.ticket_count ||
+                                        0
+                                    )}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="member-result-open">
+                                View Member →
+                            </div>
+
+                        </button>
+                    `;
+                }
+            )
+            .join("");
+
+
+    target
+        .querySelectorAll(
+            "[data-member-id]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    async () => {
+
+                        const id =
+                            Number(
+                                button.dataset
+                                    .memberId
+                            );
+
+
+                        if (!id) {
+
+                            return;
+                        }
+
+
+                        await loadMemberProfile(
+                            id
+                        );
+                    }
+                );
+            }
+        );
+}
+
+
+/* ========================================
+   SEARCH MEMBERS
+======================================== */
+
+async function searchMembers(
+    suppliedQuery = null
+) {
+
+    const input =
+        document.getElementById(
+            "memberSearchInput"
+        );
+
+    const button =
+        document.getElementById(
+            "memberSearchButton"
+        );
+
+    const target =
+        document.getElementById(
+            "memberSearchResults"
+        );
+
+
+    const query =
+        String(
+            suppliedQuery ??
+            input?.value ??
+            ""
+        ).trim();
+
+
+    if (!query) {
+
+        input?.focus();
+
+        return;
+    }
+
+
+    if (button) {
+
+        button.disabled = true;
+
+        button.textContent =
+            "Searching...";
+    }
+
+
+    if (target) {
+
+        target.innerHTML = `
+            <p class="staff-muted">
+                Searching member database...
+            </p>
+        `;
+    }
+
+
+    try {
+
+        const data =
+            await staffFetch(
+                `/api/staff/admin/users?q=${encodeURIComponent(query)}`
+            );
+
+
+        renderMemberSearchResults(
+            data.users || []
+        );
+
+
+    } catch (error) {
+
+        if (target) {
+
+            target.innerHTML = `
+                <div class="member-management-empty">
+
+                    <h3>
+                        Unable to search members
+                    </h3>
+
+                    <p>
+                        ${escapeHtml(
+                            error.message ||
+                            "Member search failed."
+                        )}
+                    </p>
+
+                </div>
+            `;
+        }
+
+
+    } finally {
+
+        if (button) {
+
+            button.disabled = false;
+
+            button.textContent =
+                "Search Members";
+        }
+    }
+}
+
+
+/* ========================================
+   MEMBER STAFF NOTES
+======================================== */
+
+function renderMemberNotes(notes) {
+
+    if (!notes.length) {
+
+        return `
+            <div class="member-profile-empty">
+
+                <p>
+                    No staff notes have been added
+                    to this member.
+                </p>
+
+            </div>
+        `;
+    }
+
+
+    return notes
+        .map(
+            note => `
+                <article class="member-note">
+
+                    <div class="member-note-header">
+
+                        <strong>
+                            ${escapeHtml(
+                                note.actor_name ||
+                                "Union Staff"
+                            )}
+                        </strong>
+
+                        <span>
+                            ${escapeHtml(
+                                formatMemberDate(
+                                    note.created_at
+                                )
+                            )}
+                        </span>
+
+                    </div>
+
+                    <p>
+                        ${escapeHtml(
+                            note.note ||
+                            ""
+                        )}
+                    </p>
+
+                </article>
+            `
+        )
+        .join("");
+}
+
+
+/* ========================================
+   LOAD MEMBER PROFILE
+======================================== */
+
+async function loadMemberProfile(
+    memberId
+) {
+
+    const panel =
+        document.getElementById(
+            "memberProfilePanel"
+        );
+
+    const content =
+        document.getElementById(
+            "memberProfileContent"
+        );
+
+    const title =
+        document.getElementById(
+            "memberProfileName"
+        );
+
+
+    if (
+        !panel ||
+        !content
+    ) {
+
+        return;
+    }
+
+
+    panel.hidden = false;
+
+
+    content.innerHTML = `
+        <p class="staff-muted">
+            Loading member profile...
+        </p>
+    `;
+
+
+    try {
+
+        const data =
+            await staffFetch(
+                `/api/staff/admin/users/${memberId}`
+            );
+
+
+        const member =
+            data.user;
+
+
+        if (!member) {
+
+            throw new Error(
+                "Member could not be found."
+            );
+        }
+
+
+        const name =
+            memberDisplayName(
+                member
+            );
+
+
+        if (title) {
+
+            title.textContent =
+                name;
+        }
+
+
+        const avatar =
+            member.avatar &&
+            member.discord_id
+
+                ? `
+                    <img
+                        src="https://cdn.discordapp.com/avatars/${member.discord_id}/${member.avatar}.png?size=128"
+                        alt=""
+                    >
+                `
+
+                : escapeHtml(
+                    name
+                        .charAt(0)
+                        .toUpperCase()
+                );
+
+
+        content.innerHTML = `
+
+            <div class="member-profile-header">
+
+                <div class="member-profile-avatar">
+                    ${avatar}
+                </div>
+
+                <div>
+
+                    <h3>
+                        ${escapeHtml(name)}
+                    </h3>
+
+                    <p>
+                        ${escapeHtml(
+                            member.union_id ||
+                            "No Union ID"
+                        )}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="member-information-grid">
+
+
+                <div>
+
+                    <span>
+                        Union ID
+                    </span>
+
+                    <strong>
+                        ${escapeHtml(
+                            member.union_id ||
+                            "Not assigned"
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Discord ID
+                    </span>
+
+                    <strong>
+                        ${escapeHtml(
+                            member.discord_id ||
+                            "Unknown"
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Discord Username
+                    </span>
+
+                    <strong>
+                        ${escapeHtml(
+                            member.discord_username ||
+                            member.username ||
+                            "Unknown"
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Display Name
+                    </span>
+
+                    <strong>
+                        ${escapeHtml(name)}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Member Since
+                    </span>
+
+                    <strong>
+                        ${escapeHtml(
+                            formatMemberDate(
+                                member.created_at
+                            )
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Database ID
+                    </span>
+
+                    <strong>
+                        #${Number(member.id)}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="member-profile-section">
+
+                <div class="staff-section-heading">
+
+                    <span>
+                        STAFF INFORMATION
+                    </span>
+
+                    <h2>
+                        Internal Notes
+                    </h2>
+
+                    <p>
+                        These notes are only visible
+                        to authorised staff.
+                    </p>
+
+                </div>
+
+
+                <div class="member-note-form">
+
+                    <textarea
+                        id="memberStaffNote"
+                        rows="4"
+                        placeholder="Add an internal note about this member..."
+                    ></textarea>
+
+
+                    <button
+                        type="button"
+                        class="btn primary"
+                        id="addMemberStaffNote"
+                    >
+                        Add Staff Note
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="member-notes-list"
+                    id="memberNotesList"
+                >
+
+                    ${renderMemberNotes(
+                        data.notes || []
+                    )}
+
+                </div>
+
+            </div>
+        `;
+
+
+        const noteButton =
+            document.getElementById(
+                "addMemberStaffNote"
+            );
+
+
+        if (noteButton) {
+
+            noteButton.addEventListener(
+                "click",
+                async () => {
+
+                    await addMemberStaffNote(
+                        memberId
+                    );
+                }
+            );
+        }
+
+
+        panel.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+
+    } catch (error) {
+
+        content.innerHTML = `
+            <div class="member-management-empty">
+
+                <h3>
+                    Unable to load member
+                </h3>
+
+                <p>
+                    ${escapeHtml(
+                        error.message ||
+                        "Member profile could not be loaded."
+                    )}
+                </p>
+
+            </div>
+        `;
+    }
+}
+
+
+/* ========================================
+   ADD MEMBER STAFF NOTE
+======================================== */
+
+async function addMemberStaffNote(
+    memberId
+) {
+
+    const input =
+        document.getElementById(
+            "memberStaffNote"
+        );
+
+    const button =
+        document.getElementById(
+            "addMemberStaffNote"
+        );
+
+
+    const note =
+        String(
+            input?.value || ""
+        ).trim();
+
+
+    if (!note) {
+
+        input?.focus();
+
+        return;
+    }
+
+
+    if (button) {
+
+        button.disabled = true;
+
+        button.textContent =
+            "Adding Note...";
+    }
+
+
+    try {
+
+        await staffFetch(
+            `/api/staff/admin/users/${memberId}/notes`,
+            {
+                method: "POST",
+
+                body:
+                    JSON.stringify({
+                        note
+                    })
+            }
+        );
+
+
+        await loadMemberProfile(
+            memberId
+        );
+
+
+    } catch (error) {
+
+        alert(
+            error.message ||
+            "Unable to add staff note."
+        );
+
+
+        if (button) {
+
+            button.disabled = false;
+
+            button.textContent =
+                "Add Staff Note";
+        }
+    }
+}
+
+
+/* ========================================
+   MEMBER MANAGEMENT EVENTS
+======================================== */
+
+function setupMemberManagement() {
+
+    const input =
+        document.getElementById(
+            "memberSearchInput"
+        );
+
+    const button =
+        document.getElementById(
+            "memberSearchButton"
+        );
+
+    const topSearch =
+        document.getElementById(
+            "staffSearch"
+        );
+
+
+    if (button) {
+
+        button.addEventListener(
+            "click",
+            async () => {
+
+                await searchMembers();
+            }
+        );
+    }
+
+
+    if (input) {
+
+        input.addEventListener(
+            "keydown",
+            async event => {
+
+                if (
+                    event.key !==
+                    "Enter"
+                ) {
+
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                await searchMembers();
+            }
+        );
+    }
+
+
+    if (topSearch) {
+
+        topSearch.addEventListener(
+            "keydown",
+            async event => {
+
+                if (
+                    event.key !==
+                    "Enter"
+                ) {
+
+                    return;
+                }
+
+
+                const membersView =
+                    document.getElementById(
+                        "staffMembersView"
+                    );
+
+
+                if (
+                    !membersView ||
+                    membersView.hidden
+                ) {
+
+                    return;
+                }
+
+
+                const query =
+                    topSearch.value
+                        .trim();
+
+
+                if (!query) {
+
+                    return;
+                }
+
+
+                if (input) {
+
+                    input.value =
+                        query;
+                }
+
+
+                await searchMembers(
+                    query
+                );
+            }
+        );
+    }
+}
+
+
+/* ========================================
    PAGE INITIALISATION
 ======================================== */
 
@@ -1352,7 +2264,9 @@ document.addEventListener(
         }
 
 
-        /* DASHBOARD BUTTON */
+        /* ========================================
+           DASHBOARD BUTTON
+        ======================================== */
 
         const dashboardButton =
             document.querySelector(
@@ -1366,10 +2280,6 @@ document.addEventListener(
                 "click",
                 () => {
 
-                    currentQueueType =
-                        null;
-
-
                     setActiveNav(
                         dashboardButton
                     );
@@ -1381,7 +2291,9 @@ document.addEventListener(
         }
 
 
-        /* MEMBER MANAGEMENT BUTTON */
+        /* ========================================
+           MEMBER MANAGEMENT BUTTON
+        ======================================== */
 
         const memberButton =
             document.querySelector(
@@ -1395,10 +2307,6 @@ document.addEventListener(
                 "click",
                 () => {
 
-                    currentQueueType =
-                        null;
-
-
                     setActiveNav(
                         memberButton
                     );
@@ -1410,7 +2318,9 @@ document.addEventListener(
         }
 
 
-        /* APPLICATION NAVIGATION */
+        /* ========================================
+           APPLICATION NAVIGATION
+        ======================================== */
 
         document
             .querySelectorAll(
@@ -1444,7 +2354,9 @@ document.addEventListener(
             );
 
 
-        /* STATUS FILTERS */
+        /* ========================================
+           STATUS FILTERS
+        ======================================== */
 
         document
             .querySelectorAll(
@@ -1499,6 +2411,8 @@ document.addEventListener(
 
 
         setupApplicationSearch();
+
+        setupMemberManagement();
 
 
         showDashboard();
