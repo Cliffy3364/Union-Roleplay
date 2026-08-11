@@ -55,9 +55,6 @@ img {
     gap: 30px;
 }
 
-
-/* BRAND */
-
 .navbar-brand {
     display: flex;
     align-items: center;
@@ -76,9 +73,6 @@ img {
 .navbar-brand-text {
     white-space: nowrap;
 }
-
-
-/* NAVIGATION */
 
 .navbar-links {
     display: flex;
@@ -102,9 +96,6 @@ img {
 .navbar-link.active {
     color: #ffffff;
 }
-
-
-/* NAVBAR ACTIONS */
 
 .navbar-actions {
     display: flex;
@@ -811,9 +802,6 @@ footer p {
     flex-shrink: 0;
 }
 
-
-/* APPLICATION ROW */
-
 .dashboard-application-row {
     display: flex;
     align-items: center;
@@ -831,6 +819,18 @@ footer p {
 
     background:
         rgba(255, 255, 255, 0.018);
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.dashboard-application-row:hover {
+    background:
+        rgba(255, 255, 255, 0.028);
+
+    border-color:
+        rgba(124, 92, 255, 0.16);
 }
 
 .dashboard-application-row + .dashboard-application-row {
@@ -894,9 +894,6 @@ footer p {
 
     flex-shrink: 0;
 }
-
-
-/* STATUS BADGES */
 
 .dashboard-status-badge {
     display: inline-flex;
@@ -969,9 +966,6 @@ footer p {
         1px solid
         rgba(239, 68, 68, 0.16);
 }
-
-
-/* LOADING / EMPTY */
 
 .dashboard-applications-loading,
 .dashboard-applications-empty {
@@ -1413,7 +1407,6 @@ footer p {
 
     .dashboard-application-row {
         align-items: flex-start;
-
         flex-direction: column;
     }
 
