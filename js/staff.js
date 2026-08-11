@@ -14,6 +14,10 @@ const APPLICATION_TYPES = [
     "UHS Command Application"
 ];
 
+let currentQueueType = null;
+let currentQueueApplications = [];
+let currentStatusFilter = "pending";
+
 function getToken() {
     return localStorage.getItem("union_session");
 }
@@ -40,14 +44,86 @@ async function staffFetch(path) {
     return data;
 }
 
-function isPendingStatus(status) {
-    const value = String(status || "").toLowerCase();
+function normalizeStatus(status) {
+    return String(status || "")
+        .trim()
+        .toLowerCase();
+}
 
+function isPendingStatus(status) {
     return [
         "submitted",
         "pending",
         "pending review"
-    ].includes(value);
+    ].includes(
+        normalizeStatus(status)
+    );
+}
+
+function isInterviewStatus(status) {
+    return (
+        normalizeStatus(status) ===
+        "interview"
+    );
+}
+
+function isOnHoldStatus(status) {
+    return (
+        normalizeStatus(status) ===
+        "on hold"
+    );
+}
+
+function isAcceptedStatus(status) {
+    return (
+        normalizeStatus(status) ===
+        "accepted"
+    );
+}
+
+function isDeclinedStatus(status) {
+    return (
+        normalizeStatus(status) ===
+        "declined"
+    );
+}
+
+function isActiveApplication(status) {
+    return (
+        isPendingStatus(status) ||
+        isInterviewStatus(status) ||
+        isOnHoldStatus(status)
+    );
+}
+
+function filterApplicationsByStatus(applications, filter) {
+    switch (filter) {
+        case "interview":
+            return applications.filter(app =>
+                isInterviewStatus(app.status)
+            );
+
+        case "on-hold":
+            return applications.filter(app =>
+                isOnHoldStatus(app.status)
+            );
+
+        case "accepted":
+            return applications.filter(app =>
+                isAcceptedStatus(app.status)
+            );
+
+        case "declined":
+            return applications.filter(app =>
+                isDeclinedStatus(app.status)
+            );
+
+        case "pending":
+        default:
+            return applications.filter(app =>
+                isPendingStatus(app.status)
+            );
+    }
 }
 
 function formatWaitTime(timestamp) {
@@ -375,13 +451,18 @@ async function openQueue(type) {
             `/api/staff/applications?type=${encodeURIComponent(type)}`
         );
 
-        const applications =
-            (data.applications || [])
-            .filter(app =>
-                isPendingStatus(app.status)
-            );
+currentQueueType = type;
 
-        renderQueue(applications);
+currentQueueApplications =
+    data.applications || [];
+
+const applications =
+    filterApplicationsByStatus(
+        currentQueueApplications,
+        currentStatusFilter
+    );
+
+renderQueue(applications);
 
     } catch (error) {
         if (queue) {
@@ -433,25 +514,79 @@ document.addEventListener(
             panel.hidden = false;
         }
 
-        document
-            .querySelectorAll(
-                ".staff-nav-item[data-type]"
-            )
-            .forEach(button => {
+  document
+    .querySelectorAll(
+        ".staff-nav-item[data-type]"
+    )
+    .forEach(button => {
 
-                button.addEventListener(
-                    "click",
-                    async () => {
+        button.addEventListener(
+            "click",
+            async () => {
 
-                        setActiveNav(button);
+                setActiveNav(button);
 
-                        await openQueue(
-                            button.dataset.type
+                currentStatusFilter = "pending";
+
+                document
+                    .querySelectorAll(
+                        ".staff-status-filter-button"
+                    )
+                    .forEach(item => {
+                        item.classList.toggle(
+                            "active",
+                            item.dataset.statusFilter ===
+                                "pending"
                         );
-                    }
+                    });
+
+                await openQueue(
+                    button.dataset.type
+                );
+            }
+        );
+
+    });
+
+    document
+    .querySelectorAll(
+        ".staff-status-filter-button"
+    )
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                document
+                    .querySelectorAll(
+                        ".staff-status-filter-button"
+                    )
+                    .forEach(item =>
+                        item.classList.remove(
+                            "active"
+                        )
+                    );
+
+                button.classList.add(
+                    "active"
                 );
 
-            });
+                currentStatusFilter =
+                    button.dataset.statusFilter ||
+                    "pending";
+
+                const filtered =
+                    filterApplicationsByStatus(
+                        currentQueueApplications,
+                        currentStatusFilter
+                    );
+
+                renderQueue(filtered);
+            }
+        );
+
+    });
 
         const dashboardButton =
             document.querySelector(

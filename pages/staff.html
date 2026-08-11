@@ -161,13 +161,52 @@
 
                 <section id="staffQueueView" hidden>
 
-                    <div class="staff-section-heading">
-                        <span>APPLICATION QUEUE</span>
-                        <h2 id="queueTitle">Applications</h2>
-                        <p>Oldest submissions are shown first.</p>
-                    </div>
+<div class="staff-section-heading">
+    <span>APPLICATION QUEUE</span>
+    <h2 id="queueTitle">Applications</h2>
+    <p>Oldest submissions are shown first.</p>
+</div>
 
-                    <div id="applicationQueue"></div>
+<div class="staff-status-filter" id="staffStatusFilter">
+
+    <button
+        class="staff-status-filter-button active"
+        data-status-filter="pending"
+    >
+        Pending
+    </button>
+
+    <button
+        class="staff-status-filter-button"
+        data-status-filter="interview"
+    >
+        Interview
+    </button>
+
+    <button
+        class="staff-status-filter-button"
+        data-status-filter="on-hold"
+    >
+        On Hold
+    </button>
+
+    <button
+        class="staff-status-filter-button"
+        data-status-filter="accepted"
+    >
+        Accepted
+    </button>
+
+    <button
+        class="staff-status-filter-button"
+        data-status-filter="declined"
+    >
+        Declined
+    </button>
+
+</div>
+
+<div id="applicationQueue"></div>
 
                 </section>
 
