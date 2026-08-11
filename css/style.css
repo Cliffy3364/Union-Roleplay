@@ -2842,3 +2842,446 @@ footer::before {
             transparent
         );
 }
+/* ==========================================================
+   UNION ROLEPLAY - ADVANCED HOMEPAGE HERO
+========================================================== */
+
+.hero {
+    min-height: 100vh;
+
+    padding:
+        150px 20px
+        100px;
+
+    background:
+        radial-gradient(
+            circle at 50% 15%,
+            rgba(255, 255, 255, 0.045),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #0b0c0f 0%,
+            #08090c 100%
+        );
+}
+
+
+/* CENTRAL LIGHT */
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 1px;
+    height: 420px;
+
+    left: 50%;
+    top: 90px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            rgba(255, 255, 255, 0.08),
+            transparent
+        );
+
+    opacity: 0.6;
+
+    pointer-events: none;
+}
+
+
+/* SIDE ATMOSPHERE */
+
+.hero-decoration {
+    position: absolute;
+
+    width: 440px;
+    height: 440px;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    filter:
+        blur(100px);
+
+    opacity: 0.35;
+}
+
+.hero-decoration-left {
+    left: -250px;
+    top: 30%;
+
+    background:
+        rgba(255, 255, 255, 0.055);
+}
+
+.hero-decoration-right {
+    right: -260px;
+    top: 20%;
+
+    background:
+        rgba(139, 92, 246, 0.055);
+}
+
+
+/* CONTENT WIDTH */
+
+.hero-content {
+    width:
+        min(
+            980px,
+            100%
+        );
+}
+
+
+/* BADGE */
+
+.hero-badge {
+    margin-bottom: 18px;
+
+    color: #b8bac2;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border-color:
+        rgba(255, 255, 255, 0.08);
+}
+
+
+/* RELEASE LINE */
+
+.hero-release {
+    width: fit-content;
+
+    margin:
+        0 auto
+        28px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color:
+        #747781;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing:
+        0.5px;
+}
+
+.hero-release-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background:
+        #22c55e;
+
+    box-shadow:
+        0 0 10px
+        rgba(34, 197, 94, 0.35);
+}
+
+
+/* TITLE */
+
+.hero h1 {
+    max-width: 880px;
+
+    margin:
+        0 auto
+        25px;
+
+    font-size:
+        clamp(
+            54px,
+            7.6vw,
+            94px
+        );
+
+    line-height: 0.96;
+
+    letter-spacing:
+        -4px;
+}
+
+.hero h1 span {
+    display: block;
+
+    margin-top: 5px;
+}
+
+
+/* DESCRIPTION */
+
+.hero p {
+    max-width: 660px;
+
+    font-size: 17px;
+
+    color:
+        #94969f;
+}
+
+
+/* BUTTON AREA */
+
+.hero-buttons {
+    margin-top:
+        32px;
+}
+
+
+/* ==========================================================
+   HERO HIGHLIGHT STRIP
+========================================================== */
+
+.hero-highlights {
+    width:
+        min(
+            760px,
+            100%
+        );
+
+    margin:
+        55px auto
+        0;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1px
+        1fr
+        1px
+        1fr;
+
+    align-items: center;
+
+    padding:
+        18px
+        24px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.065);
+
+    border-radius:
+        16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.025),
+            rgba(255, 255, 255, 0.008)
+        ),
+        rgba(10, 11, 14, 0.75);
+
+    backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, 0.18);
+}
+
+.hero-highlight {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    text-align: left;
+}
+
+.hero-highlight-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius:
+        9px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    color:
+        #8f919a;
+
+    font-size:
+        10px;
+
+    font-weight:
+        900;
+}
+
+.hero-highlight strong {
+    display: block;
+
+    color:
+        #f4f4f5;
+
+    font-size:
+        13px;
+}
+
+.hero-highlight small {
+    display: block;
+
+    margin-top: 2px;
+
+    color:
+        #73757e;
+
+    font-size:
+        10px;
+}
+
+.hero-highlight-divider {
+    width: 1px;
+    height: 34px;
+
+    background:
+        rgba(255, 255, 255, 0.06);
+}
+
+
+/* ==========================================================
+   SCROLL INDICATOR
+========================================================== */
+
+.hero-scroll-indicator {
+    position: absolute;
+
+    left: 50%;
+    bottom: 27px;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 8px;
+
+    color:
+        #555861;
+
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+}
+
+.hero-scroll-line {
+    width: 1px;
+    height: 28px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        rgba(255, 255, 255, 0.07);
+}
+
+.hero-scroll-line::after {
+    content: "";
+
+    position: absolute;
+
+    top: -12px;
+    left: 0;
+
+    width: 100%;
+    height: 12px;
+
+    background:
+        #8b5cf6;
+
+    animation:
+        heroScrollPulse
+        2.1s ease-in-out
+        infinite;
+}
+
+@keyframes heroScrollPulse {
+
+    0% {
+        top: -12px;
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 28px;
+        opacity: 0;
+    }
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 760px) {
+
+    .hero-highlights {
+        grid-template-columns:
+            1fr;
+
+        gap: 15px;
+
+        padding:
+            18px;
+    }
+
+    .hero-highlight-divider {
+        width: 100%;
+        height: 1px;
+    }
+
+    .hero-highlight {
+        justify-content:
+            flex-start;
+    }
+
+    .hero h1 {
+        letter-spacing:
+            -2px;
+    }
+
+    .hero-scroll-indicator {
+        display: none;
+    }
+}
