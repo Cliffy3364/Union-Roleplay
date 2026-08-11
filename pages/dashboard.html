@@ -1,97 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
+<title>Dashboard | Union Roleplay</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../css/style.css">
 
-    <title>Dashboard | Union Roleplay</title>
+<div id="navbar"></div>
 
-    <link rel="stylesheet" href="../css/style.css">
-</head>
+<main class="dashboard-page">
 
-<body>
+    <section class="dashboard-header">
+        <div class="dashboard-container">
 
-    <div id="navbar"></div>
+            <div>
+                <span class="dashboard-eyebrow">MEMBER PORTAL</span>
 
-    <main class="dashboard-page">
+                <h1>Your Dashboard</h1>
 
-        <section class="dashboard-header">
-            <div class="dashboard-container">
-
-                <div>
-                    <span class="dashboard-eyebrow">MEMBER PORTAL</span>
-                    <h1>Your Dashboard</h1>
-                    <p>
-                        Manage your Union Roleplay applications and account from one place.
-                    </p>
-                </div>
-
+                <p>
+                    Manage your Union Roleplay applications and account from one place.
+                </p>
             </div>
-        </section>
 
-        <section class="dashboard-content">
+        </div>
+    </section>
 
-            <div class="dashboard-container">
 
-                <div class="dashboard-grid">
+    <section class="dashboard-content">
 
-                    <article class="dashboard-card profile-card">
-                        <span class="card-label">DISCORD ACCOUNT</span>
+        <div class="dashboard-container">
 
-                        <div class="profile-placeholder">
-                            <div class="profile-avatar">U</div>
+            <div class="dashboard-grid">
 
-                            <div>
-                                <h2>Not signed in</h2>
-                                <p>Login with Discord to view your account.</p>
-                            </div>
+
+                <!-- DISCORD ACCOUNT -->
+
+                <article class="dashboard-card profile-card">
+
+                    <span class="card-label">
+                        DISCORD ACCOUNT
+                    </span>
+
+                    <div class="profile-placeholder">
+
+                        <div class="profile-avatar">
+                            U
                         </div>
 
-                        <a href="#" class="btn primary">
-                            Login with Discord
-                        </a>
-                    </article>
+                        <div>
+                            <h2>Not signed in</h2>
 
-                    <article class="dashboard-card">
-                        <span class="card-label">WHITELIST STATUS</span>
+                            <p>
+                                Login with Discord to view your account.
+                            </p>
+                        </div>
 
-                        <h2>Not Applied</h2>
+                    </div>
 
-                        <p>
-                            You have not submitted a whitelist application yet.
-                        </p>
+                    <a href="#" class="btn primary">
+                        Login with Discord
+                    </a>
 
-                        <a href="applications.html" class="dashboard-link">
-                            View Applications →
-                        </a>
-                    </article>
+                </article>
 
-                    <article class="dashboard-card">
-                        <span class="card-label">APPLICATIONS</span>
 
-                        <h2>0 Applications</h2>
+                <!-- WHITELIST STATUS -->
 
-                        <p>
-                            Your submitted applications and their current status will appear here.
-                        </p>
+                <article class="dashboard-card">
 
-                        <a href="applications.html" class="dashboard-link">
-                            Browse Applications →
-                        </a>
-                    </article>
+                    <span class="card-label">
+                        WHITELIST STATUS
+                    </span>
 
-                </div>
+                    <h2 id="dashboardWhitelistStatus">
+                        Not Applied
+                    </h2>
+
+                    <p id="dashboardWhitelistDescription">
+                        You have not submitted a whitelist application yet.
+                    </p>
+
+                    <a
+                        href="applications.html"
+                        class="dashboard-link"
+                    >
+                        View Applications →
+                    </a>
+
+                </article>
+
+
+                <!-- APPLICATIONS -->
+
+                <article class="dashboard-card">
+
+                    <span class="card-label">
+                        APPLICATIONS
+                    </span>
+
+                    <h2 id="dashboardApplicationCount">
+                        0 Applications
+                    </h2>
+
+                    <p id="dashboardApplicationDescription">
+                        Your submitted applications and their current status will appear here.
+                    </p>
+
+                    <a
+                        href="applications.html"
+                        class="dashboard-link"
+                    >
+                        Browse Applications →
+                    </a>
+
+                </article>
+
 
             </div>
 
-        </section>
+        </div>
 
-    </main>
+    </section>
+
+</main>
+
 
 <script src="../js/auth.js"></script>
 <script src="../js/dashboard.js"></script>
 <script src="../js/components.js"></script>
-
-</body>
-</html>
