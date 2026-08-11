@@ -34,14 +34,11 @@ async function loadNavbar() {
             );
         }
 
-
         navbar.innerHTML =
             await response.text();
 
 
-        setupDiscordLogin();
-
-        await setupStaffNavigation();
+        await setupNavbarUser();
 
 
     } catch (error) {
@@ -54,50 +51,30 @@ async function loadNavbar() {
 }
 
 
-function setupDiscordLogin() {
+async function setupNavbarUser() {
 
     const loginButton =
         document.getElementById(
             "discordLogin"
         );
 
-    if (!loginButton) return;
-
-
-    loginButton.addEventListener(
-        "click",
-        function(event) {
-
-            event.preventDefault();
-
-            window.location.href =
-                `${COMPONENTS_API}/api/auth/discord`;
-        }
-    );
-}
-
-
-async function setupStaffNavigation() {
-
     const staffLink =
         document.getElementById(
             "staffPanelNav"
         );
 
-    if (!staffLink) return;
 
-
-    /*
-     * Hide it by default.
-     * This prevents normal members seeing
-     * the Staff Panel link while authentication
-     * is being checked.
-     */
-
-    staffLink.hidden = true;
+    if (staffLink) {
+        staffLink.hidden = true;
+    }
 
 
     if (!window.UnionAuth) {
+
+        setupLoginButton(
+            loginButton
+        );
+
         return;
     }
 
@@ -108,8 +85,45 @@ async function setupStaffNavigation() {
             await UnionAuth.getCurrentUser();
 
 
+        /*
+         * NOT LOGGED IN
+         */
+
+        if (!user) {
+
+            setupLoginButton(
+                loginButton
+            );
+
+            return;
+        }
+
+
+        /*
+         * LOGGED IN
+         */
+
+        if (loginButton) {
+
+            loginButton.textContent =
+                user.discord_display_name ||
+                user.discord_username ||
+                user.username ||
+                "Account";
+
+            loginButton.href =
+                getPagePath(
+                    "dashboard.html"
+                );
+        }
+
+
+        /*
+         * STAFF PANEL
+         */
+
         if (
-            user &&
+            staffLink &&
             user.is_staff === true
         ) {
 
@@ -120,12 +134,48 @@ async function setupStaffNavigation() {
     } catch (error) {
 
         console.error(
-            "Staff navigation check failed:",
+            "Navbar user check failed:",
             error
         );
 
-        staffLink.hidden = true;
+        setupLoginButton(
+            loginButton
+        );
     }
+}
+
+
+function setupLoginButton(
+    loginButton
+) {
+
+    if (!loginButton) {
+        return;
+    }
+
+
+    loginButton.textContent =
+        "Login with Discord";
+
+    loginButton.href =
+        `${COMPONENTS_API}/api/auth/discord`;
+}
+
+
+function getPagePath(
+    page
+) {
+
+    if (
+        window.location.pathname.includes(
+            "/pages/"
+        )
+    ) {
+
+        return page;
+    }
+
+    return `pages/${page}`;
 }
 
 
