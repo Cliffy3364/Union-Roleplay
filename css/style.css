@@ -757,6 +757,258 @@ footer p {
 
 
 /* ========================================
+   DASHBOARD - RECENT APPLICATIONS
+======================================== */
+
+.dashboard-applications-panel {
+    margin-top: 24px;
+
+    padding: 28px;
+
+    border-radius: 18px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.035),
+            rgba(255, 255, 255, 0.012)
+        );
+}
+
+.dashboard-panel-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 20px;
+}
+
+.dashboard-panel-heading h2 {
+    margin-top: 6px;
+
+    font-size: 25px;
+
+    letter-spacing: -0.6px;
+}
+
+.dashboard-panel-heading p {
+    margin-top: 6px;
+
+    color: #8e8899;
+
+    font-size: 13px;
+}
+
+.dashboard-panel-heading .dashboard-link {
+    margin-top: 0;
+
+    flex-shrink: 0;
+}
+
+
+/* APPLICATION ROW */
+
+.dashboard-application-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 16px 18px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.055);
+
+    border-radius: 12px;
+
+    background:
+        rgba(255, 255, 255, 0.018);
+}
+
+.dashboard-application-row + .dashboard-application-row {
+    margin-top: 9px;
+}
+
+.dashboard-application-main {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    min-width: 0;
+}
+
+.dashboard-application-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    border:
+        1px solid
+        rgba(124, 92, 255, 0.18);
+
+    background:
+        rgba(124, 92, 255, 0.09);
+
+    color: #c7b9ff;
+
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.dashboard-application-main h3 {
+    margin: 0;
+
+    color: #f0eef5;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.dashboard-application-main p {
+    margin-top: 4px;
+
+    color: #777180;
+
+    font-size: 11px;
+}
+
+.dashboard-application-status {
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+
+/* STATUS BADGES */
+
+.dashboard-status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 9px;
+
+    border-radius: 999px;
+
+    font-size: 9px;
+    font-weight: 900;
+
+    letter-spacing: 0.45px;
+
+    text-transform: uppercase;
+}
+
+.dashboard-status-badge.pending {
+    color: #c4b5fd;
+
+    background:
+        rgba(124, 92, 255, 0.08);
+
+    border:
+        1px solid
+        rgba(124, 92, 255, 0.17);
+}
+
+.dashboard-status-badge.interview {
+    color: #fde68a;
+
+    background:
+        rgba(234, 179, 8, 0.07);
+
+    border:
+        1px solid
+        rgba(234, 179, 8, 0.15);
+}
+
+.dashboard-status-badge.on-hold {
+    color: #cbd5e1;
+
+    background:
+        rgba(148, 163, 184, 0.06);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.14);
+}
+
+.dashboard-status-badge.accepted {
+    color: #9ae6b4;
+
+    background:
+        rgba(34, 197, 94, 0.07);
+
+    border:
+        1px solid
+        rgba(34, 197, 94, 0.16);
+}
+
+.dashboard-status-badge.declined {
+    color: #fca5a5;
+
+    background:
+        rgba(239, 68, 68, 0.06);
+
+    border:
+        1px solid
+        rgba(239, 68, 68, 0.16);
+}
+
+
+/* LOADING / EMPTY */
+
+.dashboard-applications-loading,
+.dashboard-applications-empty {
+    padding: 28px;
+
+    border:
+        1px dashed
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 12px;
+
+    background:
+        rgba(255, 255, 255, 0.01);
+
+    color: #777180;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+.dashboard-applications-empty h3 {
+    color: #d8d4df;
+
+    font-size: 16px;
+}
+
+.dashboard-applications-empty p {
+    margin-top: 5px;
+
+    color: #777180;
+
+    font-size: 12px;
+}
+
+
+/* ========================================
    STAFF PANEL
 ======================================== */
 
@@ -1048,6 +1300,11 @@ footer p {
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
+
+    .dashboard-panel-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
 }
 
 
@@ -1148,5 +1405,19 @@ footer p {
         flex-direction: column;
 
         text-align: center;
+    }
+
+    .dashboard-applications-panel {
+        padding: 18px;
+    }
+
+    .dashboard-application-row {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .dashboard-application-status {
+        padding-left: 56px;
     }
 }
