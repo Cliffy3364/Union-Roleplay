@@ -1752,3 +1752,36 @@
         flex-shrink: 0;
     }
 }
+.staff-reviewer-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 5px 8px;
+
+    border-radius: 999px;
+
+    background: rgba(124, 92, 255, 0.08);
+
+    border:
+        1px solid
+        rgba(124, 92, 255, 0.14);
+
+    color: #c8bbff;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.staff-reviewer-name.unassigned {
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border-color:
+        rgba(255, 255, 255, 0.06);
+
+    color: #777782;
+}

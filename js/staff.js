@@ -194,7 +194,11 @@ async function loadDashboardStats() {
 
         const interviews =
             document.getElementById("interviewCount");
+const inReview =
+    document.getElementById("reviewCount");
 
+const reviewedToday =
+    document.getElementById("reviewedCount");
         if (pending) {
             pending.textContent =
                 Number(summary.pending || 0);
@@ -204,7 +208,15 @@ async function loadDashboardStats() {
             interviews.textContent =
                 Number(summary.interviews || 0);
         }
+if (inReview) {
+    inReview.textContent =
+        Number(summary.in_review || 0);
+}
 
+if (reviewedToday) {
+    reviewedToday.textContent =
+        Number(summary.reviewed_today || 0);
+}
     } catch (error) {
         console.error(
             "Failed to load staff dashboard:",
@@ -230,10 +242,10 @@ async function loadApplicationOverview() {
                 `/api/staff/applications?type=${encodeURIComponent(type)}`
             );
 
-            const pending = (data.applications || [])
-                .filter(app =>
-                    isPendingStatus(app.status)
-                );
+const pending = (data.applications || [])
+    .filter(app =>
+        isActiveApplication(app.status)
+    );
 
             rows.push({
                 type,
@@ -402,7 +414,13 @@ function renderQueue(applications) {
 <div class="staff-application-meta">
     <span>Reviewer</span>
 
-    <strong>
+    <strong
+        class="staff-reviewer-name ${
+            app.assigned_to
+                ? ""
+                : "unassigned"
+        }"
+    >
         ${
             app.assigned_to
                 ? (
