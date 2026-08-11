@@ -3917,7 +3917,7 @@
 
 
 /* ==========================================================
-   STAFF DISCIPLINE
+   PLAYER DISCIPLINE
 ========================================================== */
 
 #staffDisciplineView {
@@ -5043,3 +5043,72 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ==========================================================
+   PLAYER DISCIPLINE - FINAL LAYOUT FIT
+========================================================== */
+
+#staffDisciplineView {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.discipline-layout {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(280px, 315px);
+
+    gap: 14px;
+}
+
+.discipline-form-panel,
+.discipline-history-panel,
+.discipline-history-panel > .staff-dashboard-panel {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.discipline-form-panel {
+    overflow: hidden;
+}
+
+.discipline-field-grid > *,
+.discipline-member-search-row > * {
+    min-width: 0;
+}
+
+.discipline-field input,
+.discipline-field select,
+.discipline-field textarea,
+.discipline-member-search-row input {
+    max-width: 100%;
+}
+
+@media (max-width: 1280px) {
+    .discipline-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .discipline-history-panel {
+        display: grid;
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .discipline-history-panel > .staff-dashboard-panel {
+        position: static;
+    }
+}
+
+@media (max-width: 760px) {
+    .discipline-history-panel {
+        display: flex;
+    }
+}
+

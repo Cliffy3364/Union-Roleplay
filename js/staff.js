@@ -686,14 +686,14 @@ function showStaffDiscipline() {
     if (title) {
 
         title.textContent =
-            "Staff Discipline";
+            "Player Discipline";
     }
 
 
     if (description) {
 
         description.textContent =
-            "Create and review formal disciplinary records for Union Roleplay staff members.";
+            "Create and review formal disciplinary records for Union Roleplay players.";
     }
 
 
@@ -808,7 +808,7 @@ function renderDisciplineMemberResults(
 
         target.innerHTML = `
             <div class="discipline-search-empty">
-                No matching staff members were found.
+                No matching players were found.
             </div>
         `;
 
@@ -1197,11 +1197,11 @@ function renderDisciplineHistory(
                 </div>
 
                 <strong>
-                    No staff member selected
+                    No player selected
                 </strong>
 
                 <p>
-                    Search for a staff member to view their disciplinary history.
+                    Search for a player to view their disciplinary history.
                 </p>
 
             </div>
@@ -1225,7 +1225,7 @@ function renderDisciplineHistory(
                 </strong>
 
                 <p>
-                    No disciplinary records are currently stored for this staff member.
+                    No disciplinary records are currently stored for this player.
                 </p>
 
             </div>
@@ -1419,7 +1419,7 @@ async function submitDisciplineRecord() {
     if (!selectedDisciplineMember) {
 
         setDisciplineMessage(
-            "Select the staff member receiving this disciplinary action before submitting.",
+            "Select the player receiving this disciplinary action before submitting.",
             "error"
         );
 
@@ -1441,54 +1441,87 @@ async function submitDisciplineRecord() {
     }
 
 
+    const action =
+        document.getElementById(
+            "disciplineAction"
+        )?.value || "";
+
+    const severity =
+        document.getElementById(
+            "disciplineSeverity"
+        )?.value || "";
+
+    const category =
+        document.getElementById(
+            "disciplineCategory"
+        )?.value || "";
+
+    const notified =
+        document.getElementById(
+            "disciplineNotified"
+        )?.value || "";
+
+    const externalReference =
+        document.getElementById(
+            "disciplineReference"
+        )?.value.trim() || "";
+
+    const internalNotes =
+        document.getElementById(
+            "disciplineInternalNotes"
+        )?.value.trim() || "";
+
+    const evidenceText =
+        document.getElementById(
+            "disciplineEvidence"
+        )?.value.trim() || "";
+
+    const expiryValue =
+        document.getElementById(
+            "disciplineExpiry"
+        )?.value || "";
+
+    const evidence =
+        evidenceText
+            ? evidenceText
+                .split(/\r?\n/)
+                .map(line => line.trim())
+                .filter(Boolean)
+            : [];
+
+    const outcomeDetails = [
+        severity ? `Severity: ${severity}` : "",
+        category ? `Category: ${category}` : "",
+        notified ? `Player Notified: ${notified}` : "",
+        externalReference ? `External Reference: ${externalReference}` : "",
+        internalNotes ? `Internal Staff Notes: ${internalNotes}` : ""
+    ]
+        .filter(Boolean)
+        .join("\n");
+
     const payload = {
 
         disciplinary_type:
-            document.getElementById(
-                "disciplineAction"
-            )?.value || "",
+            action,
 
         reason:
             document.getElementById(
                 "disciplineReason"
             )?.value.trim() || "",
 
-        evidence:
-            document.getElementById(
-                "disciplineEvidence"
-            )?.value.trim() || "",
+        evidence,
 
         action_taken:
-            document.getElementById(
-                "disciplineCategory"
-            )?.value || "",
+            outcomeDetails,
 
         review_at: null,
 
         expires_at:
-            document.getElementById(
-                "disciplineExpiry"
-            )?.value || null,
-
-        severity:
-            document.getElementById(
-                "disciplineSeverity"
-            )?.value || "",
-
-        notified:
-            document.getElementById(
-                "disciplineNotified"
-            )?.value || "",
-
-        external_reference:
-            document.getElementById(
-                "disciplineReference"
-            )?.value.trim() || "",
-
-        internal_notes:
-            document.getElementById(
-                "disciplineInternalNotes"
-            )?.value.trim() || ""
+            expiryValue
+                ? new Date(
+                    `${expiryValue}T23:59:59`
+                ).getTime()
+                : null
     };
 
 
