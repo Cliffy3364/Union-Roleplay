@@ -1334,7 +1334,7 @@ async function loadDisciplineHistory(
 
         const data =
             await staffFetch(
-                `/api/staff/discipline?member_id=${encodeURIComponent(memberId)}`
+                `/api/staff/admin/users/${encodeURIComponent(memberId)}/disciplinary`
             );
 
 
@@ -1443,29 +1443,9 @@ async function submitDisciplineRecord() {
 
     const payload = {
 
-        member_id:
-            Number(
-                selectedDisciplineMember.id
-            ),
-
-        action:
+        disciplinary_type:
             document.getElementById(
                 "disciplineAction"
-            )?.value || "",
-
-        severity:
-            document.getElementById(
-                "disciplineSeverity"
-            )?.value || "",
-
-        category:
-            document.getElementById(
-                "disciplineCategory"
-            )?.value || "",
-
-        notified:
-            document.getElementById(
-                "disciplineNotified"
             )?.value || "",
 
         reason:
@@ -1478,10 +1458,27 @@ async function submitDisciplineRecord() {
                 "disciplineEvidence"
             )?.value.trim() || "",
 
-        expiry_date:
+        action_taken:
+            document.getElementById(
+                "disciplineCategory"
+            )?.value || "",
+
+        review_at: null,
+
+        expires_at:
             document.getElementById(
                 "disciplineExpiry"
             )?.value || null,
+
+        severity:
+            document.getElementById(
+                "disciplineSeverity"
+            )?.value || "",
+
+        notified:
+            document.getElementById(
+                "disciplineNotified"
+            )?.value || "",
 
         external_reference:
             document.getElementById(
@@ -1514,7 +1511,7 @@ async function submitDisciplineRecord() {
 
         const data =
             await staffFetch(
-                "/api/staff/discipline",
+                `/api/staff/admin/users/${encodeURIComponent(selectedDisciplineMember.id)}/disciplinary`,
                 {
                     method: "POST",
 
