@@ -1,0 +1,484 @@
+/* ========================================
+   UNION ROLEPLAY - RULES
+======================================== */
+
+.rules-page-shell {
+    min-height: 100vh;
+    padding-top: 76px;
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(124, 58, 237, 0.08),
+            transparent 30%
+        ),
+        #09090d;
+    color: #f5f5f7;
+}
+
+.rules-container {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+
+/* ========================================
+   HERO
+======================================== */
+
+.rules-hero {
+    padding: 72px 0 34px;
+}
+
+.rules-eyebrow,
+.rule-category-label,
+.zero-tolerance-label {
+    display: inline-block;
+    color: #8f8f9a;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.rules-hero h1 {
+    margin: 9px 0 0;
+    font-size: clamp(42px, 6vw, 64px);
+    letter-spacing: -2px;
+    line-height: 1;
+}
+
+.rules-hero p {
+    max-width: 760px;
+    margin: 18px 0 0;
+    color: #8d8d98;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.rules-hero-actions {
+    margin-top: 24px;
+}
+
+
+/* ========================================
+   INTRODUCTION
+======================================== */
+
+.rules-introduction {
+    padding: 6px 0 30px;
+}
+
+.rules-notice {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 18px;
+    padding: 20px;
+    border: 1px solid rgba(234, 179, 8, 0.12);
+    border-radius: 14px;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(234, 179, 8, 0.035),
+            rgba(255, 255, 255, 0.008)
+        ),
+        #101016;
+}
+
+.rules-notice-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(234, 179, 8, 0.08);
+    color: #fde68a;
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.rules-notice h2 {
+    margin: 0;
+    font-size: 19px;
+}
+
+.rules-notice p {
+    margin: 8px 0 0;
+    color: #8e8e99;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   RULEBOOK LAYOUT
+======================================== */
+
+.rules-rulebook {
+    padding: 14px 0 90px;
+}
+
+.rules-layout {
+    display: grid;
+    grid-template-columns: 270px minmax(0, 1fr);
+    gap: 18px;
+    align-items: start;
+}
+
+.rules-sidebar {
+    position: sticky;
+    top: 96px;
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.018),
+            rgba(255, 255, 255, 0.005)
+        ),
+        #101016;
+}
+
+
+/* ========================================
+   SEARCH
+======================================== */
+
+.rules-search-wrapper label {
+    display: block;
+    margin-bottom: 8px;
+    color: #8b8b95;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.rules-search {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 9px;
+    outline: none;
+    background: #0b0b10;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.rules-search::placeholder {
+    color: #5f5f69;
+}
+
+.rules-search:focus {
+    border-color: rgba(124, 92, 255, 0.4);
+}
+
+
+/* ========================================
+   SIDEBAR NAVIGATION
+======================================== */
+
+.rules-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 16px;
+}
+
+.rules-navigation a {
+    padding: 9px 10px;
+    border-radius: 8px;
+    color: #777782;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.35;
+    transition:
+        color 0.15s ease,
+        background 0.15s ease;
+}
+
+.rules-navigation a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+
+/* ========================================
+   CONTENT
+======================================== */
+
+.rules-content {
+    min-width: 0;
+}
+
+.rule-category {
+    margin-bottom: 18px;
+    padding: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 15px;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.016),
+            rgba(255, 255, 255, 0.004)
+        ),
+        #101016;
+}
+
+.rule-category-header {
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+    margin-bottom: 16px;
+}
+
+.rule-number {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(124, 92, 255, 0.18);
+    border-radius: 12px;
+    background: rgba(124, 92, 255, 0.08);
+    color: #c2b4ff;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.rule-category-header h2 {
+    margin: 5px 0 0;
+    font-size: 24px;
+    letter-spacing: -0.6px;
+}
+
+.rule-category-header p {
+    margin: 7px 0 0;
+    color: #7d7d88;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   RULE ITEMS
+======================================== */
+
+.rule-item {
+    margin-top: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.055);
+    border-radius: 10px;
+    background: #121218;
+}
+
+.rule-item[hidden] {
+    display: none !important;
+}
+
+.rule-item summary {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr) auto 26px;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 15px;
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+}
+
+.rule-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.rule-id {
+    color: #9284d6;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.4px;
+}
+
+.rule-title {
+    color: #eeeeF2;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.45;
+}
+
+.rule-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.035);
+    color: #8f8f99;
+    font-size: 15px;
+    font-weight: 700;
+    transition: transform 0.15s ease;
+}
+
+.rule-item[open] .rule-toggle {
+    transform: rotate(45deg);
+}
+
+.rule-body {
+    padding: 0 15px 15px 79px;
+}
+
+.rule-body p {
+    margin: 0;
+    color: #8b8b96;
+    font-size: 12px;
+    line-height: 1.75;
+}
+
+
+/* ========================================
+   PUNISHMENT BADGES
+======================================== */
+
+.punishment {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 8px;
+    border-radius: 999px;
+    font-size: 9px;
+    font-weight: 800;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+}
+
+.punishment-bannable {
+    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.06);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+.punishment-permanent-ban {
+    color: #fda4af;
+    background: rgba(190, 24, 93, 0.07);
+    border: 1px solid rgba(190, 24, 93, 0.16);
+}
+
+.punishment-failrp {
+    color: #fde68a;
+    background: rgba(234, 179, 8, 0.07);
+    border: 1px solid rgba(234, 179, 8, 0.15);
+}
+
+.punishment-strike {
+    color: #c4b5fd;
+    background: rgba(124, 92, 255, 0.08);
+    border: 1px solid rgba(124, 92, 255, 0.17);
+}
+
+.punishment-business-shutdown {
+    color: #fdba74;
+    background: rgba(249, 115, 22, 0.07);
+    border: 1px solid rgba(249, 115, 22, 0.15);
+}
+
+
+/* ========================================
+   ZERO TOLERANCE
+======================================== */
+
+.rules-zero-tolerance {
+    margin: 18px 0;
+    padding: 22px;
+    border: 1px solid rgba(239, 68, 68, 0.15);
+    border-radius: 15px;
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(239, 68, 68, 0.08),
+            transparent 38%
+        ),
+        #111015;
+}
+
+.rules-zero-tolerance h2 {
+    margin: 6px 0 0;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+}
+
+.rules-zero-tolerance p {
+    margin: 10px 0 0;
+    color: #8e8e98;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   NO RESULTS
+======================================== */
+
+.rules-no-results {
+    padding: 28px;
+    border: 1px dashed rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    color: #777782;
+    text-align: center;
+    font-size: 13px;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+    .rules-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .rules-sidebar {
+        position: static;
+    }
+}
+
+@media (max-width: 650px) {
+    .rules-container {
+        width: min(100% - 28px, 1180px);
+    }
+
+    .rules-hero {
+        padding-top: 48px;
+    }
+
+    .rule-category {
+        padding: 17px;
+    }
+
+    .rule-category-header {
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .rule-number {
+        width: 40px;
+        height: 40px;
+    }
+
+    .rule-item summary {
+        grid-template-columns: 42px minmax(0, 1fr) 24px;
+    }
+
+    .punishment {
+        grid-column: 2 / 4;
+        justify-self: start;
+    }
+
+    .rule-body {
+        padding-left: 15px;
+    }
+}
