@@ -482,3 +482,39 @@
         padding-left: 15px;
     }
 }
+.rule-enforcement {
+    margin-top: 14px;
+    padding: 12px 14px;
+
+    border:
+        1px solid
+        rgba(124, 92, 255, 0.12);
+
+    border-radius: 9px;
+
+    background:
+        rgba(124, 92, 255, 0.045);
+}
+
+.rule-enforcement strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #b9a9ff;
+
+    font-size: 9px;
+    font-weight: 900;
+
+    letter-spacing: 0.7px;
+
+    text-transform: uppercase;
+}
+
+.rule-enforcement span {
+    color: #8b8b96;
+
+    font-size: 11px;
+
+    line-height: 1.65;
+}
