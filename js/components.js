@@ -37,9 +37,7 @@ async function loadNavbar() {
         navbar.innerHTML =
             await response.text();
 
-
         await setupNavbarUser();
-
 
     } catch (error) {
 
@@ -58,6 +56,11 @@ async function setupNavbarUser() {
             "discordLogin"
         );
 
+    const logoutButton =
+        document.getElementById(
+            "logoutButton"
+        );
+
     const staffLink =
         document.getElementById(
             "staffPanelNav"
@@ -66,6 +69,10 @@ async function setupNavbarUser() {
 
     if (staffLink) {
         staffLink.hidden = true;
+    }
+
+    if (logoutButton) {
+        logoutButton.hidden = true;
     }
 
 
@@ -85,10 +92,6 @@ async function setupNavbarUser() {
             await UnionAuth.getCurrentUser();
 
 
-        /*
-         * NOT LOGGED IN
-         */
-
         if (!user) {
 
             setupLoginButton(
@@ -99,10 +102,6 @@ async function setupNavbarUser() {
         }
 
 
-        /*
-         * LOGGED IN
-         */
-
         if (loginButton) {
 
             loginButton.textContent =
@@ -112,15 +111,22 @@ async function setupNavbarUser() {
                 "Account";
 
             loginButton.href =
-                getPagePath(
-                    "dashboard.html"
-                );
+                "/Union-Roleplay/pages/dashboard.html";
         }
 
 
-        /*
-         * STAFF PANEL
-         */
+        if (logoutButton) {
+
+            logoutButton.hidden = false;
+
+            logoutButton.addEventListener(
+                "click",
+                () => {
+                    UnionAuth.logout();
+                }
+            );
+        }
+
 
         if (
             staffLink &&
@@ -159,23 +165,6 @@ function setupLoginButton(
 
     loginButton.href =
         `${COMPONENTS_API}/api/auth/discord`;
-}
-
-
-function getPagePath(
-    page
-) {
-
-    if (
-        window.location.pathname.includes(
-            "/pages/"
-        )
-    ) {
-
-        return page;
-    }
-
-    return `pages/${page}`;
 }
 
 
