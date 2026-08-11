@@ -1,30 +1,50 @@
-<header class="navbar">
+<nav class="navbar">
 
-    <div class="nav-container">
+    <div class="navbar-inner">
 
-        <a href="../index.html" class="brand" id="brandLink">
-            <img src="../assets/images/logo.png" alt="Union Roleplay" id="brandLogo">
-            <span>Union Roleplay</span>
+        <a href="../index.html" class="navbar-brand">
+            <span class="navbar-brand-text">
+                Union Roleplay
+            </span>
         </a>
 
-        <nav class="nav-links">
+        <div class="navbar-links">
 
-            <a href="../index.html">Home</a>
-
-            <a href="../pages/applications.html">Applications</a>
-
-            <a href="../pages/rules.html">Rules</a>
-
-            <a href="https://discord.gg/qyUKU9HtyN" target="_blank">
-                Discord
+            <a href="../index.html" class="navbar-link">
+                Home
             </a>
 
-        </nav>
+            <a href="../pages/dashboard.html" class="navbar-link">
+                Dashboard
+            </a>
 
-        <a href="#" class="discord-login" id="discordLogin">
-            Login with Discord
-        </a>
+            <a href="../pages/applications.html" class="navbar-link">
+                Applications
+            </a>
+
+            <a
+                href="../pages/staff.html"
+                class="navbar-link"
+                id="staffPanelNav"
+                hidden
+            >
+                Staff Panel
+            </a>
+
+        </div>
+
+        <div class="navbar-actions">
+
+            <a
+                href="#"
+                class="btn primary"
+                id="discordLogin"
+            >
+                Login with Discord
+            </a>
+
+        </div>
 
     </div>
 
-</header>
+</nav>
