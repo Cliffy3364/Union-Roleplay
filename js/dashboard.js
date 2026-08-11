@@ -50,20 +50,30 @@ document.addEventListener(
 
         try {
 
-            /* =========================
-               LOGGED IN USER
-            ========================= */
-
             const user =
                 await UnionAuth.getCurrentUser();
 
+            const accountButton =
+                document.getElementById(
+                    "dashboardAccountButton"
+                );
+
             if (!user) {
+
+                if (accountButton) {
+                    accountButton.textContent =
+                        "Login with Discord";
+
+                    accountButton.href =
+                        `${DASHBOARD_API}/api/auth/discord`;
+                }
+
                 return;
             }
 
 
             /* =========================
-               DISCORD ACCOUNT CARD
+               DISCORD ACCOUNT
             ========================= */
 
             const title =
@@ -127,6 +137,21 @@ document.addEventListener(
                         .charAt(0)
                         .toUpperCase();
                 }
+            }
+
+            if (accountButton) {
+                accountButton.textContent =
+                    "Account Connected";
+
+                accountButton.href =
+                    "#";
+
+                accountButton.addEventListener(
+                    "click",
+                    event => {
+                        event.preventDefault();
+                    }
+                );
             }
 
 
@@ -239,45 +264,58 @@ document.addEventListener(
 
                 if (whitelistDescription) {
 
-                    const normalized =
-                        status.toLowerCase();
-
-                    switch (normalized) {
+                    switch (
+                        status.toLowerCase()
+                    ) {
 
                         case "submitted":
+
                             whitelistDescription.textContent =
                                 "Your whitelist application has been submitted and is waiting for staff review.";
+
                             break;
 
                         case "pending":
                         case "pending review":
+
                             whitelistDescription.textContent =
                                 "Your whitelist application is currently being reviewed by staff.";
+
                             break;
 
                         case "interview":
+
                             whitelistDescription.textContent =
                                 "Your whitelist application has progressed to the interview stage.";
+
                             break;
 
                         case "on hold":
+
                             whitelistDescription.textContent =
                                 "Your whitelist application is currently on hold.";
+
                             break;
 
                         case "accepted":
+
                             whitelistDescription.textContent =
                                 "Your whitelist application has been accepted.";
+
                             break;
 
                         case "declined":
+
                             whitelistDescription.textContent =
                                 "Your whitelist application was not successful.";
+
                             break;
 
                         default:
+
                             whitelistDescription.textContent =
                                 "View your application for the latest information.";
+
                             break;
                     }
                 }
