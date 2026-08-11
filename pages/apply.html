@@ -1,159 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
+<title>Apply | Union Roleplay</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/applications.css">
+<link rel="stylesheet" href="../css/apply.css">
 
-    <title>Apply | Union Roleplay</title>
+<div id="navbar"></div>
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/applications.css">
-</head>
+<main class="apply-page">
 
-<body>
+    <section class="apply-shell">
 
-    <div id="navbar"></div>
+        <div class="apply-header">
 
-    <main class="apply-page">
+            <a href="applications.html" class="apply-back">
+                ← Back to Applications
+            </a>
 
-        <section class="apply-shell">
+            <span class="applications-eyebrow">
+                APPLICATION
+            </span>
 
-            <div class="apply-header">
+            <h1 id="applicationTitle">
+                Loading application...
+            </h1>
 
-                <a href="applications.html" class="apply-back">
-                    ← Back to Applications
-                </a>
+            <p id="applicationDescription">
+                Please wait while your application is prepared.
+            </p>
 
-                <span class="applications-eyebrow">
-                    APPLICATION
+        </div>
+
+        <div class="apply-layout">
+
+            <aside class="apply-progress-panel">
+
+                <div class="apply-progress-label">
+                    Progress
+                </div>
+
+                <div class="apply-progress-bar">
+                    <div
+                        class="apply-progress-fill"
+                        id="applicationProgress"
+                        style="width: 0%;"
+                    ></div>
+                </div>
+
+                <span id="applicationProgressText">
+                    0% complete
                 </span>
 
-                <h1 id="applicationTitle">
-                    Loading application...
-                </h1>
+                <div id="applicationSteps"></div>
 
-                <p id="applicationDescription">
-                    Please wait while your application is prepared.
-                </p>
+            </aside>
 
-            </div>
+            <section class="apply-form-panel">
 
-            <div class="apply-layout">
+                <div id="applicationLoading">
+                    <h2>Preparing application...</h2>
+                    <p>Please wait.</p>
+                </div>
 
-                <aside class="apply-progress-panel">
+                <div id="applicationLoginRequired" hidden>
 
-                    <div class="apply-progress-label">
-                        Progress
-                    </div>
+                    <h2>Login required</h2>
 
-                    <div class="apply-progress-bar">
-                        <div
-                            class="apply-progress-fill"
-                            id="applicationProgress"
-                            style="width: 0%;"
-                        ></div>
-                    </div>
+                    <p>
+                        You must be signed in with Discord before
+                        submitting an application.
+                    </p>
 
-                    <span id="applicationProgressText">
-                        0% complete
-                    </span>
+                    <a
+                        href="#"
+                        class="staff-review-button"
+                        id="applyLoginButton"
+                    >
+                        Login with Discord
+                    </a>
 
-                    <div id="applicationSteps"></div>
+                </div>
 
-                </aside>
+                <form id="applicationForm" hidden>
 
-                <section class="apply-form-panel">
+                    <div id="applicationQuestions"></div>
 
-                    <div id="applicationLoading">
-                        <h2>Preparing application...</h2>
-                        <p>Please wait.</p>
-                    </div>
+                    <div class="apply-form-actions">
 
-                    <div id="applicationLoginRequired" hidden>
-
-                        <h2>Login required</h2>
-
-                        <p>
-                            You must be signed in with Discord before
-                            submitting an application.
-                        </p>
-
-                        <a
-                            href="#"
-                            class="staff-review-button"
-                            id="applyLoginButton"
+                        <button
+                            type="button"
+                            class="apply-secondary-button"
+                            id="previousQuestion"
                         >
-                            Login with Discord
-                        </a>
+                            Previous
+                        </button>
 
-                    </div>
-
-                    <form id="applicationForm" hidden>
-
-                        <div id="applicationQuestions"></div>
-
-                        <div class="apply-form-actions">
-
-                            <button
-                                type="button"
-                                class="apply-secondary-button"
-                                id="previousQuestion"
-                            >
-                                Previous
-                            </button>
-
-                            <button
-                                type="button"
-                                class="staff-review-button"
-                                id="nextQuestion"
-                            >
-                                Continue
-                            </button>
-
-                            <button
-                                type="submit"
-                                class="staff-review-button"
-                                id="submitApplication"
-                                hidden
-                            >
-                                Submit Application
-                            </button>
-
-                        </div>
-
-                    </form>
-
-                    <div id="applicationSuccess" hidden>
-
-                        <h2>Application submitted</h2>
-
-                        <p>
-                            Your application has been sent to
-                            Union Roleplay staff for review.
-                        </p>
-
-                        <a
-                            href="dashboard.html"
+                        <button
+                            type="button"
                             class="staff-review-button"
+                            id="nextQuestion"
                         >
-                            Return to Dashboard
-                        </a>
+                            Continue
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="staff-review-button"
+                            id="submitApplication"
+                            hidden
+                        >
+                            Submit Application
+                        </button>
 
                     </div>
 
-                </section>
+                </form>
 
-            </div>
+                <div id="applicationSuccess" hidden>
 
-        </section>
+                    <h2>Application submitted</h2>
 
-    </main>
+                    <p>
+                        Your application has been sent to
+                        Union Roleplay staff for review.
+                    </p>
 
-    <script src="../js/auth.js"></script>
-    <script src="../js/apply.js"></script>
-    <script src="../js/components.js"></script>
+                    <a
+                        href="dashboard.html"
+                        class="staff-review-button"
+                    >
+                        Return to Dashboard
+                    </a>
 
-</body>
+                </div>
 
-</html>
+            </section>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="../js/auth.js"></script>
+<script src="../js/apply.js"></script>
+<script src="../js/components.js"></script>

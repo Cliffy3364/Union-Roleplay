@@ -1,0 +1,547 @@
+/* ========================================
+   UNION ROLEPLAY - APPLICATION FORM
+======================================== */
+
+.apply-page {
+    min-height: 100vh;
+    padding-top: 76px;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(124, 58, 237, 0.08),
+            transparent 32%
+        ),
+        #09090d;
+
+    color: #f5f5f7;
+}
+
+.apply-shell {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+
+    padding: 58px 0 90px;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.apply-header {
+    max-width: 760px;
+    margin-bottom: 34px;
+}
+
+.apply-back {
+    display: inline-flex;
+
+    margin-bottom: 24px;
+
+    color: #74747f;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: color 0.15s ease;
+}
+
+.apply-back:hover {
+    color: #ffffff;
+}
+
+.apply-header h1 {
+    margin: 8px 0 0;
+
+    color: #ffffff;
+
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 800;
+
+    letter-spacing: -1.7px;
+    line-height: 1.05;
+}
+
+.apply-header p {
+    max-width: 650px;
+
+    margin: 15px 0 0;
+
+    color: #858590;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   MAIN LAYOUT
+======================================== */
+
+.apply-layout {
+    display: grid;
+
+    grid-template-columns:
+        280px
+        minmax(0, 1fr);
+
+    gap: 18px;
+
+    align-items: start;
+}
+
+
+/* ========================================
+   PROGRESS PANEL
+======================================== */
+
+.apply-progress-panel {
+    position: sticky;
+    top: 100px;
+
+    padding: 20px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.06);
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.018),
+            rgba(255, 255, 255, 0.005)
+        ),
+        #101016;
+}
+
+.apply-progress-label {
+    margin-bottom: 10px;
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.apply-progress-bar {
+    width: 100%;
+    height: 7px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.055);
+}
+
+.apply-progress-fill {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7c3aed,
+            #a855f7
+        );
+
+    transition:
+        width 0.25s ease;
+}
+
+#applicationProgressText {
+    display: block;
+
+    margin-top: 9px;
+
+    color: #73737e;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* ========================================
+   QUESTION STEPS
+======================================== */
+
+#applicationSteps {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    margin-top: 22px;
+}
+
+.apply-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+
+    padding: 10px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.05);
+
+    border-radius: 9px;
+
+    background:
+        rgba(255, 255, 255, 0.012);
+
+    color: #74747e;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.apply-step-number {
+    width: 25px;
+    height: 25px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 7px;
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    color: #8d8d98;
+
+    font-size: 10px;
+    font-weight: 900;
+}
+
+.apply-step.active {
+    border-color:
+        rgba(124, 92, 255, 0.25);
+
+    background:
+        rgba(124, 92, 255, 0.08);
+
+    color: #d5ccff;
+}
+
+.apply-step.active .apply-step-number {
+    background:
+        rgba(124, 92, 255, 0.18);
+
+    color: #d7cdff;
+}
+
+.apply-step.completed {
+    color: #9ae6b4;
+}
+
+.apply-step.completed .apply-step-number {
+    background:
+        rgba(34, 197, 94, 0.1);
+
+    color: #86efac;
+}
+
+
+/* ========================================
+   FORM PANEL
+======================================== */
+
+.apply-form-panel {
+    min-height: 410px;
+
+    padding: 26px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.06);
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.018),
+            rgba(255, 255, 255, 0.005)
+        ),
+        #101016;
+}
+
+#applicationLoading h2,
+#applicationLoginRequired h2,
+#applicationSuccess h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 22px;
+}
+
+#applicationLoading p,
+#applicationLoginRequired p,
+#applicationSuccess p {
+    margin: 10px 0 20px;
+
+    color: #82828d;
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   QUESTION
+======================================== */
+
+.application-question {
+    min-height: 250px;
+}
+
+.application-question-meta {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 17px;
+}
+
+.application-question-number {
+    color: #a78bfa;
+
+    font-size: 10px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.application-required {
+    padding: 4px 7px;
+
+    border:
+        1px solid
+        rgba(239, 68, 68, 0.15);
+
+    border-radius: 999px;
+
+    background:
+        rgba(239, 68, 68, 0.05);
+
+    color: #fca5a5;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+}
+
+.application-question h2,
+.application-question h3 {
+    margin: 0 0 18px;
+
+    color: #ffffff;
+
+    font-size: 22px;
+    line-height: 1.35;
+
+    letter-spacing: -0.4px;
+}
+
+.application-question input,
+.application-question textarea,
+.application-question select {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #0b0b10;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    transition:
+        border-color 0.15s ease,
+        background 0.15s ease;
+}
+
+.application-question textarea {
+    min-height: 150px;
+    resize: vertical;
+
+    line-height: 1.65;
+}
+
+.application-question input::placeholder,
+.application-question textarea::placeholder {
+    color: #5f5f69;
+}
+
+.application-question input:focus,
+.application-question textarea:focus,
+.application-question select:focus {
+    border-color:
+        rgba(124, 92, 255, 0.45);
+
+    background: #0e0e14;
+}
+
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+.apply-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 9px;
+
+    margin-top: 25px;
+    padding-top: 20px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.05);
+}
+
+.apply-secondary-button,
+.staff-review-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 11px 16px;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 800;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.apply-secondary-button {
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    color: #a3a3ad;
+}
+
+.apply-secondary-button:hover {
+    background:
+        rgba(255, 255, 255, 0.045);
+}
+
+.staff-review-button {
+    border:
+        1px solid
+        rgba(124, 92, 255, 0.24);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124, 58, 237, 0.95),
+            rgba(147, 51, 234, 0.95)
+        );
+
+    color: #ffffff;
+}
+
+.staff-review-button:hover {
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   HIDDEN
+======================================== */
+
+#applicationForm[hidden],
+#applicationLoginRequired[hidden],
+#applicationSuccess[hidden],
+#submitApplication[hidden] {
+    display: none !important;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 850px) {
+
+    .apply-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .apply-progress-panel {
+        position: static;
+    }
+
+    #applicationSteps {
+        display: grid;
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+
+    .apply-shell {
+        width: min(100% - 28px, 1180px);
+
+        padding-top: 42px;
+    }
+
+    .apply-form-panel,
+    .apply-progress-panel {
+        padding: 17px;
+    }
+
+    #applicationSteps {
+        grid-template-columns: 1fr;
+    }
+
+    .apply-form-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .apply-secondary-button,
+    .staff-review-button {
+        width: 100%;
+    }
+}
