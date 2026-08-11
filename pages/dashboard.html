@@ -19,213 +19,388 @@
 
 </head>
 
-<body>
+<body class="dashboard-page">
 
-<div id="navbar"></div>
-
-
-<main class="dashboard-page">
+    <div id="navbar"></div>
 
 
-    <!-- =========================
-         HEADER
-    ========================== -->
+    <main>
 
-    <section class="dashboard-header">
+        <!-- =========================
+             DASHBOARD HERO
+        ========================== -->
 
-        <div class="dashboard-container">
+        <section class="dashboard-header">
 
-            <div>
+            <div class="dashboard-container">
 
-                <span class="dashboard-eyebrow">
-                    MEMBER PORTAL
-                </span>
+                <div class="dashboard-hero">
 
-                <h1>
-                    Your Dashboard
-                </h1>
+                    <div class="dashboard-hero-main">
 
-                <p>
-                    Manage your Union Roleplay applications
-                    and account from one place.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         DASHBOARD CONTENT
-    ========================== -->
-
-    <section class="dashboard-content">
-
-        <div class="dashboard-container">
-
-
-            <!-- =========================
-                 TOP CARDS
-            ========================== -->
-
-            <div class="dashboard-grid">
-
-
-                <!-- DISCORD ACCOUNT -->
-
-                <article class="dashboard-card profile-card">
-
-                    <span class="card-label">
-                        DISCORD ACCOUNT
-                    </span>
-
-                    <div class="profile-placeholder">
-
-                        <div class="profile-avatar">
-                            U
-                        </div>
-
-                        <div>
-
-                            <h2>
-                                Not signed in
-                            </h2>
-
-                            <p>
-                                Login with Discord to view your account.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    <a
-                        href="#"
-                        class="btn primary"
-                        id="dashboardAccountButton"
-                    >
-                        Login with Discord
-                    </a>
-
-                </article>
-
-
-                <!-- WHITELIST STATUS -->
-
-                <article class="dashboard-card">
-
-                    <span class="card-label">
-                        WHITELIST STATUS
-                    </span>
-
-                    <h2 id="dashboardWhitelistStatus">
-                        Not Applied
-                    </h2>
-
-                    <p id="dashboardWhitelistDescription">
-                        You have not submitted a whitelist application yet.
-                    </p>
-
-                    <a
-                        href="applications.html"
-                        class="dashboard-link"
-                    >
-                        View Applications →
-                    </a>
-
-                </article>
-
-
-                <!-- APPLICATIONS -->
-
-                <article class="dashboard-card">
-
-                    <span class="card-label">
-                        APPLICATIONS
-                    </span>
-
-                    <h2 id="dashboardApplicationCount">
-                        0 Applications
-                    </h2>
-
-                    <p id="dashboardApplicationDescription">
-                        Your submitted applications and their current status
-                        will appear here.
-                    </p>
-
-                    <a
-                        href="applications.html"
-                        class="dashboard-link"
-                    >
-                        Browse Applications →
-                    </a>
-
-                </article>
-
-
-            </div>
-
-
-            <!-- =========================
-                 RECENT APPLICATIONS
-            ========================== -->
-
-            <section class="dashboard-applications-panel">
-
-                <div class="dashboard-panel-heading">
-
-                    <div>
-
-                        <span class="card-label">
-                            YOUR APPLICATIONS
+                        <span class="dashboard-eyebrow">
+                            MEMBER PORTAL
                         </span>
 
-                        <h2>
-                            Recent Applications
-                        </h2>
+                        <h1>
+                            Your Dashboard
+                        </h1>
 
                         <p>
-                            Track the current status of your submitted applications.
+                            Manage your Union Roleplay account,
+                            applications and current status from one place.
                         </p>
 
                     </div>
 
-                    <a
-                        href="applications.html"
-                        class="dashboard-link"
-                    >
-                        New Application →
-                    </a>
 
-                </div>
+                    <div class="dashboard-hero-status">
 
+                        <div class="dashboard-status-line">
 
-                <div id="dashboardRecentApplications">
+                            <span class="dashboard-live-dot"></span>
 
-                    <div class="dashboard-applications-loading">
+                            <div>
 
-                        Loading your applications...
+                                <span>
+                                    ACCOUNT PORTAL
+                                </span>
+
+                                <strong>
+                                    Connected to Union
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                        <div class="dashboard-hero-reference">
+
+                            <span>
+                                UNION ROLEPLAY
+                            </span>
+
+                            <strong>
+                                MEMBER ACCESS
+                            </strong>
+
+                        </div>
 
                     </div>
 
                 </div>
 
-            </section>
+            </div>
+
+        </section>
 
 
-        </div>
+        <!-- =========================
+             DASHBOARD CONTENT
+        ========================== -->
 
-    </section>
+        <section class="dashboard-content">
+
+            <div class="dashboard-container">
 
 
-</main>
+                <!-- =========================
+                     OVERVIEW STRIP
+                ========================== -->
+
+                <div class="dashboard-overview-strip">
+
+                    <div class="dashboard-overview-item">
+
+                        <span>
+                            01
+                        </span>
+
+                        <div>
+
+                            <small>
+                                ACCOUNT
+                            </small>
+
+                            <strong>
+                                Discord Linked
+                            </strong>
+
+                        </div>
+
+                    </div>
 
 
-<script src="../js/auth.js"></script>
-<script src="../js/dashboard.js"></script>
-<script src="../js/components.js"></script>
+                    <div class="dashboard-overview-divider"></div>
+
+
+                    <div class="dashboard-overview-item">
+
+                        <span>
+                            02
+                        </span>
+
+                        <div>
+
+                            <small>
+                                ACCESS
+                            </small>
+
+                            <strong id="dashboardOverviewWhitelist">
+                                Whitelist Status
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="dashboard-overview-divider"></div>
+
+
+                    <div class="dashboard-overview-item">
+
+                        <span>
+                            03
+                        </span>
+
+                        <div>
+
+                            <small>
+                                APPLICATIONS
+                            </small>
+
+                            <strong id="dashboardOverviewApplications">
+                                View Progress
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     MAIN CARDS
+                ========================== -->
+
+                <div class="dashboard-grid">
+
+
+                    <!-- DISCORD ACCOUNT -->
+
+                    <article class="dashboard-card profile-card dashboard-card-featured">
+
+                        <div class="dashboard-card-top">
+
+                            <span class="card-label">
+                                DISCORD ACCOUNT
+                            </span>
+
+                            <span class="dashboard-card-number">
+                                01
+                            </span>
+
+                        </div>
+
+
+                        <div class="profile-placeholder">
+
+                            <div class="profile-avatar">
+                                U
+                            </div>
+
+                            <div>
+
+                                <h2>
+                                    Not signed in
+                                </h2>
+
+                                <p>
+                                    Login with Discord to view your account.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="dashboard-card-footer">
+
+                            <a
+                                href="#"
+                                class="btn primary"
+                                id="dashboardAccountButton"
+                            >
+                                Login with Discord
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- WHITELIST STATUS -->
+
+                    <article class="dashboard-card">
+
+                        <div class="dashboard-card-top">
+
+                            <span class="card-label">
+                                WHITELIST STATUS
+                            </span>
+
+                            <span class="dashboard-card-number">
+                                02
+                            </span>
+
+                        </div>
+
+
+                        <div class="dashboard-card-status-icon">
+                            <span></span>
+                        </div>
+
+
+                        <h2 id="dashboardWhitelistStatus">
+                            Not Applied
+                        </h2>
+
+                        <p id="dashboardWhitelistDescription">
+                            You have not submitted a whitelist application yet.
+                        </p>
+
+
+                        <div class="dashboard-card-footer">
+
+                            <a
+                                href="applications.html"
+                                class="dashboard-link"
+                            >
+                                View Applications →
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- APPLICATIONS -->
+
+                    <article class="dashboard-card">
+
+                        <div class="dashboard-card-top">
+
+                            <span class="card-label">
+                                APPLICATIONS
+                            </span>
+
+                            <span class="dashboard-card-number">
+                                03
+                            </span>
+
+                        </div>
+
+
+                        <div class="dashboard-card-app-icon">
+                            +
+                        </div>
+
+
+                        <h2 id="dashboardApplicationCount">
+                            0 Applications
+                        </h2>
+
+                        <p id="dashboardApplicationDescription">
+                            Your submitted applications and their current status
+                            will appear here.
+                        </p>
+
+
+                        <div class="dashboard-card-footer">
+
+                            <a
+                                href="applications.html"
+                                class="dashboard-link"
+                            >
+                                Browse Applications →
+                            </a>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+                <!-- =========================
+                     RECENT APPLICATIONS
+                ========================== -->
+
+                <section class="dashboard-applications-panel">
+
+                    <div class="dashboard-panel-heading">
+
+                        <div>
+
+                            <span class="card-label">
+                                YOUR APPLICATIONS
+                            </span>
+
+                            <h2>
+                                Recent Applications
+                            </h2>
+
+                            <p>
+                                Track the current status of your submitted applications.
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="applications.html"
+                            class="dashboard-link dashboard-panel-link"
+                        >
+                            New Application →
+                        </a>
+
+                    </div>
+
+
+                    <div class="dashboard-panel-divider"></div>
+
+
+                    <div id="dashboardRecentApplications">
+
+                        <div class="dashboard-applications-loading">
+
+                            <div class="dashboard-loading-line"></div>
+                            <div class="dashboard-loading-line short"></div>
+
+                            <span>
+                                Loading your applications...
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/components.js"></script>
 
 </body>
 
