@@ -4,11 +4,14 @@ const APPLY_API =
 const DISCORD_LOGIN_URL =
     `${APPLY_API}/api/auth/discord`;
 
+
 const APPLICATION_CONFIG = {
+
     "Whitelist Application": {
         title: "Whitelist Application",
         description:
             "Apply for access to Union Roleplay.",
+
         questions: [
             {
                 key: "age",
@@ -43,10 +46,12 @@ const APPLICATION_CONFIG = {
         ]
     },
 
+
     "Staff Application": {
         title: "Staff Application",
         description:
             "Apply to join the Union Roleplay staff team.",
+
         questions: [
             {
                 key: "age",
@@ -81,10 +86,12 @@ const APPLICATION_CONFIG = {
         ]
     },
 
+
     "QA Tester Application": {
         title: "QA Tester Application",
         description:
             "Apply to test scripts, systems and updates before release.",
+
         questions: [
             {
                 key: "age",
@@ -119,10 +126,12 @@ const APPLICATION_CONFIG = {
         ]
     },
 
+
     "Social Media Manager Application": {
         title: "Social Media Manager Application",
         description:
             "Apply to manage Union Roleplay's social media presence and coordinate the media team.",
+
         questions: [
             {
                 key: "age",
@@ -156,10 +165,13 @@ const APPLICATION_CONFIG = {
             }
         ]
     },
-        "Media Application": {
+
+
+    "Media Application": {
         title: "Media Team Application",
         description:
             "Apply to create screenshots, videos and promotional media for Union Roleplay.",
+
         questions: [
             {
                 key: "age",
@@ -194,10 +206,12 @@ const APPLICATION_CONFIG = {
         ]
     },
 
+
     "Script Developer Application": {
         title: "Script Developer Application",
         description:
             "Apply to work on scripts and server systems for Union Roleplay.",
+
         questions: [
             {
                 key: "age",
@@ -232,10 +246,12 @@ const APPLICATION_CONFIG = {
         ]
     },
 
+
     "Vehicle Developer Application": {
         title: "Vehicle Developer Application",
         description:
             "Apply to work on Union Roleplay's vehicle fleet.",
+
         questions: [
             {
                 key: "age",
@@ -270,10 +286,12 @@ const APPLICATION_CONFIG = {
         ]
     },
 
+
     "EUP Developer Application": {
         title: "EUP Developer Application",
         description:
             "Apply to develop clothing and uniforms for Union Roleplay.",
+
         questions: [
             {
                 key: "age",
@@ -307,10 +325,13 @@ const APPLICATION_CONFIG = {
             }
         ]
     },
-        "UPD Command Application": {
+
+
+    "UPD Command Application": {
         title: "UPD Command Application",
         description:
             "Apply for a command position within the Union Police Department.",
+
         questions: [
             {
                 key: "age",
@@ -345,10 +366,12 @@ const APPLICATION_CONFIG = {
         ]
     },
 
+
     "UHS Command Application": {
         title: "UHS Command Application",
         description:
             "Apply for a command position within Union Health Service.",
+
         questions: [
             {
                 key: "age",
@@ -384,19 +407,29 @@ const APPLICATION_CONFIG = {
     }
 };
 
+
 let currentApplicationType = "";
 let currentConfig = null;
 let currentQuestionIndex = 0;
 let draftApplication = null;
+
 let answers = {};
+
 let autoSaveTimer = null;
+
 let isSaving = false;
 let isSubmitting = false;
+
+
 function getToken() {
-    return localStorage.getItem("union_session");
+    return localStorage.getItem(
+        "union_session"
+    );
 }
 
+
 function getSelectedApplicationType() {
+
     const params =
         new URLSearchParams(
             window.location.search
@@ -405,8 +438,12 @@ function getSelectedApplicationType() {
     return params.get("type") || "";
 }
 
+
 function parseJsonObject(value) {
-    if (!value) return {};
+
+    if (!value) {
+        return {};
+    }
 
     if (
         typeof value === "object" &&
@@ -416,7 +453,9 @@ function parseJsonObject(value) {
     }
 
     try {
-        const parsed = JSON.parse(value);
+
+        const parsed =
+            JSON.parse(value);
 
         return (
             parsed &&
@@ -427,11 +466,14 @@ function parseJsonObject(value) {
             : {};
 
     } catch {
+
         return {};
     }
 }
 
+
 function escapeHtml(value) {
+
     return String(value ?? "")
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
@@ -440,11 +482,14 @@ function escapeHtml(value) {
         .replaceAll("'", "&#039;");
 }
 
+
 async function apiRequest(
     path,
     options = {}
 ) {
-    const token = getToken();
+
+    const token =
+        getToken();
 
     if (!token) {
         throw new Error(
@@ -452,28 +497,33 @@ async function apiRequest(
         );
     }
 
-    const response = await fetch(
-        `${APPLY_API}${path}`,
-        {
-            ...options,
+    const response =
+        await fetch(
+            `${APPLY_API}${path}`,
+            {
+                ...options,
 
-            headers: {
-                "Content-Type":
-                    "application/json",
+                headers: {
+                    "Content-Type":
+                        "application/json",
 
-                "Authorization":
-                    `Bearer ${token}`,
+                    Authorization:
+                        `Bearer ${token}`,
 
-                ...(options.headers || {})
+                    ...(options.headers || {})
+                }
             }
-        }
-    );
+        );
 
     let data;
 
     try {
-        data = await response.json();
+
+        data =
+            await response.json();
+
     } catch {
+
         data = {
             success: false,
             error:
@@ -494,21 +544,27 @@ async function apiRequest(
     return data;
 }
 
+
 function setPageMessage(
     title,
     message
 ) {
+
     const loading =
         document.getElementById(
             "applicationLoading"
         );
 
-    if (!loading) return;
+    if (!loading) {
+        return;
+    }
 
     loading.hidden = false;
 
     loading.innerHTML = `
-        <h2>${escapeHtml(title)}</h2>
+        <h2>
+            ${escapeHtml(title)}
+        </h2>
 
         <p>
             ${escapeHtml(message)}
@@ -516,7 +572,9 @@ function setPageMessage(
     `;
 }
 
+
 function calculateProgress() {
+
     if (
         !currentConfig ||
         !currentConfig.questions.length
@@ -529,7 +587,9 @@ function calculateProgress() {
             question => {
 
                 const value =
-                    answers[question.key];
+                    answers[
+                        question.key
+                    ];
 
                 return (
                     value !== undefined &&
@@ -546,7 +606,14 @@ function calculateProgress() {
         ) * 100
     );
 }
+
+
 function updateProgress() {
+
+    if (!currentConfig) {
+        return;
+    }
+
     const progress =
         calculateProgress();
 
@@ -600,14 +667,16 @@ function updateProgress() {
                 );
 
                 step.classList.toggle(
-                    "complete",
+                    "completed",
                     complete
                 );
             }
         );
 }
 
+
 function renderSteps() {
+
     const container =
         document.getElementById(
             "applicationSteps"
@@ -629,13 +698,15 @@ function renderSteps() {
                         class="apply-step"
                         data-step-index="${index}"
                     >
-                        <span>
+
+                        <span class="apply-step-number">
                             ${index + 1}
                         </span>
 
-                        <p>
+                        <span>
                             Question ${index + 1}
-                        </p>
+                        </span>
+
                     </button>
                 `
             )
@@ -655,8 +726,7 @@ function renderSteps() {
 
                     const nextIndex =
                         Number(
-                            button.dataset
-                                .stepIndex
+                            button.dataset.stepIndex
                         );
 
                     if (
@@ -674,8 +744,11 @@ function renderSteps() {
                     updateProgress();
 
                     try {
+
                         await saveDraft();
+
                     } catch (error) {
+
                         console.warn(
                             "Draft save failed:",
                             error
@@ -683,19 +756,21 @@ function renderSteps() {
                     }
                 }
             );
-
         });
 }
+
 
 function createQuestionInput(
     question
 ) {
+
     let input;
 
     if (
         question.type ===
         "textarea"
     ) {
+
         input =
             document.createElement(
                 "textarea"
@@ -742,7 +817,6 @@ function createQuestionInput(
                 input.value;
 
             updateProgress();
-
             scheduleAutoSave();
         }
     );
@@ -750,7 +824,9 @@ function createQuestionInput(
     return input;
 }
 
+
 function renderCurrentQuestion() {
+
     const container =
         document.getElementById(
             "applicationQuestions"
@@ -768,9 +844,12 @@ function renderCurrentQuestion() {
             currentQuestionIndex
         ];
 
-    if (!question) return;
+    if (!question) {
+        return;
+    }
 
     container.innerHTML = "";
+
 
     const wrapper =
         document.createElement(
@@ -778,7 +857,17 @@ function renderCurrentQuestion() {
         );
 
     wrapper.className =
-        "apply-question";
+        "application-question";
+
+
+    const meta =
+        document.createElement(
+            "div"
+        );
+
+    meta.className =
+        "application-question-meta";
+
 
     const counter =
         document.createElement(
@@ -786,23 +875,15 @@ function renderCurrentQuestion() {
         );
 
     counter.className =
-        "apply-question-counter";
+        "application-question-number";
 
     counter.textContent =
         `Question ${currentQuestionIndex + 1} of ${currentConfig.questions.length}`;
 
-    const label =
-        document.createElement(
-            "label"
-        );
-
-    label.setAttribute(
-        "for",
-        `application-${question.key}`
+    meta.appendChild(
+        counter
     );
 
-    label.textContent =
-        question.label;
 
     if (question.required) {
 
@@ -812,27 +893,38 @@ function renderCurrentQuestion() {
             );
 
         required.className =
-            "apply-required";
+            "application-required";
 
         required.textContent =
-            " Required";
+            "Required";
 
-        label.appendChild(
+        meta.appendChild(
             required
         );
     }
+
+
+    const heading =
+        document.createElement(
+            "h2"
+        );
+
+    heading.textContent =
+        question.label;
+
 
     const input =
         createQuestionInput(
             question
         );
 
+
     wrapper.appendChild(
-        counter
+        meta
     );
 
     wrapper.appendChild(
-        label
+        heading
     );
 
     wrapper.appendChild(
@@ -842,6 +934,7 @@ function renderCurrentQuestion() {
     container.appendChild(
         wrapper
     );
+
 
     const previous =
         document.getElementById(
@@ -858,32 +951,44 @@ function renderCurrentQuestion() {
             "submitApplication"
         );
 
+
     if (previous) {
+
         previous.hidden =
             currentQuestionIndex === 0;
     }
+
 
     const isLast =
         currentQuestionIndex ===
         currentConfig.questions.length - 1;
 
+
     if (next) {
+
         next.hidden =
             isLast;
     }
 
+
     if (submit) {
+
         submit.hidden =
             !isLast;
     }
 
+
     requestAnimationFrame(
         () => {
+
             input.focus();
         }
     );
 }
+
+
 function getCurrentInput() {
+
     if (!currentConfig) {
         return null;
     }
@@ -902,7 +1007,9 @@ function getCurrentInput() {
     );
 }
 
+
 function saveCurrentInput() {
+
     if (!currentConfig) {
         return;
     }
@@ -926,7 +1033,9 @@ function saveCurrentInput() {
         input.value;
 }
 
+
 function validateCurrentQuestion() {
+
     if (!currentConfig) {
         return false;
     }
@@ -954,6 +1063,7 @@ function validateCurrentQuestion() {
             input.value || ""
         ).trim() === ""
     ) {
+
         input.focus();
 
         input.setCustomValidity(
@@ -968,14 +1078,18 @@ function validateCurrentQuestion() {
     }
 
     if (!input.checkValidity()) {
+
         input.reportValidity();
+
         return false;
     }
 
     return true;
 }
 
+
 function validateAllQuestions() {
+
     if (!currentConfig) {
         return false;
     }
@@ -986,6 +1100,7 @@ function validateAllQuestions() {
         currentConfig.questions.length;
         index++
     ) {
+
         const question =
             currentConfig.questions[
                 index
@@ -1004,6 +1119,7 @@ function validateAllQuestions() {
                 String(value).trim() === ""
             )
         ) {
+
             currentQuestionIndex =
                 index;
 
@@ -1014,6 +1130,7 @@ function validateAllQuestions() {
                 getCurrentInput();
 
             if (input) {
+
                 input.focus();
 
                 input.setCustomValidity(
@@ -1032,7 +1149,9 @@ function validateAllQuestions() {
     return true;
 }
 
+
 async function createOrLoadDraft() {
+
     const data =
         await apiRequest(
             "/api/applications/create",
@@ -1050,6 +1169,7 @@ async function createOrLoadDraft() {
         data.application || null;
 
     if (draftApplication) {
+
         answers =
             parseJsonObject(
                 draftApplication.data
@@ -1059,7 +1179,9 @@ async function createOrLoadDraft() {
     return draftApplication;
 }
 
+
 async function saveDraft() {
+
     if (
         !currentApplicationType ||
         !draftApplication ||
@@ -1074,6 +1196,7 @@ async function saveDraft() {
     isSaving = true;
 
     try {
+
         await apiRequest(
             "/api/applications/save",
             {
@@ -1098,8 +1221,11 @@ async function saveDraft() {
     }
 }
 
+
 function scheduleAutoSave() {
+
     if (autoSaveTimer) {
+
         clearTimeout(
             autoSaveTimer
         );
@@ -1112,6 +1238,7 @@ function scheduleAutoSave() {
                 saveDraft()
                     .catch(
                         error => {
+
                             console.warn(
                                 "Automatic draft save failed:",
                                 error
@@ -1123,7 +1250,10 @@ function scheduleAutoSave() {
             750
         );
 }
+
+
 async function submitApplication() {
+
     if (isSubmitting) {
         return;
     }
@@ -1142,17 +1272,24 @@ async function submitApplication() {
     isSubmitting = true;
 
     if (autoSaveTimer) {
-        clearTimeout(autoSaveTimer);
+
+        clearTimeout(
+            autoSaveTimer
+        );
+
         autoSaveTimer = null;
     }
 
     if (button) {
+
         button.disabled = true;
+
         button.textContent =
             "Submitting...";
     }
 
     try {
+
         const data =
             await apiRequest(
                 "/api/applications/submit",
@@ -1172,6 +1309,7 @@ async function submitApplication() {
                 }
             );
 
+
         const form =
             document.getElementById(
                 "applicationForm"
@@ -1182,25 +1320,35 @@ async function submitApplication() {
                 "applicationSuccess"
             );
 
+
         if (form) {
+
             form.hidden = true;
         }
 
+
         if (success) {
+
             success.hidden = false;
 
             const reference =
                 data.application?.reference;
 
             if (reference) {
+
                 const paragraph =
-                    success.querySelector("p");
+                    success.querySelector(
+                        "p"
+                    );
 
                 if (paragraph) {
+
                     paragraph.innerHTML = `
                         Your application has been sent to
                         Union Roleplay staff for review.
+
                         <br><br>
+
                         <strong>
                             Reference:
                             ${escapeHtml(reference)}
@@ -1209,6 +1357,7 @@ async function submitApplication() {
                 }
             }
         }
+
 
         const fill =
             document.getElementById(
@@ -1220,15 +1369,20 @@ async function submitApplication() {
                 "applicationProgressText"
             );
 
+
         if (fill) {
+
             fill.style.width =
                 "100%";
         }
 
+
         if (text) {
+
             text.textContent =
                 "100% complete";
         }
+
 
         window.scrollTo({
             top: 0,
@@ -1243,7 +1397,9 @@ async function submitApplication() {
         );
 
         if (button) {
+
             button.disabled = false;
+
             button.textContent =
                 "Submit Application";
         }
@@ -1253,7 +1409,10 @@ async function submitApplication() {
         isSubmitting = false;
     }
 }
+
+
 async function initialiseApplicationForm() {
+
     currentApplicationType =
         getSelectedApplicationType();
 
@@ -1261,6 +1420,7 @@ async function initialiseApplicationForm() {
         APPLICATION_CONFIG[
             currentApplicationType
         ] || null;
+
 
     const loading =
         document.getElementById(
@@ -1292,10 +1452,13 @@ async function initialiseApplicationForm() {
             "applyLoginButton"
         );
 
+
     if (loginButton) {
+
         loginButton.addEventListener(
             "click",
             event => {
+
                 event.preventDefault();
 
                 window.location.href =
@@ -1304,13 +1467,17 @@ async function initialiseApplicationForm() {
         );
     }
 
+
     if (!currentConfig) {
+
         if (title) {
+
             title.textContent =
                 "Application unavailable";
         }
 
         if (description) {
+
             description.textContent =
                 "This application type could not be found.";
         }
@@ -1323,17 +1490,23 @@ async function initialiseApplicationForm() {
         return;
     }
 
+
     if (title) {
+
         title.textContent =
             currentConfig.title;
     }
 
+
     if (description) {
+
         description.textContent =
             currentConfig.description;
     }
 
+
     if (!window.UnionAuth) {
+
         setPageMessage(
             "Unable to load application",
             "The authentication system is unavailable."
@@ -1342,39 +1515,54 @@ async function initialiseApplicationForm() {
         return;
     }
 
+
     const user =
         await UnionAuth.getCurrentUser();
 
+
     if (!user) {
+
         if (loading) {
+
             loading.hidden = true;
         }
 
         if (loginRequired) {
+
             loginRequired.hidden = false;
         }
 
         return;
     }
 
+
     try {
+
         await createOrLoadDraft();
 
         currentQuestionIndex = 0;
 
         renderSteps();
+
         renderCurrentQuestion();
+
         updateProgress();
 
+
         if (loading) {
+
             loading.hidden = true;
         }
 
+
         if (loginRequired) {
+
             loginRequired.hidden = true;
         }
 
+
         if (form) {
+
             form.hidden = false;
         }
 
@@ -1392,6 +1580,7 @@ async function initialiseApplicationForm() {
         );
     }
 }
+
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -1412,7 +1601,9 @@ document.addEventListener(
                 "applicationForm"
             );
 
+
         if (previous) {
+
             previous.addEventListener(
                 "click",
                 async () => {
@@ -1423,14 +1614,19 @@ document.addEventListener(
                         currentQuestionIndex >
                         0
                     ) {
+
                         currentQuestionIndex--;
 
                         renderCurrentQuestion();
+
                         updateProgress();
 
                         try {
+
                             await saveDraft();
+
                         } catch (error) {
+
                             console.warn(
                                 "Draft save failed:",
                                 error
@@ -1441,7 +1637,9 @@ document.addEventListener(
             );
         }
 
+
         if (next) {
+
             next.addEventListener(
                 "click",
                 async () => {
@@ -1453,8 +1651,11 @@ document.addEventListener(
                     }
 
                     try {
+
                         await saveDraft();
+
                     } catch (error) {
+
                         console.warn(
                             "Draft save failed:",
                             error
@@ -1465,16 +1666,20 @@ document.addEventListener(
                         currentQuestionIndex <
                         currentConfig.questions.length - 1
                     ) {
+
                         currentQuestionIndex++;
 
                         renderCurrentQuestion();
+
                         updateProgress();
                     }
                 }
             );
         }
 
+
         if (form) {
+
             form.addEventListener(
                 "submit",
                 async event => {
@@ -1486,13 +1691,16 @@ document.addEventListener(
             );
         }
 
+
         initialiseApplicationForm();
     }
 );
 
+
 window.addEventListener(
     "beforeunload",
     () => {
+
         saveCurrentInput();
     }
 );
