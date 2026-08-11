@@ -216,3 +216,627 @@
         grid-template-columns: 1fr;
     }
 }
+/* ==========================================================
+   APPLICATIONS PAGE - RELEASE VISUAL POLISH
+========================================================== */
+
+.applications-page {
+    background:
+        radial-gradient(
+            circle at 18% 0%,
+            rgba(255, 255, 255, 0.035),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 88% 5%,
+            rgba(139, 92, 246, 0.025),
+            transparent 24%
+        ),
+        #090a0d;
+}
+
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.applications-hero {
+    padding:
+        92px 0
+        42px;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.05);
+}
+
+.applications-hero-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        270px;
+
+    align-items: end;
+
+    gap: 60px;
+}
+
+.applications-hero-main {
+    max-width: 760px;
+}
+
+.applications-eyebrow {
+    color: #747780;
+}
+
+.applications-hero h1 {
+    margin-top: 9px;
+
+    color: #f4f4f5;
+
+    font-size:
+        clamp(
+            48px,
+            7vw,
+            76px
+        );
+
+    line-height: 0.98;
+
+    letter-spacing: -3px;
+}
+
+.applications-hero p {
+    max-width: 680px;
+
+    margin-top: 18px;
+
+    color: #858790;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+/* HERO META */
+
+.applications-hero-meta {
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.06);
+
+    border-radius: 13px;
+
+    background: #101115;
+}
+
+.applications-meta-item {
+    padding: 14px 16px;
+
+    background:
+        rgba(255, 255, 255, 0.012);
+}
+
+.applications-meta-item + .applications-meta-item {
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.05);
+}
+
+.applications-meta-item > span {
+    display: block;
+
+    color: #5f626b;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+.applications-meta-item strong {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 5px;
+
+    color: #d9dade;
+
+    font-size: 11px;
+}
+
+.applications-open-label span {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 9px
+        rgba(34, 197, 94, 0.3);
+}
+
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.applications-content {
+    padding:
+        38px 0
+        100px;
+}
+
+.applications-section-heading {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 24px;
+
+    padding-bottom: 18px;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.05);
+}
+
+.applications-section-heading > div:first-child > span {
+    display: block;
+
+    color: #6d7079;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.3px;
+}
+
+.applications-section-heading h2 {
+    margin-top: 6px;
+
+    color: #f1f1f3;
+
+    font-size: 28px;
+
+    letter-spacing: -0.8px;
+}
+
+.applications-section-heading p {
+    margin-top: 7px;
+
+    color: #777a83;
+
+    font-size: 12px;
+}
+
+
+/* RIGHT HEADING DETAIL */
+
+.applications-heading-detail {
+    text-align: right;
+}
+
+.applications-heading-detail span {
+    display: block;
+
+    color: #5e6169;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.1px;
+}
+
+.applications-heading-detail strong {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #c9cacf;
+
+    font-size: 11px;
+}
+
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.applications-grid {
+    gap: 14px;
+}
+
+
+/* ==========================================================
+   APPLICATION CARDS
+========================================================== */
+
+.application-card {
+    position: relative;
+
+    min-height: 250px;
+
+    padding: 20px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.06);
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.018),
+            rgba(255, 255, 255, 0.005)
+        ),
+        #101115;
+
+    box-shadow:
+        0 12px 35px
+        rgba(0, 0, 0, 0.09);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.application-card:hover {
+    transform:
+        translateY(-4px);
+
+    border-color:
+        rgba(255, 255, 255, 0.11);
+
+    background:
+        #131419;
+
+    box-shadow:
+        0 22px 48px
+        rgba(0, 0, 0, 0.18);
+}
+
+
+/* TOP EDGE DETAIL */
+
+.application-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: -1px;
+    left: 20px;
+
+    width: 55px;
+    height: 1px;
+
+    opacity: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(167, 139, 250, 0.65),
+            transparent
+        );
+
+    transition:
+        opacity 0.2s ease,
+        width 0.2s ease;
+}
+
+.application-card:hover::before {
+    width: 90px;
+
+    opacity: 1;
+}
+
+
+/* FEATURED WHITELIST */
+
+.application-card.featured {
+    border-color:
+        rgba(255, 255, 255, 0.09);
+
+    background:
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(139, 92, 246, 0.035),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #121318,
+            #101115
+        );
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(255, 255, 255, 0.015),
+        0 14px 38px
+        rgba(0, 0, 0, 0.12);
+}
+
+
+/* ==========================================================
+   CARD TOP
+========================================================== */
+
+.application-card-top {
+    margin-bottom: 25px;
+}
+
+.application-code {
+    width: 40px;
+    height: 40px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 10px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    color: #b6b7bd;
+
+    font-size: 11px;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.application-card:hover .application-code {
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(139, 92, 246, 0.16);
+
+    background:
+        rgba(139, 92, 246, 0.045);
+
+    color: #b9a7ef;
+}
+
+
+/* OPEN STATUS */
+
+.application-status {
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.5px;
+
+    text-transform: uppercase;
+}
+
+.application-status.open {
+    border-color:
+        rgba(34, 197, 94, 0.11);
+
+    background:
+        rgba(34, 197, 94, 0.035);
+
+    color: #86efac;
+}
+
+.application-status.open::before {
+    background: #22c55e;
+
+    box-shadow:
+        0 0 8px
+        rgba(34, 197, 94, 0.28);
+}
+
+
+/* ==========================================================
+   CARD CONTENT
+========================================================== */
+
+.application-category {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #62656d;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.1px;
+}
+
+.application-card h3 {
+    margin: 0;
+
+    color: #f0f0f2;
+
+    font-size: 21px;
+
+    line-height: 1.2;
+
+    letter-spacing: -0.5px;
+}
+
+.application-card > p {
+    margin-top: 10px;
+
+    color: #81838c;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* ==========================================================
+   CARD FOOTER
+========================================================== */
+
+.application-card-footer {
+    margin-top: auto;
+
+    padding-top: 19px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.045);
+}
+
+.application-card-footer > span {
+    color: #62646d;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+.application-card-footer a {
+    position: relative;
+
+    color: #a999df;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    transition:
+        color 0.16s ease,
+        transform 0.16s ease;
+}
+
+.application-card-footer a:hover {
+    color: #d5c9ff;
+
+    transform:
+        translateX(3px);
+}
+
+
+/* ==========================================================
+   LOAD ANIMATION
+========================================================== */
+
+.application-card {
+    animation:
+        applicationCardIn
+        0.45s ease both;
+}
+
+.application-card:nth-child(1) {
+    animation-delay: 0.02s;
+}
+
+.application-card:nth-child(2) {
+    animation-delay: 0.05s;
+}
+
+.application-card:nth-child(3) {
+    animation-delay: 0.08s;
+}
+
+.application-card:nth-child(4) {
+    animation-delay: 0.11s;
+}
+
+.application-card:nth-child(5) {
+    animation-delay: 0.14s;
+}
+
+.application-card:nth-child(6) {
+    animation-delay: 0.17s;
+}
+
+.application-card:nth-child(7) {
+    animation-delay: 0.20s;
+}
+
+.application-card:nth-child(8) {
+    animation-delay: 0.23s;
+}
+
+.application-card:nth-child(9) {
+    animation-delay: 0.26s;
+}
+
+.application-card:nth-child(10) {
+    animation-delay: 0.29s;
+}
+
+@keyframes applicationCardIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 900px) {
+
+    .applications-hero-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .applications-hero-meta {
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .applications-section-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .applications-heading-detail {
+        text-align: left;
+    }
+}
