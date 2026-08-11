@@ -1683,6 +1683,17 @@
         1px solid
         rgba(124, 92, 255, 0.18);
 }
+.staff-application-status.submitted,
+.staff-application-status.pending-review {
+    color: #cabbff;
+
+    background:
+        rgba(124, 92, 255, 0.09);
+
+    border:
+        1px solid
+        rgba(124, 92, 255, 0.18);
+}
 
 .staff-application-status.interview {
     color: #fde68a;

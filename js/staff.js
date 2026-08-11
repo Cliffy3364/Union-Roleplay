@@ -387,12 +387,33 @@ function renderQueue(applications) {
                     </div>
 
                     <div class="staff-application-meta">
-                        <span>Waiting</span>
-                        <strong>
-                            ${formatWaitTime(submitted)}
-                        </strong>
-                    </div>
+    <span>Status</span>
 
+    <strong
+        class="staff-application-status ${
+            normalizeStatus(app.status)
+                .replaceAll(" ", "-")
+        }"
+    >
+        ${app.status || "Submitted"}
+    </strong>
+</div>
+
+<div class="staff-application-meta">
+    <span>Reviewer</span>
+
+    <strong>
+        ${
+            app.assigned_to
+                ? (
+                    app.assigned_reviewer_display_name ||
+                    app.assigned_reviewer_username ||
+                    app.assigned_to
+                )
+                : "Unassigned"
+        }
+    </strong>
+</div>
                     <div class="staff-application-meta">
                         <span>Status</span>
                         <strong>
