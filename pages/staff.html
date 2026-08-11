@@ -50,6 +50,8 @@
     <aside class="staff-sidebar">
 
 
+        <!-- BRAND -->
+
         <div class="staff-sidebar-brand">
 
             <div class="staff-sidebar-logo">
@@ -71,6 +73,8 @@
         </div>
 
 
+        <!-- SYSTEM STATUS -->
+
         <div class="staff-sidebar-status">
 
             <span class="staff-sidebar-status-dot"></span>
@@ -90,13 +94,17 @@
         </div>
 
 
+        <!-- NAVIGATION -->
+
         <nav class="staff-sidebar-nav">
 
+
+            <!-- CONTROL -->
 
             <div class="staff-nav-group">
 
                 <span class="staff-nav-heading">
-                    CONTROL CENTRE
+                    CONTROL
                 </span>
 
 
@@ -127,294 +135,323 @@
 
             <div class="staff-nav-group">
 
-                <span class="staff-nav-heading">
-                    APPLICATIONS
-                </span>
-
-
-                <button
-                    type="button"
-                    class="staff-nav-item"
-                    data-type="Whitelist Application"
+                <details
+                    class="staff-nav-dropdown"
+                    open
                 >
 
-                    <span class="staff-nav-content">
+                    <summary class="staff-nav-dropdown-summary">
 
-                        <span class="staff-nav-icon">
-                            WL
+                        <span class="staff-nav-content">
+
+                            <span class="staff-nav-icon">
+                                AP
+                            </span>
+
+                            <span>
+                                Applications
+                            </span>
+
                         </span>
 
-                        <span>
-                            Whitelist
+                        <span class="staff-nav-dropdown-arrow">
+                            ›
                         </span>
 
-                    </span>
+                    </summary>
 
-                    <span
-                        class="staff-nav-badge"
-                        id="nav-count-whitelist"
-                    >
-                        0
-                    </span>
 
-                </button>
+                    <div class="staff-nav-dropdown-content">
 
 
-                <button
-                    type="button"
-                    class="staff-nav-item"
-                    data-type="Staff Application"
-                >
+                        <button
+                            type="button"
+                            class="staff-nav-item staff-nav-subitem"
+                            data-type="Whitelist Application"
+                        >
 
-                    <span class="staff-nav-content">
+                            <span class="staff-nav-content">
 
-                        <span class="staff-nav-icon">
-                            ST
-                        </span>
+                                <span class="staff-nav-icon">
+                                    WL
+                                </span>
 
-                        <span>
-                            Staff
-                        </span>
+                                <span>
+                                    Whitelist
+                                </span>
 
-                    </span>
+                            </span>
 
-                    <span
-                        class="staff-nav-badge"
-                        id="nav-count-staff"
-                    >
-                        0
-                    </span>
+                            <span
+                                class="staff-nav-badge"
+                                id="nav-count-whitelist"
+                            >
+                                0
+                            </span>
 
-                </button>
+                        </button>
 
 
-                <button
-                    type="button"
-                    class="staff-nav-item"
-                    data-type="QA Tester Application"
-                >
+                        <button
+                            type="button"
+                            class="staff-nav-item staff-nav-subitem"
+                            data-type="Staff Application"
+                        >
 
-                    <span class="staff-nav-content">
+                            <span class="staff-nav-content">
 
-                        <span class="staff-nav-icon">
-                            QA
-                        </span>
+                                <span class="staff-nav-icon">
+                                    ST
+                                </span>
 
-                        <span>
-                            QA Tester
-                        </span>
+                                <span>
+                                    Staff
+                                </span>
 
-                    </span>
+                            </span>
 
-                    <span
-                        class="staff-nav-badge"
-                        id="nav-count-qa"
-                    >
-                        0
-                    </span>
+                            <span
+                                class="staff-nav-badge"
+                                id="nav-count-staff"
+                            >
+                                0
+                            </span>
 
-                </button>
+                        </button>
 
 
-                <button
-                    type="button"
-                    class="staff-nav-item"
-                    data-type="Social Media Manager Application"
-                >
+                        <button
+                            type="button"
+                            class="staff-nav-item staff-nav-subitem"
+                            data-type="QA Tester Application"
+                        >
 
-                    <span class="staff-nav-content">
+                            <span class="staff-nav-content">
 
-                        <span class="staff-nav-icon">
-                            SM
-                        </span>
+                                <span class="staff-nav-icon">
+                                    QA
+                                </span>
 
-                        <span>
-                            Social Media
-                        </span>
+                                <span>
+                                    QA Tester
+                                </span>
 
-                    </span>
+                            </span>
 
-                    <span
-                        class="staff-nav-badge"
-                        id="nav-count-social"
-                    >
-                        0
-                    </span>
+                            <span
+                                class="staff-nav-badge"
+                                id="nav-count-qa"
+                            >
+                                0
+                            </span>
 
-                </button>
+                        </button>
 
 
-                <button
-                    type="button"
-                    class="staff-nav-item"
-                    data-type="Media Application"
-                >
+                        <button
+                            type="button"
+                            class="staff-nav-item staff-nav-subitem"
+                            data-type="Social Media Manager Application"
+                        >
 
-                    <span class="staff-nav-content">
+                            <span class="staff-nav-content">
 
-                        <span class="staff-nav-icon">
-                            ME
-                        </span>
+                                <span class="staff-nav-icon">
+                                    SM
+                                </span>
 
-                        <span>
-                            Media
-                        </span>
+                                <span>
+                                    Social Media
+                                </span>
 
-                    </span>
+                            </span>
 
-                    <span
-                        class="staff-nav-badge"
-                        id="nav-count-media"
-                    >
-                        0
-                    </span>
+                            <span
+                                class="staff-nav-badge"
+                                id="nav-count-social"
+                            >
+                                0
+                            </span>
 
-                </button>
+                        </button>
 
 
-                <button
-                    type="button"
-                    class="staff-nav-item"
-                    data-type="Script Developer Application"
-                >
+                        <button
+                            type="button"
+                            class="staff-nav-item staff-nav-subitem"
+                            data-type="Media Application"
+                        >
 
-                    <span class="staff-nav-content">
+                            <span class="staff-nav-content">
 
-                        <span class="staff-nav-icon">
-                            SD
-                        </span>
+                                <span class="staff-nav-icon">
+                                    ME
+                                </span>
 
-                        <span>
-                            Script Developer
-                        </span>
+                                <span>
+                                    Media Team
+                                </span>
 
-                    </span>
+                            </span>
 
-                    <span
-                        class="staff-nav-badge"
-                        id="nav-count-script"
-                    >
-                        0
-                    </span>
+                            <span
+                                class="staff-nav-badge"
+                                id="nav-count-media"
+                            >
+                                0
+                            </span>
 
-                </button>
+                        </button>
 
 
-                <button
-                    type="button"
-                    class="staff-nav-item"
-                    data-type="Vehicle Developer Application"
-                >
+                        <button
+                            type="button"
+                            class="staff-nav-item staff-nav-subitem"
+                            data-type="Script Developer Application"
+                        >
 
-                    <span class="staff-nav-content">
+                            <span class="staff-nav-content">
 
-                        <span class="staff-nav-icon">
-                            VD
-                        </span>
+                                <span class="staff-nav-icon">
+                                    SD
+                                </span>
 
-                        <span>
-                            Vehicle Developer
-                        </span>
+                                <span>
+                                    Script Developer
+                                </span>
 
-                    </span>
+                            </span>
 
-                    <span
-                        class="staff-nav-badge"
-                        id="nav-count-vehicle"
-                    >
-                        0
-                    </span>
+                            <span
+                                class="staff-nav-badge"
+                                id="nav-count-script"
+                            >
+                                0
+                            </span>
 
-                </button>
+                        </button>
 
 
-                <button
-                    type="button"
-                    class="staff-nav-item"
-                    data-type="EUP Developer Application"
-                >
+                        <button
+                            type="button"
+                            class="staff-nav-item staff-nav-subitem"
+                            data-type="Vehicle Developer Application"
+                        >
 
-                    <span class="staff-nav-content">
+                            <span class="staff-nav-content">
 
-                        <span class="staff-nav-icon">
-                            EU
-                        </span>
+                                <span class="staff-nav-icon">
+                                    VD
+                                </span>
 
-                        <span>
-                            EUP Developer
-                        </span>
+                                <span>
+                                    Vehicle Developer
+                                </span>
 
-                    </span>
+                            </span>
 
-                    <span
-                        class="staff-nav-badge"
-                        id="nav-count-eup"
-                    >
-                        0
-                    </span>
+                            <span
+                                class="staff-nav-badge"
+                                id="nav-count-vehicle"
+                            >
+                                0
+                            </span>
 
-                </button>
+                        </button>
 
 
-                <button
-                    type="button"
-                    class="staff-nav-item"
-                    data-type="UPD Command Application"
-                >
+                        <button
+                            type="button"
+                            class="staff-nav-item staff-nav-subitem"
+                            data-type="EUP Developer Application"
+                        >
 
-                    <span class="staff-nav-content">
+                            <span class="staff-nav-content">
 
-                        <span class="staff-nav-icon">
-                            PD
-                        </span>
+                                <span class="staff-nav-icon">
+                                    EU
+                                </span>
 
-                        <span>
-                            UPD Command
-                        </span>
+                                <span>
+                                    EUP Developer
+                                </span>
 
-                    </span>
+                            </span>
 
-                    <span
-                        class="staff-nav-badge"
-                        id="nav-count-upd"
-                    >
-                        0
-                    </span>
+                            <span
+                                class="staff-nav-badge"
+                                id="nav-count-eup"
+                            >
+                                0
+                            </span>
 
-                </button>
+                        </button>
 
 
-                <button
-                    type="button"
-                    class="staff-nav-item"
-                    data-type="UHS Command Application"
-                >
+                        <button
+                            type="button"
+                            class="staff-nav-item staff-nav-subitem"
+                            data-type="UPD Command Application"
+                        >
 
-                    <span class="staff-nav-content">
+                            <span class="staff-nav-content">
 
-                        <span class="staff-nav-icon">
-                            HS
-                        </span>
+                                <span class="staff-nav-icon">
+                                    PD
+                                </span>
 
-                        <span>
-                            UHS Command
-                        </span>
+                                <span>
+                                    UPD Command
+                                </span>
 
-                    </span>
+                            </span>
 
-                    <span
-                        class="staff-nav-badge"
-                        id="nav-count-uhs"
-                    >
-                        0
-                    </span>
+                            <span
+                                class="staff-nav-badge"
+                                id="nav-count-upd"
+                            >
+                                0
+                            </span>
 
-                </button>
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="staff-nav-item staff-nav-subitem"
+                            data-type="UHS Command Application"
+                        >
+
+                            <span class="staff-nav-content">
+
+                                <span class="staff-nav-icon">
+                                    HS
+                                </span>
+
+                                <span>
+                                    UHS Command
+                                </span>
+
+                            </span>
+
+                            <span
+                                class="staff-nav-badge"
+                                id="nav-count-uhs"
+                            >
+                                0
+                            </span>
+
+                        </button>
+
+
+                    </div>
+
+                </details>
 
             </div>
 
 
-            <!-- MEMBERS -->
+            <!-- MANAGEMENT -->
 
             <div class="staff-nav-group">
 
@@ -444,11 +481,35 @@
 
                 </button>
 
+
+                <button
+                    type="button"
+                    class="staff-nav-item"
+                    data-view="discipline"
+                    id="staffDisciplineNav"
+                >
+
+                    <span class="staff-nav-content">
+
+                        <span class="staff-nav-icon">
+                            DC
+                        </span>
+
+                        <span>
+                            Staff Discipline
+                        </span>
+
+                    </span>
+
+                </button>
+
             </div>
 
 
         </nav>
 
+
+        <!-- SIDEBAR FOOTER -->
 
         <div class="staff-sidebar-footer">
 
@@ -533,7 +594,9 @@
         </div>
 
 
-        <!-- STAFF PANEL -->
+        <!-- ========================================
+             STAFF PANEL
+        ========================================= -->
 
         <div
             id="staffPanel"
@@ -541,9 +604,7 @@
         >
 
 
-            <!-- ========================================
-                 TOP BAR
-            ========================================= -->
+            <!-- TOP BAR -->
 
             <header class="staff-topbar">
 
@@ -561,7 +622,7 @@
                         Dashboard
                     </h1>
 
-                    <p>
+                    <p id="staffPageDescription">
                         Review applications and manage the Union Roleplay community.
                     </p>
 
@@ -591,7 +652,7 @@
 
 
             <!-- ========================================
-                 DASHBOARD
+                 DASHBOARD VIEW
             ========================================= -->
 
             <section id="staffDashboardView">
@@ -621,8 +682,6 @@
 
                 </div>
 
-
-                <!-- STATS -->
 
                 <div class="staff-stat-grid">
 
@@ -730,8 +789,6 @@
                 </div>
 
 
-                <!-- QUEUE OVERVIEW -->
-
                 <section class="staff-dashboard-panel">
 
                     <div class="staff-panel-header">
@@ -768,9 +825,7 @@
                     </div>
 
 
-                    <div
-                        class="staff-panel-divider"
-                    ></div>
+                    <div class="staff-panel-divider"></div>
 
 
                     <div id="applicationOverview"></div>
@@ -876,8 +931,6 @@
             >
 
 
-                <!-- SEARCH -->
-
                 <section class="staff-dashboard-panel">
 
                     <div class="staff-panel-header">
@@ -948,8 +1001,6 @@
                 </section>
 
 
-                <!-- RESULTS -->
-
                 <section
                     class="staff-dashboard-panel member-results-panel"
                 >
@@ -997,8 +1048,6 @@
                 </section>
 
 
-                <!-- PROFILE -->
-
                 <section
                     class="staff-dashboard-panel member-profile-panel"
                     id="memberProfilePanel"
@@ -1029,6 +1078,710 @@
 
 
                 </section>
+
+
+            </section>
+
+
+            <!-- ========================================
+                 STAFF DISCIPLINE
+            ========================================= -->
+
+            <section
+                id="staffDisciplineView"
+                hidden
+            >
+
+
+                <!-- INTRO -->
+
+                <div class="discipline-intro">
+
+                    <div>
+
+                        <span>
+                            INTERNAL RECORDS
+                        </span>
+
+                        <h2>
+                            Staff Discipline
+                        </h2>
+
+                        <p>
+                            Record formal disciplinary action taken against
+                            a Union Roleplay staff member.
+                        </p>
+
+                    </div>
+
+
+                    <div class="discipline-security-status">
+
+                        <span></span>
+
+                        AUTHORISED STAFF ONLY
+
+                    </div>
+
+                </div>
+
+
+                <div class="discipline-layout">
+
+
+                    <!-- ========================================
+                         DISCIPLINE FORM
+                    ========================================= -->
+
+                    <section class="staff-dashboard-panel discipline-form-panel">
+
+
+                        <div class="staff-panel-header">
+
+                            <div>
+
+                                <span>
+                                    NEW DISCIPLINARY RECORD
+                                </span>
+
+                                <h2>
+                                    Create Record
+                                </h2>
+
+                                <p>
+                                    All fields should be completed accurately.
+                                </p>
+
+                            </div>
+
+
+                            <div class="staff-panel-reference">
+
+                                <span>
+                                    RECORD TYPE
+                                </span>
+
+                                <strong>
+                                    Staff Discipline
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="staff-panel-divider"></div>
+
+
+                        <form id="staffDisciplineForm">
+
+
+                            <!-- STAFF MEMBER -->
+
+                            <div class="discipline-form-section">
+
+                                <div class="discipline-section-heading">
+
+                                    <span>
+                                        01
+                                    </span>
+
+                                    <div>
+
+                                        <strong>
+                                            Staff Member
+                                        </strong>
+
+                                        <small>
+                                            Select the member receiving the disciplinary action.
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="discipline-field">
+
+                                    <label for="disciplineMemberSearch">
+                                        Search Staff Member
+                                    </label>
+
+                                    <div class="discipline-member-search-row">
+
+                                        <input
+                                            type="search"
+                                            id="disciplineMemberSearch"
+                                            placeholder="Union ID, Discord username or Discord ID..."
+                                            autocomplete="off"
+                                        >
+
+                                        <button
+                                            type="button"
+                                            class="discipline-secondary-button"
+                                            id="disciplineMemberSearchButton"
+                                        >
+                                            Search
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    id="disciplineMemberResults"
+                                    class="discipline-member-results"
+                                ></div>
+
+
+                                <div
+                                    id="disciplineSelectedMember"
+                                    class="discipline-selected-member"
+                                    hidden
+                                >
+
+                                    <div class="discipline-selected-avatar">
+                                        U
+                                    </div>
+
+                                    <div>
+
+                                        <span>
+                                            SELECTED STAFF MEMBER
+                                        </span>
+
+                                        <strong id="disciplineSelectedMemberName">
+                                            Staff Member
+                                        </strong>
+
+                                        <small id="disciplineSelectedMemberDetails">
+                                            Union ID
+                                        </small>
+
+                                    </div>
+
+
+                                    <button
+                                        type="button"
+                                        id="disciplineChangeMember"
+                                    >
+                                        Change
+                                    </button>
+
+                                </div>
+
+
+                                <input
+                                    type="hidden"
+                                    id="disciplineMemberId"
+                                >
+
+                            </div>
+
+
+                            <!-- DISCIPLINE DETAILS -->
+
+                            <div class="discipline-form-section">
+
+                                <div class="discipline-section-heading">
+
+                                    <span>
+                                        02
+                                    </span>
+
+                                    <div>
+
+                                        <strong>
+                                            Disciplinary Action
+                                        </strong>
+
+                                        <small>
+                                            Record the action and severity.
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="discipline-field-grid">
+
+
+                                    <div class="discipline-field">
+
+                                        <label for="disciplineAction">
+                                            Action Taken
+                                        </label>
+
+                                        <select
+                                            id="disciplineAction"
+                                            required
+                                        >
+
+                                            <option value="">
+                                                Select action...
+                                            </option>
+
+                                            <option value="Verbal Warning">
+                                                Verbal Warning
+                                            </option>
+
+                                            <option value="Written Warning">
+                                                Written Warning
+                                            </option>
+
+                                            <option value="Strike">
+                                                Staff Strike
+                                            </option>
+
+                                            <option value="Suspension">
+                                                Suspension
+                                            </option>
+
+                                            <option value="Demotion">
+                                                Demotion
+                                            </option>
+
+                                            <option value="Removal">
+                                                Removal from Staff
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="discipline-field">
+
+                                        <label for="disciplineSeverity">
+                                            Severity
+                                        </label>
+
+                                        <select
+                                            id="disciplineSeverity"
+                                            required
+                                        >
+
+                                            <option value="">
+                                                Select severity...
+                                            </option>
+
+                                            <option value="Low">
+                                                Low
+                                            </option>
+
+                                            <option value="Moderate">
+                                                Moderate
+                                            </option>
+
+                                            <option value="High">
+                                                High
+                                            </option>
+
+                                            <option value="Severe">
+                                                Severe
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="discipline-field">
+
+                                        <label for="disciplineCategory">
+                                            Category
+                                        </label>
+
+                                        <select
+                                            id="disciplineCategory"
+                                            required
+                                        >
+
+                                            <option value="">
+                                                Select category...
+                                            </option>
+
+                                            <option value="Conduct">
+                                                Conduct
+                                            </option>
+
+                                            <option value="Staff Abuse">
+                                                Staff Abuse
+                                            </option>
+
+                                            <option value="Professional Standards">
+                                                Professional Standards
+                                            </option>
+
+                                            <option value="Inactivity">
+                                                Inactivity
+                                            </option>
+
+                                            <option value="Confidentiality">
+                                                Confidentiality
+                                            </option>
+
+                                            <option value="Roleplay Standards">
+                                                Roleplay Standards
+                                            </option>
+
+                                            <option value="Misuse of Permissions">
+                                                Misuse of Permissions
+                                            </option>
+
+                                            <option value="Failure to Follow Procedure">
+                                                Failure to Follow Procedure
+                                            </option>
+
+                                            <option value="Other">
+                                                Other
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="discipline-field">
+
+                                        <label for="disciplineNotified">
+                                            Staff Member Notified
+                                        </label>
+
+                                        <select
+                                            id="disciplineNotified"
+                                            required
+                                        >
+
+                                            <option value="">
+                                                Select...
+                                            </option>
+
+                                            <option value="Yes">
+                                                Yes
+                                            </option>
+
+                                            <option value="No">
+                                                No
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- INCIDENT DETAILS -->
+
+                            <div class="discipline-form-section">
+
+                                <div class="discipline-section-heading">
+
+                                    <span>
+                                        03
+                                    </span>
+
+                                    <div>
+
+                                        <strong>
+                                            Incident Details
+                                        </strong>
+
+                                        <small>
+                                            Explain exactly what resulted in the disciplinary action.
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="discipline-field">
+
+                                    <label for="disciplineReason">
+                                        Reason / Incident Summary
+                                    </label>
+
+                                    <textarea
+                                        id="disciplineReason"
+                                        rows="6"
+                                        placeholder="Explain what happened, what standards were breached and why action is being taken..."
+                                        required
+                                    ></textarea>
+
+                                </div>
+
+
+                                <div class="discipline-field">
+
+                                    <label for="disciplineEvidence">
+                                        Evidence
+                                    </label>
+
+                                    <textarea
+                                        id="disciplineEvidence"
+                                        rows="4"
+                                        placeholder="Evidence links, message references, screenshots, clips or other relevant information..."
+                                    ></textarea>
+
+                                    <small>
+                                        Add one or more links or references where applicable.
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- OUTCOME -->
+
+                            <div class="discipline-form-section">
+
+                                <div class="discipline-section-heading">
+
+                                    <span>
+                                        04
+                                    </span>
+
+                                    <div>
+
+                                        <strong>
+                                            Outcome
+                                        </strong>
+
+                                        <small>
+                                            Record any additional restrictions or conditions.
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="discipline-field-grid">
+
+
+                                    <div class="discipline-field">
+
+                                        <label for="disciplineExpiry">
+                                            Expiry / Review Date
+                                        </label>
+
+                                        <input
+                                            type="date"
+                                            id="disciplineExpiry"
+                                        >
+
+                                        <small>
+                                            Optional for warnings, strikes or suspensions.
+                                        </small>
+
+                                    </div>
+
+
+                                    <div class="discipline-field">
+
+                                        <label for="disciplineReference">
+                                            External Reference
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="disciplineReference"
+                                            placeholder="Optional case, ticket or report reference"
+                                        >
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="discipline-field">
+
+                                    <label for="disciplineInternalNotes">
+                                        Internal Staff Notes
+                                    </label>
+
+                                    <textarea
+                                        id="disciplineInternalNotes"
+                                        rows="4"
+                                        placeholder="Any additional information for senior staff..."
+                                    ></textarea>
+
+                                    <small>
+                                        Internal notes will not be included in any member-facing communication.
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- CONFIRMATION -->
+
+                            <div class="discipline-confirmation">
+
+                                <label>
+
+                                    <input
+                                        type="checkbox"
+                                        id="disciplineConfirmation"
+                                        required
+                                    >
+
+                                    <span>
+                                        I confirm this disciplinary record is accurate
+                                        and that I am authorised to issue this action.
+                                    </span>
+
+                                </label>
+
+                            </div>
+
+
+                            <!-- SUBMIT -->
+
+                            <div class="discipline-form-actions">
+
+                                <button
+                                    type="reset"
+                                    class="discipline-secondary-button"
+                                    id="disciplineResetButton"
+                                >
+                                    Clear Form
+                                </button>
+
+
+                                <button
+                                    type="submit"
+                                    class="btn primary"
+                                    id="disciplineSubmitButton"
+                                >
+                                    Submit Disciplinary Record
+                                </button>
+
+                            </div>
+
+
+                            <div
+                                id="disciplineFormMessage"
+                                class="discipline-form-message"
+                                hidden
+                            ></div>
+
+
+                        </form>
+
+
+                    </section>
+
+
+                    <!-- ========================================
+                         DISCIPLINE HISTORY
+                    ========================================= -->
+
+                    <aside class="discipline-history-panel">
+
+
+                        <section class="staff-dashboard-panel">
+
+                            <div class="staff-panel-header">
+
+                                <div>
+
+                                    <span>
+                                        DISCIPLINARY HISTORY
+                                    </span>
+
+                                    <h2>
+                                        Recent Records
+                                    </h2>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="staff-panel-divider"></div>
+
+
+                            <div id="disciplineHistory">
+
+                                <div class="discipline-empty-state">
+
+                                    <div>
+                                        DC
+                                    </div>
+
+                                    <strong>
+                                        No staff member selected
+                                    </strong>
+
+                                    <p>
+                                        Search for a staff member to view their
+                                        disciplinary history.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                        <section class="staff-dashboard-panel discipline-guidance-panel">
+
+                            <span class="discipline-guidance-label">
+                                INTERNAL GUIDANCE
+                            </span>
+
+                            <h3>
+                                Before issuing discipline
+                            </h3>
+
+                            <p>
+                                Ensure the evidence has been reviewed and the action
+                                is proportionate to the conduct being recorded.
+                            </p>
+
+                            <div class="discipline-guidance-list">
+
+                                <div>
+                                    <span>01</span>
+                                    Confirm the facts.
+                                </div>
+
+                                <div>
+                                    <span>02</span>
+                                    Review available evidence.
+                                </div>
+
+                                <div>
+                                    <span>03</span>
+                                    Select a proportionate outcome.
+                                </div>
+
+                                <div>
+                                    <span>04</span>
+                                    Record the decision clearly.
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                    </aside>
+
+
+                </div>
 
 
             </section>

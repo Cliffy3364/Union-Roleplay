@@ -57,6 +57,10 @@ let currentStatusFilter =
     "pending";
 
 
+let selectedDisciplineMember = null;
+let disciplineHistoryRecords = [];
+
+
 /* ========================================
    AUTH / API
 ======================================== */
@@ -460,6 +464,11 @@ function hideAllViews() {
             "staffMembersView"
         );
 
+    const discipline =
+        document.getElementById(
+            "staffDisciplineView"
+        );
+
 
     if (dashboard) {
 
@@ -476,6 +485,12 @@ function hideAllViews() {
     if (members) {
 
         members.hidden = true;
+    }
+
+
+    if (discipline) {
+
+        discipline.hidden = true;
     }
 }
 
@@ -532,6 +547,11 @@ function showDashboard() {
             "staffPageTitle"
         );
 
+    const description =
+        document.getElementById(
+            "staffPageDescription"
+        );
+
 
     if (dashboard) {
 
@@ -543,6 +563,13 @@ function showDashboard() {
 
         title.textContent =
             "Dashboard";
+    }
+
+
+    if (description) {
+
+        description.textContent =
+            "Review applications and manage the Union Roleplay community.";
     }
 
 
@@ -575,6 +602,11 @@ function showMemberManagement() {
             "staffPageTitle"
         );
 
+    const description =
+        document.getElementById(
+            "staffPageDescription"
+        );
+
 
     if (members) {
 
@@ -586,6 +618,13 @@ function showMemberManagement() {
 
         title.textContent =
             "Member Management";
+    }
+
+
+    if (description) {
+
+        description.textContent =
+            "Search member records, review account information and manage internal notes.";
     }
 
 
@@ -604,6 +643,1009 @@ function showMemberManagement() {
 
 
             memberSearch?.focus();
+        }
+    );
+}
+
+
+/* ========================================
+   STAFF DISCIPLINE VIEW
+======================================== */
+
+function showStaffDiscipline() {
+
+    hideAllViews();
+
+
+    currentQueueType =
+        null;
+
+
+    const discipline =
+        document.getElementById(
+            "staffDisciplineView"
+        );
+
+    const title =
+        document.getElementById(
+            "staffPageTitle"
+        );
+
+    const description =
+        document.getElementById(
+            "staffPageDescription"
+        );
+
+
+    if (discipline) {
+
+        discipline.hidden = false;
+    }
+
+
+    if (title) {
+
+        title.textContent =
+            "Staff Discipline";
+    }
+
+
+    if (description) {
+
+        description.textContent =
+            "Create and review formal disciplinary records for Union Roleplay staff members.";
+    }
+
+
+    setTopSearch(
+        "",
+        false
+    );
+
+
+    requestAnimationFrame(
+        () => {
+
+            const search =
+                document.getElementById(
+                    "disciplineMemberSearch"
+                );
+
+
+            search?.focus();
+        }
+    );
+}
+
+
+/* ========================================
+   DISCIPLINE HELPERS
+======================================== */
+
+function disciplineMemberDetails(member) {
+
+    const parts = [];
+
+
+    if (member.union_id) {
+
+        parts.push(
+            member.union_id
+        );
+    }
+
+
+    if (member.discord_id) {
+
+        parts.push(
+            `Discord ${member.discord_id}`
+        );
+    }
+
+
+    return parts.join(" · ") ||
+        "No member identifiers available";
+}
+
+
+function setDisciplineMessage(
+    message,
+    type = "info"
+) {
+
+    const target =
+        document.getElementById(
+            "disciplineFormMessage"
+        );
+
+
+    if (!target) {
+
+        return;
+    }
+
+
+    if (!message) {
+
+        target.hidden = true;
+
+        target.textContent = "";
+
+        target.className =
+            "discipline-form-message";
+
+        return;
+    }
+
+
+    target.hidden = false;
+
+    target.textContent =
+        message;
+
+    target.className =
+        `discipline-form-message ${type}`;
+}
+
+
+function renderDisciplineMemberResults(
+    members
+) {
+
+    const target =
+        document.getElementById(
+            "disciplineMemberResults"
+        );
+
+
+    if (!target) {
+
+        return;
+    }
+
+
+    if (!members.length) {
+
+        target.innerHTML = `
+            <div class="discipline-search-empty">
+                No matching staff members were found.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    target.innerHTML =
+        members
+            .map(
+                member => {
+
+                    const name =
+                        memberDisplayName(
+                            member
+                        );
+
+                    const initial =
+                        name
+                            .charAt(0)
+                            .toUpperCase();
+
+
+                    return `
+                        <button
+                            type="button"
+                            class="discipline-member-result"
+                            data-discipline-member-id="${Number(member.id)}"
+                        >
+
+                            <span class="discipline-member-result-avatar">
+                                ${escapeHtml(initial)}
+                            </span>
+
+                            <span class="discipline-member-result-main">
+
+                                <strong>
+                                    ${escapeHtml(name)}
+                                </strong>
+
+                                <small>
+                                    ${escapeHtml(
+                                        disciplineMemberDetails(member)
+                                    )}
+                                </small>
+
+                            </span>
+
+                            <span class="discipline-member-result-action">
+                                Select →
+                            </span>
+
+                        </button>
+                    `;
+                }
+            )
+            .join("");
+
+
+    target
+        .querySelectorAll(
+            "[data-discipline-member-id]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    async () => {
+
+                        const id =
+                            Number(
+                                button.dataset
+                                    .disciplineMemberId
+                            );
+
+
+                        const member =
+                            members.find(
+                                item =>
+                                    Number(item.id) === id
+                            );
+
+
+                        if (!member) {
+
+                            return;
+                        }
+
+
+                        await selectDisciplineMember(
+                            member
+                        );
+                    }
+                );
+            }
+        );
+}
+
+
+async function searchDisciplineMembers() {
+
+    const input =
+        document.getElementById(
+            "disciplineMemberSearch"
+        );
+
+    const button =
+        document.getElementById(
+            "disciplineMemberSearchButton"
+        );
+
+    const target =
+        document.getElementById(
+            "disciplineMemberResults"
+        );
+
+
+    const query =
+        String(
+            input?.value || ""
+        ).trim();
+
+
+    if (!query) {
+
+        input?.focus();
+
+        return;
+    }
+
+
+    if (button) {
+
+        button.disabled = true;
+
+        button.textContent =
+            "Searching...";
+    }
+
+
+    if (target) {
+
+        target.innerHTML = `
+            <p class="staff-muted">
+                Searching staff records...
+            </p>
+        `;
+    }
+
+
+    try {
+
+        const data =
+            await staffFetch(
+                `/api/staff/admin/users?q=${encodeURIComponent(query)}`
+            );
+
+
+        const users =
+            data.users || [];
+
+
+        renderDisciplineMemberResults(
+            users
+        );
+
+
+    } catch (error) {
+
+        if (target) {
+
+            target.innerHTML = `
+                <div class="discipline-search-empty error">
+                    ${escapeHtml(
+                        error.message ||
+                        "Unable to search staff records."
+                    )}
+                </div>
+            `;
+        }
+
+
+    } finally {
+
+        if (button) {
+
+            button.disabled = false;
+
+            button.textContent =
+                "Search";
+        }
+    }
+}
+
+
+async function selectDisciplineMember(
+    member
+) {
+
+    selectedDisciplineMember =
+        member;
+
+
+    const results =
+        document.getElementById(
+            "disciplineMemberResults"
+        );
+
+    const selected =
+        document.getElementById(
+            "disciplineSelectedMember"
+        );
+
+    const name =
+        document.getElementById(
+            "disciplineSelectedMemberName"
+        );
+
+    const details =
+        document.getElementById(
+            "disciplineSelectedMemberDetails"
+        );
+
+    const avatar =
+        selected?.querySelector(
+            ".discipline-selected-avatar"
+        );
+
+    const memberId =
+        document.getElementById(
+            "disciplineMemberId"
+        );
+
+
+    if (results) {
+
+        results.innerHTML = "";
+    }
+
+
+    if (selected) {
+
+        selected.hidden = false;
+    }
+
+
+    if (name) {
+
+        name.textContent =
+            memberDisplayName(member);
+    }
+
+
+    if (details) {
+
+        details.textContent =
+            disciplineMemberDetails(member);
+    }
+
+
+    if (avatar) {
+
+        avatar.textContent =
+            memberDisplayName(member)
+                .charAt(0)
+                .toUpperCase();
+    }
+
+
+    if (memberId) {
+
+        memberId.value =
+            Number(member.id) || "";
+    }
+
+
+    setDisciplineMessage("");
+
+
+    await loadDisciplineHistory(
+        member.id
+    );
+}
+
+
+function clearDisciplineMember() {
+
+    selectedDisciplineMember = null;
+
+    disciplineHistoryRecords = [];
+
+
+    const selected =
+        document.getElementById(
+            "disciplineSelectedMember"
+        );
+
+    const memberId =
+        document.getElementById(
+            "disciplineMemberId"
+        );
+
+    const input =
+        document.getElementById(
+            "disciplineMemberSearch"
+        );
+
+    const results =
+        document.getElementById(
+            "disciplineMemberResults"
+        );
+
+
+    if (selected) {
+
+        selected.hidden = true;
+    }
+
+
+    if (memberId) {
+
+        memberId.value = "";
+    }
+
+
+    if (input) {
+
+        input.value = "";
+    }
+
+
+    if (results) {
+
+        results.innerHTML = "";
+    }
+
+
+    renderDisciplineHistory([]);
+
+
+    requestAnimationFrame(
+        () => input?.focus()
+    );
+}
+
+
+function formatDisciplineAction(record) {
+
+    return (
+        record.action ||
+        record.action_taken ||
+        record.outcome ||
+        "Disciplinary Action"
+    );
+}
+
+
+function renderDisciplineHistory(
+    records
+) {
+
+    disciplineHistoryRecords =
+        records || [];
+
+
+    const target =
+        document.getElementById(
+            "disciplineHistory"
+        );
+
+
+    if (!target) {
+
+        return;
+    }
+
+
+    if (!selectedDisciplineMember) {
+
+        target.innerHTML = `
+            <div class="discipline-empty-state">
+
+                <div>
+                    DC
+                </div>
+
+                <strong>
+                    No staff member selected
+                </strong>
+
+                <p>
+                    Search for a staff member to view their disciplinary history.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    if (!disciplineHistoryRecords.length) {
+
+        target.innerHTML = `
+            <div class="discipline-empty-state">
+
+                <div>
+                    ✓
+                </div>
+
+                <strong>
+                    No disciplinary records
+                </strong>
+
+                <p>
+                    No disciplinary records are currently stored for this staff member.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    target.innerHTML =
+        disciplineHistoryRecords
+            .map(
+                record => `
+                    <article class="discipline-history-record">
+
+                        <div class="discipline-history-record-top">
+
+                            <span class="discipline-history-action">
+                                ${escapeHtml(
+                                    formatDisciplineAction(record)
+                                )}
+                            </span>
+
+                            <time>
+                                ${escapeHtml(
+                                    formatMemberDate(
+                                        record.created_at ||
+                                        record.issued_at
+                                    )
+                                )}
+                            </time>
+
+                        </div>
+
+                        <strong>
+                            ${escapeHtml(
+                                record.category ||
+                                "Staff Conduct"
+                            )}
+                        </strong>
+
+                        <p>
+                            ${escapeHtml(
+                                record.reason ||
+                                record.summary ||
+                                "No reason recorded."
+                            )}
+                        </p>
+
+                        <div class="discipline-history-meta">
+
+                            <span>
+                                ${escapeHtml(
+                                    record.severity ||
+                                    "Unspecified severity"
+                                )}
+                            </span>
+
+                            <span>
+                                Issued by
+                                ${escapeHtml(
+                                    record.issued_by_name ||
+                                    record.actor_name ||
+                                    "Union Staff"
+                                )}
+                            </span>
+
+                        </div>
+
+                    </article>
+                `
+            )
+            .join("");
+}
+
+
+async function loadDisciplineHistory(
+    memberId
+) {
+
+    const target =
+        document.getElementById(
+            "disciplineHistory"
+        );
+
+
+    if (!memberId) {
+
+        renderDisciplineHistory([]);
+
+        return;
+    }
+
+
+    if (target) {
+
+        target.innerHTML = `
+            <p class="staff-muted">
+                Loading disciplinary history...
+            </p>
+        `;
+    }
+
+
+    try {
+
+        const data =
+            await staffFetch(
+                `/api/staff/discipline?member_id=${encodeURIComponent(memberId)}`
+            );
+
+
+        renderDisciplineHistory(
+            data.records ||
+            data.discipline ||
+            []
+        );
+
+
+    } catch (error) {
+
+        if (target) {
+
+            target.innerHTML = `
+                <div class="discipline-empty-state error">
+
+                    <div>
+                        !
+                    </div>
+
+                    <strong>
+                        History unavailable
+                    </strong>
+
+                    <p>
+                        ${escapeHtml(
+                            error.message ||
+                            "Unable to load disciplinary history."
+                        )}
+                    </p>
+
+                </div>
+            `;
+        }
+    }
+}
+
+
+function resetDisciplineForm(
+    clearMember = false
+) {
+
+    const form =
+        document.getElementById(
+            "staffDisciplineForm"
+        );
+
+
+    form?.reset();
+
+
+    if (clearMember) {
+
+        clearDisciplineMember();
+    }
+
+
+    setDisciplineMessage("");
+}
+
+
+async function submitDisciplineRecord() {
+
+    const form =
+        document.getElementById(
+            "staffDisciplineForm"
+        );
+
+    const button =
+        document.getElementById(
+            "disciplineSubmitButton"
+        );
+
+
+    if (!form) {
+
+        return;
+    }
+
+
+    if (!selectedDisciplineMember) {
+
+        setDisciplineMessage(
+            "Select the staff member receiving this disciplinary action before submitting.",
+            "error"
+        );
+
+        document
+            .getElementById(
+                "disciplineMemberSearch"
+            )
+            ?.focus();
+
+        return;
+    }
+
+
+    if (!form.checkValidity()) {
+
+        form.reportValidity();
+
+        return;
+    }
+
+
+    const payload = {
+
+        member_id:
+            Number(
+                selectedDisciplineMember.id
+            ),
+
+        action:
+            document.getElementById(
+                "disciplineAction"
+            )?.value || "",
+
+        severity:
+            document.getElementById(
+                "disciplineSeverity"
+            )?.value || "",
+
+        category:
+            document.getElementById(
+                "disciplineCategory"
+            )?.value || "",
+
+        notified:
+            document.getElementById(
+                "disciplineNotified"
+            )?.value || "",
+
+        reason:
+            document.getElementById(
+                "disciplineReason"
+            )?.value.trim() || "",
+
+        evidence:
+            document.getElementById(
+                "disciplineEvidence"
+            )?.value.trim() || "",
+
+        expiry_date:
+            document.getElementById(
+                "disciplineExpiry"
+            )?.value || null,
+
+        external_reference:
+            document.getElementById(
+                "disciplineReference"
+            )?.value.trim() || "",
+
+        internal_notes:
+            document.getElementById(
+                "disciplineInternalNotes"
+            )?.value.trim() || ""
+    };
+
+
+    if (button) {
+
+        button.disabled = true;
+
+        button.textContent =
+            "Submitting Record...";
+    }
+
+
+    setDisciplineMessage(
+        "Submitting disciplinary record...",
+        "info"
+    );
+
+
+    try {
+
+        const data =
+            await staffFetch(
+                "/api/staff/discipline",
+                {
+                    method: "POST",
+
+                    body:
+                        JSON.stringify(
+                            payload
+                        )
+                }
+            );
+
+
+        setDisciplineMessage(
+            data.message ||
+            "Disciplinary record created successfully.",
+            "success"
+        );
+
+
+        form.reset();
+
+
+        await loadDisciplineHistory(
+            selectedDisciplineMember.id
+        );
+
+
+    } catch (error) {
+
+        setDisciplineMessage(
+            error.message ||
+            "The disciplinary record could not be created.",
+            "error"
+        );
+
+
+    } finally {
+
+        if (button) {
+
+            button.disabled = false;
+
+            button.textContent =
+                "Submit Disciplinary Record";
+        }
+    }
+}
+
+
+function setupDisciplineManagement() {
+
+    const searchInput =
+        document.getElementById(
+            "disciplineMemberSearch"
+        );
+
+    const searchButton =
+        document.getElementById(
+            "disciplineMemberSearchButton"
+        );
+
+    const changeButton =
+        document.getElementById(
+            "disciplineChangeMember"
+        );
+
+    const resetButton =
+        document.getElementById(
+            "disciplineResetButton"
+        );
+
+    const form =
+        document.getElementById(
+            "staffDisciplineForm"
+        );
+
+
+    searchButton?.addEventListener(
+        "click",
+        async () => {
+
+            await searchDisciplineMembers();
+        }
+    );
+
+
+    searchInput?.addEventListener(
+        "keydown",
+        async event => {
+
+            if (event.key !== "Enter") {
+
+                return;
+            }
+
+
+            event.preventDefault();
+
+            await searchDisciplineMembers();
+        }
+    );
+
+
+    changeButton?.addEventListener(
+        "click",
+        () => {
+
+            clearDisciplineMember();
+        }
+    );
+
+
+    resetButton?.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            resetDisciplineForm(
+                true
+            );
+        }
+    );
+
+
+    form?.addEventListener(
+        "submit",
+        async event => {
+
+            event.preventDefault();
+
+            await submitDisciplineRecord();
         }
     );
 }
@@ -1154,6 +2196,11 @@ async function openQueue(type) {
             "staffPageTitle"
         );
 
+    const pageDescription =
+        document.getElementById(
+            "staffPageDescription"
+        );
+
     const queue =
         document.getElementById(
             "staffApplicationList"
@@ -1173,6 +2220,13 @@ async function openQueue(type) {
                 " Application",
                 ""
             );
+    }
+
+
+    if (pageDescription) {
+
+        pageDescription.textContent =
+            "Review, filter and manage applications in this queue.";
     }
 
 
@@ -2319,6 +3373,33 @@ document.addEventListener(
 
 
         /* ========================================
+           STAFF DISCIPLINE BUTTON
+        ======================================== */
+
+        const disciplineButton =
+            document.querySelector(
+                '.staff-nav-item[data-view="discipline"]'
+            );
+
+
+        if (disciplineButton) {
+
+            disciplineButton.addEventListener(
+                "click",
+                () => {
+
+                    setActiveNav(
+                        disciplineButton
+                    );
+
+
+                    showStaffDiscipline();
+                }
+            );
+        }
+
+
+        /* ========================================
            APPLICATION NAVIGATION
         ======================================== */
 
@@ -2413,6 +3494,8 @@ document.addEventListener(
         setupApplicationSearch();
 
         setupMemberManagement();
+
+        setupDisciplineManagement();
 
 
         showDashboard();
