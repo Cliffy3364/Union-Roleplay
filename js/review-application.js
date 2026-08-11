@@ -1,15 +1,164 @@
 const REVIEW_API =
     "https://union-roleplay-api.danielclifford2808.workers.dev";
 
+
 let currentApplication = null;
 let currentStaffUser = null;
 let pendingDecisionStatus = null;
 
+
+/* ========================================
+   APPLICATION QUESTION LABELS
+
+   These match the questions in apply.js.
+======================================== */
+
+const REVIEW_QUESTION_CONFIG = {
+
+    "Whitelist Application": {
+        age: "How old are you?",
+        timezone: "What is your timezone?",
+        roleplayExperience:
+            "Tell us about your previous roleplay experience.",
+        whyUnion:
+            "Why do you want to join Union Roleplay?",
+        scenario:
+            "You are stopped by police after a pursuit. Explain how you would roleplay the situation."
+    },
+
+
+    "Staff Application": {
+        age: "How old are you?",
+        experience:
+            "Do you have any previous staff experience? Tell us about it.",
+        whyStaff:
+            "Why do you want to join the Union Roleplay staff team?",
+        strengths:
+            "What strengths would you bring to the staff team?",
+        staffScenario:
+            "Two players are arguing in a staff situation and both are blaming each other. How would you handle it?"
+    },
+
+
+    "QA Tester Application": {
+        age: "How old are you?",
+        availability:
+            "When are you usually available to test?",
+        testingExperience:
+            "Do you have any previous QA or testing experience?",
+        bugReporting:
+            "How would you report a bug clearly to a developer?",
+        whyQa:
+            "Why do you want to become a QA Tester for Union Roleplay?"
+    },
+
+
+    "Social Media Manager Application": {
+        age: "How old are you?",
+        experience:
+            "Describe your previous social media or FiveM media experience.",
+        portfolio:
+            "Provide links or details for at least three examples of your previous FiveM videos or images.",
+        strategy:
+            "How would you grow Union Roleplay's social media accounts?",
+        management:
+            "How would you organise and request content from the Union Roleplay media team?"
+    },
+
+
+    "Media Application": {
+        age: "How old are you?",
+        experience:
+            "Tell us about your previous FiveM or media experience.",
+        portfolio:
+            "Provide examples of your previous media work.",
+        tools:
+            "What editing or capture software do you use?",
+        availability:
+            "How often would you be available to create media for Union Roleplay?"
+    },
+
+
+    "Script Developer Application": {
+        age: "How old are you?",
+        experience:
+            "Tell us about your FiveM development experience.",
+        languages:
+            "Which programming languages and FiveM frameworks are you comfortable with?",
+        portfolio:
+            "Provide examples or links to previous development work.",
+        availability:
+            "How much time can you normally dedicate to development each week?"
+    },
+
+
+    "Vehicle Developer Application": {
+        age: "How old are you?",
+        experience:
+            "Tell us about your FiveM vehicle development experience.",
+        skills:
+            "What vehicle development work can you do? For example liveries, handling, metas, models or optimisation.",
+        portfolio:
+            "Provide examples or links to your previous vehicle work.",
+        availability:
+            "How often are you available to work on vehicles?"
+    },
+
+
+    "EUP Developer Application": {
+        age: "How old are you?",
+        experience:
+            "Tell us about your EUP development experience.",
+        skills:
+            "What EUP work can you create or edit?",
+        portfolio:
+            "Provide examples or links to your previous EUP work.",
+        availability:
+            "How often are you available to work on EUP?"
+    },
+
+
+    "UPD Command Application": {
+        age: "How old are you?",
+        experience:
+            "Tell us about your previous policing and command experience.",
+        leadership:
+            "Describe your leadership style.",
+        plans:
+            "What would you bring to UPD Command?",
+        standards:
+            "How would you maintain high roleplay and policing standards within the department?"
+    },
+
+
+    "UHS Command Application": {
+        age: "How old are you?",
+        experience:
+            "Tell us about your previous medical and command experience.",
+        leadership:
+            "Describe your leadership style.",
+        plans:
+            "What would you bring to UHS Command?",
+        standards:
+            "How would you maintain high medical roleplay and departmental standards?"
+    }
+};
+
+
+/* ========================================
+   BASIC HELPERS
+======================================== */
+
 function getReviewToken() {
-    return localStorage.getItem("union_session");
+
+    return localStorage.getItem(
+        "union_session"
+    );
 }
 
+
 function getApplicationId() {
+
     const params =
         new URLSearchParams(
             window.location.search
@@ -20,7 +169,9 @@ function getApplicationId() {
     );
 }
 
+
 function escapeHtml(value) {
+
     return String(value ?? "")
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
@@ -29,7 +180,9 @@ function escapeHtml(value) {
         .replaceAll("'", "&#039;");
 }
 
+
 function formatLabel(key) {
+
     return String(key)
         .replace(
             /([a-z])([A-Z])/g,
@@ -46,17 +199,136 @@ function formatLabel(key) {
         );
 }
 
+
+function getQuestionLabel(
+    applicationType,
+    key
+) {
+
+    const config =
+        REVIEW_QUESTION_CONFIG[
+            applicationType
+        ];
+
+    if (
+        config &&
+        config[key]
+    ) {
+        return config[key];
+    }
+
+    return formatLabel(key);
+}
+
+
 function formatDate(timestamp) {
+
     if (!timestamp) {
         return "Not available";
     }
 
-    return new Date(
-        Number(timestamp)
-    ).toLocaleString("en-GB");
+    const date =
+        new Date(
+            Number(timestamp)
+        );
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+        return "Not available";
+    }
+
+    return date.toLocaleString(
+        "en-GB"
+    );
 }
 
+
+function normaliseStatus(status) {
+
+    return String(status || "")
+        .trim()
+        .toLowerCase();
+}
+
+
+function isFinalStatus(status) {
+
+    const value =
+        normaliseStatus(status);
+
+    return (
+        value === "accepted" ||
+        value === "declined"
+    );
+}
+
+
+function isAssignedToCurrentStaff(app) {
+
+    if (
+        !app ||
+        !currentStaffUser
+    ) {
+        return false;
+    }
+
+    return (
+        String(
+            app.assigned_to || ""
+        ) ===
+        String(
+            currentStaffUser.discord_id ||
+            currentStaffUser.discordId ||
+            ""
+        )
+    );
+}
+
+
+function currentStaffName() {
+
+    if (!currentStaffUser) {
+        return "Union Staff";
+    }
+
+    return (
+        currentStaffUser.discord_display_name ||
+        currentStaffUser.discordDisplayName ||
+        currentStaffUser.display_name ||
+        currentStaffUser.displayName ||
+        currentStaffUser.discord_username ||
+        currentStaffUser.username ||
+        "Union Staff"
+    );
+}
+
+
+function reviewerDisplayName(app) {
+
+    if (!app?.assigned_to) {
+        return "Unassigned";
+    }
+
+    if (
+        isAssignedToCurrentStaff(app)
+    ) {
+        return currentStaffName();
+    }
+
+    return (
+        app.assigned_to_name ||
+        app.assigned_reviewer_name ||
+        app.reviewer_name ||
+        app.assigned_to
+    );
+}
+
+
 function parseApplicationData(value) {
+
     if (!value) {
         return {};
     }
@@ -69,6 +341,7 @@ function parseApplicationData(value) {
     }
 
     try {
+
         const parsed =
             JSON.parse(value);
 
@@ -81,18 +354,26 @@ function parseApplicationData(value) {
             : {};
 
     } catch {
+
         return {};
     }
 }
+
+
+/* ========================================
+   API
+======================================== */
 
 async function reviewFetch(
     path,
     options = {}
 ) {
+
     const token =
         getReviewToken();
 
     if (!token) {
+
         throw new Error(
             "Not logged in."
         );
@@ -105,6 +386,7 @@ async function reviewFetch(
                 ...options,
 
                 headers: {
+
                     "Content-Type":
                         "application/json",
 
@@ -119,6 +401,7 @@ async function reviewFetch(
     let data;
 
     try {
+
         data =
             await response.json();
 
@@ -135,6 +418,7 @@ async function reviewFetch(
         !response.ok ||
         !data.success
     ) {
+
         throw new Error(
             data.error ||
             "Request failed."
@@ -143,13 +427,22 @@ async function reviewFetch(
 
     return data;
 }
+
+
+/* ========================================
+   APPLICANT
+======================================== */
+
 function renderApplicant(app) {
+
     const target =
         document.getElementById(
             "reviewApplicant"
         );
 
-    if (!target) return;
+    if (!target) {
+        return;
+    }
 
     const name =
         app.discord_display_name ||
@@ -157,16 +450,22 @@ function renderApplicant(app) {
         app.discord_id ||
         "Unknown Applicant";
 
-    const avatar = app.avatar
-        ? `
-            <img
-                src="https://cdn.discordapp.com/avatars/${app.discord_id}/${app.avatar}.png?size=128"
-                alt=""
-            >
-        `
-        : escapeHtml(
-            name.charAt(0).toUpperCase()
-        );
+    const avatar =
+        app.avatar &&
+        app.discord_id
+
+            ? `
+                <img
+                    src="https://cdn.discordapp.com/avatars/${app.discord_id}/${app.avatar}.png?size=128"
+                    alt=""
+                >
+            `
+
+            : escapeHtml(
+                name
+                    .charAt(0)
+                    .toUpperCase()
+            );
 
     target.innerHTML = `
         <div class="review-applicant-profile">
@@ -192,10 +491,14 @@ function renderApplicant(app) {
 
         </div>
 
+
         <div class="review-information-grid">
 
             <div>
-                <span>Union ID</span>
+
+                <span>
+                    Union ID
+                </span>
 
                 <strong>
                     ${escapeHtml(
@@ -203,10 +506,15 @@ function renderApplicant(app) {
                         "Not assigned"
                     )}
                 </strong>
+
             </div>
 
+
             <div>
-                <span>Discord ID</span>
+
+                <span>
+                    Discord ID
+                </span>
 
                 <strong>
                     ${escapeHtml(
@@ -214,10 +522,15 @@ function renderApplicant(app) {
                         "Unknown"
                     )}
                 </strong>
+
             </div>
 
+
             <div>
-                <span>Application Type</span>
+
+                <span>
+                    Application Type
+                </span>
 
                 <strong>
                     ${escapeHtml(
@@ -225,10 +538,15 @@ function renderApplicant(app) {
                         "Application"
                     )}
                 </strong>
+
             </div>
 
+
             <div>
-                <span>Submitted</span>
+
+                <span>
+                    Submitted
+                </span>
 
                 <strong>
                     ${escapeHtml(
@@ -238,13 +556,20 @@ function renderApplicant(app) {
                         )
                     )}
                 </strong>
+
             </div>
 
         </div>
     `;
 }
 
+
+/* ========================================
+   ANSWERS
+======================================== */
+
 function renderAnswers(app) {
+
     const target =
         document.getElementById(
             "reviewAnswers"
@@ -255,7 +580,9 @@ function renderAnswers(app) {
             "reviewQuestionCount"
         );
 
-    if (!target) return;
+    if (!target) {
+        return;
+    }
 
     const answers =
         parseApplicationData(
@@ -268,6 +595,7 @@ function renderAnswers(app) {
         );
 
     if (counter) {
+
         counter.textContent =
             `${entries.length} ${
                 entries.length === 1
@@ -277,6 +605,7 @@ function renderAnswers(app) {
     }
 
     if (!entries.length) {
+
         target.innerHTML = `
             <div class="review-empty-state">
 
@@ -284,7 +613,9 @@ function renderAnswers(app) {
                     0
                 </div>
 
-                <h3>No answers found</h3>
+                <h3>
+                    No answers found
+                </h3>
 
                 <p class="staff-muted">
                     This application does not contain
@@ -307,6 +638,7 @@ function renderAnswers(app) {
                     if (
                         Array.isArray(value)
                     ) {
+
                         displayValue =
                             value.join(", ");
 
@@ -315,6 +647,7 @@ function renderAnswers(app) {
                         typeof value ===
                             "object"
                     ) {
+
                         displayValue =
                             JSON.stringify(
                                 value,
@@ -323,11 +656,18 @@ function renderAnswers(app) {
                             );
 
                     } else {
+
                         displayValue =
                             String(
                                 value ?? ""
                             );
                     }
+
+                    const question =
+                        getQuestionLabel(
+                            app.application_type,
+                            key
+                        );
 
                     return `
                         <article class="review-answer">
@@ -338,9 +678,13 @@ function renderAnswers(app) {
 
                             <div>
 
+                                <span class="review-answer-question-label">
+                                    Question ${index + 1}
+                                </span>
+
                                 <h3>
                                     ${escapeHtml(
-                                        formatLabel(key)
+                                        question
                                     )}
                                 </h3>
 
@@ -359,7 +703,13 @@ function renderAnswers(app) {
             .join("");
 }
 
+
+/* ========================================
+   STATUS
+======================================== */
+
 function renderStatus(app) {
+
     const target =
         document.getElementById(
             "reviewStatus"
@@ -371,12 +721,15 @@ function renderStatus(app) {
         );
 
     if (headerStatus) {
+
         headerStatus.textContent =
             app.status ||
             "Submitted";
     }
 
-    if (!target) return;
+    if (!target) {
+        return;
+    }
 
     target.innerHTML = `
         <div class="review-current-status">
@@ -394,6 +747,7 @@ function renderStatus(app) {
 
         </div>
 
+
         <div class="review-current-status">
 
             <span>
@@ -409,6 +763,7 @@ function renderStatus(app) {
 
         </div>
 
+
         <div class="review-current-status">
 
             <span>
@@ -417,8 +772,7 @@ function renderStatus(app) {
 
             <strong>
                 ${escapeHtml(
-                    app.assigned_to ||
-                    "Unassigned"
+                    reviewerDisplayName(app)
                 )}
             </strong>
 
@@ -426,7 +780,13 @@ function renderStatus(app) {
     `;
 }
 
+
+/* ========================================
+   HEADER
+======================================== */
+
 function renderHeader(app) {
+
     const title =
         document.getElementById(
             "reviewTitle"
@@ -438,12 +798,14 @@ function renderHeader(app) {
         );
 
     if (title) {
+
         title.textContent =
             app.application_type ||
             "Application";
     }
 
     if (reference) {
+
         const referenceText =
             app.reference ||
             `#${app.id}`;
@@ -458,13 +820,167 @@ function renderHeader(app) {
             `${referenceText} • Submitted ${submitted}`;
     }
 }
+
+
+/* ========================================
+   REVIEW CONTROLS
+======================================== */
+
+function updateReviewControls(app) {
+
+    if (!app) {
+        return;
+    }
+
+    const status =
+        normaliseStatus(
+            app.status
+        );
+
+    const claimButton =
+        document.getElementById(
+            "claimApplication"
+        );
+
+    const startReviewButton =
+        document.getElementById(
+            "startReviewApplication"
+        );
+
+    const interviewButton =
+        document.getElementById(
+            "interviewApplication"
+        );
+
+    const approveButton =
+        document.getElementById(
+            "approveApplication"
+        );
+
+    const holdButton =
+        document.getElementById(
+            "holdApplication"
+        );
+
+    const denyButton =
+        document.getElementById(
+            "denyApplication"
+        );
+
+
+    if (claimButton) {
+
+        if (app.assigned_to) {
+
+            claimButton.hidden = false;
+
+            claimButton.disabled = true;
+
+            claimButton.textContent =
+                isAssignedToCurrentStaff(app)
+                    ? `Claimed by ${currentStaffName()}`
+                    : "Application Claimed";
+
+        } else if (
+            isFinalStatus(status)
+        ) {
+
+            claimButton.hidden = true;
+
+        } else {
+
+            claimButton.hidden = false;
+
+            claimButton.disabled = false;
+
+            claimButton.textContent =
+                "Claim Application";
+        }
+    }
+
+
+    if (
+        isFinalStatus(status)
+    ) {
+
+        if (startReviewButton) {
+            startReviewButton.hidden = true;
+        }
+
+        if (interviewButton) {
+            interviewButton.hidden = true;
+        }
+
+        if (approveButton) {
+            approveButton.hidden = true;
+        }
+
+        if (holdButton) {
+            holdButton.hidden = true;
+        }
+
+        if (denyButton) {
+            denyButton.hidden = true;
+        }
+
+        return;
+    }
+
+
+    if (startReviewButton) {
+
+        startReviewButton.hidden =
+            ![
+                "",
+                "submitted",
+                "pending"
+            ].includes(status);
+    }
+
+
+    if (interviewButton) {
+
+        interviewButton.hidden =
+            status === "interview";
+    }
+
+
+    if (approveButton) {
+
+        approveButton.hidden =
+            false;
+    }
+
+
+    if (holdButton) {
+
+        holdButton.hidden =
+            status === "on hold";
+    }
+
+
+    if (denyButton) {
+
+        denyButton.hidden =
+            false;
+    }
+}
+
+
+/* ========================================
+   NOTES
+======================================== */
+
 function renderNotes(app) {
+
     const target =
         document.getElementById(
             "reviewNotes"
         );
 
-    if (!target) return;
+    if (!target) {
+        return;
+    }
 
     const raw =
         String(
@@ -472,18 +988,23 @@ function renderNotes(app) {
         ).trim();
 
     if (!raw) {
+
         target.innerHTML = `
             <div class="review-activity-empty">
 
                 <span class="review-activity-dot"></span>
 
                 <div>
-                    <strong>No internal notes</strong>
+
+                    <strong>
+                        No internal notes
+                    </strong>
 
                     <p class="staff-muted">
                         Staff notes added to this application
                         will appear here.
                     </p>
+
                 </div>
 
             </div>
@@ -499,44 +1020,63 @@ function renderNotes(app) {
 
     target.innerHTML =
         notes
-            .map(note => `
-                <div class="review-activity-empty">
+            .map(
+                note => `
+                    <div class="review-activity-empty">
 
-                    <span class="review-activity-dot"></span>
+                        <span class="review-activity-dot"></span>
 
-                    <div>
-                        <strong>Staff Note</strong>
+                        <div>
 
-                        <p class="staff-muted">
-                            ${escapeHtml(note)}
-                        </p>
+                            <strong>
+                                Staff Note
+                            </strong>
+
+                            <p class="staff-muted">
+                                ${escapeHtml(note)}
+                            </p>
+
+                        </div>
+
                     </div>
-
-                </div>
-            `)
+                `
+            )
             .join("");
 }
 
+
+/* ========================================
+   ACTIVITY
+======================================== */
+
 function renderActivity(activity) {
+
     const target =
         document.getElementById(
             "reviewActivity"
         );
 
-    if (!target) return;
+    if (!target) {
+        return;
+    }
 
     if (!activity.length) {
+
         target.innerHTML = `
             <div class="review-activity-empty">
 
                 <span class="review-activity-dot"></span>
 
                 <div>
-                    <strong>No activity yet</strong>
+
+                    <strong>
+                        No activity yet
+                    </strong>
 
                     <p class="staff-muted">
                         Staff actions will appear here.
                     </p>
+
                 </div>
 
             </div>
@@ -547,63 +1087,76 @@ function renderActivity(activity) {
 
     target.innerHTML =
         activity
-            .map(item => {
+            .map(
+                item => {
 
-                const actor =
-                    item.actor_name ||
-                    "Union Staff";
+                    const actor =
+                        item.actor_name ||
+                        "Union Staff";
 
-                const action =
-                    item.action ||
-                    "Application updated";
+                    const action =
+                        item.action ||
+                        "Application updated";
 
-                const details =
-                    item.details
-                        ? `
-                            <p class="staff-muted">
-                                ${escapeHtml(item.details)}
-                            </p>
-                        `
-                        : "";
+                    const details =
+                        item.details
+                            ? `
+                                <p class="staff-muted">
+                                    ${escapeHtml(
+                                        item.details
+                                    )}
+                                </p>
+                            `
+                            : "";
 
-                return `
-                    <div class="review-activity-empty">
+                    return `
+                        <div class="review-activity-empty">
 
-                        <span class="review-activity-dot"></span>
+                            <span class="review-activity-dot"></span>
 
-                        <div>
+                            <div>
 
-                            <strong>
-                                ${escapeHtml(action)}
-                            </strong>
+                                <strong>
+                                    ${escapeHtml(action)}
+                                </strong>
 
-                            <p class="staff-muted">
-                                ${escapeHtml(actor)}
-                                •
-                                ${escapeHtml(
-                                    formatDate(
-                                        item.created_at
-                                    )
-                                )}
-                            </p>
+                                <p class="staff-muted">
 
-                            ${details}
+                                    ${escapeHtml(actor)}
+
+                                    •
+
+                                    ${escapeHtml(
+                                        formatDate(
+                                            item.created_at
+                                        )
+                                    )}
+
+                                </p>
+
+                                ${details}
+
+                            </div>
 
                         </div>
-
-                    </div>
-                `;
-            })
+                    `;
+                }
+            )
             .join("");
 }
 
+
 async function loadActivity() {
+
     const id =
         getApplicationId();
 
-    if (!id) return;
+    if (!id) {
+        return;
+    }
 
     try {
+
         const data =
             await reviewFetch(
                 `/api/staff/applications/${id}/activity`
@@ -622,11 +1175,18 @@ async function loadActivity() {
     }
 }
 
+
+/* ========================================
+   LOAD APPLICATION
+======================================== */
+
 async function loadApplication() {
+
     const id =
         getApplicationId();
 
     if (!id) {
+
         throw new Error(
             "No application ID was provided."
         );
@@ -641,6 +1201,7 @@ async function loadApplication() {
         data.application;
 
     if (!currentApplication) {
+
         throw new Error(
             "Application not found."
         );
@@ -666,19 +1227,39 @@ async function loadApplication() {
         currentApplication
     );
 
+    updateReviewControls(
+        currentApplication
+    );
+
     await loadActivity();
 
     return currentApplication;
 }
 
+
 async function reloadApplication() {
+
     await loadApplication();
 }
+
+
+/* ========================================
+   CLAIM APPLICATION
+======================================== */
+
 async function claimApplication() {
+
     const id =
         getApplicationId();
 
-    if (!id) {
+    if (
+        !id ||
+        !currentApplication ||
+        currentApplication.assigned_to ||
+        isFinalStatus(
+            currentApplication.status
+        )
+    ) {
         return;
     }
 
@@ -688,12 +1269,15 @@ async function claimApplication() {
         );
 
     if (button) {
+
         button.disabled = true;
+
         button.textContent =
             "Claiming...";
     }
 
     try {
+
         await reviewFetch(
             `/api/staff/applications/${id}/assignment`,
             {
@@ -707,13 +1291,6 @@ async function claimApplication() {
 
         await reloadApplication();
 
-        if (button) {
-            button.textContent =
-                "Application Claimed";
-        }
-
-        await loadActivity();
-
     } catch (error) {
 
         alert(
@@ -722,14 +1299,22 @@ async function claimApplication() {
         );
 
         if (button) {
+
             button.disabled = false;
+
             button.textContent =
                 "Claim Application";
         }
     }
 }
 
+
+/* ========================================
+   INTERNAL NOTES
+======================================== */
+
 async function addInternalNote() {
+
     const id =
         getApplicationId();
 
@@ -754,17 +1339,22 @@ async function addInternalNote() {
         input.value.trim();
 
     if (!note) {
+
         input.focus();
+
         return;
     }
 
     if (button) {
+
         button.disabled = true;
+
         button.textContent =
             "Adding Note...";
     }
 
     try {
+
         await reviewFetch(
             `/api/staff/applications/${id}/notes`,
             {
@@ -780,12 +1370,6 @@ async function addInternalNote() {
 
         await reloadApplication();
 
-        if (button) {
-            button.disabled = false;
-            button.textContent =
-                "Add Internal Note";
-        }
-
     } catch (error) {
 
         alert(
@@ -793,18 +1377,38 @@ async function addInternalNote() {
             "Unable to add internal note."
         );
 
+    } finally {
+
         if (button) {
+
             button.disabled = false;
+
             button.textContent =
                 "Add Internal Note";
         }
     }
 }
+
+
+/* ========================================
+   DECISION MODAL
+======================================== */
+
 function openDecisionModal(
     status,
     title,
     description
 ) {
+
+    if (
+        !currentApplication ||
+        isFinalStatus(
+            currentApplication.status
+        )
+    ) {
+        return;
+    }
+
     pendingDecisionStatus =
         status;
 
@@ -834,31 +1438,40 @@ function openDecisionModal(
         );
 
     if (modalTitle) {
+
         modalTitle.textContent =
             title;
     }
 
     if (modalDescription) {
+
         modalDescription.textContent =
             description;
     }
 
     if (reason) {
+
         reason.value = "";
     }
 
     if (error) {
+
         error.hidden = true;
+
         error.textContent = "";
     }
 
     if (modal) {
+
         modal.hidden = false;
     }
 }
 
+
 function closeDecisionModal() {
-    pendingDecisionStatus = null;
+
+    pendingDecisionStatus =
+        null;
 
     const modal =
         document.getElementById(
@@ -876,28 +1489,50 @@ function closeDecisionModal() {
         );
 
     if (reason) {
+
         reason.value = "";
     }
 
     if (error) {
+
         error.hidden = true;
+
         error.textContent = "";
     }
 
     if (modal) {
+
         modal.hidden = true;
     }
 }
+
+
+/* ========================================
+   UPDATE STATUS
+======================================== */
 
 async function updateApplicationStatus(
     status,
     staffResponse = ""
 ) {
+
     const id =
         getApplicationId();
 
     if (!id) {
         return;
+    }
+
+    if (
+        currentApplication &&
+        isFinalStatus(
+            currentApplication.status
+        )
+    ) {
+
+        throw new Error(
+            "This application has already been closed."
+        );
     }
 
     const data =
@@ -907,13 +1542,17 @@ async function updateApplicationStatus(
                 method: "POST",
 
                 body: JSON.stringify({
+
                     status,
+
                     staff_response:
                         staffResponse,
+
                     reviewer_notes:
                         currentApplication
                             ?.reviewer_notes ||
                         "",
+
                     priority:
                         currentApplication
                             ?.priority ||
@@ -928,8 +1567,24 @@ async function updateApplicationStatus(
     await reloadApplication();
 }
 
+
+/* ========================================
+   START REVIEW
+======================================== */
+
 async function startReview() {
+
+    if (
+        !currentApplication ||
+        isFinalStatus(
+            currentApplication.status
+        )
+    ) {
+        return;
+    }
+
     try {
+
         await updateApplicationStatus(
             "Pending Review",
             "Application review started."
@@ -944,8 +1599,20 @@ async function startReview() {
     }
 }
 
+
+/* ========================================
+   CONFIRM DECISION
+======================================== */
+
 async function confirmDecision() {
-    if (!pendingDecisionStatus) {
+
+    if (
+        !pendingDecisionStatus ||
+        !currentApplication ||
+        isFinalStatus(
+            currentApplication.status
+        )
+    ) {
         return;
     }
 
@@ -969,15 +1636,31 @@ async function confirmDecision() {
             reason?.value || ""
         ).trim();
 
+    const requiresReason =
+        (
+            pendingDecisionStatus ===
+                "Declined" ||
+
+            pendingDecisionStatus ===
+                "On Hold"
+        );
+
     if (
-        pendingDecisionStatus ===
-            "Declined" &&
+        requiresReason &&
         !text
     ) {
+
         if (error) {
+
             error.hidden = false;
+
             error.textContent =
-                "A reason is required when denying an application.";
+                pendingDecisionStatus ===
+                    "Declined"
+
+                    ? "A reason is required when denying an application."
+
+                    : "A reason is required when placing an application on hold.";
         }
 
         reason?.focus();
@@ -986,12 +1669,15 @@ async function confirmDecision() {
     }
 
     if (button) {
+
         button.disabled = true;
+
         button.textContent =
             "Saving...";
     }
 
     try {
+
         await updateApplicationStatus(
             pendingDecisionStatus,
             text
@@ -1002,7 +1688,9 @@ async function confirmDecision() {
     } catch (requestError) {
 
         if (error) {
+
             error.hidden = false;
+
             error.textContent =
                 requestError.message ||
                 "Unable to update application.";
@@ -1011,14 +1699,22 @@ async function confirmDecision() {
     } finally {
 
         if (button) {
+
             button.disabled = false;
+
             button.textContent =
                 "Confirm";
         }
     }
 }
 
+
+/* ========================================
+   BUTTON EVENTS
+======================================== */
+
 function setupDecisionButtons() {
+
     const startReviewButton =
         document.getElementById(
             "startReviewApplication"
@@ -1059,86 +1755,112 @@ function setupDecisionButtons() {
             "confirmDecision"
         );
 
+
     if (startReviewButton) {
+
         startReviewButton.addEventListener(
             "click",
             startReview
         );
     }
 
+
     if (interviewButton) {
+
         interviewButton.addEventListener(
             "click",
             () => {
+
                 openDecisionModal(
                     "Interview",
                     "Move to Interview",
-                    "Add any interview instructions or notes for the applicant."
+                    "Add any interview instructions or notes for the applicant. This note is optional."
                 );
             }
         );
     }
 
+
     if (approveButton) {
+
         approveButton.addEventListener(
             "click",
             () => {
+
                 openDecisionModal(
                     "Accepted",
                     "Accept Application",
-                    "Confirm that you want to accept this application."
+                    "Confirm that you want to accept this application. You may add an optional note."
                 );
             }
         );
     }
 
+
     if (holdButton) {
+
         holdButton.addEventListener(
             "click",
             () => {
+
                 openDecisionModal(
                     "On Hold",
                     "Put Application On Hold",
-                    "Add a note explaining why this application is being placed on hold."
+                    "A reason is required when placing an application on hold."
                 );
             }
         );
     }
 
+
     if (denyButton) {
+
         denyButton.addEventListener(
             "click",
             () => {
+
                 openDecisionModal(
                     "Declined",
                     "Deny Application",
-                    "A reason is required. This will be recorded against the application."
+                    "A reason is required when denying an application."
                 );
             }
         );
     }
 
+
     if (closeButton) {
+
         closeButton.addEventListener(
             "click",
             closeDecisionModal
         );
     }
 
+
     if (cancelButton) {
+
         cancelButton.addEventListener(
             "click",
             closeDecisionModal
         );
     }
 
+
     if (confirmButton) {
+
         confirmButton.addEventListener(
             "click",
             confirmDecision
         );
     }
 }
+
+
+/* ========================================
+   PAGE START
+======================================== */
+
 document.addEventListener(
     "DOMContentLoaded",
     async () => {
@@ -1169,7 +1891,9 @@ document.addEventListener(
             );
 
         try {
+
             if (!window.UnionAuth) {
+
                 throw new Error(
                     "Authentication system unavailable."
                 );
@@ -1182,11 +1906,14 @@ document.addEventListener(
                 !currentStaffUser ||
                 currentStaffUser.is_staff !== true
             ) {
+
                 if (loading) {
+
                     loading.hidden = true;
                 }
 
                 if (denied) {
+
                     denied.hidden = false;
                 }
 
@@ -1196,6 +1923,7 @@ document.addEventListener(
             setupDecisionButtons();
 
             if (claimButton) {
+
                 claimButton.addEventListener(
                     "click",
                     claimApplication
@@ -1203,6 +1931,7 @@ document.addEventListener(
             }
 
             if (noteButton) {
+
                 noteButton.addEventListener(
                     "click",
                     addInternalNote
@@ -1212,10 +1941,12 @@ document.addEventListener(
             await loadApplication();
 
             if (loading) {
+
                 loading.hidden = true;
             }
 
             if (workspace) {
+
                 workspace.hidden = false;
             }
 
@@ -1227,8 +1958,11 @@ document.addEventListener(
             );
 
             if (loading) {
+
                 loading.innerHTML = `
-                    <h1>Unable to load application</h1>
+                    <h1>
+                        Unable to load application
+                    </h1>
 
                     <p>
                         ${escapeHtml(
