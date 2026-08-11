@@ -5112,3 +5112,261 @@
     }
 }
 
+/* ==========================================================
+   PLAYER DISCIPLINE - FINISHING PASS
+========================================================== */
+
+/* The discipline screen has its own page header, so avoid a duplicated
+   title underneath the fixed site navigation. */
+#staffPanel.discipline-mode > .staff-topbar {
+    display: none;
+}
+
+#staffPanel.discipline-mode #staffDisciplineView {
+    padding-top: 2px;
+}
+
+.discipline-intro-compact {
+    align-items: center;
+
+    margin-bottom: 18px;
+    padding: 0 0 18px;
+}
+
+.discipline-intro-compact > div:first-child > span {
+    color: #676a73;
+}
+
+.discipline-intro-compact > div:first-child > p {
+    margin-top: 5px;
+}
+
+.discipline-security-status {
+    border-color: rgba(255, 255, 255, 0.065);
+
+    background: rgba(255, 255, 255, 0.018);
+
+    color: #8f929b;
+}
+
+.discipline-security-status > span {
+    background: #8b5cf6;
+
+    box-shadow:
+        0 0 8px
+        rgba(139, 92, 246, 0.22);
+}
+
+/* Keep both right-hand cards visible while staff work through the form. */
+.discipline-history-panel {
+    position: sticky;
+    top: 94px;
+
+    align-self: start;
+}
+
+.discipline-history-panel > .staff-dashboard-panel {
+    position: static;
+}
+
+
+/* FULL HISTORY RECORDS */
+
+.discipline-history-record {
+    padding: 13px;
+
+    border: 1px solid var(--staff-border);
+    border-radius: 10px;
+
+    background: #121318;
+}
+
+.discipline-history-record + .discipline-history-record {
+    margin-top: 8px;
+}
+
+.discipline-history-record-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.discipline-history-reference {
+    display: block;
+
+    color: #575a63;
+
+    font-size: 6px;
+    font-weight: 900;
+
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+}
+
+.discipline-history-action {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #eeeeef;
+
+    font-size: 11px;
+}
+
+.discipline-history-record > p {
+    margin: 10px 0 0;
+
+    color: #83868f;
+
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+.discipline-history-detail-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 6px;
+
+    margin-top: 11px;
+}
+
+.discipline-history-detail-grid > div {
+    padding: 8px;
+
+    border: 1px solid rgba(255, 255, 255, 0.045);
+    border-radius: 7px;
+
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.discipline-history-detail-grid span {
+    display: block;
+
+    color: #555860;
+
+    font-size: 6px;
+    font-weight: 900;
+
+    letter-spacing: 0.65px;
+}
+
+.discipline-history-detail-grid strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #bfc1c7;
+
+    font-size: 8px;
+}
+
+.discipline-history-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    margin-top: 10px;
+    padding-top: 9px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.045);
+
+    color: #646770;
+
+    font-size: 7px;
+}
+
+.discipline-history-reference-line {
+    margin-top: 7px;
+
+    color: #646770;
+
+    font-size: 7px;
+}
+
+.discipline-history-reference-line strong {
+    color: #9a9ca4;
+}
+
+.discipline-record-status.revoked {
+    color: #a8abb3;
+
+    border-color: rgba(148, 163, 184, 0.12);
+
+    background: rgba(148, 163, 184, 0.035);
+}
+
+.discipline-record-status.expired,
+.discipline-record-status.resolved {
+    color: #d5c681;
+
+    border-color: rgba(234, 179, 8, 0.11);
+
+    background: rgba(234, 179, 8, 0.03);
+}
+
+.discipline-revoke-button {
+    width: 100%;
+
+    margin-top: 10px;
+    padding: 8px 10px;
+
+    border: 1px solid rgba(239, 68, 68, 0.10);
+    border-radius: 7px;
+
+    background: rgba(239, 68, 68, 0.025);
+
+    color: #d99797;
+
+    font-family: inherit;
+    font-size: 7px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.15s ease,
+        background 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.discipline-revoke-button:hover {
+    color: #f0b0b0;
+
+    border-color: rgba(239, 68, 68, 0.16);
+
+    background: rgba(239, 68, 68, 0.045);
+}
+
+.discipline-revoke-button:disabled {
+    opacity: 0.55;
+    cursor: wait;
+}
+
+
+@media (max-width: 1280px) {
+
+    .discipline-history-panel {
+        position: static;
+    }
+}
+
+@media (max-width: 620px) {
+
+    .discipline-history-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .discipline-history-meta {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+

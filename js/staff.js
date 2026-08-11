@@ -492,6 +492,17 @@ function hideAllViews() {
 
         discipline.hidden = true;
     }
+
+
+    const staffPanel =
+        document.getElementById(
+            "staffPanel"
+        );
+
+
+    staffPanel?.classList.remove(
+        "discipline-mode"
+    );
 }
 
 
@@ -681,6 +692,15 @@ function showStaffDiscipline() {
 
         discipline.hidden = false;
     }
+
+
+    document
+        .getElementById(
+            "staffPanel"
+        )
+        ?.classList.add(
+            "discipline-mode"
+        );
 
 
     if (title) {
@@ -1167,6 +1187,56 @@ function formatDisciplineAction(record) {
 }
 
 
+function parseDisciplineOutcomeDetails(
+    value
+) {
+
+    const result = {};
+
+    String(value || "")
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .filter(Boolean)
+        .forEach(line => {
+
+            const separator =
+                line.indexOf(":");
+
+            if (separator === -1) {
+                return;
+            }
+
+            const key =
+                line
+                    .slice(0, separator)
+                    .trim()
+                    .toLowerCase();
+
+            const itemValue =
+                line
+                    .slice(separator + 1)
+                    .trim();
+
+            result[key] =
+                itemValue;
+        });
+
+
+    return result;
+}
+
+
+function formatDisciplineStatus(
+    record
+) {
+
+    return String(
+        record.status ||
+        "Active"
+    );
+}
+
+
 function renderDisciplineHistory(
     records
 ) {
@@ -1192,9 +1262,7 @@ function renderDisciplineHistory(
         target.innerHTML = `
             <div class="discipline-empty-state">
 
-                <div>
-                    DC
-                </div>
+                <div>DC</div>
 
                 <strong>
                     No player selected
@@ -1216,9 +1284,7 @@ function renderDisciplineHistory(
         target.innerHTML = `
             <div class="discipline-empty-state">
 
-                <div>
-                    ✓
-                </div>
+                <div>✓</div>
 
                 <strong>
                     No disciplinary records
@@ -1238,69 +1304,272 @@ function renderDisciplineHistory(
     target.innerHTML =
         disciplineHistoryRecords
             .map(
-                record => `
-                    <article class="discipline-history-record">
+                record => {
 
-                        <div class="discipline-history-record-top">
+                    const details =
+                        parseDisciplineOutcomeDetails(
+                            record.action_taken
+                        );
 
-                            <span class="discipline-history-action">
-                                ${escapeHtml(
-                                    formatDisciplineAction(record)
-                                )}
-                            </span>
+                    const status =
+                        formatDisciplineStatus(
+                            record
+                        );
 
-                            <time>
-                                ${escapeHtml(
-                                    formatMemberDate(
-                                        record.created_at ||
-                                        record.issued_at
+                    const evidenceCount =
+                        (() => {
+
+                            try {
+
+                                const parsed =
+                                    Array.isArray(
+                                        record.evidence
                                     )
-                                )}
-                            </time>
+                                        ? record.evidence
+                                        : JSON.parse(
+                                            record.evidence ||
+                                            "[]"
+                                        );
 
-                        </div>
+                                return Array.isArray(parsed)
+                                    ? parsed.length
+                                    : 0;
 
-                        <strong>
-                            ${escapeHtml(
-                                record.category ||
-                                "Staff Conduct"
-                            )}
-                        </strong>
+                            } catch {
 
-                        <p>
-                            ${escapeHtml(
-                                record.reason ||
-                                record.summary ||
-                                "No reason recorded."
-                            )}
-                        </p>
+                                return 0;
+                            }
+                        })();
 
-                        <div class="discipline-history-meta">
+                    const canRevoke =
+                        String(status)
+                            .toLowerCase() !==
+                        "revoked";
 
-                            <span>
+                    return `
+                        <article
+                            class="discipline-history-record"
+                            data-discipline-record-id="${escapeHtml(record.id)}"
+                        >
+
+                            <div class="discipline-history-record-top">
+
+                                <div>
+
+                                    <span class="discipline-history-reference">
+                                        ${escapeHtml(
+                                            record.reference ||
+                                            `Record #${record.id}`
+                                        )}
+                                    </span>
+
+                                    <strong class="discipline-history-action">
+                                        ${escapeHtml(
+                                            record.disciplinary_type ||
+                                            formatDisciplineAction(record)
+                                        )}
+                                    </strong>
+
+                                </div>
+
+                                <span class="discipline-record-status ${escapeHtml(
+                                    status
+                                        .toLowerCase()
+                                        .replaceAll(" ", "-")
+                                )}">
+                                    ${escapeHtml(status)}
+                                </span>
+
+                            </div>
+
+                            <p>
                                 ${escapeHtml(
-                                    record.severity ||
-                                    "Unspecified severity"
+                                    record.reason ||
+                                    "No reason recorded."
                                 )}
-                            </span>
+                            </p>
 
-                            <span>
-                                Issued by
-                                ${escapeHtml(
-                                    record.issued_by_name ||
-                                    record.actor_name ||
-                                    "Union Staff"
-                                )}
-                            </span>
+                            <div class="discipline-history-detail-grid">
 
-                        </div>
+                                <div>
+                                    <span>SEVERITY</span>
+                                    <strong>
+                                        ${escapeHtml(
+                                            details["severity"] ||
+                                            "Not recorded"
+                                        )}
+                                    </strong>
+                                </div>
 
-                    </article>
-                `
+                                <div>
+                                    <span>CATEGORY</span>
+                                    <strong>
+                                        ${escapeHtml(
+                                            details["category"] ||
+                                            "Not recorded"
+                                        )}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    <span>PLAYER NOTIFIED</span>
+                                    <strong>
+                                        ${escapeHtml(
+                                            details["player notified"] ||
+                                            "Not recorded"
+                                        )}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    <span>EVIDENCE</span>
+                                    <strong>
+                                        ${evidenceCount}
+                                        ${evidenceCount === 1 ? "item" : "items"}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                            <div class="discipline-history-meta">
+
+                                <span>
+                                    Issued
+                                    ${escapeHtml(
+                                        formatMemberDate(
+                                            record.issued_at ||
+                                            record.created_at
+                                        )
+                                    )}
+                                </span>
+
+                                <span>
+                                    By
+                                    ${escapeHtml(
+                                        record.issued_by_name ||
+                                        "Union Staff"
+                                    )}
+                                </span>
+
+                            </div>
+
+                            ${
+                                details["external reference"]
+                                    ? `
+                                        <div class="discipline-history-reference-line">
+                                            Reference:
+                                            <strong>
+                                                ${escapeHtml(
+                                                    details["external reference"]
+                                                )}
+                                            </strong>
+                                        </div>
+                                    `
+                                    : ""
+                            }
+
+                            ${
+                                record.expires_at
+                                    ? `
+                                        <div class="discipline-history-reference-line">
+                                            Expiry / Review:
+                                            <strong>
+                                                ${escapeHtml(
+                                                    formatMemberDate(
+                                                        record.expires_at
+                                                    )
+                                                )}
+                                            </strong>
+                                        </div>
+                                    `
+                                    : ""
+                            }
+
+                            ${
+                                canRevoke
+                                    ? `
+                                        <button
+                                            type="button"
+                                            class="discipline-revoke-button"
+                                            data-revoke-discipline="${escapeHtml(record.id)}"
+                                        >
+                                            Revoke Record
+                                        </button>
+                                    `
+                                    : ""
+                            }
+
+                        </article>
+                    `;
+                }
             )
             .join("");
-}
 
+
+    target
+        .querySelectorAll(
+            "[data-revoke-discipline]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                async () => {
+
+                    const recordId =
+                        Number(
+                            button.dataset
+                                .revokeDiscipline
+                        );
+
+                    if (!recordId) {
+                        return;
+                    }
+
+                    const confirmed =
+                        window.confirm(
+                            "Revoke this disciplinary record? The record will remain in the audit history."
+                        );
+
+                    if (!confirmed) {
+                        return;
+                    }
+
+                    button.disabled = true;
+                    button.textContent =
+                        "Revoking...";
+
+                    try {
+
+                        await staffFetch(
+                            `/api/staff/admin/disciplinary/${encodeURIComponent(recordId)}`,
+                            {
+                                method: "PATCH",
+                                body: JSON.stringify({
+                                    status: "Revoked"
+                                })
+                            }
+                        );
+
+                        await loadDisciplineHistory(
+                            selectedDisciplineMember.id
+                        );
+
+                    } catch (error) {
+
+                        alert(
+                            error.message ||
+                            "The disciplinary record could not be revoked."
+                        );
+
+                        button.disabled = false;
+                        button.textContent =
+                            "Revoke Record";
+                    }
+                }
+            );
+        });
+}
 
 async function loadDisciplineHistory(
     memberId
