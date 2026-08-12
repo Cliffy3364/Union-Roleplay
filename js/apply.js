@@ -1,6 +1,7 @@
 const APPLY_API =
     "https://union-roleplay-api.danielclifford2808.workers.dev";
 
+
 const DISCORD_LOGIN_URL =
     `${APPLY_API}/api/auth/discord`;
 
