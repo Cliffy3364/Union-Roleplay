@@ -2272,3 +2272,59 @@
 [hidden] {
     display: none !important;
 }
+/* ========================================
+   APPLICATION ANSWER REQUIREMENTS
+   Add this to the bottom of application.css
+======================================== */
+
+.application-answer-requirement {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.012);
+}
+
+.application-answer-guidance {
+    color: #686b74;
+    font-size: 9px;
+    line-height: 1.55;
+}
+
+.application-character-counter {
+    flex-shrink: 0;
+    color: #888b94;
+    font-size: 9px;
+    font-weight: 800;
+    white-space: nowrap;
+    transition: color 0.16s ease;
+}
+
+.application-character-counter.requirement-pending {
+    color: #c7a96d;
+}
+
+.application-character-counter.requirement-met {
+    color: #86c99c;
+}
+
+.application-character-check {
+    margin-right: 3px;
+    font-weight: 900;
+}
+
+@media (max-width: 620px) {
+    .application-answer-requirement {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .application-character-counter {
+        white-space: normal;
+    }
+}
