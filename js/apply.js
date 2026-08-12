@@ -8,404 +8,834 @@ const DISCORD_LOGIN_URL =
 
 const APPLICATION_CONFIG = {
 
+
+    /* ==========================================================
+       WHITELIST APPLICATION
+    ========================================================== */
+
     "Whitelist Application": {
-        title: "Whitelist Application",
+
+        title:
+            "Whitelist Application",
+
         description:
-            "Apply for access to Union Roleplay.",
+            "Union Roleplay operates a strict whitelist. Take your time and provide detailed, original answers. Low-effort, copied or AI-generated applications may be declined.",
 
         questions: [
+
             {
                 key: "age",
-                label: "How old are you?",
+                label:
+                    "How old are you?",
                 type: "number",
                 required: true
             },
-            {
-                key: "timezone",
-                label: "What is your timezone?",
-                type: "text",
-                required: true
-            },
+
             {
                 key: "roleplayExperience",
-                label: "Tell us about your previous roleplay experience.",
+                label:
+                    "Tell us about your previous roleplay experience. Include how long you have been roleplaying, previous FiveM communities you have been part of and the type of roleplay you are used to.",
                 type: "textarea",
                 required: true
             },
+
+            {
+                key: "characterBackstory",
+                label:
+                    "What is your character's full name and backstory? Tell us about their previous life, personality, experiences, motivations and what has brought them to Union.",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "characterPlans",
+                label:
+                    "What are your plans for your character within Union Roleplay? Explain the type of story you want to create and what you would like your character to achieve over time.",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "collisionScenario",
+                label:
+                    "Your character is involved in a serious high-speed vehicle collision. Explain how you would roleplay the situation, including your injuries and how the incident could affect your character afterwards.",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "policeScenario",
+                label:
+                    "Police stop your vehicle and you know there are illegal items inside. Explain how you would approach the situation and create enjoyable roleplay for everyone involved.",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "lossScenario",
+                label:
+                    "A roleplay situation does not go your way and results in your character being arrested or losing a large amount of money or items. How would you react and continue the roleplay?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "rulebreakScenario",
+                label:
+                    "During an active roleplay situation, you believe another player has broken a server rule. Explain what you would do and how you would handle the situation.",
+                type: "textarea",
+                required: true
+            },
+
             {
                 key: "whyUnion",
-                label: "Why do you want to join Union Roleplay?",
-                type: "textarea",
-                required: true
-            },
-            {
-                key: "scenario",
-                label: "You are stopped by police after a pursuit. Explain how you would roleplay the situation.",
+                label:
+                    "Why should we accept you into Union Roleplay? Tell us what you can bring to the server and what we can expect from you as a member of the community.",
                 type: "textarea",
                 required: true
             }
+
         ]
     },
 
+
+    /* ==========================================================
+       STAFF APPLICATION
+    ========================================================== */
 
     "Staff Application": {
-        title: "Staff Application",
+
+        title:
+            "Staff Application",
+
         description:
-            "Apply to join the Union Roleplay staff team.",
+            "Apply to join the Union Roleplay staff team. We are looking for mature, fair and trustworthy people who can maintain our community standards.",
 
         questions: [
+
             {
                 key: "age",
-                label: "How old are you?",
+                label:
+                    "How old are you?",
                 type: "number",
                 required: true
             },
+
             {
-                key: "experience",
-                label: "Do you have any previous staff experience? Tell us about it.",
+                key: "staffExperience",
+                label:
+                    "Tell us about any previous staff or community management experience you have. Include your previous positions, responsibilities and what you learnt from them.",
                 type: "textarea",
                 required: true
             },
+
             {
                 key: "whyStaff",
-                label: "Why do you want to join the Union Roleplay staff team?",
+                label:
+                    "Why do you want to join the Union Roleplay staff team, and why should we choose you over another applicant?",
                 type: "textarea",
                 required: true
             },
+
             {
-                key: "strengths",
-                label: "What strengths would you bring to the staff team?",
+                key: "strengthsWeaknesses",
+                label:
+                    "What are your main strengths and weaknesses when working as part of a staff team?",
                 type: "textarea",
                 required: true
             },
+
             {
-                key: "staffScenario",
-                label: "Two players are arguing in a staff situation and both are blaming each other. How would you handle it?",
+                key: "staffConflict",
+                label:
+                    "Two players are arguing in a staff situation. Both have different versions of events and both are blaming each other. Explain exactly how you would handle the situation.",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "friendScenario",
+                label:
+                    "You witness a close friend breaking a serious server rule. Nobody else has noticed. What would you do and why?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "staffMisconduct",
+                label:
+                    "You believe another member of staff is abusing their permissions or treating players unfairly. How would you handle this?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "availability",
+                label:
+                    "How active can you realistically be each week, and are there any days or times when you are normally unavailable?",
                 type: "textarea",
                 required: true
             }
+
         ]
     },
 
+
+    /* ==========================================================
+       QA TESTER APPLICATION
+    ========================================================== */
 
     "QA Tester Application": {
-        title: "QA Tester Application",
+
+        title:
+            "QA Tester Application",
+
         description:
-            "Apply to test scripts, systems and updates before release.",
+            "Apply to test scripts, systems and updates before they reach the live Union Roleplay server.",
 
         questions: [
+
             {
                 key: "age",
-                label: "How old are you?",
+                label:
+                    "How old are you?",
                 type: "number",
                 required: true
             },
-            {
-                key: "availability",
-                label: "When are you usually available to test?",
-                type: "textarea",
-                required: true
-            },
+
             {
                 key: "testingExperience",
-                label: "Do you have any previous QA or testing experience?",
+                label:
+                    "Tell us about any previous QA, FiveM testing or bug-reporting experience you have.",
                 type: "textarea",
                 required: true
             },
-            {
-                key: "bugReporting",
-                label: "How would you report a bug clearly to a developer?",
-                type: "textarea",
-                required: true
-            },
+
             {
                 key: "whyQa",
-                label: "Why do you want to become a QA Tester for Union Roleplay?",
+                label:
+                    "Why do you want to become a QA Tester for Union Roleplay?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "bugReport",
+                label:
+                    "You discover that a new script occasionally causes players to lose an item when it should not. Explain exactly how you would test and report this issue to a developer.",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "reproduction",
+                label:
+                    "A developer tells you they cannot reproduce a bug you reported. What would you do next?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "confidentiality",
+                label:
+                    "As a QA Tester you may see unreleased scripts, features and information. How would you handle this information?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "availability",
+                label:
+                    "When are you normally available to test, and how quickly could you respond when a developer needs something tested?",
                 type: "textarea",
                 required: true
             }
+
         ]
     },
 
+
+    /* ==========================================================
+       SOCIAL MEDIA MANAGER
+    ========================================================== */
 
     "Social Media Manager Application": {
-        title: "Social Media Manager Application",
+
+        title:
+            "Social Media Manager Application",
+
         description:
-            "Apply to manage Union Roleplay's social media presence and coordinate the media team.",
+            "Apply to manage Union Roleplay's social media presence and coordinate the wider media team.",
 
         questions: [
+
             {
                 key: "age",
-                label: "How old are you?",
+                label:
+                    "How old are you?",
                 type: "number",
                 required: true
             },
+
             {
                 key: "experience",
-                label: "Describe your previous social media or FiveM media experience.",
+                label:
+                    "Describe your previous social media, content creation or FiveM media experience.",
                 type: "textarea",
                 required: true
             },
+
             {
                 key: "portfolio",
-                label: "Provide links or details for at least three examples of your previous FiveM videos or images.",
+                label:
+                    "Provide at least three examples of previous FiveM media you have created or managed. Include links where possible.",
                 type: "textarea",
                 required: true
             },
+
             {
-                key: "strategy",
-                label: "How would you grow Union Roleplay's social media accounts?",
+                key: "platforms",
+                label:
+                    "Which social media platforms are you most experienced with, and what type of content would you use on each platform for Union Roleplay?",
                 type: "textarea",
                 required: true
             },
+
             {
-                key: "management",
-                label: "How would you organise and request content from the Union Roleplay media team?",
+                key: "growthStrategy",
+                label:
+                    "If Union Roleplay's social media engagement was low, what would you do to improve reach and attract new members without relying on spam?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "mediaManagement",
+                label:
+                    "How would you organise the Media Team, assign content requests and make sure content is completed on time?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "qualityControl",
+                label:
+                    "A member of the Media Team submits content that does not meet the quality expected for Union Roleplay. How would you handle it?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "availability",
+                label:
+                    "How frequently would you be available to manage Union Roleplay's social media and coordinate the Media Team?",
                 type: "textarea",
                 required: true
             }
+
         ]
     },
 
+
+    /* ==========================================================
+       MEDIA TEAM
+    ========================================================== */
 
     "Media Application": {
-        title: "Media Team Application",
+
+        title:
+            "Media Team Application",
+
         description:
-            "Apply to create screenshots, videos and promotional media for Union Roleplay.",
+            "Apply to create screenshots, videos, trailers and promotional content for Union Roleplay.",
 
         questions: [
+
             {
                 key: "age",
-                label: "How old are you?",
+                label:
+                    "How old are you?",
                 type: "number",
                 required: true
             },
+
             {
                 key: "experience",
-                label: "Tell us about your previous FiveM or media experience.",
+                label:
+                    "Tell us about your previous FiveM, photography, video editing or other media experience.",
                 type: "textarea",
                 required: true
             },
+
             {
                 key: "portfolio",
-                label: "Provide examples of your previous media work.",
+                label:
+                    "Provide examples of your previous media work. Links to FiveM screenshots, videos or edits are preferred.",
                 type: "textarea",
                 required: true
             },
+
             {
-                key: "tools",
-                label: "What editing or capture software do you use?",
+                key: "software",
+                label:
+                    "What software do you currently use for capturing and editing screenshots or videos?",
                 type: "textarea",
                 required: true
             },
+
+            {
+                key: "mediaScenario",
+                label:
+                    "You are asked to create promotional content for a major server update. Explain how you would plan and create the content.",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "feedback",
+                label:
+                    "A piece of media you spent a lot of time creating is rejected and you are asked to redo it. How would you respond?",
+                type: "textarea",
+                required: true
+            },
+
             {
                 key: "availability",
-                label: "How often would you be available to create media for Union Roleplay?",
+                label:
+                    "How often would you realistically be available to create media for Union Roleplay?",
                 type: "textarea",
                 required: true
             }
+
         ]
     },
 
+
+    /* ==========================================================
+       SCRIPT DEVELOPER
+    ========================================================== */
 
     "Script Developer Application": {
-        title: "Script Developer Application",
+
+        title:
+            "Script Developer Application",
+
         description:
-            "Apply to work on scripts and server systems for Union Roleplay.",
+            "Apply to help develop, maintain and improve scripts and systems used by Union Roleplay.",
 
         questions: [
+
             {
                 key: "age",
-                label: "How old are you?",
+                label:
+                    "How old are you?",
                 type: "number",
                 required: true
             },
+
             {
                 key: "experience",
-                label: "Tell us about your FiveM development experience.",
+                label:
+                    "Tell us about your FiveM development experience, including how long you have been developing.",
                 type: "textarea",
                 required: true
             },
+
             {
                 key: "languages",
-                label: "Which programming languages and FiveM frameworks are you comfortable with?",
+                label:
+                    "Which programming languages, libraries and FiveM frameworks are you comfortable working with?",
                 type: "textarea",
                 required: true
             },
+
+            {
+                key: "frameworkExperience",
+                label:
+                    "Describe your experience with QBOX/QBCore, ox_lib, ox_inventory, ox_target or similar FiveM resources.",
+                type: "textarea",
+                required: true
+            },
+
             {
                 key: "portfolio",
-                label: "Provide examples or links to previous development work.",
+                label:
+                    "Provide examples, GitHub repositories, videos or other evidence of previous development work.",
                 type: "textarea",
                 required: true
             },
+
+            {
+                key: "debugScenario",
+                label:
+                    "A script works perfectly on your development server but throws errors when deployed to the live server. Explain how you would approach diagnosing the problem.",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "security",
+                label:
+                    "What steps would you take when developing a script that handles money, inventory items or other sensitive server data?",
+                type: "textarea",
+                required: true
+            },
+
             {
                 key: "availability",
-                label: "How much time can you normally dedicate to development each week?",
+                label:
+                    "How much time can you realistically dedicate to Union Roleplay development each week?",
                 type: "textarea",
                 required: true
             }
+
         ]
     },
 
+
+    /* ==========================================================
+       VEHICLE DEVELOPER
+    ========================================================== */
 
     "Vehicle Developer Application": {
-        title: "Vehicle Developer Application",
+
+        title:
+            "Vehicle Developer Application",
+
         description:
-            "Apply to work on Union Roleplay's vehicle fleet.",
+            "Apply to develop, maintain and optimise vehicles used throughout Union Roleplay.",
 
         questions: [
+
             {
                 key: "age",
-                label: "How old are you?",
+                label:
+                    "How old are you?",
                 type: "number",
                 required: true
             },
+
             {
                 key: "experience",
-                label: "Tell us about your FiveM vehicle development experience.",
+                label:
+                    "Tell us about your previous FiveM vehicle development experience.",
                 type: "textarea",
                 required: true
             },
+
             {
                 key: "skills",
-                label: "What vehicle development work can you do? For example liveries, handling, metas, models or optimisation.",
+                label:
+                    "What areas of vehicle development can you confidently work on? For example liveries, handling, metas, models, lighting or optimisation.",
                 type: "textarea",
                 required: true
             },
+
+            {
+                key: "software",
+                label:
+                    "Which programs and tools do you normally use when creating or editing FiveM vehicles?",
+                type: "textarea",
+                required: true
+            },
+
             {
                 key: "portfolio",
-                label: "Provide examples or links to your previous vehicle work.",
+                label:
+                    "Provide examples or links to previous vehicles, liveries or other vehicle-development work you have completed.",
                 type: "textarea",
                 required: true
             },
+
+            {
+                key: "optimisationScenario",
+                label:
+                    "You are given a vehicle that looks good but performs poorly and causes noticeable client FPS loss. How would you approach the problem?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "standards",
+                label:
+                    "How would you make sure vehicles you add to Union match our British theme and quality standards?",
+                type: "textarea",
+                required: true
+            },
+
             {
                 key: "availability",
-                label: "How often are you available to work on vehicles?",
+                label:
+                    "How often are you realistically available to work on the Union Roleplay vehicle fleet?",
                 type: "textarea",
                 required: true
             }
+
         ]
     },
 
+
+    /* ==========================================================
+       EUP DEVELOPER
+    ========================================================== */
 
     "EUP Developer Application": {
-        title: "EUP Developer Application",
+
+        title:
+            "EUP Developer Application",
+
         description:
-            "Apply to develop clothing and uniforms for Union Roleplay.",
+            "Apply to create and maintain uniforms, clothing and department assets used throughout Union Roleplay.",
 
         questions: [
+
             {
                 key: "age",
-                label: "How old are you?",
+                label:
+                    "How old are you?",
                 type: "number",
                 required: true
             },
+
             {
                 key: "experience",
-                label: "Tell us about your EUP development experience.",
+                label:
+                    "Tell us about your previous EUP or FiveM clothing development experience.",
                 type: "textarea",
                 required: true
             },
+
             {
                 key: "skills",
-                label: "What EUP work can you create or edit?",
+                label:
+                    "What EUP work can you confidently create or edit? Include texturing, models, components, props or other relevant skills.",
                 type: "textarea",
                 required: true
             },
+
+            {
+                key: "software",
+                label:
+                    "Which programs and tools do you normally use for EUP development?",
+                type: "textarea",
+                required: true
+            },
+
             {
                 key: "portfolio",
-                label: "Provide examples or links to your previous EUP work.",
+                label:
+                    "Provide examples or links to previous uniforms, clothing or EUP work you have created.",
                 type: "textarea",
                 required: true
             },
+
+            {
+                key: "departmentScenario",
+                label:
+                    "You are asked to create a new uniform pack for one of Union's emergency services. Explain how you would plan the pack and keep it consistent with the department.",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "optimisation",
+                label:
+                    "What would you consider when making sure an EUP pack is organised and suitable for use on a live FiveM server?",
+                type: "textarea",
+                required: true
+            },
+
             {
                 key: "availability",
-                label: "How often are you available to work on EUP?",
+                label:
+                    "How often are you realistically available to work on Union Roleplay EUP?",
                 type: "textarea",
                 required: true
             }
+
         ]
     },
 
+
+    /* ==========================================================
+       UPD COMMAND
+    ========================================================== */
 
     "UPD Command Application": {
-        title: "UPD Command Application",
+
+        title:
+            "UPD Command Application",
+
         description:
-            "Apply for a command position within the Union Police Department.",
+            "Apply for a senior leadership position within Union Police. Command applicants are expected to demonstrate strong leadership, realistic policing standards and the ability to manage officers fairly.",
 
         questions: [
+
             {
                 key: "age",
-                label: "How old are you?",
+                label:
+                    "How old are you?",
                 type: "number",
                 required: true
             },
+
             {
-                key: "experience",
-                label: "Tell us about your previous policing and command experience.",
+                key: "policeExperience",
+                label:
+                    "Tell us about your previous FiveM policing experience, including any supervisory or command positions you have held.",
                 type: "textarea",
                 required: true
             },
+
             {
-                key: "leadership",
-                label: "Describe your leadership style.",
+                key: "leadershipStyle",
+                label:
+                    "Describe your leadership style and how you would apply it when managing officers within Union Police.",
                 type: "textarea",
                 required: true
             },
+
             {
-                key: "plans",
-                label: "What would you bring to UPD Command?",
+                key: "departmentPlans",
+                label:
+                    "What would you bring to UPD Command, and what would your priorities be during your first few weeks?",
                 type: "textarea",
                 required: true
             },
+
             {
-                key: "standards",
-                label: "How would you maintain high roleplay and policing standards within the department?",
+                key: "officerStandards",
+                label:
+                    "An experienced officer repeatedly performs poorly but is popular within the department. How would you handle the situation?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "misconductScenario",
+                label:
+                    "You receive a serious complaint alleging that one of your supervisors has abused their position during a roleplay situation. Explain how you would deal with it.",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "roleplayStandards",
+                label:
+                    "How would you ensure Union Police creates good roleplay for civilians rather than focusing solely on winning pursuits, arrests or incidents?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "commandConflict",
+                label:
+                    "You strongly disagree with another command member about a major departmental decision. How would you handle the disagreement?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "availability",
+                label:
+                    "How active can you realistically be within Union Police, and how much time can you commit to command responsibilities?",
                 type: "textarea",
                 required: true
             }
+
         ]
     },
 
 
+    /* ==========================================================
+       UHS COMMAND
+    ========================================================== */
+
     "UHS Command Application": {
-        title: "UHS Command Application",
+
+        title:
+            "UHS Command Application",
+
         description:
-            "Apply for a command position within Union Health Service.",
+            "Apply for a senior leadership position within Union Health Service. Command applicants should demonstrate strong leadership and a commitment to high-quality medical roleplay.",
 
         questions: [
+
             {
                 key: "age",
-                label: "How old are you?",
+                label:
+                    "How old are you?",
                 type: "number",
                 required: true
             },
+
             {
-                key: "experience",
-                label: "Tell us about your previous medical and command experience.",
+                key: "medicalExperience",
+                label:
+                    "Tell us about your previous FiveM medical roleplay experience, including any supervisory or command positions you have held.",
                 type: "textarea",
                 required: true
             },
+
             {
-                key: "leadership",
-                label: "Describe your leadership style.",
+                key: "leadershipStyle",
+                label:
+                    "Describe your leadership style and how you would apply it while managing members of Union Health Service.",
                 type: "textarea",
                 required: true
             },
+
             {
-                key: "plans",
-                label: "What would you bring to UHS Command?",
+                key: "departmentPlans",
+                label:
+                    "What would you bring to UHS Command, and what would your priorities be during your first few weeks?",
                 type: "textarea",
                 required: true
             },
+
             {
-                key: "standards",
-                label: "How would you maintain high medical roleplay and departmental standards?",
+                key: "medicalStandards",
+                label:
+                    "How would you maintain realistic and high-quality medical roleplay across the department?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "staffPerformance",
+                label:
+                    "A long-serving member of UHS repeatedly provides poor medical roleplay despite previous guidance. How would you handle the situation?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "majorIncident",
+                label:
+                    "A major incident occurs with several casualties and limited medical resources available. As a command member, how would you organise the response?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "commandConflict",
+                label:
+                    "You strongly disagree with another command member about how the department should operate. How would you resolve the disagreement professionally?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "availability",
+                label:
+                    "How active can you realistically be within Union Health Service, and how much time can you commit to command responsibilities?",
                 type: "textarea",
                 required: true
             }
+
         ]
     }
+
 };
 
 
