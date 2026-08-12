@@ -838,6 +838,218 @@ const APPLICATION_CONFIG = {
 
 };
 
+/* ==========================================================
+   APPLICATION QUALITY REQUIREMENTS
+========================================================== */
+
+const APPLICATION_MINIMUM_LENGTHS = {
+
+    "Whitelist Application": {
+        roleplayExperience: 150,
+        characterBackstory: 400,
+        characterPlans: 180,
+        collisionScenario: 220,
+        policeScenario: 220,
+        lossScenario: 180,
+        rulebreakScenario: 180,
+        whyUnion: 180
+    },
+
+    "Staff Application": {
+        staffExperience: 150,
+        whyStaff: 180,
+        strengthsWeaknesses: 150,
+        staffConflict: 220,
+        friendScenario: 180,
+        staffMisconduct: 200,
+        availability: 100
+    },
+
+    "QA Tester Application": {
+        testingExperience: 120,
+        whyQa: 140,
+        bugReport: 220,
+        reproduction: 160,
+        confidentiality: 140,
+        availability: 100
+    },
+
+    "Social Media Manager Application": {
+        experience: 150,
+        portfolio: 80,
+        platforms: 180,
+        growthStrategy: 220,
+        mediaManagement: 200,
+        qualityControl: 180,
+        availability: 100
+    },
+
+    "Media Application": {
+        experience: 120,
+        portfolio: 60,
+        software: 80,
+        mediaScenario: 180,
+        feedback: 150,
+        availability: 100
+    },
+
+    "Script Developer Application": {
+        experience: 150,
+        languages: 120,
+        frameworkExperience: 150,
+        portfolio: 60,
+        debugScenario: 220,
+        security: 200,
+        availability: 100
+    },
+
+    "Vehicle Developer Application": {
+        experience: 120,
+        skills: 140,
+        software: 80,
+        portfolio: 60,
+        optimisationScenario: 200,
+        standards: 160,
+        availability: 100
+    },
+
+    "EUP Developer Application": {
+        experience: 120,
+        skills: 140,
+        software: 80,
+        portfolio: 60,
+        departmentScenario: 200,
+        optimisation: 160,
+        availability: 100
+    },
+
+    "UPD Command Application": {
+        policeExperience: 180,
+        leadershipStyle: 220,
+        departmentPlans: 220,
+        officerStandards: 250,
+        misconductScenario: 250,
+        roleplayStandards: 220,
+        commandConflict: 220,
+        availability: 120
+    },
+
+    "UHS Command Application": {
+        medicalExperience: 180,
+        leadershipStyle: 220,
+        departmentPlans: 220,
+        medicalStandards: 220,
+        staffPerformance: 250,
+        majorIncident: 250,
+        commandConflict: 220,
+        availability: 120
+    }
+};
+
+
+function getQuestionMinimumLength(question) {
+
+    if (!question || question.type === "number") {
+        return 0;
+    }
+
+    return Number(
+        APPLICATION_MINIMUM_LENGTHS[
+            currentApplicationType
+        ]?.[question.key] || 0
+    );
+}
+
+
+function getAnswerLength(value) {
+
+    return String(value ?? "")
+        .trim()
+        .length;
+}
+
+
+function isQuestionComplete(question, value) {
+
+    const answerLength =
+        getAnswerLength(value);
+
+    if (
+        question.required &&
+        answerLength === 0
+    ) {
+        return false;
+    }
+
+    const minimumLength =
+        getQuestionMinimumLength(question);
+
+    if (
+        minimumLength > 0 &&
+        answerLength < minimumLength
+    ) {
+        return false;
+    }
+
+    return true;
+}
+
+
+function updateCharacterCounter(question, input) {
+
+    const counter =
+        document.getElementById(
+            "applicationCharacterCounter"
+        );
+
+    if (!counter) {
+        return;
+    }
+
+    const minimumLength =
+        getQuestionMinimumLength(question);
+
+    if (minimumLength <= 0) {
+        counter.hidden = true;
+        return;
+    }
+
+    const currentLength =
+        getAnswerLength(input?.value);
+
+    counter.hidden = false;
+
+    counter.classList.toggle(
+        "requirement-met",
+        currentLength >= minimumLength
+    );
+
+    counter.classList.toggle(
+        "requirement-pending",
+        currentLength < minimumLength
+    );
+
+    if (currentLength >= minimumLength) {
+
+        counter.innerHTML = `
+            <span class="application-character-check">✓</span>
+            Minimum requirement met
+            <strong>${currentLength}</strong>
+            characters
+        `;
+
+        return;
+    }
+
+    counter.innerHTML = `
+        <strong>${currentLength}</strong>
+        /
+        <strong>${minimumLength}</strong>
+        minimum characters
+    `;
+}
+
+
 
 let currentApplicationType = "";
 let currentConfig = null;
@@ -1022,10 +1234,9 @@ function calculateProgress() {
                         question.key
                     ];
 
-                return (
-                    value !== undefined &&
-                    value !== null &&
-                    String(value).trim() !== ""
+                return isQuestionComplete(
+                    question,
+                    value
                 );
             }
         ).length;
@@ -1086,10 +1297,10 @@ function updateProgress() {
                     ];
 
                 const complete =
-                    value !== undefined &&
-                    value !== null &&
-                    String(value)
-                        .trim() !== "";
+                    isQuestionComplete(
+                        question,
+                        value
+                    );
 
                 step.classList.toggle(
                     "active",
@@ -1235,6 +1446,23 @@ function createQuestionInput(
     input.required =
         question.required === true;
 
+
+    const minimumLength =
+        getQuestionMinimumLength(question);
+
+
+    if (
+        minimumLength > 0 &&
+        (
+            input.tagName === "TEXTAREA" ||
+            input.type === "text"
+        )
+    ) {
+        input.minLength =
+            minimumLength;
+    }
+
+
     input.autocomplete = "off";
 
     input.value =
@@ -1248,6 +1476,12 @@ function createQuestionInput(
                 input.value;
 
             updateProgress();
+
+            updateCharacterCounter(
+                question,
+                input
+            );
+
             scheduleAutoSave();
         }
     );
@@ -1361,6 +1595,68 @@ function renderCurrentQuestion() {
     wrapper.appendChild(
         input
     );
+
+
+    const minimumLength =
+        getQuestionMinimumLength(question);
+
+
+    if (minimumLength > 0) {
+
+        const requirement =
+            document.createElement(
+                "div"
+            );
+
+        requirement.className =
+            "application-answer-requirement";
+
+
+        const requirementText =
+            document.createElement(
+                "span"
+            );
+
+        requirementText.className =
+            "application-answer-guidance";
+
+        requirementText.textContent =
+            question.key === "characterBackstory"
+                ? "Detailed, original answers are expected. AI-generated or copied backstories may be declined."
+                : "Give a detailed answer that properly addresses the question.";
+
+
+        const counter =
+            document.createElement(
+                "span"
+            );
+
+        counter.id =
+            "applicationCharacterCounter";
+
+        counter.className =
+            "application-character-counter";
+
+
+        requirement.appendChild(
+            requirementText
+        );
+
+        requirement.appendChild(
+            counter
+        );
+
+        wrapper.appendChild(
+            requirement
+        );
+
+
+        updateCharacterCounter(
+            question,
+            input
+        );
+    }
+
 
     container.appendChild(
         wrapper
@@ -1508,6 +1804,32 @@ function validateCurrentQuestion() {
         return false;
     }
 
+    const minimumLength =
+        getQuestionMinimumLength(question);
+
+    const answerLength =
+        getAnswerLength(input.value);
+
+
+    if (
+        minimumLength > 0 &&
+        answerLength < minimumLength
+    ) {
+
+        input.focus();
+
+        input.setCustomValidity(
+            `Your answer needs more detail. Please write at least ${minimumLength} characters. You currently have ${answerLength}.`
+        );
+
+        input.reportValidity();
+
+        input.setCustomValidity("");
+
+        return false;
+    }
+
+
     if (!input.checkValidity()) {
 
         input.reportValidity();
@@ -1566,6 +1888,44 @@ function validateAllQuestions() {
 
                 input.setCustomValidity(
                     "Please answer this question before submitting."
+                );
+
+                input.reportValidity();
+
+                input.setCustomValidity("");
+            }
+
+            return false;
+        }
+
+
+        const minimumLength =
+            getQuestionMinimumLength(question);
+
+        const answerLength =
+            getAnswerLength(value);
+
+
+        if (
+            minimumLength > 0 &&
+            answerLength < minimumLength
+        ) {
+
+            currentQuestionIndex =
+                index;
+
+            renderCurrentQuestion();
+            updateProgress();
+
+            const input =
+                getCurrentInput();
+
+            if (input) {
+
+                input.focus();
+
+                input.setCustomValidity(
+                    `Your answer needs more detail. Please write at least ${minimumLength} characters. You currently have ${answerLength}.`
                 );
 
                 input.reportValidity();
