@@ -2265,3 +2265,10 @@
         animation: none;
     }
 }
+/* ========================================
+   HIDDEN ELEMENT FIX
+======================================== */
+
+[hidden] {
+    display: none !important;
+}
