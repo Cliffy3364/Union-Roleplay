@@ -110,8 +110,13 @@ async function setupNavbarUser() {
                 user.username ||
                 "Account";
 
+            /*
+                CLOUDFLARE PAGES:
+                Site now runs from the domain root.
+            */
+
             loginButton.href =
-                "/Union-Roleplay/pages/dashboard.html";
+                "/pages/dashboard.html";
         }
 
 
