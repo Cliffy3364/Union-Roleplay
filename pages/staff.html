@@ -199,6 +199,19 @@
                     </span>
                 </button>
 
+                <button
+                    type="button"
+                    class="staff-nav-item"
+                    data-view="discipline-records"
+                    id="disciplineRecordsNav"
+                >
+                    <span class="staff-nav-content">
+                        <span class="staff-nav-icon">DR</span>
+                        <span>Disciplinary Records</span>
+                    </span>
+                </button>
+
+
             </div>
 
         </nav>
@@ -912,6 +925,147 @@
                     </aside>
 
                 </div>
+
+            </section>
+
+
+            <!-- ========================================
+                 DISCIPLINARY RECORDS MANAGEMENT
+            ========================================= -->
+
+            <section
+                id="disciplineRecordsView"
+                class="discipline-records-view"
+                hidden
+            >
+
+                <div class="discipline-records-header">
+
+                    <div>
+                        <span>PLAYER MANAGEMENT</span>
+                        <h2>Disciplinary Records</h2>
+                        <p>
+                            Search, filter and review all player disciplinary records from one place.
+                        </p>
+                    </div>
+
+                    <div class="discipline-records-live">
+                        <span></span>
+                        LIVE DATABASE
+                    </div>
+
+                </div>
+
+                <div class="discipline-record-stats">
+
+                    <article>
+                        <span>ALL RECORDS</span>
+                        <strong id="disciplineRecordsTotal">0</strong>
+                    </article>
+
+                    <article>
+                        <span>ACTIVE</span>
+                        <strong id="disciplineRecordsActive">0</strong>
+                    </article>
+
+                    <article>
+                        <span>REVOKED</span>
+                        <strong id="disciplineRecordsRevoked">0</strong>
+                    </article>
+
+                    <article>
+                        <span>RESOLVED / EXPIRED</span>
+                        <strong id="disciplineRecordsClosed">0</strong>
+                    </article>
+
+                </div>
+
+                <section class="staff-dashboard-panel discipline-records-panel">
+
+                    <div class="discipline-records-toolbar">
+
+                        <div class="discipline-records-search">
+
+                            <span>⌕</span>
+
+                            <input
+                                type="search"
+                                id="disciplineRecordsSearch"
+                                placeholder="Search Union ID, Discord, record ID or reason..."
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+                        <select id="disciplineRecordsStatus">
+                            <option value="all">All Statuses</option>
+                            <option value="Active">Active</option>
+                            <option value="Revoked">Revoked</option>
+                            <option value="Resolved">Resolved</option>
+                            <option value="Expired">Expired</option>
+                        </select>
+
+                        <select id="disciplineRecordsType">
+                            <option value="all">All Actions</option>
+                        </select>
+
+                        <input
+                            type="search"
+                            id="disciplineRecordsIssuer"
+                            placeholder="Issued by..."
+                            autocomplete="off"
+                        >
+
+                        <button
+                            type="button"
+                            class="discipline-secondary-button"
+                            id="disciplineRecordsRefresh"
+                        >
+                            Refresh
+                        </button>
+
+                    </div>
+
+                    <div class="staff-panel-divider"></div>
+
+                    <div class="discipline-records-layout">
+
+                        <div>
+
+                            <div
+                                id="disciplineRecordsList"
+                                class="discipline-records-list"
+                            >
+                                <div class="member-management-empty">
+                                    <h3>Loading records...</h3>
+                                </div>
+                            </div>
+
+                            <div
+                                class="discipline-records-pagination"
+                                id="disciplineRecordsPagination"
+                            ></div>
+
+                        </div>
+
+                        <aside
+                            class="discipline-record-detail"
+                            id="disciplineRecordDetail"
+                        >
+
+                            <div class="discipline-record-detail-empty">
+                                <div>DR</div>
+                                <strong>Select a record</strong>
+                                <p>
+                                    Choose a disciplinary record to view its full details.
+                                </p>
+                            </div>
+
+                        </aside>
+
+                    </div>
+
+                </section>
 
             </section>
 

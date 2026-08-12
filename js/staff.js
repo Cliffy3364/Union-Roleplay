@@ -60,6 +60,11 @@ let currentStatusFilter =
 let selectedDisciplineMember = null;
 let disciplineHistoryRecords = [];
 
+let disciplineRecords = [];
+let disciplineRecordsPage = 1;
+let disciplineRecordsPages = 1;
+let selectedGlobalDisciplineRecord = null;
+
 
 /* ========================================
    AUTH / API
@@ -470,6 +475,12 @@ function hideAllViews() {
         );
 
 
+    const disciplineRecordsView =
+        document.getElementById(
+            "disciplineRecordsView"
+        );
+
+
     if (dashboard) {
 
         dashboard.hidden = true;
@@ -491,6 +502,12 @@ function hideAllViews() {
     if (discipline) {
 
         discipline.hidden = true;
+    }
+
+
+    if (disciplineRecordsView) {
+
+        disciplineRecordsView.hidden = true;
     }
 
 
@@ -733,6 +750,1072 @@ function showStaffDiscipline() {
 
 
             search?.focus();
+        }
+    );
+}
+
+
+
+/* ========================================
+   DISCIPLINARY RECORDS VIEW
+======================================== */
+
+function showDisciplinaryRecords() {
+
+    hideAllViews();
+
+    currentQueueType = null;
+
+    const view =
+        document.getElementById(
+            "disciplineRecordsView"
+        );
+
+    const title =
+        document.getElementById(
+            "staffPageTitle"
+        );
+
+    const description =
+        document.getElementById(
+            "staffPageDescription"
+        );
+
+
+    if (view) {
+        view.hidden = false;
+    }
+
+    if (title) {
+        title.textContent =
+            "Disciplinary Records";
+    }
+
+    if (description) {
+        description.textContent =
+            "Search and review all player disciplinary records.";
+    }
+
+    setTopSearch(
+        "",
+        false
+    );
+
+    disciplineRecordsPage = 1;
+
+    loadGlobalDisciplineRecords();
+}
+
+
+function globalDisciplinePlayerName(record) {
+
+    return (
+        record.discord_display_name ||
+        record.discord_username ||
+        record.username ||
+        record.discord_id ||
+        "Unknown Player"
+    );
+}
+
+
+function evidenceItemsFromRecord(record) {
+
+    try {
+
+        const parsed =
+            Array.isArray(record.evidence)
+                ? record.evidence
+                : JSON.parse(record.evidence || "[]");
+
+        return Array.isArray(parsed)
+            ? parsed
+            : [];
+
+    } catch {
+
+        return [];
+    }
+}
+
+
+function renderGlobalDisciplineStats(
+    data
+) {
+
+    const total =
+        Number(
+            data.pagination?.total || 0
+        );
+
+    const counts = {};
+
+    (data.status_counts || [])
+        .forEach(row => {
+
+            counts[
+                String(row.status || "")
+                    .toLowerCase()
+            ] =
+                Number(row.count || 0);
+        });
+
+
+    const totalEl =
+        document.getElementById(
+            "disciplineRecordsTotal"
+        );
+
+    const activeEl =
+        document.getElementById(
+            "disciplineRecordsActive"
+        );
+
+    const revokedEl =
+        document.getElementById(
+            "disciplineRecordsRevoked"
+        );
+
+    const closedEl =
+        document.getElementById(
+            "disciplineRecordsClosed"
+        );
+
+
+    if (totalEl) {
+        totalEl.textContent = total;
+    }
+
+    if (activeEl) {
+        activeEl.textContent =
+            counts.active || 0;
+    }
+
+    if (revokedEl) {
+        revokedEl.textContent =
+            counts.revoked || 0;
+    }
+
+    if (closedEl) {
+        closedEl.textContent =
+            (counts.resolved || 0) +
+            (counts.expired || 0);
+    }
+}
+
+
+function populateDisciplineTypeFilter(
+    types
+) {
+
+    const select =
+        document.getElementById(
+            "disciplineRecordsType"
+        );
+
+    if (!select) {
+        return;
+    }
+
+    const current =
+        select.value;
+
+    select.innerHTML = `
+        <option value="all">
+            All Actions
+        </option>
+
+        ${(types || [])
+            .map(
+                type => `
+                    <option value="${escapeHtml(type)}">
+                        ${escapeHtml(type)}
+                    </option>
+                `
+            )
+            .join("")}
+    `;
+
+    if (
+        [...select.options]
+            .some(
+                option =>
+                    option.value === current
+            )
+    ) {
+        select.value = current;
+    }
+}
+
+
+function renderGlobalDisciplineRecords(
+    records
+) {
+
+    const target =
+        document.getElementById(
+            "disciplineRecordsList"
+        );
+
+    if (!target) {
+        return;
+    }
+
+    disciplineRecords =
+        records || [];
+
+
+    if (!disciplineRecords.length) {
+
+        target.innerHTML = `
+            <div class="member-management-empty">
+
+                <div class="member-empty-icon">
+                    DR
+                </div>
+
+                <h3>
+                    No records found
+                </h3>
+
+                <p>
+                    Try changing your search or filters.
+                </p>
+
+            </div>
+        `;
+
+        renderGlobalDisciplineDetail(
+            null
+        );
+
+        return;
+    }
+
+
+    target.innerHTML =
+        disciplineRecords
+            .map(
+                record => {
+
+                    const details =
+                        parseDisciplineOutcomeDetails(
+                            record.action_taken
+                        );
+
+                    const status =
+                        formatDisciplineStatus(
+                            record
+                        );
+
+                    return `
+                        <button
+                            type="button"
+                            class="discipline-global-row"
+                            data-global-discipline-id="${Number(record.id)}"
+                        >
+
+                            <div class="discipline-global-main">
+
+                                <span class="discipline-global-reference">
+                                    ${escapeHtml(
+                                        record.reference ||
+                                        `#${record.id}`
+                                    )}
+                                </span>
+
+                                <strong>
+                                    ${escapeHtml(
+                                        globalDisciplinePlayerName(
+                                            record
+                                        )
+                                    )}
+                                </strong>
+
+                                <small>
+                                    ${escapeHtml(
+                                        record.union_id ||
+                                        "No Union ID"
+                                    )}
+                                    ·
+                                    ${escapeHtml(
+                                        record.disciplinary_type ||
+                                        "Disciplinary Action"
+                                    )}
+                                </small>
+
+                            </div>
+
+                            <div class="discipline-global-meta">
+
+                                <span>Severity</span>
+
+                                <strong>
+                                    ${escapeHtml(
+                                        details.severity ||
+                                        "—"
+                                    )}
+                                </strong>
+
+                            </div>
+
+                            <div class="discipline-global-meta">
+
+                                <span>Issued By</span>
+
+                                <strong>
+                                    ${escapeHtml(
+                                        record.issued_by_name ||
+                                        "Union Staff"
+                                    )}
+                                </strong>
+
+                            </div>
+
+                            <div class="discipline-global-date">
+
+                                <span>
+                                    ${escapeHtml(
+                                        formatMemberDate(
+                                            record.issued_at
+                                        )
+                                    )}
+                                </span>
+
+                            </div>
+
+                            <span
+                                class="discipline-record-status ${escapeHtml(
+                                    status
+                                        .toLowerCase()
+                                        .replaceAll(" ", "-")
+                                )}"
+                            >
+                                ${escapeHtml(status)}
+                            </span>
+
+                            <span class="discipline-global-open">
+                                →
+                            </span>
+
+                        </button>
+                    `;
+                }
+            )
+            .join("");
+
+
+    target
+        .querySelectorAll(
+            "[data-global-discipline-id]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const id =
+                        Number(
+                            button.dataset
+                                .globalDisciplineId
+                        );
+
+                    const record =
+                        disciplineRecords.find(
+                            item =>
+                                Number(item.id) === id
+                        );
+
+                    selectedGlobalDisciplineRecord =
+                        record || null;
+
+                    target
+                        .querySelectorAll(
+                            ".discipline-global-row"
+                        )
+                        .forEach(row =>
+                            row.classList.toggle(
+                                "active",
+                                Number(
+                                    row.dataset
+                                        .globalDisciplineId
+                                ) === id
+                            )
+                        );
+
+                    renderGlobalDisciplineDetail(
+                        record
+                    );
+                }
+            );
+        });
+
+
+    if (
+        selectedGlobalDisciplineRecord
+    ) {
+
+        const updated =
+            disciplineRecords.find(
+                item =>
+                    Number(item.id) ===
+                    Number(
+                        selectedGlobalDisciplineRecord.id
+                    )
+            );
+
+        if (updated) {
+            selectedGlobalDisciplineRecord =
+                updated;
+
+            renderGlobalDisciplineDetail(
+                updated
+            );
+        }
+    }
+}
+
+
+function renderGlobalDisciplineDetail(
+    record
+) {
+
+    const target =
+        document.getElementById(
+            "disciplineRecordDetail"
+        );
+
+    if (!target) {
+        return;
+    }
+
+
+    if (!record) {
+
+        target.innerHTML = `
+            <div class="discipline-record-detail-empty">
+
+                <div>DR</div>
+
+                <strong>
+                    Select a record
+                </strong>
+
+                <p>
+                    Choose a disciplinary record to view its full details.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    const details =
+        parseDisciplineOutcomeDetails(
+            record.action_taken
+        );
+
+    const evidence =
+        evidenceItemsFromRecord(
+            record
+        );
+
+    const status =
+        formatDisciplineStatus(
+            record
+        );
+
+    const canRevoke =
+        status.toLowerCase() !==
+        "revoked";
+
+
+    target.innerHTML = `
+
+        <div class="discipline-detail-heading">
+
+            <div>
+
+                <span>
+                    ${escapeHtml(
+                        record.reference ||
+                        `#${record.id}`
+                    )}
+                </span>
+
+                <h3>
+                    ${escapeHtml(
+                        record.disciplinary_type ||
+                        "Disciplinary Action"
+                    )}
+                </h3>
+
+            </div>
+
+            <span
+                class="discipline-record-status ${escapeHtml(
+                    status
+                        .toLowerCase()
+                        .replaceAll(" ", "-")
+                )}"
+            >
+                ${escapeHtml(status)}
+            </span>
+
+        </div>
+
+
+        <div class="discipline-detail-player">
+
+            <span>PLAYER</span>
+
+            <strong>
+                ${escapeHtml(
+                    globalDisciplinePlayerName(
+                        record
+                    )
+                )}
+            </strong>
+
+            <small>
+                ${escapeHtml(
+                    record.union_id ||
+                    "No Union ID"
+                )}
+                ·
+                ${escapeHtml(
+                    record.discord_id ||
+                    "No Discord ID"
+                )}
+            </small>
+
+        </div>
+
+
+        <div class="discipline-detail-grid">
+
+            <div>
+                <span>SEVERITY</span>
+                <strong>
+                    ${escapeHtml(
+                        details.severity ||
+                        "Not recorded"
+                    )}
+                </strong>
+            </div>
+
+            <div>
+                <span>CATEGORY</span>
+                <strong>
+                    ${escapeHtml(
+                        details.category ||
+                        "Not recorded"
+                    )}
+                </strong>
+            </div>
+
+            <div>
+                <span>PLAYER NOTIFIED</span>
+                <strong>
+                    ${escapeHtml(
+                        details["player notified"] ||
+                        "Not recorded"
+                    )}
+                </strong>
+            </div>
+
+            <div>
+                <span>ISSUED BY</span>
+                <strong>
+                    ${escapeHtml(
+                        record.issued_by_name ||
+                        "Union Staff"
+                    )}
+                </strong>
+            </div>
+
+            <div>
+                <span>ISSUED</span>
+                <strong>
+                    ${escapeHtml(
+                        formatMemberDate(
+                            record.issued_at
+                        )
+                    )}
+                </strong>
+            </div>
+
+            <div>
+                <span>EXPIRY / REVIEW</span>
+                <strong>
+                    ${record.expires_at
+                        ? escapeHtml(
+                            formatMemberDate(
+                                record.expires_at
+                            )
+                        )
+                        : "None"}
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="discipline-detail-section">
+
+            <span>INCIDENT SUMMARY</span>
+
+            <p>
+                ${escapeHtml(
+                    record.reason ||
+                    "No reason recorded."
+                )}
+            </p>
+
+        </div>
+
+
+        <div class="discipline-detail-section">
+
+            <span>EVIDENCE</span>
+
+            ${
+                evidence.length
+                    ? `
+                        <div class="discipline-detail-evidence">
+
+                            ${evidence
+                                .map(
+                                    item => `
+                                        <div>
+                                            ${escapeHtml(item)}
+                                        </div>
+                                    `
+                                )
+                                .join("")}
+
+                        </div>
+                    `
+                    : `
+                        <p class="staff-muted">
+                            No evidence references recorded.
+                        </p>
+                    `
+            }
+
+        </div>
+
+
+        ${
+            details["external reference"]
+                ? `
+                    <div class="discipline-detail-section">
+
+                        <span>EXTERNAL REFERENCE</span>
+
+                        <p>
+                            ${escapeHtml(
+                                details[
+                                    "external reference"
+                                ]
+                            )}
+                        </p>
+
+                    </div>
+                `
+                : ""
+        }
+
+
+        ${
+            details["internal staff notes"]
+                ? `
+                    <div class="discipline-detail-section">
+
+                        <span>INTERNAL STAFF NOTES</span>
+
+                        <p>
+                            ${escapeHtml(
+                                details[
+                                    "internal staff notes"
+                                ]
+                            )}
+                        </p>
+
+                    </div>
+                `
+                : ""
+        }
+
+
+        ${
+            canRevoke
+                ? `
+                    <button
+                        type="button"
+                        class="discipline-revoke-button"
+                        id="globalDisciplineRevoke"
+                    >
+                        Revoke Record
+                    </button>
+                `
+                : ""
+        }
+    `;
+
+
+    document
+        .getElementById(
+            "globalDisciplineRevoke"
+        )
+        ?.addEventListener(
+            "click",
+            async () => {
+
+                const confirmed =
+                    window.confirm(
+                        "Revoke this disciplinary record? It will remain in the permanent history."
+                    );
+
+                if (!confirmed) {
+                    return;
+                }
+
+                try {
+
+                    await staffFetch(
+                        `/api/staff/admin/disciplinary/${encodeURIComponent(record.id)}`,
+                        {
+                            method: "PATCH",
+
+                            body:
+                                JSON.stringify({
+                                    status:
+                                        "Revoked"
+                                })
+                        }
+                    );
+
+                    await loadGlobalDisciplineRecords();
+
+                } catch (error) {
+
+                    alert(
+                        error.message ||
+                        "The disciplinary record could not be revoked."
+                    );
+                }
+            }
+        );
+}
+
+
+function renderGlobalDisciplinePagination(
+    pagination
+) {
+
+    const target =
+        document.getElementById(
+            "disciplineRecordsPagination"
+        );
+
+    if (!target) {
+        return;
+    }
+
+
+    disciplineRecordsPage =
+        Number(
+            pagination?.page || 1
+        );
+
+    disciplineRecordsPages =
+        Number(
+            pagination?.pages || 1
+        );
+
+
+    if (
+        disciplineRecordsPages <= 1
+    ) {
+
+        target.innerHTML = "";
+
+        return;
+    }
+
+
+    target.innerHTML = `
+
+        <button
+            type="button"
+            id="disciplineRecordsPrevious"
+            ${disciplineRecordsPage <= 1 ? "disabled" : ""}
+        >
+            ← Previous
+        </button>
+
+        <span>
+            Page
+            ${disciplineRecordsPage}
+            of
+            ${disciplineRecordsPages}
+        </span>
+
+        <button
+            type="button"
+            id="disciplineRecordsNext"
+            ${disciplineRecordsPage >= disciplineRecordsPages ? "disabled" : ""}
+        >
+            Next →
+        </button>
+    `;
+
+
+    document
+        .getElementById(
+            "disciplineRecordsPrevious"
+        )
+        ?.addEventListener(
+            "click",
+            async () => {
+
+                if (
+                    disciplineRecordsPage <= 1
+                ) {
+                    return;
+                }
+
+                disciplineRecordsPage--;
+
+                await loadGlobalDisciplineRecords();
+            }
+        );
+
+
+    document
+        .getElementById(
+            "disciplineRecordsNext"
+        )
+        ?.addEventListener(
+            "click",
+            async () => {
+
+                if (
+                    disciplineRecordsPage >=
+                    disciplineRecordsPages
+                ) {
+                    return;
+                }
+
+                disciplineRecordsPage++;
+
+                await loadGlobalDisciplineRecords();
+            }
+        );
+}
+
+
+async function loadGlobalDisciplineRecords() {
+
+    const target =
+        document.getElementById(
+            "disciplineRecordsList"
+        );
+
+    const search =
+        document.getElementById(
+            "disciplineRecordsSearch"
+        )?.value.trim() || "";
+
+    const status =
+        document.getElementById(
+            "disciplineRecordsStatus"
+        )?.value || "all";
+
+    const type =
+        document.getElementById(
+            "disciplineRecordsType"
+        )?.value || "all";
+
+    const issuer =
+        document.getElementById(
+            "disciplineRecordsIssuer"
+        )?.value.trim() || "";
+
+
+    if (target) {
+
+        target.innerHTML = `
+            <p class="staff-muted">
+                Loading disciplinary records...
+            </p>
+        `;
+    }
+
+
+    try {
+
+        const params =
+            new URLSearchParams({
+                page:
+                    String(
+                        disciplineRecordsPage
+                    ),
+                page_size:
+                    "25",
+                status,
+                type
+            });
+
+        if (search) {
+            params.set(
+                "search",
+                search
+            );
+        }
+
+        if (issuer) {
+            params.set(
+                "issuer",
+                issuer
+            );
+        }
+
+
+        const data =
+            await staffFetch(
+                `/api/staff/admin/disciplinary?${params.toString()}`
+            );
+
+
+        renderGlobalDisciplineStats(
+            data
+        );
+
+        populateDisciplineTypeFilter(
+            data.types || []
+        );
+
+        renderGlobalDisciplineRecords(
+            data.records || []
+        );
+
+        renderGlobalDisciplinePagination(
+            data.pagination || {}
+        );
+
+
+    } catch (error) {
+
+        if (target) {
+
+            target.innerHTML = `
+                <div class="member-management-empty">
+
+                    <h3>
+                        Unable to load records
+                    </h3>
+
+                    <p>
+                        ${escapeHtml(
+                            error.message ||
+                            "Disciplinary records could not be loaded."
+                        )}
+                    </p>
+
+                </div>
+            `;
+        }
+    }
+}
+
+
+function setupDisciplinaryRecordsManagement() {
+
+    const search =
+        document.getElementById(
+            "disciplineRecordsSearch"
+        );
+
+    const status =
+        document.getElementById(
+            "disciplineRecordsStatus"
+        );
+
+    const type =
+        document.getElementById(
+            "disciplineRecordsType"
+        );
+
+    const issuer =
+        document.getElementById(
+            "disciplineRecordsIssuer"
+        );
+
+    const refresh =
+        document.getElementById(
+            "disciplineRecordsRefresh"
+        );
+
+
+    const reloadFromStart =
+        async () => {
+
+            disciplineRecordsPage = 1;
+
+            selectedGlobalDisciplineRecord =
+                null;
+
+            await loadGlobalDisciplineRecords();
+        };
+
+
+    status?.addEventListener(
+        "change",
+        reloadFromStart
+    );
+
+    type?.addEventListener(
+        "change",
+        reloadFromStart
+    );
+
+    refresh?.addEventListener(
+        "click",
+        reloadFromStart
+    );
+
+
+    search?.addEventListener(
+        "keydown",
+        async event => {
+
+            if (event.key !== "Enter") {
+                return;
+            }
+
+            event.preventDefault();
+
+            await reloadFromStart();
+        }
+    );
+
+
+    issuer?.addEventListener(
+        "keydown",
+        async event => {
+
+            if (event.key !== "Enter") {
+                return;
+            }
+
+            event.preventDefault();
+
+            await reloadFromStart();
         }
     );
 }
@@ -3698,6 +4781,33 @@ document.addEventListener(
         }
 
 
+
+        /* ========================================
+           DISCIPLINARY RECORDS BUTTON
+        ======================================== */
+
+        const disciplineRecordsButton =
+            document.querySelector(
+                '.staff-nav-item[data-view="discipline-records"]'
+            );
+
+
+        if (disciplineRecordsButton) {
+
+            disciplineRecordsButton.addEventListener(
+                "click",
+                () => {
+
+                    setActiveNav(
+                        disciplineRecordsButton
+                    );
+
+                    showDisciplinaryRecords();
+                }
+            );
+        }
+
+
         /* ========================================
            APPLICATION NAVIGATION
         ======================================== */
@@ -3795,6 +4905,8 @@ document.addEventListener(
         setupMemberManagement();
 
         setupDisciplineManagement();
+
+        setupDisciplinaryRecordsManagement();
 
 
         showDashboard();
