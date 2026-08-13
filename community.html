@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community | Union Roleplay</title>
+    <meta name="description" content="Union Roleplay community dashboard, live server status and leaderboards.">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/community.css">
+</head>
+<body class="community-page-shell">
+    <div id="navbar"></div>
+
+    <main>
+        <section class="community-hero">
+            <div class="community-container">
+                <div class="community-hero-layout">
+                    <div>
+                        <span class="community-eyebrow">UNION COMMUNITY</span>
+                        <h1>The city never <span>stands still.</span></h1>
+                        <p>See the live state of Union Roleplay, who's making their mark and how the community stacks up.</p>
+                        <div class="community-hero-actions">
+                            <a class="btn primary" href="fivem://connect/185.223.29.112:30120">Connect to Union</a>
+                            <a class="community-secondary-button" href="#leaderboards">View Leaderboards</a>
+                        </div>
+                    </div>
+
+                    <aside class="server-card">
+                        <div class="server-card-heading">
+                            <div>
+                                <span>LIVE SERVER</span>
+                                <strong>Union Roleplay</strong>
+                            </div>
+                            <div class="server-state" id="serverState">
+                                <i></i><span>Checking...</span>
+                            </div>
+                        </div>
+
+                        <div class="server-player-display">
+                            <span>PLAYERS ONLINE</span>
+                            <strong><span id="serverPlayers">--</span><small> / <span id="serverMaxPlayers">--</span></small></strong>
+                            <div class="server-capacity"><span id="serverCapacityBar"></span></div>
+                        </div>
+
+                        <div class="server-meta">
+                            <div><span>SERVER</span><strong id="serverHostname">Union Roleplay</strong></div>
+                            <div><span>ADDRESS</span><strong>185.223.29.112:30120</strong></div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section class="community-content" id="leaderboards">
+            <div class="community-container">
+                <div class="community-section-heading">
+                    <div>
+                        <span>COMMUNITY COMPETITION</span>
+                        <h2>Leaderboards</h2>
+                        <p>See who's leading the city across Union's community rankings.</p>
+                    </div>
+                    <div class="community-live-label"><i></i> LIVE DATA</div>
+                </div>
+
+                <div class="leaderboard-grid">
+                    <article class="leaderboard-card">
+                        <div class="leaderboard-header">
+                            <div><span>01</span><h3>Most Time In City</h3></div>
+                            <small>PLAYTIME</small>
+                        </div>
+                        <div class="leaderboard-list" id="playtimeLeaderboard">
+                            <div class="leaderboard-empty">Leaderboard data will appear here once connected.</div>
+                        </div>
+                    </article>
+
+                    <article class="leaderboard-card">
+                        <div class="leaderboard-header">
+                            <div><span>02</span><h3>Wealthiest Citizens</h3></div>
+                            <small>NET WORTH</small>
+                        </div>
+                        <div class="leaderboard-list" id="moneyLeaderboard">
+                            <div class="leaderboard-empty">Leaderboard data will appear here once connected.</div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="community-stats-grid">
+                    <article>
+                        <span>SERVER STATUS</span>
+                        <strong id="statServerStatus">Checking</strong>
+                        <p>Current FiveM server availability</p>
+                    </article>
+                    <article>
+                        <span>ONLINE NOW</span>
+                        <strong id="statPlayers">--</strong>
+                        <p>Players currently in Union City</p>
+                    </article>
+                    <article>
+                        <span>COMMUNITY</span>
+                        <strong>Strict RP</strong>
+                        <p>Serious whitelist roleplay</p>
+                    </article>
+                </div>
+
+                <section class="community-info-panel">
+                    <div>
+                        <span>MAKE YOUR MARK</span>
+                        <h2>Your story contributes to the city.</h2>
+                        <p>Leaderboards are designed to give the community something extra to compete for without replacing quality roleplay. More rankings and community achievements can be added as Union grows.</p>
+                    </div>
+                    <a href="applications.html" class="community-panel-link">Join Union <span>→</span></a>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/community.js"></script>
+</body>
+</html>
