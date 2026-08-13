@@ -2328,3 +2328,79 @@
         white-space: normal;
     }
 }
+/* ==========================================================
+   PUBLIC APPLICATION AVAILABILITY
+   Add to the bottom of application.css
+========================================================== */
+
+.application-role-card.availability-temporarily-closed,
+.application-featured-card.availability-temporarily-closed {
+    border-color:
+        rgba(234, 179, 8, 0.12);
+}
+
+.application-role-card.availability-closed,
+.application-featured-card.availability-closed {
+    border-color:
+        rgba(239, 68, 68, 0.11);
+}
+
+
+.application-role-card.availability-temporarily-closed
+.application-role-status,
+.application-featured-card.availability-temporarily-closed
+.application-featured-status {
+    color: #e8c864;
+}
+
+.application-role-card.availability-temporarily-closed
+.application-role-status > span,
+.application-featured-card.availability-temporarily-closed
+.application-featured-status > span {
+    background: #eab308;
+    box-shadow:
+        0 0 8px
+        rgba(234, 179, 8, 0.22);
+}
+
+
+.application-role-card.availability-closed
+.application-role-status,
+.application-featured-card.availability-closed
+.application-featured-status {
+    color: #ef9b9b;
+}
+
+.application-role-card.availability-closed
+.application-role-status > span,
+.application-featured-card.availability-closed
+.application-featured-status > span {
+    background: #ef4444;
+    box-shadow:
+        0 0 8px
+        rgba(239, 68, 68, 0.20);
+}
+
+
+.application-link-disabled {
+    opacity: 0.45;
+    cursor: not-allowed !important;
+    pointer-events: auto;
+}
+
+.application-link-disabled:hover {
+    transform: none !important;
+}
+
+
+#recruitmentOverallStatus.overall-open {
+    color: #86efac;
+}
+
+#recruitmentOverallStatus.overall-partial {
+    color: #e8c864;
+}
+
+#recruitmentOverallStatus.overall-closed {
+    color: #ef9b9b;
+}

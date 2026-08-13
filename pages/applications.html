@@ -43,16 +43,11 @@
     <main class="applications-page">
 
 
-        <!-- ========================================
-             HERO
-        ======================================== -->
-
         <section class="applications-hero">
 
             <div class="applications-container">
 
                 <div class="applications-hero-layout">
-
 
                     <div class="applications-hero-main">
 
@@ -64,12 +59,10 @@
 
                         </div>
 
-
                         <h1>
                             Find your place
                             <span>in Union.</span>
                         </h1>
-
 
                         <p>
                             Whether you're joining the city, supporting the community,
@@ -77,20 +70,11 @@
                             starts with an application.
                         </p>
 
-
                         <div class="applications-hero-tags">
 
-                            <span>
-                                STRICT WHITELIST
-                            </span>
-
-                            <span>
-                                STAFF REVIEWED
-                            </span>
-
-                            <span>
-                                DISCORD ACCOUNT REQUIRED
-                            </span>
+                            <span>STRICT WHITELIST</span>
+                            <span>STAFF REVIEWED</span>
+                            <span>DISCORD ACCOUNT REQUIRED</span>
 
                         </div>
 
@@ -101,35 +85,27 @@
 
                         <div class="applications-hero-side-top">
 
-                            <span>
-                                RECRUITMENT STATUS
-                            </span>
+                            <span>RECRUITMENT STATUS</span>
 
-                            <strong>
+                            <strong id="recruitmentOverallStatus">
                                 OPEN
                             </strong>
 
                         </div>
 
-
                         <div class="applications-hero-side-row">
 
-                            <span>
-                                Applications Available
-                            </span>
+                            <span>Applications Available</span>
 
-                            <strong>
+                            <strong id="applicationsAvailableCount">
                                 10
                             </strong>
 
                         </div>
 
-
                         <div class="applications-hero-side-row">
 
-                            <span>
-                                Review Process
-                            </span>
+                            <span>Review Process</span>
 
                             <strong>
                                 Staff Review
@@ -137,12 +113,9 @@
 
                         </div>
 
-
                         <div class="applications-hero-side-row">
 
-                            <span>
-                                Application Tracking
-                            </span>
+                            <span>Application Tracking</span>
 
                             <strong>
                                 Dashboard
@@ -152,7 +125,6 @@
 
                     </div>
 
-
                 </div>
 
             </div>
@@ -160,26 +132,16 @@
         </section>
 
 
-        <!-- ========================================
-             APPLICATIONS
-        ======================================== -->
-
         <section class="applications-content">
 
             <div class="applications-container">
 
 
-                <!-- ========================================
-                     MAIN APPLICATION
-                ======================================== -->
-
                 <div class="applications-group-heading">
 
                     <div>
 
-                        <span>
-                            GET STARTED
-                        </span>
+                        <span>GET STARTED</span>
 
                         <h2>
                             Join Union Roleplay
@@ -194,16 +156,15 @@
                 </div>
 
 
-                <article class="application-featured-card">
+                <article
+                    class="application-featured-card"
+                    data-application-card
+                    data-application-type="Whitelist Application"
+                >
 
                     <div class="application-featured-background">
-
-                        <span>
-                            UNION
-                        </span>
-
+                        <span>UNION</span>
                     </div>
-
 
                     <div class="application-featured-top">
 
@@ -211,17 +172,15 @@
                             WL
                         </div>
 
-
-                        <div class="application-featured-status">
-
+                        <div
+                            class="application-featured-status"
+                            data-application-status
+                        >
                             <span></span>
-
                             APPLICATIONS OPEN
-
                         </div>
 
                     </div>
-
 
                     <div class="application-featured-content">
 
@@ -229,11 +188,9 @@
                             GENERAL SERVER ACCESS
                         </span>
 
-
                         <h2>
                             Whitelist Application
                         </h2>
-
 
                         <p>
                             Begin your journey into Union Roleplay. Complete the
@@ -241,74 +198,48 @@
                             understand the standards expected within the community.
                         </p>
 
-
                         <div class="application-featured-details">
 
                             <div>
-
-                                <span>
-                                    TYPE
-                                </span>
-
-                                <strong>
-                                    Server Access
-                                </strong>
-
+                                <span>TYPE</span>
+                                <strong>Server Access</strong>
                             </div>
 
                             <div>
-
-                                <span>
-                                    PROCESS
-                                </span>
-
-                                <strong>
-                                    Application Review
-                                </strong>
-
+                                <span>PROCESS</span>
+                                <strong>Application Review</strong>
                             </div>
 
                             <div>
-
-                                <span>
-                                    STATUS
-                                </span>
-
-                                <strong>
-                                    Open
-                                </strong>
-
+                                <span>STATUS</span>
+                                <strong data-application-detail-status>Open</strong>
                             </div>
 
                         </div>
 
                     </div>
 
-
                     <div class="application-featured-action">
 
                         <div>
 
-                            <span>
+                            <span data-application-action-kicker>
                                 READY TO BEGIN?
                             </span>
 
-                            <strong>
+                            <strong data-application-action-title>
                                 Start your application
                             </strong>
 
                         </div>
 
-
                         <a
                             href="apply.html?type=Whitelist%20Application"
                             class="application-featured-button"
+                            data-application-link
                         >
-                            Apply Now
-
-                            <span>
-                                →
-                            </span>
+                            <span data-application-link-text>Apply Now</span>
+                            <span>→</span>
                         </a>
 
                     </div>
@@ -316,24 +247,13 @@
                 </article>
 
 
-                <!-- ========================================
-                     COMMUNITY
-                ======================================== -->
-
                 <div class="applications-group">
 
                     <div class="applications-group-heading">
 
                         <div>
-
-                            <span>
-                                COMMUNITY
-                            </span>
-
-                            <h2>
-                                Help run Union
-                            </h2>
-
+                            <span>COMMUNITY</span>
+                            <h2>Help run Union</h2>
                         </div>
 
                         <p>
@@ -342,27 +262,28 @@
 
                     </div>
 
-
                     <div class="applications-role-grid">
 
 
-                        <!-- STAFF -->
-
-                        <article class="application-role-card">
+                        <article
+                            class="application-role-card"
+                            data-application-card
+                            data-application-type="Staff Application"
+                        >
 
                             <div class="application-role-top">
 
-                                <div class="application-role-icon">
-                                    ST
-                                </div>
+                                <div class="application-role-icon">ST</div>
 
-                                <span class="application-role-status">
+                                <span
+                                    class="application-role-status"
+                                    data-application-status
+                                >
                                     <span></span>
                                     OPEN
                                 </span>
 
                             </div>
-
 
                             <div class="application-role-content">
 
@@ -370,9 +291,7 @@
                                     COMMUNITY OPERATIONS
                                 </span>
 
-                                <h3>
-                                    Staff Team
-                                </h3>
+                                <h3>Staff Team</h3>
 
                                 <p>
                                     Support the community, handle reports and help
@@ -381,40 +300,39 @@
 
                             </div>
 
-
                             <a
                                 href="apply.html?type=Staff%20Application"
                                 class="application-role-action"
+                                data-application-link
                             >
-                                <span>
+                                <span data-application-link-text>
                                     Staff Application
                                 </span>
-
-                                <strong>
-                                    →
-                                </strong>
+                                <strong>→</strong>
                             </a>
 
                         </article>
 
 
-                        <!-- QA -->
-
-                        <article class="application-role-card">
+                        <article
+                            class="application-role-card"
+                            data-application-card
+                            data-application-type="QA Tester Application"
+                        >
 
                             <div class="application-role-top">
 
-                                <div class="application-role-icon">
-                                    QA
-                                </div>
+                                <div class="application-role-icon">QA</div>
 
-                                <span class="application-role-status">
+                                <span
+                                    class="application-role-status"
+                                    data-application-status
+                                >
                                     <span></span>
                                     OPEN
                                 </span>
 
                             </div>
-
 
                             <div class="application-role-content">
 
@@ -422,9 +340,7 @@
                                     QUALITY ASSURANCE
                                 </span>
 
-                                <h3>
-                                    QA Tester
-                                </h3>
+                                <h3>QA Tester</h3>
 
                                 <p>
                                     Test scripts, systems and upcoming updates before
@@ -433,46 +349,31 @@
 
                             </div>
 
-
                             <a
                                 href="apply.html?type=QA%20Tester%20Application"
                                 class="application-role-action"
+                                data-application-link
                             >
-                                <span>
+                                <span data-application-link-text>
                                     QA Application
                                 </span>
-
-                                <strong>
-                                    →
-                                </strong>
+                                <strong>→</strong>
                             </a>
 
                         </article>
-
 
                     </div>
 
                 </div>
 
 
-                <!-- ========================================
-                     MEDIA
-                ======================================== -->
-
                 <div class="applications-group">
 
                     <div class="applications-group-heading">
 
                         <div>
-
-                            <span>
-                                MEDIA
-                            </span>
-
-                            <h2>
-                                Shape how Union is seen
-                            </h2>
-
+                            <span>MEDIA</span>
+                            <h2>Shape how Union is seen</h2>
                         </div>
 
                         <p>
@@ -481,27 +382,28 @@
 
                     </div>
 
-
                     <div class="applications-role-grid">
 
 
-                        <!-- SOCIAL MEDIA -->
-
-                        <article class="application-role-card">
+                        <article
+                            class="application-role-card"
+                            data-application-card
+                            data-application-type="Social Media Manager Application"
+                        >
 
                             <div class="application-role-top">
 
-                                <div class="application-role-icon">
-                                    SM
-                                </div>
+                                <div class="application-role-icon">SM</div>
 
-                                <span class="application-role-status">
+                                <span
+                                    class="application-role-status"
+                                    data-application-status
+                                >
                                     <span></span>
                                     OPEN
                                 </span>
 
                             </div>
-
 
                             <div class="application-role-content">
 
@@ -509,9 +411,7 @@
                                     MEDIA LEADERSHIP
                                 </span>
 
-                                <h3>
-                                    Social Media Manager
-                                </h3>
+                                <h3>Social Media Manager</h3>
 
                                 <p>
                                     Lead Union's social media presence, coordinate content
@@ -520,40 +420,39 @@
 
                             </div>
 
-
                             <a
                                 href="apply.html?type=Social%20Media%20Manager%20Application"
                                 class="application-role-action"
+                                data-application-link
                             >
-                                <span>
+                                <span data-application-link-text>
                                     Manager Application
                                 </span>
-
-                                <strong>
-                                    →
-                                </strong>
+                                <strong>→</strong>
                             </a>
 
                         </article>
 
 
-                        <!-- MEDIA TEAM -->
-
-                        <article class="application-role-card">
+                        <article
+                            class="application-role-card"
+                            data-application-card
+                            data-application-type="Media Application"
+                        >
 
                             <div class="application-role-top">
 
-                                <div class="application-role-icon">
-                                    ME
-                                </div>
+                                <div class="application-role-icon">ME</div>
 
-                                <span class="application-role-status">
+                                <span
+                                    class="application-role-status"
+                                    data-application-status
+                                >
                                     <span></span>
                                     OPEN
                                 </span>
 
                             </div>
-
 
                             <div class="application-role-content">
 
@@ -561,9 +460,7 @@
                                     CONTENT CREATION
                                 </span>
 
-                                <h3>
-                                    Media Team
-                                </h3>
+                                <h3>Media Team</h3>
 
                                 <p>
                                     Capture high-quality screenshots, trailers, videos
@@ -572,46 +469,31 @@
 
                             </div>
 
-
                             <a
                                 href="apply.html?type=Media%20Application"
                                 class="application-role-action"
+                                data-application-link
                             >
-                                <span>
+                                <span data-application-link-text>
                                     Media Application
                                 </span>
-
-                                <strong>
-                                    →
-                                </strong>
+                                <strong>→</strong>
                             </a>
 
                         </article>
-
 
                     </div>
 
                 </div>
 
 
-                <!-- ========================================
-                     DEVELOPMENT
-                ======================================== -->
-
                 <div class="applications-group">
 
                     <div class="applications-group-heading">
 
                         <div>
-
-                            <span>
-                                DEVELOPMENT
-                            </span>
-
-                            <h2>
-                                Build the experience
-                            </h2>
-
+                            <span>DEVELOPMENT</span>
+                            <h2>Build the experience</h2>
                         </div>
 
                         <p>
@@ -620,27 +502,28 @@
 
                     </div>
 
-
                     <div class="applications-role-grid applications-role-grid-three">
 
 
-                        <!-- SCRIPT DEV -->
-
-                        <article class="application-role-card">
+                        <article
+                            class="application-role-card"
+                            data-application-card
+                            data-application-type="Script Developer Application"
+                        >
 
                             <div class="application-role-top">
 
-                                <div class="application-role-icon">
-                                    SD
-                                </div>
+                                <div class="application-role-icon">SD</div>
 
-                                <span class="application-role-status">
+                                <span
+                                    class="application-role-status"
+                                    data-application-status
+                                >
                                     <span></span>
                                     OPEN
                                 </span>
 
                             </div>
-
 
                             <div class="application-role-content">
 
@@ -648,9 +531,7 @@
                                     SERVER DEVELOPMENT
                                 </span>
 
-                                <h3>
-                                    Script Developer
-                                </h3>
+                                <h3>Script Developer</h3>
 
                                 <p>
                                     Develop and maintain scripts, systems and integrations
@@ -659,40 +540,39 @@
 
                             </div>
 
-
                             <a
                                 href="apply.html?type=Script%20Developer%20Application"
                                 class="application-role-action"
+                                data-application-link
                             >
-                                <span>
+                                <span data-application-link-text>
                                     Developer Application
                                 </span>
-
-                                <strong>
-                                    →
-                                </strong>
+                                <strong>→</strong>
                             </a>
 
                         </article>
 
 
-                        <!-- VEHICLE DEV -->
-
-                        <article class="application-role-card">
+                        <article
+                            class="application-role-card"
+                            data-application-card
+                            data-application-type="Vehicle Developer Application"
+                        >
 
                             <div class="application-role-top">
 
-                                <div class="application-role-icon">
-                                    VD
-                                </div>
+                                <div class="application-role-icon">VD</div>
 
-                                <span class="application-role-status">
+                                <span
+                                    class="application-role-status"
+                                    data-application-status
+                                >
                                     <span></span>
                                     OPEN
                                 </span>
 
                             </div>
-
 
                             <div class="application-role-content">
 
@@ -700,9 +580,7 @@
                                     VEHICLE DEVELOPMENT
                                 </span>
 
-                                <h3>
-                                    Vehicle Developer
-                                </h3>
+                                <h3>Vehicle Developer</h3>
 
                                 <p>
                                     Work on vehicle assets, liveries, handling,
@@ -711,40 +589,39 @@
 
                             </div>
 
-
                             <a
                                 href="apply.html?type=Vehicle%20Developer%20Application"
                                 class="application-role-action"
+                                data-application-link
                             >
-                                <span>
+                                <span data-application-link-text>
                                     Vehicle Application
                                 </span>
-
-                                <strong>
-                                    →
-                                </strong>
+                                <strong>→</strong>
                             </a>
 
                         </article>
 
 
-                        <!-- EUP DEV -->
-
-                        <article class="application-role-card">
+                        <article
+                            class="application-role-card"
+                            data-application-card
+                            data-application-type="EUP Developer Application"
+                        >
 
                             <div class="application-role-top">
 
-                                <div class="application-role-icon">
-                                    EU
-                                </div>
+                                <div class="application-role-icon">EU</div>
 
-                                <span class="application-role-status">
+                                <span
+                                    class="application-role-status"
+                                    data-application-status
+                                >
                                     <span></span>
                                     OPEN
                                 </span>
 
                             </div>
-
 
                             <div class="application-role-content">
 
@@ -752,9 +629,7 @@
                                     CLOTHING DEVELOPMENT
                                 </span>
 
-                                <h3>
-                                    EUP Developer
-                                </h3>
+                                <h3>EUP Developer</h3>
 
                                 <p>
                                     Create and maintain uniforms, clothing and
@@ -763,46 +638,31 @@
 
                             </div>
 
-
                             <a
                                 href="apply.html?type=EUP%20Developer%20Application"
                                 class="application-role-action"
+                                data-application-link
                             >
-                                <span>
+                                <span data-application-link-text>
                                     EUP Application
                                 </span>
-
-                                <strong>
-                                    →
-                                </strong>
+                                <strong>→</strong>
                             </a>
 
                         </article>
-
 
                     </div>
 
                 </div>
 
 
-                <!-- ========================================
-                     COMMAND
-                ======================================== -->
-
                 <div class="applications-group">
 
                     <div class="applications-group-heading">
 
                         <div>
-
-                            <span>
-                                COMMAND
-                            </span>
-
-                            <h2>
-                                Lead a department
-                            </h2>
-
+                            <span>COMMAND</span>
+                            <h2>Lead a department</h2>
                         </div>
 
                         <p>
@@ -811,27 +671,28 @@
 
                     </div>
 
-
                     <div class="applications-role-grid">
 
 
-                        <!-- POLICE COMMAND -->
-
-                        <article class="application-role-card application-command-card">
+                        <article
+                            class="application-role-card application-command-card"
+                            data-application-card
+                            data-application-type="UPD Command Application"
+                        >
 
                             <div class="application-role-top">
 
-                                <div class="application-role-icon">
-                                    PD
-                                </div>
+                                <div class="application-role-icon">PD</div>
 
-                                <span class="application-role-status">
+                                <span
+                                    class="application-role-status"
+                                    data-application-status
+                                >
                                     <span></span>
                                     OPEN
                                 </span>
 
                             </div>
-
 
                             <div class="application-role-content">
 
@@ -839,9 +700,7 @@
                                     UNION POLICE
                                 </span>
 
-                                <h3>
-                                    UPD Command
-                                </h3>
+                                <h3>UPD Command</h3>
 
                                 <p>
                                     Apply for a senior leadership position within
@@ -850,40 +709,39 @@
 
                             </div>
 
-
                             <a
                                 href="apply.html?type=UPD%20Command%20Application"
                                 class="application-role-action"
+                                data-application-link
                             >
-                                <span>
+                                <span data-application-link-text>
                                     Police Command Application
                                 </span>
-
-                                <strong>
-                                    →
-                                </strong>
+                                <strong>→</strong>
                             </a>
 
                         </article>
 
 
-                        <!-- UHS COMMAND -->
-
-                        <article class="application-role-card application-command-card">
+                        <article
+                            class="application-role-card application-command-card"
+                            data-application-card
+                            data-application-type="UHS Command Application"
+                        >
 
                             <div class="application-role-top">
 
-                                <div class="application-role-icon">
-                                    HS
-                                </div>
+                                <div class="application-role-icon">HS</div>
 
-                                <span class="application-role-status">
+                                <span
+                                    class="application-role-status"
+                                    data-application-status
+                                >
                                     <span></span>
                                     OPEN
                                 </span>
 
                             </div>
-
 
                             <div class="application-role-content">
 
@@ -891,9 +749,7 @@
                                     UNION HEALTH SERVICE
                                 </span>
 
-                                <h3>
-                                    UHS Command
-                                </h3>
+                                <h3>UHS Command</h3>
 
                                 <p>
                                     Apply for senior leadership within Union Health
@@ -902,31 +758,23 @@
 
                             </div>
 
-
                             <a
                                 href="apply.html?type=UHS%20Command%20Application"
                                 class="application-role-action"
+                                data-application-link
                             >
-                                <span>
+                                <span data-application-link-text>
                                     UHS Command Application
                                 </span>
-
-                                <strong>
-                                    →
-                                </strong>
+                                <strong>→</strong>
                             </a>
 
                         </article>
-
 
                     </div>
 
                 </div>
 
-
-                <!-- ========================================
-                     BOTTOM INFORMATION
-                ======================================== -->
 
                 <div class="applications-bottom-note">
 
@@ -934,12 +782,9 @@
                         i
                     </div>
 
-
                     <div>
 
-                        <span>
-                            BEFORE APPLYING
-                        </span>
+                        <span>BEFORE APPLYING</span>
 
                         <strong>
                             Take your time with your application.
@@ -951,7 +796,6 @@
                         </p>
 
                     </div>
-
 
                     <a href="../rules.html">
                         View Rules →
@@ -969,6 +813,7 @@
 
 
     <script src="../js/auth.js"></script>
+    <script src="../js/applications.js"></script>
     <script src="../js/components.js"></script>
 
 </body>
