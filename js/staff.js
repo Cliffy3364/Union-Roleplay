@@ -480,6 +480,11 @@ function hideAllViews() {
             "disciplineRecordsView"
         );
 
+    const applicationManagementView =
+        document.getElementById(
+            "applicationManagementView"
+        );
+
 
     if (dashboard) {
 
@@ -508,6 +513,11 @@ function hideAllViews() {
     if (disciplineRecordsView) {
 
         disciplineRecordsView.hidden = true;
+    }
+
+    if (applicationManagementView) {
+
+        applicationManagementView.hidden = true;
     }
 
 
@@ -3033,6 +3043,187 @@ function setupDisciplineManagement() {
 }
 
 
+
+/* ==========================================================
+   APPLICATION MANAGEMENT
+========================================================== */
+
+const APPLICATION_STATUS_LABELS = {
+    open: "Open",
+    temporarily_closed: "Temporarily Closed",
+    closed: "Closed"
+};
+
+function applicationStatusLabel(status) {
+    return APPLICATION_STATUS_LABELS[String(status || "").toLowerCase()] || "Open";
+}
+
+function applicationStatusClass(status) {
+    return String(status || "open").toLowerCase().replaceAll("_","-");
+}
+
+function ensureApplicationManagementUI() {
+    const heading = [...document.querySelectorAll(".staff-nav-heading")]
+        .find(el => el.textContent.trim().toUpperCase() === "MANAGEMENT");
+    const group = heading?.closest(".staff-nav-group");
+
+    if (group && !document.getElementById("applicationManagementNav")) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "staff-nav-item";
+        button.dataset.view = "application-management";
+        button.id = "applicationManagementNav";
+        button.innerHTML = `
+            <span class="staff-nav-content">
+                <span class="staff-nav-icon">AM</span>
+                <span>Application Management</span>
+            </span>`;
+        group.appendChild(button);
+    }
+
+    const panel = document.getElementById("staffPanel");
+    if (panel && !document.getElementById("applicationManagementView")) {
+        const view = document.createElement("section");
+        view.id = "applicationManagementView";
+        view.className = "application-management-view";
+        view.hidden = true;
+        view.innerHTML = `
+            <section class="staff-dashboard-panel application-management-panel">
+                <div class="staff-panel-header">
+                    <div>
+                        <span>RECRUITMENT CONTROL</span>
+                        <h2>Application Availability</h2>
+                        <p>Open or close recruitment without editing the website. Existing submissions are not affected.</p>
+                    </div>
+                    <div class="staff-panel-reference">
+                        <span>LIVE CONFIGURATION</span>
+                        <strong>10 Application Types</strong>
+                    </div>
+                </div>
+                <div class="staff-panel-divider"></div>
+                <div id="applicationManagementMessage" class="application-management-message" hidden></div>
+                <div id="applicationManagementList" class="application-management-list">
+                    <div class="member-management-empty"><h3>Loading application settings...</h3></div>
+                </div>
+            </section>`;
+        const queue = document.getElementById("staffQueueView");
+        queue ? queue.insertAdjacentElement("afterend",view) : panel.appendChild(view);
+    }
+}
+
+function setApplicationManagementMessage(message,type="info") {
+    const el = document.getElementById("applicationManagementMessage");
+    if (!el) return;
+    if (!message) {
+        el.hidden = true;
+        el.textContent = "";
+        el.className = "application-management-message";
+        return;
+    }
+    el.hidden = false;
+    el.textContent = message;
+    el.className = `application-management-message ${type}`;
+}
+
+function renderApplicationManagement(rows) {
+    const target = document.getElementById("applicationManagementList");
+    if (!target) return;
+
+    const map = new Map((rows || []).map(r => [r.application_type,r]));
+    target.innerHTML = APPLICATION_TYPES.map((type,index) => {
+        const row = map.get(type) || {status:"open"};
+        const status = String(row.status || "open").toLowerCase();
+        return `
+            <article class="application-management-row">
+                <div class="application-management-number">${String(index+1).padStart(2,"0")}</div>
+                <div class="application-management-main">
+                    <span>APPLICATION TYPE</span>
+                    <strong>${escapeHtml(type)}</strong>
+                    <small>Existing applications remain available for staff review.</small>
+                </div>
+                <div class="application-management-current">
+                    <span>CURRENT STATUS</span>
+                    <strong class="application-management-status ${escapeHtml(applicationStatusClass(status))}">
+                        <span></span>${escapeHtml(applicationStatusLabel(status))}
+                    </strong>
+                </div>
+                <div class="application-management-controls">
+                    <button type="button" data-app-type="${escapeHtml(type)}" data-app-status="open" class="${status==="open"?"active open":""}">Open</button>
+                    <button type="button" data-app-type="${escapeHtml(type)}" data-app-status="temporarily_closed" class="${status==="temporarily_closed"?"active temporary":""}">Temporarily Closed</button>
+                    <button type="button" data-app-type="${escapeHtml(type)}" data-app-status="closed" class="${status==="closed"?"active closed":""}">Closed</button>
+                </div>
+            </article>`;
+    }).join("");
+
+    target.querySelectorAll("[data-app-type]").forEach(button => {
+        button.addEventListener("click",() =>
+            changeApplicationAvailability(
+                button.dataset.appType,
+                button.dataset.appStatus
+            )
+        );
+    });
+}
+
+async function loadApplicationManagement() {
+    const target = document.getElementById("applicationManagementList");
+    if (target) target.innerHTML = `<div class="member-management-empty"><h3>Loading application settings...</h3><p>Reading live recruitment configuration.</p></div>`;
+    try {
+        const data = await staffFetch("/api/staff/applications/availability");
+        renderApplicationManagement(data.applications || []);
+    } catch (error) {
+        if (target) target.innerHTML = `<div class="member-management-empty"><h3>Unable to load application settings</h3><p>${escapeHtml(error.message || "Request failed.")}</p></div>`;
+    }
+}
+
+async function changeApplicationAvailability(applicationType,status) {
+    const label = applicationStatusLabel(status);
+    if (!window.confirm(`Change ${applicationType} to "${label}"?`)) return;
+
+    document.querySelectorAll("[data-app-type]").forEach(b => b.disabled = true);
+    setApplicationManagementMessage(`Updating ${applicationType}...`,"info");
+
+    try {
+        await staffFetch("/api/staff/applications/availability",{
+            method:"PATCH",
+            body:JSON.stringify({application_type:applicationType,status})
+        });
+        setApplicationManagementMessage(`${applicationType} is now ${label}.`,"success");
+        await loadApplicationManagement();
+    } catch (error) {
+        setApplicationManagementMessage(error.message || "Status update failed.","error");
+        document.querySelectorAll("[data-app-type]").forEach(b => b.disabled = false);
+    }
+}
+
+function showApplicationManagement() {
+    hideAllViews();
+    currentQueueType = null;
+
+    const view = document.getElementById("applicationManagementView");
+    if (view) view.hidden = false;
+
+    const title = document.getElementById("staffPageTitle");
+    const description = document.getElementById("staffPageDescription");
+
+    if (title) title.textContent = "Application Management";
+    if (description) description.textContent =
+        "Control which Union Roleplay applications are currently accepting submissions.";
+
+    setTopSearch("",false);
+    loadApplicationManagement();
+}
+
+function setupApplicationManagement() {
+    ensureApplicationManagementUI();
+    const button = document.getElementById("applicationManagementNav");
+    button?.addEventListener("click",() => {
+        setActiveNav(button);
+        showApplicationManagement();
+    });
+}
+
+
 /* ========================================
    DASHBOARD STATS
 ======================================== */
@@ -4917,3 +5108,5 @@ document.addEventListener(
         await loadApplicationOverview();
     }
 );
+
+document.addEventListener("DOMContentLoaded", () => { setupApplicationManagement(); });
