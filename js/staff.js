@@ -60,6 +60,291 @@ let currentStatusFilter =
 let selectedDisciplineMember = null;
 let disciplineHistoryRecords = [];
 
+
+/* ==========================================================
+   STAFF PERMISSIONS
+========================================================== */
+
+let currentStaffPermissions = null;
+
+async function loadStaffPermissions() {
+    try {
+        const data =
+            await staffFetch(
+                "/api/staff/permissions"
+            );
+
+        currentStaffPermissions =
+            data || null;
+
+        return currentStaffPermissions;
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load staff permissions:",
+            error
+        );
+
+        currentStaffPermissions = null;
+
+        return null;
+    }
+}
+
+function hasStaffPermission(name) {
+    return (
+        currentStaffPermissions?.permissions?.[name] ===
+        true
+    );
+}
+
+function setPermissionVisibility(
+    element,
+    visible
+) {
+    if (!element) {
+        return;
+    }
+
+    element.hidden = !visible;
+
+    element.style.display =
+        visible
+            ? ""
+            : "none";
+
+    element.setAttribute(
+        "aria-hidden",
+        visible ? "false" : "true"
+    );
+}
+
+function updateStaffRankDisplay() {
+    const role =
+        currentStaffPermissions?.staff_role;
+
+    if (!role) {
+        return;
+    }
+
+    const statusStrong =
+        document.querySelector(
+            ".staff-sidebar-status strong"
+        );
+
+    if (statusStrong) {
+        statusStrong.textContent =
+            `${role} Access Active`;
+    }
+
+    const footerStrong =
+        document.querySelector(
+            ".staff-sidebar-footer strong"
+        );
+
+    if (footerStrong) {
+        footerStrong.textContent =
+            role;
+    }
+}
+
+function applyStaffPermissions() {
+
+    if (!currentStaffPermissions) {
+        return;
+    }
+
+    /*
+     * Everyone with staff access:
+     * Dashboard
+     * Applications
+     * Rule Search
+     */
+
+    const memberNav =
+        document.getElementById(
+            "memberManagementNav"
+        );
+
+    const disciplineNav =
+        document.getElementById(
+            "staffDisciplineNav"
+        );
+
+    const recordsNav =
+        document.getElementById(
+            "disciplineRecordsNav"
+        );
+
+    const applicationManagementNav =
+        document.getElementById(
+            "applicationManagementNav"
+        );
+
+    const ruleSearchNav =
+        document.getElementById(
+            "ruleSearchNav"
+        );
+
+
+    setPermissionVisibility(
+        memberNav,
+        hasStaffPermission(
+            "member_management"
+        )
+    );
+
+    setPermissionVisibility(
+        disciplineNav,
+        hasStaffPermission(
+            "player_discipline"
+        )
+    );
+
+    setPermissionVisibility(
+        recordsNav,
+        hasStaffPermission(
+            "disciplinary_records"
+        )
+    );
+
+    setPermissionVisibility(
+        applicationManagementNav,
+        hasStaffPermission(
+            "application_availability"
+        )
+    );
+
+    setPermissionVisibility(
+        ruleSearchNav,
+        hasStaffPermission(
+            "rule_search"
+        )
+    );
+
+
+    /*
+     * Also hide the corresponding views so manually changing
+     * HTML attributes cannot reveal restricted screens.
+     */
+
+    if (
+        !hasStaffPermission(
+            "member_management"
+        )
+    ) {
+        const view =
+            document.getElementById(
+                "staffMembersView"
+            );
+
+        if (view) {
+            view.hidden = true;
+        }
+    }
+
+
+    if (
+        !hasStaffPermission(
+            "player_discipline"
+        )
+    ) {
+        const view =
+            document.getElementById(
+                "staffDisciplineView"
+            );
+
+        if (view) {
+            view.hidden = true;
+        }
+    }
+
+
+    if (
+        !hasStaffPermission(
+            "disciplinary_records"
+        )
+    ) {
+        const view =
+            document.getElementById(
+                "disciplineRecordsView"
+            );
+
+        if (view) {
+            view.hidden = true;
+        }
+    }
+
+
+    if (
+        !hasStaffPermission(
+            "application_availability"
+        )
+    ) {
+        const view =
+            document.getElementById(
+                "applicationManagementView"
+            );
+
+        if (view) {
+            view.hidden = true;
+        }
+    }
+
+
+    updateStaffRankDisplay();
+
+
+    /*
+     * Hide empty navigation groups after restricted items
+     * have been removed.
+     */
+
+    document
+        .querySelectorAll(
+            ".staff-nav-group"
+        )
+        .forEach(group => {
+
+            const visibleItems =
+                [...group.querySelectorAll(
+                    ".staff-nav-item"
+                )]
+                .filter(item => {
+
+                    const style =
+                        window.getComputedStyle(
+                            item
+                        );
+
+                    return (
+                        !item.hidden &&
+                        style.display !==
+                            "none"
+                    );
+                });
+
+            const dropdown =
+                group.querySelector(
+                    ".staff-nav-dropdown"
+                );
+
+            const hasApplicationDropdown =
+                dropdown !== null;
+
+            if (
+                !visibleItems.length &&
+                !hasApplicationDropdown
+            ) {
+                group.hidden = true;
+            } else {
+                group.hidden = false;
+            }
+        });
+}
+
+
 let disciplineRecords = [];
 let disciplineRecordsPage = 1;
 let disciplineRecordsPages = 1;
@@ -633,6 +918,17 @@ function showDashboard() {
 
 function showMemberManagement() {
 
+    if (
+        currentStaffPermissions &&
+        !hasStaffPermission(
+            "member_management"
+        )
+    ) {
+        showDashboard();
+        return;
+    }
+
+
     hideAllViews();
 
 
@@ -701,6 +997,17 @@ function showMemberManagement() {
 ======================================== */
 
 function showStaffDiscipline() {
+
+    if (
+        currentStaffPermissions &&
+        !hasStaffPermission(
+            "player_discipline"
+        )
+    ) {
+        showDashboard();
+        return;
+    }
+
 
     hideAllViews();
 
@@ -781,6 +1088,17 @@ function showStaffDiscipline() {
 ======================================== */
 
 function showDisciplinaryRecords() {
+
+    if (
+        currentStaffPermissions &&
+        !hasStaffPermission(
+            "disciplinary_records"
+        )
+    ) {
+        showDashboard();
+        return;
+    }
+
 
     hideAllViews();
 
@@ -3207,6 +3525,17 @@ async function changeApplicationAvailability(applicationType,status) {
 }
 
 function showApplicationManagement() {
+
+    if (
+        currentStaffPermissions &&
+        !hasStaffPermission(
+            "application_availability"
+        )
+    ) {
+        showDashboard();
+        return;
+    }
+
     hideAllViews();
     currentQueueType = null;
 
@@ -4502,6 +4831,17 @@ async function runRuleSearch() {
 
 
 function showRuleSearch() {
+
+    if (
+        currentStaffPermissions &&
+        !hasStaffPermission(
+            "rule_search"
+        )
+    ) {
+        showDashboard();
+        return;
+    }
+
 
     hideAllViews();
 
@@ -6369,6 +6709,23 @@ document.addEventListener(
         }
 
 
+        /*
+         * Load the logged-in staff member's exact permissions.
+         * The Worker remains the security authority; this controls
+         * what the Staff Panel displays.
+         */
+        await loadStaffPermissions();
+
+        /*
+         * Dynamic navigation items are created by their setup
+         * functions below/alongside page initialisation.
+         */
+        ensureApplicationManagementUI();
+        ensureRuleSearchUI();
+
+        applyStaffPermissions();
+
+
         /* ========================================
            DASHBOARD BUTTON
         ======================================== */
@@ -6577,6 +6934,11 @@ document.addEventListener(
 
         setupDisciplinaryRecordsManagement();
 
+        /*
+         * Re-apply after all dynamic UI has been created.
+         */
+        applyStaffPermissions();
+
 
         showDashboard();
 
@@ -6587,7 +6949,17 @@ document.addEventListener(
     }
 );
 
-document.addEventListener("DOMContentLoaded", () => { setupApplicationManagement(); });
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+        setupApplicationManagement();
+
+        setTimeout(
+            applyStaffPermissions,
+            0
+        );
+    }
+);
 
 
 /* ==========================================================
@@ -6599,5 +6971,10 @@ document.addEventListener(
     () => {
 
         setupStaffRuleSearch();
+
+        setTimeout(
+            applyStaffPermissions,
+            0
+        );
     }
 );
