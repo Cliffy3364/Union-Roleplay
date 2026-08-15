@@ -15,7 +15,6 @@
    The website handles everything else automatically.
 ========================================================= */
 
-
 const RULEBOOK = [
 
     /* =====================================================
@@ -175,7 +174,7 @@ const RULEBOOK = [
                     "Warnings or strikes may be issued where behaviour clearly falls below expected standards despite not being explicitly listed elsewhere."
             },
 
-             {
+            {
                 id: "01.10",
 
                 title:
@@ -237,6 +236,54 @@ const RULEBOOK = [
 
                 enforcement:
                     "Prohibited content will be removed immediately. Players may receive a warning, strike or temporary ban depending on the content and severity. Deliberately displaying extreme or seriously inappropriate material may result in stronger action."
+            },
+
+            {
+                id: "01.14",
+
+                title:
+                    "Character Names",
+
+                punishment:
+                    "3-Strike System",
+
+                description:
+                    "Character names must be realistic and appropriate for serious roleplay. Troll names, deliberately offensive names, celebrity names or names clearly created as a joke are prohibited.",
+
+                enforcement:
+                    "Players may be required to rename or recreate the character. Refusal or repeated breaches may result in a warning or strike."
+            },
+
+            {
+                id: "01.15",
+
+                title:
+                    "Sexual & Explicit Roleplay",
+
+                punishment:
+                    "Bannable",
+
+                description:
+                    "Sexually explicit roleplay, erotic roleplay, sexual assault roleplay or behaviour intended to create sexually explicit scenes is prohibited within Union Roleplay. Players must not use animations, messages, voice chat, images or other systems to create inappropriate sexual content.",
+
+                enforcement:
+                    "Content may be stopped immediately by staff. Serious or deliberate breaches may result in a temporary or permanent ban depending on severity."
+            },
+
+            {
+                id: "01.16",
+
+                title:
+                    "Account Sharing",
+
+                punishment:
+                    "Bannable",
+
+                description:
+                    "Players must not allow another person to use their Discord, Cfx.re or Union Roleplay account to access the server, bypass whitelist requirements, access restricted roles or avoid disciplinary action.",
+
+                enforcement:
+                    "Account access may be suspended while the incident is investigated. Deliberate account sharing or attempts to bypass restrictions may result in temporary or permanent bans."
             }
 
         ]
@@ -448,6 +495,54 @@ const RULEBOOK = [
 
                 enforcement:
                     "Warning or strike. Repeated or malicious interference may result in temporary bans."
+            },
+
+            {
+                id: "02.13",
+
+                title:
+                    "Emergency Service Baiting",
+
+                punishment:
+                    "FailRP",
+
+                description:
+                    "Players must not deliberately provoke police, UHS or other emergency services purely to create a pursuit, confrontation, arrest or other form of action. Criminal behaviour must have a believable in-character reason beyond simply attempting to gain emergency-service attention.",
+
+                enforcement:
+                    "Minor incidents may result in a warning or strike. Repeated or blatant baiting may result in a temporary ban."
+            },
+
+            {
+                id: "02.14",
+
+                title:
+                    "Unrealistic Crime Frequency",
+
+                punishment:
+                    "FailRP",
+
+                description:
+                    "Characters must not continuously move from one major crime to another without reasonable downtime, consequences or character motivation. Robberies, kidnappings, shootings and other serious crimes should form part of believable roleplay rather than being repeatedly used solely to generate action.",
+
+                enforcement:
+                    "Players may receive coaching, a warning or strike. Continued unrealistic crime-focused roleplay may result in temporary restrictions or bans."
+            },
+
+            {
+                id: "02.15",
+
+                title:
+                    "Hostage Roleplay",
+
+                punishment:
+                    "Bannable",
+
+                description:
+                    "Hostages must be obtained and treated through genuine roleplay. Players must not use willing friends, alternate characters or arranged fake hostages simply to gain an advantage during robberies or negotiations. Hostages must be given reasonable opportunity to roleplay and must not be treated as disposable game mechanics.",
+
+                enforcement:
+                    "Invalid hostage situations may be stopped or disregarded by staff. Deliberate abuse may result in a strike or temporary ban, with repeated offences receiving stronger sanctions."
             }
 
         ]
@@ -777,6 +872,22 @@ const RULEBOOK = [
 
                 enforcement:
                     "Warning or strike. Serious incidents may result in property removal or temporary bans."
+            },
+
+            {
+                id: "05.6",
+
+                title:
+                    "AFK & Economy Farming",
+
+                punishment:
+                    "Bannable",
+
+                description:
+                    "Players must not remain AFK, use automated inputs or repeatedly perform activities without genuine participation in order to generate money, items, job rewards, playtime or other benefits.",
+
+                enforcement:
+                    "Illegitimate gains may be removed. Minor incidents may receive a warning or strike, while deliberate or repeated farming may result in a temporary ban."
             }
 
         ]
@@ -1195,7 +1306,6 @@ const RULEBOOK = [
     }
 
 ];
-
 
 /* =========================================================
    PUNISHMENT COLOURS
