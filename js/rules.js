@@ -175,7 +175,7 @@ const RULEBOOK = [
                     "Warnings or strikes may be issued where behaviour clearly falls below expected standards despite not being explicitly listed elsewhere."
             },
 
-            {
+             {
                 id: "01.10",
 
                 title:
@@ -205,6 +205,38 @@ const RULEBOOK = [
 
                 enforcement:
                     "Permanent ban."
+            },
+
+            {
+                id: "01.12",
+
+                title:
+                    "Contacting Staff & Developers",
+
+                punishment:
+                    "3-Strike System",
+
+                description:
+                    "Players must not directly message Union Roleplay staff members or developers regarding support requests, player reports, complaints, appeals, bugs, development issues or other server-related matters. All enquiries must be submitted through the appropriate Union Roleplay ticket system unless the staff member or developer has specifically asked you to contact them directly.",
+
+                enforcement:
+                    "Players may be redirected to the ticket system for a first minor incident. Repeatedly contacting staff or developers through direct messages after being told to use the correct channels may result in a warning or strike."
+            },
+
+            {
+                id: "01.13",
+
+                title:
+                    "Spray Paint & Custom Images",
+
+                punishment:
+                    "Bannable",
+
+                description:
+                    "The spray paint and custom image systems must not be used to display NSFW, pornographic, sexually explicit, excessively graphic, hateful or otherwise inappropriate content. Players must not attempt to bypass this rule by disguising, cropping, altering or indirectly displaying prohibited images.",
+
+                enforcement:
+                    "Prohibited content will be removed immediately. Players may receive a warning, strike or temporary ban depending on the content and severity. Deliberately displaying extreme or seriously inappropriate material may result in stronger action."
             }
 
         ]
