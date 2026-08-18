@@ -6995,3 +6995,29 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ==========================================================
+   STAFF POLICY + LOA
+========================================================== */
+.staff-policy-view[hidden],.staff-loa-view[hidden]{display:none!important}
+.staff-policy-hero{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:18px}
+.staff-policy-hero>div>span{color:#747781;font-size:9px;font-weight:900;letter-spacing:1.2px}
+.staff-policy-hero h2{margin:5px 0 0;font-size:30px;letter-spacing:-.9px}
+.staff-policy-hero p{max-width:760px;margin:8px 0 0;color:#82858e;font-size:12px;line-height:1.7}
+.staff-policy-current{display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid rgba(34,197,94,.12);border-radius:999px;color:#91bca0;font-size:8px;font-weight:900;letter-spacing:.8px;white-space:nowrap}
+.staff-policy-current span{width:6px;height:6px;border-radius:50%;background:#22c55e}
+.staff-policy-toolbar{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.staff-policy-search{position:relative;flex:1}.staff-policy-search>span{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#666975}
+.staff-policy-search input{width:100%;min-height:42px;padding:10px 12px 10px 36px;border:1px solid rgba(255,255,255,.07);border-radius:9px;outline:none;background:#0d0e12;color:#fff;font:inherit;font-size:11px}
+.staff-policy-content{display:grid;gap:9px}
+.staff-policy-section{overflow:hidden;border:1px solid rgba(255,255,255,.06);border-radius:12px;background:#101115}
+.staff-policy-section summary{display:grid;grid-template-columns:44px minmax(0,1fr) 24px;gap:12px;align-items:center;padding:14px;list-style:none;cursor:pointer}
+.staff-policy-section summary::-webkit-details-marker{display:none}.staff-policy-number{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(139,92,246,.16);border-radius:10px;background:rgba(139,92,246,.06);color:#a995e5;font-size:10px;font-weight:900}
+.staff-policy-section summary strong{color:#ececef;font-size:12px}.staff-policy-toggle{width:23px;height:23px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(255,255,255,.03);color:#777a85;transition:transform .15s ease}.staff-policy-section[open] .staff-policy-toggle{transform:rotate(45deg)}
+.staff-policy-body{padding:0 14px 14px 70px}.staff-policy-body p{margin:0 0 12px;color:#858891;font-size:11px;line-height:1.75}
+.staff-loa-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,.85fr);gap:16px;align-items:start}.staff-loa-management{margin-top:16px}
+.staff-loa-card{margin-bottom:10px;padding:15px;border:1px solid rgba(255,255,255,.055);border-radius:11px;background:#121318}.staff-loa-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.staff-loa-card-head>div{display:flex;flex-direction:column;gap:4px}.staff-loa-card-head>div>span,.staff-loa-response>span{color:#666975;font-size:8px;font-weight:900;letter-spacing:.8px}.staff-loa-card-head strong{color:#ececef;font-size:12px}.staff-loa-card-head small{color:#7a7d87;font-size:9px}.staff-loa-card>p{color:#898b95;font-size:11px;line-height:1.7}
+.staff-loa-status{display:inline-flex;align-items:center;padding:5px 8px;border-radius:999px;border:1px solid rgba(234,179,8,.14);background:rgba(234,179,8,.06);color:#d7bb67;font-size:8px;font-weight:900;text-transform:uppercase;white-space:nowrap}.staff-loa-status.approved{border-color:rgba(34,197,94,.15);background:rgba(34,197,94,.06);color:#84c598}.staff-loa-status.declined{border-color:rgba(239,68,68,.15);background:rgba(239,68,68,.06);color:#e38c8c}.staff-loa-status.cancelled{border-color:rgba(148,163,184,.14);background:rgba(148,163,184,.05);color:#9298a2}
+.staff-loa-response{margin:10px 0;padding:10px 11px;border:1px solid rgba(255,255,255,.045);border-radius:8px;background:rgba(255,255,255,.014)}.staff-loa-response p{margin:5px 0 0;color:#898b95;font-size:11px;line-height:1.6}.staff-loa-review{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.05)}.staff-loa-review textarea{width:100%;margin-bottom:9px}.staff-loa-review>div{display:flex;justify-content:flex-end;gap:8px}
+@media(max-width:1050px){.staff-loa-layout{grid-template-columns:1fr}}
+@media(max-width:700px){.staff-policy-hero,.staff-policy-toolbar{align-items:stretch;flex-direction:column}.staff-policy-toolbar>button{width:100%}.staff-policy-body{padding:0 12px 12px}.staff-loa-card-head{flex-direction:column}.staff-loa-review>div{flex-direction:column-reverse}.staff-loa-review button{width:100%}}
