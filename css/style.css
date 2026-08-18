@@ -5122,3 +5122,35 @@ footer::before {
             translateY(0);
     }
 }
+
+/* UNION MOBILE FOUNDATION */
+html, body { overflow-x: hidden; }
+img, video, iframe, canvas, svg { max-width: 100%; }
+button, input, select, textarea, a { -webkit-tap-highlight-color: transparent; }
+
+@media (max-width: 900px) {
+    body { padding-top: 70px; }
+    .navbar-inner { width: min(100% - 24px, 1180px); min-height: 62px; gap: 10px; }
+    .navbar-links {
+        position: fixed; left: 12px; right: 12px; top: 76px; z-index: 9998;
+        display: none; flex-direction: column; align-items: stretch; gap: 4px;
+        padding: 12px; border: 1px solid rgba(255,255,255,.08); border-radius: 14px;
+        background: rgba(12,12,17,.98); box-shadow: 0 18px 60px rgba(0,0,0,.4);
+        backdrop-filter: blur(16px);
+    }
+    .navbar-links.mobile-open { display: flex; }
+    .navbar-link { display:flex; align-items:center; min-height:44px; padding:10px 12px; border-radius:9px; }
+    .navbar-actions { margin-left:auto; gap:7px; }
+    .navbar-actions .btn { min-height:40px; padding:9px 11px; font-size:10px; }
+    .navbar-mobile-toggle {
+        display:inline-flex!important; width:40px; height:40px; align-items:center; justify-content:center;
+        border:1px solid rgba(255,255,255,.08); border-radius:9px; background:rgba(255,255,255,.025);
+        color:#f5f5f7; cursor:pointer; font-size:18px;
+    }
+}
+@media (min-width: 901px) { .navbar-mobile-toggle { display:none!important; } }
+@media (max-width: 650px) {
+    input, select, textarea { font-size:16px!important; }
+    .navbar-actions #discordLogin { max-width:138px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    footer .footer-container { width:min(100% - 28px,1180px); flex-direction:column; align-items:flex-start; gap:12px; }
+}

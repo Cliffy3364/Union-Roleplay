@@ -39,6 +39,8 @@ async function loadNavbar() {
 
         await setupNavbarUser();
 
+        setupMobileNavbar();
+
     } catch (error) {
 
         console.error(
@@ -177,3 +179,44 @@ document.addEventListener(
     "DOMContentLoaded",
     loadNavbar
 );
+
+/* MOBILE NAVIGATION */
+function setupMobileNavbar() {
+    const navbar = document.querySelector("#navbar .navbar-inner");
+    const links = document.querySelector("#navbar .navbar-links");
+    if (!navbar || !links) return;
+
+    let toggle = document.getElementById("navbarMobileToggle");
+    if (!toggle) {
+        toggle = document.createElement("button");
+        toggle.type = "button";
+        toggle.id = "navbarMobileToggle";
+        toggle.className = "navbar-mobile-toggle";
+        toggle.setAttribute("aria-label", "Open navigation");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.textContent = "☰";
+        const actions = navbar.querySelector(".navbar-actions");
+        actions ? navbar.insertBefore(toggle, actions) : navbar.appendChild(toggle);
+    }
+
+    const closeMenu = () => {
+        links.classList.remove("mobile-open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.textContent = "☰";
+    };
+
+    toggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const open = links.classList.toggle("mobile-open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.textContent = open ? "×" : "☰";
+    });
+
+    links.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
+    document.addEventListener("click", event => {
+        if (window.innerWidth <= 900 && !navbar.contains(event.target)) closeMenu();
+    });
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 900) closeMenu();
+    });
+}

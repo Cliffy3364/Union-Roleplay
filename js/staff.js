@@ -776,6 +776,12 @@ function hideAllViews() {
         );
 
 
+    const staffRulesView =
+        document.getElementById(
+            "staffRulesView"
+        );
+
+
     if (dashboard) {
 
         dashboard.hidden = true;
@@ -813,6 +819,12 @@ function hideAllViews() {
     if (ruleSearchView) {
 
         ruleSearchView.hidden = true;
+    }
+
+
+    if (staffRulesView) {
+
+        staffRulesView.hidden = true;
     }
 
 
@@ -3787,6 +3799,55 @@ const RULE_SEARCH_ALIASES = {
     "09.6": [
         "ignored staff","refused staff direction","staff direction",
         "continued after staff told"
+    ],
+    "01.12": [
+        "dm staff","dmed staff","messaged staff","message staff",
+        "dm developer","dmed developer","messaged developer",
+        "contacted staff privately","contacted dev privately",
+        "support in dms","report in dms","appeal in dms",
+        "did not open ticket","didnt open ticket","bypassed ticket"
+    ],
+    "01.13": [
+        "spray paint nsfw","spraypaint nsfw","nsfw spray",
+        "porn spray","sexual image","explicit image","graphic image",
+        "hateful image","inappropriate spray","custom image nsfw",
+        "spray paint porn","spraypaint porn"
+    ],
+    "01.14": [
+        "troll name","joke name","celebrity name","offensive name",
+        "unrealistic name","fake character name"
+    ],
+    "01.15": [
+        "erp","erotic roleplay","sexual roleplay","sex roleplay",
+        "sexual assault roleplay","explicit roleplay","sexual animation",
+        "sexual emote"
+    ],
+    "01.16": [
+        "account sharing","shared account","using someone elses account",
+        "using someone else's account","gave account to friend",
+        "shared discord account","shared cfx account"
+    ],
+    "02.13": [
+        "cop baiting","police baiting","baiting police","baiting cops",
+        "emergency service baiting","baiting ambulance","baiting uhs",
+        "trying to get a chase","trying to start pursuit",
+        "provoking police for chase"
+    ],
+    "02.14": [
+        "crime chain","chaining crimes","crime after crime",
+        "constant robberies","constant crime","repeated robberies",
+        "back to back robberies","back-to-back robberies",
+        "no crime cooldown","no downtime between crimes"
+    ],
+    "02.15": [
+        "fake hostage","friend as hostage","willing hostage",
+        "arranged hostage","hostage friend","hostage abuse",
+        "disposable hostage","alt character hostage"
+    ],
+    "05.6": [
+        "afk farming","afk farm","money farming","job farming",
+        "playtime farming","automated farming","macro farming",
+        "afk for money","afk for playtime","idle farming"
     ]
 };
 
@@ -6971,6 +7032,1351 @@ document.addEventListener(
     () => {
 
         setupStaffRuleSearch();
+
+        setTimeout(
+            applyStaffPermissions,
+            0
+        );
+    }
+);
+
+
+/* ==========================================================
+   RULE SEARCH V2 - HIGH ACCURACY INCIDENT MATCHER
+========================================================== */
+
+const RULE_SEARCH_HIGH_CONFIDENCE_PATTERNS = [
+    { rule: "02.8", phrases: ["rdm","random deathmatch","killed for no reason","shot for no reason","attacked for no reason"] },
+    { rule: "02.9", phrases: ["vdm","vehicle deathmatch","ran over for no reason","used car as a weapon","used vehicle as a weapon"] },
+    { rule: "02.7", phrases: ["combat log","combat logging","alt f4","left to avoid arrest","disconnected to avoid roleplay","quit to avoid roleplay"] },
+    { rule: "02.3", phrases: ["metagaming","meta gaming","stream sniping","used discord information","information from discord","information from stream"] },
+    { rule: "02.4", phrases: ["powergaming","power gaming","forced action","forced outcome","did not let them respond","didnt let them respond"] },
+    { rule: "02.5", phrases: ["fearrp","fear rp","no fear","did not value their life","didnt value their life","failed to value life"] },
+    { rule: "02.6", phrases: ["nlr","new life rule","returned after death","came back after death","returned after respawn"] },
+    { rule: "02.13", phrases: ["cop baiting","police baiting","baiting police","baiting cops","trying to get a chase","provoking police for a chase"] },
+    { rule: "02.15", phrases: ["fake hostage","willing hostage","friend as hostage","arranged hostage","hostage friend"] },
+    { rule: "07.1", phrases: ["aimbot","wallhack","wall hack","mod menu","esp cheat","cheating"] },
+    { rule: "07.2", phrases: ["bug abuse","abused a bug","exploit abuse","exploiting a bug","used exploit"] },
+    { rule: "07.3", phrases: ["dupe","duplication","duplicated money","duplicated items","duplicated vehicle"] },
+    { rule: "01.4", phrases: ["doxxing","doxxed","real life threat","real-world threat","leaked address","leaked private information"] },
+    { rule: "01.7", phrases: ["ban evasion","ban evade","evading ban","alternate account to bypass ban","alt account to bypass ban"] },
+    { rule: "01.10", phrases: ["real money trading","rmt","sold ingame money for real money","bought ingame money with real money"] },
+    { rule: "01.12", phrases: ["dm staff","dmed staff","messaged staff directly","dm developer","dmed developer","support through dms","report through dms"] },
+    { rule: "01.13", phrases: ["nsfw spray","spray paint nsfw","porn spray","sexual image spray","explicit image spray"] },
+    { rule: "01.15", phrases: ["erp","erotic roleplay","sexual roleplay","sexual assault roleplay"] },
+    { rule: "01.16", phrases: ["account sharing","shared account","using someone elses account","using someone else's account"] },
+    { rule: "05.6", phrases: ["afk farming","afk farm","playtime farming","money farming while afk","automated farming"] }
+];
+
+const RULE_SEARCH_CONTEXT_RULES = [
+    {
+        rule: "04.4",
+        any: ["crash","collision","shot","stabbed","injured","injuries"],
+        plusAny: ["ignored injuries","walked off","ran away","acted fine","no injury rp","didnt roleplay injuries","didn't roleplay injuries"]
+    },
+    {
+        rule: "03.1",
+        any: ["driving","vehicle","car","bike"],
+        plusAny: ["reckless","unrealistic","high speed","off road","wrong side","speeding everywhere"]
+    },
+    {
+        rule: "03.2",
+        any: ["vehicle","car","truck","bike"],
+        plusAny: ["ramming","rammed","launching","repeatedly crashing","destroying vehicle"]
+    },
+    {
+        rule: "02.11",
+        any: ["argument","disagreement","verbal","minor issue"],
+        plusAny: ["shot","shooting","kidnapped","kidnapping","stabbed","killed"]
+    },
+    {
+        rule: "02.12",
+        any: ["scene","shooting","pursuit","traffic stop","robbery"],
+        plusAny: ["randomly joined","interfered","got involved","was not involved","no involvement"]
+    },
+    {
+        rule: "02.14",
+        any: ["robbery","kidnapping","shooting","crime","heist"],
+        plusAny: ["back to back","repeatedly","constant","one after another","no downtime","straight after"]
+    }
+];
+
+function ruleSearchContainsPhrase(query, phrase) {
+    const normal = ruleSearchNormalize(phrase);
+    return normal && query.includes(normal);
+}
+
+function ruleSearchPhraseScore(phrase) {
+    const words = ruleSearchNormalize(phrase).split(" ").filter(Boolean).length;
+
+    if (words >= 5) return 58;
+    if (words === 4) return 52;
+    if (words === 3) return 46;
+    if (words === 2) return 36;
+    return 20;
+}
+
+function scoreRuleSearchMatch(rule, incident) {
+
+    const query = ruleSearchNormalize(incident);
+    const tokens = ruleSearchTokens(incident);
+
+    const title = ruleSearchNormalize(rule.title);
+    const id = ruleSearchNormalize(rule.id);
+
+    const searchable = ruleSearchNormalize([
+        rule.id,
+        rule.title,
+        rule.punishment,
+        rule.description,
+        rule.enforcement,
+        rule.sectionTitle
+    ].join(" "));
+
+    let score = 0;
+    const reasons = [];
+
+    if (query === id || query.includes(` ${id} `) || query.startsWith(`${id} `)) {
+        score += 150;
+        reasons.push("Exact rule ID");
+    }
+
+    if (title && query.includes(title)) {
+        score += 110;
+        reasons.push("Exact rule title");
+    }
+
+    const strong =
+        RULE_SEARCH_HIGH_CONFIDENCE_PATTERNS
+            .find(entry => entry.rule === rule.id);
+
+    if (strong) {
+        strong.phrases.forEach(phrase => {
+            if (ruleSearchContainsPhrase(query, phrase)) {
+                score += 85 + ruleSearchPhraseScore(phrase);
+                reasons.push(`Direct incident match: "${phrase}"`);
+            }
+        });
+    }
+
+    const aliases =
+        RULE_SEARCH_ALIASES[rule.id] || [];
+
+    aliases.forEach(alias => {
+        if (ruleSearchContainsPhrase(query, alias)) {
+            score += ruleSearchPhraseScore(alias);
+            reasons.push(`Matched: "${alias}"`);
+        }
+    });
+
+    RULE_SEARCH_CONTEXT_RULES
+        .filter(entry => entry.rule === rule.id)
+        .forEach(entry => {
+
+            const first =
+                entry.any.some(
+                    phrase =>
+                        ruleSearchContainsPhrase(
+                            query,
+                            phrase
+                        )
+                );
+
+            const second =
+                entry.plusAny.some(
+                    phrase =>
+                        ruleSearchContainsPhrase(
+                            query,
+                            phrase
+                        )
+                );
+
+            if (first && second) {
+                score += 75;
+                reasons.push("Incident context matches this rule");
+            }
+        });
+
+    /*
+     * Token matching is deliberately a low-weight fallback.
+     * This prevents generic words like "player", "scene" or
+     * "vehicle" from outranking an actual breach phrase.
+     */
+    let meaningfulHits = 0;
+
+    tokens.forEach(token => {
+        if (
+            token.length >= 5 &&
+            searchable
+                .split(" ")
+                .some(word => word === token)
+        ) {
+            meaningfulHits++;
+            score += token.length >= 8 ? 4 : 2;
+        }
+    });
+
+    if (tokens.length >= 3) {
+        const coverage =
+            meaningfulHits /
+            Math.max(tokens.length, 1);
+
+        score +=
+            Math.round(
+                Math.min(coverage, 0.65) * 14
+            );
+    }
+
+    return {
+        rule,
+        score,
+        reasons:
+            [...new Set(reasons)]
+                .slice(0, 4)
+    };
+}
+
+
+function findPossibleRuleBreaches(incident) {
+
+    const query =
+        ruleSearchNormalize(
+            incident
+        );
+
+    if (query.length < 6) {
+        return [];
+    }
+
+    const matches =
+        flattenedRulebook()
+            .map(
+                rule =>
+                    scoreRuleSearchMatch(
+                        rule,
+                        incident
+                    )
+            )
+            .filter(
+                result =>
+                    result.score >= 24
+            )
+            .sort(
+                (a, b) =>
+                    b.score -
+                    a.score
+            );
+
+    if (!matches.length) {
+        return [];
+    }
+
+    const bestScore =
+        matches[0].score;
+
+    /*
+     * Keep genuinely relevant secondary breaches but suppress
+     * low-confidence noise when one clear rule is present.
+     */
+    return matches
+        .filter(
+            (result, index) => {
+                if (index === 0) {
+                    return true;
+                }
+
+                if (result.score >= 80) {
+                    return true;
+                }
+
+                if (
+                    bestScore < 80 &&
+                    result.score >= 38
+                ) {
+                    return true;
+                }
+
+                return (
+                    result.score >=
+                    Math.max(
+                        34,
+                        bestScore * 0.52
+                    )
+                );
+            }
+        )
+        .slice(0, 5);
+}
+
+
+function ruleSearchRelevance(score, index) {
+
+    if (
+        score >= 115 ||
+        (
+            index === 0 &&
+            score >= 85
+        )
+    ) {
+        return {
+            label: "Very strong match",
+            className: "high"
+        };
+    }
+
+    if (score >= 65) {
+        return {
+            label: "Strong match",
+            className: "high"
+        };
+    }
+
+    if (score >= 40) {
+        return {
+            label: "Likely match",
+            className: "medium"
+        };
+    }
+
+    return {
+        label: "Possible match",
+        className: "possible"
+    };
+}
+
+
+/* ==========================================================
+   RULE SEARCH V2 - EASIER STAFF UI
+========================================================== */
+
+function ensureRuleSearchUI() {
+
+    const playerHeading =
+        [...document.querySelectorAll(
+            ".staff-nav-heading"
+        )]
+        .find(
+            heading =>
+                heading.textContent
+                    .trim()
+                    .toUpperCase() ===
+                "PLAYER MANAGEMENT"
+        );
+
+    const group =
+        playerHeading
+            ?.closest(
+                ".staff-nav-group"
+            );
+
+    if (
+        group &&
+        !document.getElementById(
+            "ruleSearchNav"
+        )
+    ) {
+        const button =
+            document.createElement(
+                "button"
+            );
+
+        button.type = "button";
+        button.className =
+            "staff-nav-item";
+        button.dataset.view =
+            "rule-search";
+        button.id =
+            "ruleSearchNav";
+
+        button.innerHTML = `
+            <span class="staff-nav-content">
+                <span class="staff-nav-icon">RS</span>
+                <span>Rule Search</span>
+            </span>
+        `;
+
+        group.appendChild(button);
+    }
+
+
+    const panel =
+        document.getElementById(
+            "staffPanel"
+        );
+
+    if (
+        panel &&
+        !document.getElementById(
+            "ruleSearchView"
+        )
+    ) {
+        const view =
+            document.createElement(
+                "section"
+            );
+
+        view.id = "ruleSearchView";
+        view.className =
+            "rule-search-view";
+        view.hidden = true;
+
+        view.innerHTML = `
+            <div class="rule-search-v2-top">
+
+                <div>
+                    <span>INCIDENT ASSISTANT</span>
+                    <h2>Rule Search</h2>
+                    <p>
+                        Describe exactly what the player did. Specific details give
+                        the most accurate result.
+                    </p>
+                </div>
+
+                <a
+                    href="../rules.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="discipline-secondary-button"
+                >
+                    Open Full Rulebook ↗
+                </a>
+
+            </div>
+
+
+            <div class="rule-search-quick">
+
+                <span>QUICK INCIDENTS</span>
+
+                <div class="rule-search-quick-buttons">
+
+                    <button type="button" data-rule-example="Player killed another player without any prior interaction or escalation.">RDM</button>
+
+                    <button type="button" data-rule-example="Player intentionally used their vehicle to run another player over without a valid roleplay reason.">VDM</button>
+
+                    <button type="button" data-rule-example="Player disconnected during an active police situation to avoid being arrested.">Combat Logging</button>
+
+                    <button type="button" data-rule-example="Player used information they were given in Discord that their character could not know.">Metagaming</button>
+
+                    <button type="button" data-rule-example="Player deliberately kept provoking police purely to start a pursuit.">Police Baiting</button>
+
+                    <button type="button" data-rule-example="Player used their friend as a willing fake hostage during a robbery.">Fake Hostage</button>
+
+                </div>
+
+            </div>
+
+
+            <div class="rule-search-layout">
+
+                <section class="staff-dashboard-panel rule-search-input-panel">
+
+                    <div class="staff-panel-header">
+
+                        <div>
+                            <span>WHAT HAPPENED?</span>
+                            <h2>Incident Details</h2>
+                            <p>
+                                Include what they did, what happened immediately before it,
+                                and how they reacted afterwards.
+                            </p>
+                        </div>
+
+                        <div class="staff-panel-reference">
+                            <span>SEARCH MODE</span>
+                            <strong>Strict RP Rulebook</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="staff-panel-divider"></div>
+
+                    <div class="rule-search-field">
+
+                        <label for="ruleBreachDescription">
+                            INCIDENT DESCRIPTION
+                        </label>
+
+                        <textarea
+                            id="ruleBreachDescription"
+                            rows="9"
+                            maxlength="2500"
+                            placeholder="Example: The player was stopped by police, started a pursuit, crashed at high speed, ignored the collision and then disconnected when officers caught up with them."
+                        ></textarea>
+
+                        <div class="rule-search-helper-row">
+                            <small>
+                                Tip: avoid just writing “FailRP”. Describe the actual behaviour.
+                            </small>
+                            <small id="ruleSearchCharacterCount">0 / 2500</small>
+                        </div>
+
+                    </div>
+
+                    <div class="rule-search-actions">
+
+                        <button
+                            type="button"
+                            class="discipline-secondary-button"
+                            id="ruleSearchClear"
+                        >
+                            Clear
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn primary"
+                            id="ruleSearchButton"
+                        >
+                            Find Breached Rules
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <section class="staff-dashboard-panel rule-search-results-panel">
+
+                    <div class="staff-panel-header">
+
+                        <div>
+                            <span>RESULT</span>
+                            <h2>Matching Rules</h2>
+                            <p id="ruleSearchResultSummary">
+                                Enter an incident description to begin.
+                            </p>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="discipline-secondary-button"
+                            id="ruleSearchCopyAll"
+                            hidden
+                        >
+                            Copy Result
+                        </button>
+
+                    </div>
+
+                    <div class="staff-panel-divider"></div>
+
+                    <div id="ruleSearchResults">
+
+                        <div class="rule-search-empty">
+
+                            <div>RS</div>
+
+                            <strong>
+                                Ready to check
+                            </strong>
+
+                            <p>
+                                Describe the incident or use one of the quick examples above.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+        `;
+
+        panel.appendChild(view);
+    }
+}
+
+
+function setupStaffRuleSearch() {
+
+    ensureRuleSearchUI();
+
+    const nav =
+        document.getElementById(
+            "ruleSearchNav"
+        );
+
+    const button =
+        document.getElementById(
+            "ruleSearchButton"
+        );
+
+    const clear =
+        document.getElementById(
+            "ruleSearchClear"
+        );
+
+    const textarea =
+        document.getElementById(
+            "ruleBreachDescription"
+        );
+
+    const count =
+        document.getElementById(
+            "ruleSearchCharacterCount"
+        );
+
+
+    nav?.addEventListener(
+        "click",
+        () => {
+            setActiveNav(nav);
+            showRuleSearch();
+        }
+    );
+
+
+    const updateCount = () => {
+        if (count && textarea) {
+            count.textContent =
+                `${textarea.value.length} / 2500`;
+        }
+    };
+
+
+    textarea?.addEventListener(
+        "input",
+        updateCount
+    );
+
+
+    const runSearch =
+        async () => {
+
+            if (!textarea) {
+                return;
+            }
+
+            const incident =
+                textarea.value.trim();
+
+            if (incident.length < 6) {
+                textarea.focus();
+                return;
+            }
+
+            if (button) {
+                button.disabled = true;
+                button.textContent =
+                    "Checking Rulebook...";
+            }
+
+            try {
+
+                await loadRuleSearchRulebook();
+
+                const matches =
+                    findPossibleRuleBreaches(
+                        incident
+                    );
+
+                renderRuleSearchResults(
+                    incident,
+                    matches
+                );
+
+            } catch (error) {
+
+                const target =
+                    document.getElementById(
+                        "ruleSearchResults"
+                    );
+
+                if (target) {
+                    target.innerHTML = `
+                        <div class="rule-search-empty">
+                            <div>!</div>
+                            <strong>Rule search unavailable</strong>
+                            <p>${escapeHtml(error.message || "Unable to load the rulebook.")}</p>
+                        </div>
+                    `;
+                }
+
+            } finally {
+
+                if (button) {
+                    button.disabled = false;
+                    button.textContent =
+                        "Find Breached Rules";
+                }
+            }
+        };
+
+
+    button?.addEventListener(
+        "click",
+        runSearch
+    );
+
+
+    textarea?.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.ctrlKey &&
+                event.key === "Enter"
+            ) {
+                event.preventDefault();
+                runSearch();
+            }
+        }
+    );
+
+
+    clear?.addEventListener(
+        "click",
+        () => {
+
+            if (textarea) {
+                textarea.value = "";
+                textarea.focus();
+            }
+
+            updateCount();
+
+            const summary =
+                document.getElementById(
+                    "ruleSearchResultSummary"
+                );
+
+            const target =
+                document.getElementById(
+                    "ruleSearchResults"
+                );
+
+            const copyAll =
+                document.getElementById(
+                    "ruleSearchCopyAll"
+                );
+
+            if (summary) {
+                summary.textContent =
+                    "Enter an incident description to begin.";
+            }
+
+            if (copyAll) {
+                copyAll.hidden = true;
+            }
+
+            if (target) {
+                target.innerHTML = `
+                    <div class="rule-search-empty">
+                        <div>RS</div>
+                        <strong>Ready to check</strong>
+                        <p>Describe the incident or use one of the quick examples above.</p>
+                    </div>
+                `;
+            }
+        }
+    );
+
+
+    document
+        .querySelectorAll(
+            "[data-rule-example]"
+        )
+        .forEach(
+            example => {
+
+                example.addEventListener(
+                    "click",
+                    () => {
+
+                        if (!textarea) {
+                            return;
+                        }
+
+                        textarea.value =
+                            example.dataset
+                                .ruleExample || "";
+
+                        updateCount();
+
+                        textarea.focus();
+                    }
+                );
+            }
+        );
+
+
+    updateCount();
+}
+
+
+/* ==========================================================
+   STAFF RULES & REGULATIONS
+========================================================== */
+
+const STAFF_RULES_REGULATIONS = [
+    {
+        section: "01",
+        title: "Professional Conduct",
+        description: "Standards expected from every member of the Union Roleplay staff team.",
+        rules: [
+            {
+                id: "SR 01.1",
+                title: "Professional Behaviour",
+                text: "Staff must remain professional, respectful and impartial when dealing with players, other staff members and community disputes. Staff permissions must never be used to intimidate, embarrass or provoke members."
+            },
+            {
+                id: "SR 01.2",
+                title: "Remain Impartial",
+                text: "Staff must not favour friends, gangs, businesses or departments when making staff decisions. If you are directly involved in a situation or cannot remain impartial, hand the matter to another staff member."
+            },
+            {
+                id: "SR 01.3",
+                title: "No Arguments in Public",
+                text: "Staff disagreements, disciplinary discussions and internal decisions must not be argued about publicly. Raise concerns through the appropriate internal staff channel or with Staff Management."
+            }
+        ]
+    },
+    {
+        section: "02",
+        title: "Staff Powers & Permissions",
+        description: "Staff tools exist to protect roleplay and must only be used for legitimate staff duties.",
+        rules: [
+            {
+                id: "SR 02.1",
+                title: "No Abuse of Staff Powers",
+                text: "Staff commands, noclip, spectate, teleport, revive, spawning, administrative menus and any other staff tools must only be used where there is a legitimate staff or approved development reason."
+            },
+            {
+                id: "SR 02.2",
+                title: "Do Not Staff Your Own Scene",
+                text: "Where reasonably possible, staff must not make disciplinary decisions in a roleplay situation they were personally involved in. Another staff member should review the report or scene."
+            },
+            {
+                id: "SR 02.3",
+                title: "Minimum Necessary Intervention",
+                text: "Do not interrupt active roleplay unless staff intervention is genuinely required. Where possible, allow the scene to finish and deal with the report afterwards."
+            }
+        ]
+    },
+    {
+        section: "03",
+        title: "Reports, Evidence & Discipline",
+        description: "All staff action must be fair, explainable and properly recorded.",
+        rules: [
+            {
+                id: "SR 03.1",
+                title: "Review the Evidence",
+                text: "Before issuing disciplinary action, staff must review the available evidence and establish the relevant facts. Do not issue punishment solely because one player gives a convincing account."
+            },
+            {
+                id: "SR 03.2",
+                title: "Use the Correct Rule",
+                text: "Disciplinary action must identify the actual rule breached. Use Rule Search as decision support, then read the matching rule before taking action."
+            },
+            {
+                id: "SR 03.3",
+                title: "Proportionate Punishments",
+                text: "Punishments must be proportionate to the breach, severity, evidence and relevant disciplinary history. Do not increase a punishment because you personally dislike a player."
+            },
+            {
+                id: "SR 03.4",
+                title: "Record Staff Action",
+                text: "Warnings, strikes, bans and other formal disciplinary actions must be recorded accurately in the staff system with a clear reason and any relevant evidence."
+            },
+            {
+                id: "SR 03.5",
+                title: "Do Not Fabricate Evidence",
+                text: "Staff must never alter, conceal, fabricate or deliberately misrepresent evidence, staff logs, messages, disciplinary records or application information."
+            }
+        ]
+    },
+    {
+        section: "04",
+        title: "Tickets & Communication",
+        description: "Staff communication must stay organised and within the correct support channels.",
+        rules: [
+            {
+                id: "SR 04.1",
+                title: "Use Official Channels",
+                text: "Player reports, complaints, appeals and support issues should be handled through the appropriate ticket or staff system. Do not encourage players to bypass official channels through private messages."
+            },
+            {
+                id: "SR 04.2",
+                title: "Clear Communication",
+                text: "Staff responses should be clear and professional. Explain decisions where appropriate without arguing, insulting the player or disclosing confidential internal information."
+            },
+            {
+                id: "SR 04.3",
+                title: "Escalate When Required",
+                text: "If an issue exceeds your permissions, involves serious allegations, concerns another staff member or requires management approval, escalate it to the appropriate senior staff rank."
+            }
+        ]
+    },
+    {
+        section: "05",
+        title: "Confidentiality & Internal Information",
+        description: "Internal staff information must remain within authorised staff channels.",
+        rules: [
+            {
+                id: "SR 05.1",
+                title: "Confidential Staff Information",
+                text: "Internal discussions, staff notes, reports, applications, disciplinary evidence, private player information and management decisions must not be shared outside authorised staff channels."
+            },
+            {
+                id: "SR 05.2",
+                title: "No Leaking",
+                text: "Leaking screenshots, messages, unreleased content, internal documents, staff decisions or private information may result in immediate removal from the staff team and further community action."
+            },
+            {
+                id: "SR 05.3",
+                title: "Access Only What You Need",
+                text: "Do not search player records, tickets, applications or disciplinary history without a legitimate staff reason."
+            }
+        ]
+    },
+    {
+        section: "06",
+        title: "Activity, Rank & Responsibility",
+        description: "Staff rank is a responsibility and does not place anyone above the community rules.",
+        rules: [
+            {
+                id: "SR 06.1",
+                title: "Follow the Chain of Command",
+                text: "Staff should follow the staff hierarchy and escalate issues appropriately. Trial Moderators and Moderators should seek assistance where a decision falls outside their authority."
+            },
+            {
+                id: "SR 06.2",
+                title: "Follow Community Rules",
+                text: "Staff members remain subject to the normal Union Roleplay rules. Holding a staff rank does not provide exemptions from roleplay or community standards."
+            },
+            {
+                id: "SR 06.3",
+                title: "Staff Accountability",
+                text: "Staff members are responsible for actions taken through their account. Misuse of permissions, dishonesty or repeated failure to follow staff procedure may result in retraining, demotion, suspension or removal."
+            }
+        ]
+    }
+];
+
+
+function ensureStaffRulesUI() {
+
+    const managementHeading =
+        [...document.querySelectorAll(
+            ".staff-nav-heading"
+        )]
+        .find(
+            heading =>
+                heading.textContent
+                    .trim()
+                    .toUpperCase() ===
+                "MANAGEMENT"
+        );
+
+    const group =
+        managementHeading
+            ?.closest(
+                ".staff-nav-group"
+            );
+
+    if (
+        group &&
+        !document.getElementById(
+            "staffRulesNav"
+        )
+    ) {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+        button.type = "button";
+        button.className =
+            "staff-nav-item";
+        button.id =
+            "staffRulesNav";
+        button.dataset.view =
+            "staff-rules";
+
+        button.innerHTML = `
+            <span class="staff-nav-content">
+                <span class="staff-nav-icon">SR</span>
+                <span>Staff Rules</span>
+            </span>
+        `;
+
+        group.appendChild(button);
+    }
+
+
+    const panel =
+        document.getElementById(
+            "staffPanel"
+        );
+
+    if (
+        panel &&
+        !document.getElementById(
+            "staffRulesView"
+        )
+    ) {
+
+        const view =
+            document.createElement(
+                "section"
+            );
+
+        view.id =
+            "staffRulesView";
+        view.className =
+            "staff-rules-view";
+        view.hidden = true;
+
+        view.innerHTML = `
+            <div class="staff-rules-hero">
+
+                <div>
+                    <span>INTERNAL DOCUMENT</span>
+                    <h2>Staff Rules & Regulations</h2>
+                    <p>
+                        These standards apply to every Union Roleplay staff member.
+                        Staff rank does not exempt anyone from these requirements.
+                    </p>
+                </div>
+
+                <div class="staff-rules-document-status">
+                    <span></span>
+                    CURRENT POLICY
+                </div>
+
+            </div>
+
+
+            <div class="staff-rules-toolbar">
+
+                <div class="staff-rules-search">
+                    <span>⌕</span>
+                    <input
+                        type="search"
+                        id="staffRulesSearch"
+                        placeholder="Search staff rules, powers, evidence, tickets..."
+                        autocomplete="off"
+                    >
+                </div>
+
+                <button
+                    type="button"
+                    class="discipline-secondary-button"
+                    id="staffRulesExpandAll"
+                >
+                    Expand All
+                </button>
+
+            </div>
+
+
+            <div
+                id="staffRulesContent"
+                class="staff-rules-content"
+            ></div>
+
+
+            <div
+                id="staffRulesNoResults"
+                class="member-management-empty"
+                hidden
+            >
+                <h3>No matching staff rules</h3>
+                <p>Try another word or phrase.</p>
+            </div>
+        `;
+
+        panel.appendChild(view);
+    }
+}
+
+
+function renderStaffRules(filter = "") {
+
+    const target =
+        document.getElementById(
+            "staffRulesContent"
+        );
+
+    const empty =
+        document.getElementById(
+            "staffRulesNoResults"
+        );
+
+    if (!target) {
+        return;
+    }
+
+    const query =
+        ruleSearchNormalize(
+            filter
+        );
+
+    let visible = 0;
+
+    target.innerHTML =
+        STAFF_RULES_REGULATIONS
+            .map(section => {
+
+                const rules =
+                    section.rules.filter(
+                        rule => {
+
+                            if (!query) {
+                                return true;
+                            }
+
+                            return ruleSearchNormalize(
+                                [
+                                    rule.id,
+                                    rule.title,
+                                    rule.text,
+                                    section.title,
+                                    section.description
+                                ].join(" ")
+                            ).includes(query) ||
+                            ruleSearchTokens(query)
+                                .every(
+                                    token =>
+                                        ruleSearchNormalize(
+                                            [
+                                                rule.id,
+                                                rule.title,
+                                                rule.text,
+                                                section.title,
+                                                section.description
+                                            ].join(" ")
+                                        ).includes(token)
+                                );
+                        }
+                    );
+
+                if (!rules.length) {
+                    return "";
+                }
+
+                visible += rules.length;
+
+                return `
+                    <section class="staff-rules-section">
+
+                        <div class="staff-rules-section-head">
+                            <span>${escapeHtml(section.section)}</span>
+                            <div>
+                                <h3>${escapeHtml(section.title)}</h3>
+                                <p>${escapeHtml(section.description)}</p>
+                            </div>
+                        </div>
+
+                        <div class="staff-rules-list">
+
+                            ${rules.map(rule => `
+                                <details class="staff-rule-item">
+                                    <summary>
+                                        <span class="staff-rule-id">${escapeHtml(rule.id)}</span>
+                                        <strong>${escapeHtml(rule.title)}</strong>
+                                        <span class="staff-rule-open">+</span>
+                                    </summary>
+                                    <div class="staff-rule-body">
+                                        <p>${escapeHtml(rule.text)}</p>
+                                        <button
+                                            type="button"
+                                            class="discipline-secondary-button"
+                                            data-copy-staff-rule="${escapeHtml(rule.id)}"
+                                        >
+                                            Copy Rule
+                                        </button>
+                                    </div>
+                                </details>
+                            `).join("")}
+
+                        </div>
+
+                    </section>
+                `;
+            })
+            .join("");
+
+
+    if (empty) {
+        empty.hidden =
+            visible > 0;
+    }
+
+
+    target
+        .querySelectorAll(
+            "[data-copy-staff-rule]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                async () => {
+
+                    const id =
+                        button.dataset
+                            .copyStaffRule;
+
+                    let found = null;
+
+                    STAFF_RULES_REGULATIONS
+                        .some(section => {
+
+                            const rule =
+                                section.rules.find(
+                                    item =>
+                                        item.id === id
+                                );
+
+                            if (rule) {
+                                found = rule;
+                                return true;
+                            }
+
+                            return false;
+                        });
+
+
+                    if (found) {
+                        await copyRuleText(
+                            `${found.id} — ${found.title}\n${found.text}`,
+                            button
+                        );
+                    }
+                }
+            );
+        });
+}
+
+
+function showStaffRules() {
+
+    hideAllViews();
+
+    currentQueueType = null;
+
+    const view =
+        document.getElementById(
+            "staffRulesView"
+        );
+
+    if (view) {
+        view.hidden = false;
+    }
+
+    const title =
+        document.getElementById(
+            "staffPageTitle"
+        );
+
+    const description =
+        document.getElementById(
+            "staffPageDescription"
+        );
+
+    if (title) {
+        title.textContent =
+            "Staff Rules & Regulations";
+    }
+
+    if (description) {
+        description.textContent =
+            "Internal standards, staff powers, evidence requirements and staff conduct.";
+    }
+
+    setTopSearch("", false);
+
+    renderStaffRules(
+        document.getElementById(
+            "staffRulesSearch"
+        )?.value || ""
+    );
+}
+
+
+function setupStaffRules() {
+
+    ensureStaffRulesUI();
+
+    const nav =
+        document.getElementById(
+            "staffRulesNav"
+        );
+
+    const search =
+        document.getElementById(
+            "staffRulesSearch"
+        );
+
+    const expand =
+        document.getElementById(
+            "staffRulesExpandAll"
+        );
+
+
+    nav?.addEventListener(
+        "click",
+        () => {
+            setActiveNav(nav);
+            showStaffRules();
+        }
+    );
+
+
+    search?.addEventListener(
+        "input",
+        () => {
+            renderStaffRules(
+                search.value
+            );
+        }
+    );
+
+
+    expand?.addEventListener(
+        "click",
+        () => {
+
+            const items =
+                [...document.querySelectorAll(
+                    "#staffRulesContent .staff-rule-item"
+                )];
+
+            const shouldOpen =
+                items.some(
+                    item =>
+                        !item.open
+                );
+
+            items.forEach(
+                item => {
+                    item.open =
+                        shouldOpen;
+                }
+            );
+
+            expand.textContent =
+                shouldOpen
+                    ? "Collapse All"
+                    : "Expand All";
+        }
+    );
+}
+
+
+/* ==========================================================
+   STAFF RULES INITIALISATION
+========================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        setupStaffRules();
 
         setTimeout(
             applyStaffPermissions,

@@ -1120,3 +1120,17 @@
         flex-direction: column;
     }
 }
+
+/* RULES MOBILE READY */
+@media (max-width:900px) {
+    .rules-page-shell { padding-top:70px; }
+    .rules-sidebar { position:static; }
+    .rules-navigation { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:650px) {
+    .rules-hero { padding-top:48px; }
+    .rules-hero h1 { font-size:clamp(42px,14vw,60px); letter-spacing:-2px; }
+    .rules-hero-actions .btn { width:100%; justify-content:center; }
+    .rules-navigation { grid-template-columns:1fr; }
+    .rule-body { padding:0 14px 14px; }
+}
