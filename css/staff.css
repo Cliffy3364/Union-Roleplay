@@ -7021,3 +7021,229 @@
 .staff-loa-response{margin:10px 0;padding:10px 11px;border:1px solid rgba(255,255,255,.045);border-radius:8px;background:rgba(255,255,255,.014)}.staff-loa-response p{margin:5px 0 0;color:#898b95;font-size:11px;line-height:1.6}.staff-loa-review{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.05)}.staff-loa-review textarea{width:100%;margin-bottom:9px}.staff-loa-review>div{display:flex;justify-content:flex-end;gap:8px}
 @media(max-width:1050px){.staff-loa-layout{grid-template-columns:1fr}}
 @media(max-width:700px){.staff-policy-hero,.staff-policy-toolbar{align-items:stretch;flex-direction:column}.staff-policy-toolbar>button{width:100%}.staff-policy-body{padding:0 12px 12px}.staff-loa-card-head{flex-direction:column}.staff-loa-review>div{flex-direction:column-reverse}.staff-loa-review button{width:100%}}
+
+
+/* ==========================================================
+   STAFF CONTROL CENTRE - VISUAL REFRESH
+========================================================== */
+
+.staff-shell {
+    background:
+        radial-gradient(circle at 18% 0%, rgba(139,92,246,.055), transparent 26%),
+        #090a0d;
+}
+
+.staff-sidebar {
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.018), rgba(255,255,255,.004)),
+        #0d0e12;
+    border-right-color: rgba(255,255,255,.065);
+}
+
+.staff-sidebar-logo {
+    box-shadow: inset 0 0 0 1px rgba(139,92,246,.2), 0 10px 30px rgba(0,0,0,.22);
+}
+
+.staff-nav-item {
+    border: 1px solid transparent;
+    transition:
+        background .16s ease,
+        border-color .16s ease,
+        color .16s ease,
+        transform .16s ease;
+}
+
+.staff-nav-item:hover {
+    transform: translateX(2px);
+    border-color: rgba(255,255,255,.05);
+    background: rgba(255,255,255,.028);
+}
+
+.staff-nav-item.active {
+    border-color: rgba(139,92,246,.18);
+    background:
+        linear-gradient(90deg, rgba(139,92,246,.11), rgba(139,92,246,.035));
+    box-shadow: inset 3px 0 0 rgba(167,139,250,.72);
+}
+
+.staff-topbar {
+    border-bottom: 1px solid rgba(255,255,255,.055);
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.012), transparent),
+        rgba(9,10,13,.86);
+    backdrop-filter: blur(18px);
+}
+
+.staff-topbar-main h1 {
+    letter-spacing: -1px;
+}
+
+.staff-dashboard-panel,
+.staff-stat {
+    border-color: rgba(255,255,255,.065);
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.018), rgba(255,255,255,.004)),
+        #101115;
+    box-shadow: 0 18px 45px rgba(0,0,0,.08);
+}
+
+.staff-stat {
+    position: relative;
+    overflow: hidden;
+}
+
+.staff-stat::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    top: -55px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(139,92,246,.035);
+    pointer-events: none;
+}
+
+.staff-dashboard-intro {
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(255,255,255,.055);
+    border-radius: 12px;
+    background: rgba(255,255,255,.012);
+}
+
+.staff-panel-header h2 {
+    letter-spacing: -.45px;
+}
+
+.staff-search-wrapper input,
+.discipline-field input,
+.discipline-field textarea,
+.discipline-field select,
+.staff-policy-search input,
+.staff-rules-search input {
+    transition:
+        border-color .15s ease,
+        box-shadow .15s ease,
+        background .15s ease;
+}
+
+.staff-search-wrapper input:focus,
+.discipline-field input:focus,
+.discipline-field textarea:focus,
+.discipline-field select:focus,
+.staff-rules-search input:focus {
+    border-color: rgba(139,92,246,.32);
+    box-shadow: 0 0 0 3px rgba(139,92,246,.045);
+}
+
+.btn.primary {
+    box-shadow: 0 10px 28px rgba(124,58,237,.14);
+}
+
+
+/* Staff Rules is now the complete staff policy + rules document */
+
+.staff-rules-hero {
+    padding: 18px;
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at top right, rgba(139,92,246,.055), transparent 35%),
+        #101115;
+}
+
+.staff-rules-section {
+    box-shadow: 0 14px 35px rgba(0,0,0,.07);
+}
+
+.staff-rule-item[open] {
+    border-color: rgba(139,92,246,.13);
+    background: #15161b;
+}
+
+
+/* LOA */
+
+.staff-loa-premium-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 18px;
+    padding: 18px;
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at top right, rgba(139,92,246,.06), transparent 38%),
+        #101115;
+}
+
+.staff-loa-premium-head > div:first-child > span {
+    color: #747781;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+}
+
+.staff-loa-premium-head h2 {
+    margin: 5px 0 0;
+    font-size: 30px;
+    letter-spacing: -.9px;
+}
+
+.staff-loa-premium-head p {
+    margin: 8px 0 0;
+    color: #82858e;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.staff-loa-secure {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 10px;
+    border: 1px solid rgba(139,92,246,.15);
+    border-radius: 999px;
+    color: #ac9be2;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: .8px;
+    white-space: nowrap;
+}
+
+.staff-loa-secure span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #a78bfa;
+}
+
+.staff-loa-request-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.staff-loa-request-panel::after {
+    content: "LOA";
+    position: absolute;
+    right: 18px;
+    bottom: -18px;
+    color: rgba(255,255,255,.018);
+    font-size: 86px;
+    font-weight: 950;
+    letter-spacing: -6px;
+    pointer-events: none;
+}
+
+.staff-loa-management {
+    border-color: rgba(139,92,246,.1);
+}
+
+@media (max-width: 700px) {
+    .staff-loa-premium-head {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}

@@ -780,8 +780,6 @@ function hideAllViews() {
         document.getElementById(
             "staffRulesView"
         );
-
-    const staffPolicyView = document.getElementById("staffPolicyView");
     const staffLoaView = document.getElementById("staffLoaView");
 
 
@@ -829,8 +827,6 @@ function hideAllViews() {
 
         staffRulesView.hidden = true;
     }
-
-    if (staffPolicyView) staffPolicyView.hidden = true;
     if (staffLoaView) staffLoaView.hidden = true;
 
 
@@ -7818,144 +7814,803 @@ function setupStaffRuleSearch() {
 
 const STAFF_RULES_REGULATIONS = [
     {
-        section: "01",
-        title: "Professional Conduct",
-        description: "Standards expected from every member of the Union Roleplay staff team.",
-        rules: [
+        "section": "01",
+        "title": "General Staff Expectations",
+        "description": "Union Roleplay staff requirements covering general staff expectations.",
+        "rules": [
             {
-                id: "SR 01.1",
-                title: "Professional Behaviour",
-                text: "Staff must remain professional, respectful and impartial when dealing with players, other staff members and community disputes. Staff permissions must never be used to intimidate, embarrass or provoke members."
+                "id": "SR 01.1",
+                "title": "Professional Standard",
+                "text": "Every staff member represents Union Roleplay while holding a staff role. Staff must use good judgement, support the community and maintain a professional standard at all times."
             },
             {
-                id: "SR 01.2",
-                title: "Remain Impartial",
-                text: "Staff must not favour friends, gangs, businesses or departments when making staff decisions. If you are directly involved in a situation or cannot remain impartial, hand the matter to another staff member."
+                "id": "SR 01.2",
+                "title": "Lead by Example",
+                "text": "Staff are subject to the same community and roleplay rules as every other member. Staff rank does not provide an exemption from server rules."
             },
             {
-                id: "SR 01.3",
-                title: "No Arguments in Public",
-                text: "Staff disagreements, disciplinary discussions and internal decisions must not be argued about publicly. Raise concerns through the appropriate internal staff channel or with Staff Management."
+                "id": "SR 01.3",
+                "title": "Fair and Consistent Decisions",
+                "text": "Staff decisions must be reasonable, evidence-based and as consistent as possible with previous decisions and current policy."
             }
         ]
     },
     {
-        section: "02",
-        title: "Staff Powers & Permissions",
-        description: "Staff tools exist to protect roleplay and must only be used for legitimate staff duties.",
-        rules: [
+        "section": "02",
+        "title": "Staff Conduct",
+        "description": "Union Roleplay staff requirements covering staff conduct.",
+        "rules": [
             {
-                id: "SR 02.1",
-                title: "No Abuse of Staff Powers",
-                text: "Staff commands, noclip, spectate, teleport, revive, spawning, administrative menus and any other staff tools must only be used where there is a legitimate staff or approved development reason."
+                "id": "SR 02.1",
+                "title": "Respectful Behaviour",
+                "text": "Staff must remain respectful and professional when dealing with players and other staff, including during disagreements or difficult situations."
             },
             {
-                id: "SR 02.2",
-                title: "Do Not Staff Your Own Scene",
-                text: "Where reasonably possible, staff must not make disciplinary decisions in a roleplay situation they were personally involved in. Another staff member should review the report or scene."
+                "id": "SR 02.2",
+                "title": "No Public Staff Arguments",
+                "text": "Disagreements about staff decisions, staff members or internal policy must not be argued about publicly. Use the correct internal route."
             },
             {
-                id: "SR 02.3",
-                title: "Minimum Necessary Intervention",
-                text: "Do not interrupt active roleplay unless staff intervention is genuinely required. Where possible, allow the scene to finish and deal with the report afterwards."
+                "id": "SR 02.3",
+                "title": "No Intimidation",
+                "text": "Staff must not use their role, permissions or access to intimidate, embarrass or threaten members without legitimate cause."
             }
         ]
     },
     {
-        section: "03",
-        title: "Reports, Evidence & Discipline",
-        description: "All staff action must be fair, explainable and properly recorded.",
-        rules: [
+        "section": "03",
+        "title": "Staff Activity",
+        "description": "Union Roleplay staff requirements covering staff activity.",
+        "rules": [
             {
-                id: "SR 03.1",
-                title: "Review the Evidence",
-                text: "Before issuing disciplinary action, staff must review the available evidence and establish the relevant facts. Do not issue punishment solely because one player gives a convincing account."
+                "id": "SR 03.1",
+                "title": "Reasonable Activity",
+                "text": "Staff are expected to remain reasonably active and contribute to moderation, tickets and staff duties when available."
             },
             {
-                id: "SR 03.2",
-                title: "Use the Correct Rule",
-                text: "Disciplinary action must identify the actual rule breached. Use Rule Search as decision support, then read the matching rule before taking action."
+                "id": "SR 03.2",
+                "title": "Duty Contribution",
+                "text": "Being active in the server does not mean staff duties can be ignored. Staff should assist when reasonably able."
             },
             {
-                id: "SR 03.3",
-                title: "Proportionate Punishments",
-                text: "Punishments must be proportionate to the breach, severity, evidence and relevant disciplinary history. Do not increase a punishment because you personally dislike a player."
-            },
-            {
-                id: "SR 03.4",
-                title: "Record Staff Action",
-                text: "Warnings, strikes, bans and other formal disciplinary actions must be recorded accurately in the staff system with a clear reason and any relevant evidence."
-            },
-            {
-                id: "SR 03.5",
-                title: "Do Not Fabricate Evidence",
-                text: "Staff must never alter, conceal, fabricate or deliberately misrepresent evidence, staff logs, messages, disciplinary records or application information."
+                "id": "SR 03.3",
+                "title": "Activity Reviews",
+                "text": "Sustained low activity may result in contact from Staff Management, an activity review, retraining, demotion or removal."
             }
         ]
     },
     {
-        section: "04",
-        title: "Tickets & Communication",
-        description: "Staff communication must stay organised and within the correct support channels.",
-        rules: [
+        "section": "04",
+        "title": "Staff Permissions and Powers",
+        "description": "Union Roleplay staff requirements covering staff permissions and powers.",
+        "rules": [
             {
-                id: "SR 04.1",
-                title: "Use Official Channels",
-                text: "Player reports, complaints, appeals and support issues should be handled through the appropriate ticket or staff system. Do not encourage players to bypass official channels through private messages."
+                "id": "SR 04.1",
+                "title": "Legitimate Use Only",
+                "text": "Staff permissions and administrative tools may only be used for legitimate staff duties, authorised testing or approved development work."
             },
             {
-                id: "SR 04.2",
-                title: "Clear Communication",
-                text: "Staff responses should be clear and professional. Explain decisions where appropriate without arguing, insulting the player or disclosing confidential internal information."
+                "id": "SR 04.2",
+                "title": "Minimum Necessary Intervention",
+                "text": "Use only the level of staff intervention necessary to resolve the issue."
             },
             {
-                id: "SR 04.3",
-                title: "Escalate When Required",
-                text: "If an issue exceeds your permissions, involves serious allegations, concerns another staff member or requires management approval, escalate it to the appropriate senior staff rank."
+                "id": "SR 04.3",
+                "title": "No Personal Benefit",
+                "text": "Staff permissions must never be used to gain money, vehicles, items, information or any other personal advantage."
             }
         ]
     },
     {
-        section: "05",
-        title: "Confidentiality & Internal Information",
-        description: "Internal staff information must remain within authorised staff channels.",
-        rules: [
+        "section": "05",
+        "title": "Ticket Handling",
+        "description": "Union Roleplay staff requirements covering ticket handling.",
+        "rules": [
             {
-                id: "SR 05.1",
-                title: "Confidential Staff Information",
-                text: "Internal discussions, staff notes, reports, applications, disciplinary evidence, private player information and management decisions must not be shared outside authorised staff channels."
+                "id": "SR 05.1",
+                "title": "Use Official Tickets",
+                "text": "Support requests, complaints, reports and appeals should be handled through the correct ticket system."
             },
             {
-                id: "SR 05.2",
-                title: "No Leaking",
-                text: "Leaking screenshots, messages, unreleased content, internal documents, staff decisions or private information may result in immediate removal from the staff team and further community action."
+                "id": "SR 05.2",
+                "title": "Claim Responsibly",
+                "text": "Do not claim a ticket you cannot deal with. Escalate it if it requires a higher rank or specialist knowledge."
             },
             {
-                id: "SR 05.3",
-                title: "Access Only What You Need",
-                text: "Do not search player records, tickets, applications or disciplinary history without a legitimate staff reason."
+                "id": "SR 05.3",
+                "title": "Professional Responses",
+                "text": "Ticket replies must be clear, factual and professional. Avoid arguments, sarcasm and dismissive responses."
+            },
+            {
+                "id": "SR 05.4",
+                "title": "Close Properly",
+                "text": "Do not close a ticket until the matter has been dealt with, clearly explained or correctly escalated."
             }
         ]
     },
     {
-        section: "06",
-        title: "Activity, Rank & Responsibility",
-        description: "Staff rank is a responsibility and does not place anyone above the community rules.",
-        rules: [
+        "section": "06",
+        "title": "Leave of Absence",
+        "description": "Union Roleplay staff requirements covering leave of absence.",
+        "rules": [
             {
-                id: "SR 06.1",
-                title: "Follow the Chain of Command",
-                text: "Staff should follow the staff hierarchy and escalate issues appropriately. Trial Moderators and Moderators should seek assistance where a decision falls outside their authority."
+                "id": "SR 06.1",
+                "title": "When to Request LOA",
+                "text": "Submit an LOA when you expect to be unable to meet normal staff activity expectations for a meaningful period."
             },
             {
-                id: "SR 06.2",
-                title: "Follow Community Rules",
-                text: "Staff members remain subject to the normal Union Roleplay rules. Holding a staff rank does not provide exemptions from roleplay or community standards."
+                "id": "SR 06.2",
+                "title": "Submit in Advance",
+                "text": "Where reasonably possible, an LOA should be submitted before the absence begins."
             },
             {
-                id: "SR 06.3",
-                title: "Staff Accountability",
-                text: "Staff members are responsible for actions taken through their account. Misuse of permissions, dishonesty or repeated failure to follow staff procedure may result in retraining, demotion, suspension or removal."
+                "id": "SR 06.3",
+                "title": "Accurate Information",
+                "text": "LOA dates and reasons must be honest and reasonably accurate. Staff are not required to provide unnecessary private information."
+            },
+            {
+                "id": "SR 06.4",
+                "title": "Return or Extend",
+                "text": "Return to normal activity after the approved end date or submit an extension if more time is genuinely required."
+            }
+        ]
+    },
+    {
+        "section": "07",
+        "title": "Disciplinary Procedure",
+        "description": "Union Roleplay staff requirements covering disciplinary procedure.",
+        "rules": [
+            {
+                "id": "SR 07.1",
+                "title": "Fair Process",
+                "text": "Disciplinary decisions must be based on the facts, available evidence, relevant rules and previous history where appropriate."
+            },
+            {
+                "id": "SR 07.2",
+                "title": "Opportunity to Explain",
+                "text": "Where appropriate, the person involved should be given a reasonable opportunity to explain their account before a final decision."
+            },
+            {
+                "id": "SR 07.3",
+                "title": "Proportionate Outcome",
+                "text": "The outcome must be proportionate to the breach, severity and relevant history."
+            }
+        ]
+    },
+    {
+        "section": "08",
+        "title": "Disciplinary Reports",
+        "description": "Union Roleplay staff requirements covering disciplinary reports.",
+        "rules": [
+            {
+                "id": "SR 08.1",
+                "title": "Accurate Records",
+                "text": "Formal disciplinary action must be recorded clearly and accurately."
+            },
+            {
+                "id": "SR 08.2",
+                "title": "Required Detail",
+                "text": "The report should identify what happened, the rule breached, evidence considered and action taken."
+            },
+            {
+                "id": "SR 08.3",
+                "title": "No Misleading Records",
+                "text": "Do not exaggerate, omit important facts or deliberately write a report in a misleading way."
+            }
+        ]
+    },
+    {
+        "section": "09",
+        "title": "Staff Complaints",
+        "description": "Union Roleplay staff requirements covering staff complaints.",
+        "rules": [
+            {
+                "id": "SR 09.1",
+                "title": "Take Complaints Seriously",
+                "text": "Complaints about staff must be handled impartially and must not be dismissed simply because they concern another staff member."
+            },
+            {
+                "id": "SR 09.2",
+                "title": "No Retaliation",
+                "text": "Staff must not retaliate against a member or colleague for submitting a genuine complaint."
+            },
+            {
+                "id": "SR 09.3",
+                "title": "Independent Review",
+                "text": "A staff member directly involved in the complaint must not make the final decision on that complaint."
+            }
+        ]
+    },
+    {
+        "section": "10",
+        "title": "Staff Reports",
+        "description": "Union Roleplay staff requirements covering staff reports.",
+        "rules": [
+            {
+                "id": "SR 10.1",
+                "title": "Report Serious Concerns",
+                "text": "Serious misconduct, abuse of powers, leaking, dishonesty or other major staff concerns must be reported through the correct internal route."
+            },
+            {
+                "id": "SR 10.2",
+                "title": "Good Faith Reports",
+                "text": "Staff reports must be honest and made in good faith. Malicious or fabricated reports may result in discipline."
+            }
+        ]
+    },
+    {
+        "section": "11",
+        "title": "Escalation Procedures",
+        "description": "Union Roleplay staff requirements covering escalation procedures.",
+        "rules": [
+            {
+                "id": "SR 11.1",
+                "title": "Know Your Authority",
+                "text": "If an issue exceeds your rank, permissions or experience, escalate it rather than guessing or exceeding your authority."
+            },
+            {
+                "id": "SR 11.2",
+                "title": "Urgent Escalation",
+                "text": "Security incidents, major exploitation, serious staff misconduct or sensitive matters should be escalated without unnecessary delay."
+            }
+        ]
+    },
+    {
+        "section": "12",
+        "title": "Chain of Command",
+        "description": "Union Roleplay staff requirements covering chain of command.",
+        "rules": [
+            {
+                "id": "SR 12.1",
+                "title": "Normal Chain",
+                "text": "Trial Moderator → Moderator → Admin → Staff Manager → Management → Director."
+            },
+            {
+                "id": "SR 12.2",
+                "title": "Do Not Bypass Without Reason",
+                "text": "Routine matters should follow the chain of command. Bypassing it is acceptable where there is a genuine conflict of interest or urgent serious issue."
+            }
+        ]
+    },
+    {
+        "section": "13",
+        "title": "Staff Communication",
+        "description": "Union Roleplay staff requirements covering staff communication.",
+        "rules": [
+            {
+                "id": "SR 13.1",
+                "title": "Use Correct Channels",
+                "text": "Important staff information must be shared in the correct internal channels."
+            },
+            {
+                "id": "SR 13.2",
+                "title": "Clear Handovers",
+                "text": "When passing a ticket, report or investigation to another staff member, provide enough context for them to continue properly."
+            },
+            {
+                "id": "SR 13.3",
+                "title": "No Staff Gossip",
+                "text": "Staff channels must not be used for rumours, personal attacks or unnecessary discussion of private information."
+            }
+        ]
+    },
+    {
+        "section": "14",
+        "title": "Confidentiality",
+        "description": "Union Roleplay staff requirements covering confidentiality.",
+        "rules": [
+            {
+                "id": "SR 14.1",
+                "title": "Internal Information",
+                "text": "Tickets, reports, applications, internal notes, disciplinary records and management discussions are confidential unless authorised for release."
+            },
+            {
+                "id": "SR 14.2",
+                "title": "Personal Information",
+                "text": "Access or share personal information only where there is a legitimate staff reason."
+            },
+            {
+                "id": "SR 14.3",
+                "title": "No Leaking",
+                "text": "Leaking staff screenshots, documents, messages, unreleased content or private information is a serious staff breach."
+            }
+        ]
+    },
+    {
+        "section": "15",
+        "title": "Conflict of Interest",
+        "description": "Union Roleplay staff requirements covering conflict of interest.",
+        "rules": [
+            {
+                "id": "SR 15.1",
+                "title": "Declare Conflicts",
+                "text": "If you are personally involved or closely connected to a party involved, disclose the conflict."
+            },
+            {
+                "id": "SR 15.2",
+                "title": "Hand Over Where Possible",
+                "text": "Where impartiality could reasonably be questioned, hand the matter to another suitable staff member."
+            },
+            {
+                "id": "SR 15.3",
+                "title": "Do Not Review Yourself",
+                "text": "You must not investigate or make the final decision on a complaint about your own conduct."
+            }
+        ]
+    },
+    {
+        "section": "16",
+        "title": "Favouritism",
+        "description": "Union Roleplay staff requirements covering favouritism.",
+        "rules": [
+            {
+                "id": "SR 16.1",
+                "title": "No Preferential Treatment",
+                "text": "Friends, gangs, departments, businesses or long-standing members must not receive special treatment because of their relationship with staff."
+            },
+            {
+                "id": "SR 16.2",
+                "title": "Consistent Enforcement",
+                "text": "Similar cases should receive reasonably consistent treatment while still taking evidence, severity and history into account."
+            }
+        ]
+    },
+    {
+        "section": "17",
+        "title": "In Game Staff Conduct",
+        "description": "Union Roleplay staff requirements covering in game staff conduct.",
+        "rules": [
+            {
+                "id": "SR 17.1",
+                "title": "Remain In Character",
+                "text": "When playing normally, staff should remain in character and avoid unnecessary staff intervention."
+            },
+            {
+                "id": "SR 17.2",
+                "title": "Separate Staff Knowledge",
+                "text": "Information learned through staff tools, tickets, reports or spectating must never be used by your character."
+            },
+            {
+                "id": "SR 17.3",
+                "title": "No Roleplay Advantage",
+                "text": "Staff status must not be used to influence police, business, criminal or civilian roleplay outcomes."
+            }
+        ]
+    },
+    {
+        "section": "18",
+        "title": "Staff Commands",
+        "description": "Union Roleplay staff requirements covering staff commands.",
+        "rules": [
+            {
+                "id": "SR 18.1",
+                "title": "Legitimate Command Use",
+                "text": "Noclip, teleport, spectate, revive, heal, spawning and other staff commands are for legitimate staff duties or approved testing only."
+            },
+            {
+                "id": "SR 18.2",
+                "title": "No Convenience Use",
+                "text": "Do not use staff commands to avoid normal gameplay, costs, travel, injuries or roleplay consequences."
+            },
+            {
+                "id": "SR 18.3",
+                "title": "Command Accountability",
+                "text": "Assume staff command use may be logged and reviewed by senior staff."
+            }
+        ]
+    },
+    {
+        "section": "19",
+        "title": "Staff Punishments",
+        "description": "Union Roleplay staff requirements covering staff punishments.",
+        "rules": [
+            {
+                "id": "SR 19.1",
+                "title": "Stay Within Authority",
+                "text": "Only issue punishments that fall within your rank and permissions."
+            },
+            {
+                "id": "SR 19.2",
+                "title": "Explain the Reason",
+                "text": "Formal punishment should have a clear recorded reason and should be explained to the player where appropriate."
+            },
+            {
+                "id": "SR 19.3",
+                "title": "No Personal Punishments",
+                "text": "Never punish someone out of anger, retaliation or personal disagreement."
+            }
+        ]
+    },
+    {
+        "section": "20",
+        "title": "Evidence Handling",
+        "description": "Union Roleplay staff requirements covering evidence handling.",
+        "rules": [
+            {
+                "id": "SR 20.1",
+                "title": "Review Relevant Evidence",
+                "text": "Review the available relevant evidence before making serious disciplinary decisions."
+            },
+            {
+                "id": "SR 20.2",
+                "title": "Preserve Integrity",
+                "text": "Do not alter, crop or present evidence in a way that deliberately changes its meaning."
+            },
+            {
+                "id": "SR 20.3",
+                "title": "Sensitive Evidence",
+                "text": "Sensitive evidence must remain within authorised staff systems and channels."
+            }
+        ]
+    },
+    {
+        "section": "21",
+        "title": "Staff Meetings",
+        "description": "Union Roleplay staff requirements covering staff meetings.",
+        "rules": [
+            {
+                "id": "SR 21.1",
+                "title": "Attendance",
+                "text": "Staff should attend required meetings where reasonably possible or notify Staff Management if they cannot attend."
+            },
+            {
+                "id": "SR 21.2",
+                "title": "Meeting Conduct",
+                "text": "Remain professional, allow others to speak and keep discussion focused."
+            },
+            {
+                "id": "SR 21.3",
+                "title": "Follow Official Outcomes",
+                "text": "Staff are expected to follow reasonable actions and policy changes formally communicated after meetings."
+            }
+        ]
+    },
+    {
+        "section": "22",
+        "title": "Staff Training",
+        "description": "Union Roleplay staff requirements covering staff training.",
+        "rules": [
+            {
+                "id": "SR 22.1",
+                "title": "Mandatory Training",
+                "text": "Complete any training required for your rank or responsibilities."
+            },
+            {
+                "id": "SR 22.2",
+                "title": "Ask When Unsure",
+                "text": "Ask for guidance instead of guessing where you do not understand a staff process."
+            },
+            {
+                "id": "SR 22.3",
+                "title": "Retraining",
+                "text": "Staff may be required to complete retraining after mistakes, inactivity or policy changes."
+            }
+        ]
+    },
+    {
+        "section": "23",
+        "title": "Promotions",
+        "description": "Union Roleplay staff requirements covering promotions.",
+        "rules": [
+            {
+                "id": "SR 23.1",
+                "title": "Merit Based",
+                "text": "Promotions are based on conduct, performance, judgement, activity, reliability and staff-team needs."
+            },
+            {
+                "id": "SR 23.2",
+                "title": "No Guaranteed Promotion",
+                "text": "Time served alone does not guarantee promotion."
+            },
+            {
+                "id": "SR 23.3",
+                "title": "Approval",
+                "text": "Promotions must be authorised through the appropriate Staff Management or Management process."
+            }
+        ]
+    },
+    {
+        "section": "24",
+        "title": "Demotions",
+        "description": "Union Roleplay staff requirements covering demotions.",
+        "rules": [
+            {
+                "id": "SR 24.1",
+                "title": "Reasons for Demotion",
+                "text": "Demotion may be used for repeated poor performance, policy breaches, inactivity, misuse of permissions or inability to meet rank responsibilities."
+            },
+            {
+                "id": "SR 24.2",
+                "title": "Recorded Decision",
+                "text": "Formal demotions should be documented with a clear reason and suitable senior approval."
+            }
+        ]
+    },
+    {
+        "section": "25",
+        "title": "Staff Strikes and Warnings",
+        "description": "Union Roleplay staff requirements covering staff strikes and warnings.",
+        "rules": [
+            {
+                "id": "SR 25.1",
+                "title": "Warnings",
+                "text": "Warnings may be used for minor concerns, coaching issues or first-time lower-level breaches."
+            },
+            {
+                "id": "SR 25.2",
+                "title": "Strikes",
+                "text": "Strikes may be issued for more serious or repeated breaches and form part of the staff member's disciplinary history."
+            },
+            {
+                "id": "SR 25.3",
+                "title": "Repeated Breaches",
+                "text": "Repeated warnings or strikes may lead to retraining, demotion, suspension or removal."
+            }
+        ]
+    },
+    {
+        "section": "26",
+        "title": "Staff Suspensions",
+        "description": "Union Roleplay staff requirements covering staff suspensions.",
+        "rules": [
+            {
+                "id": "SR 26.1",
+                "title": "Temporary Suspension",
+                "text": "A staff member may be temporarily suspended while serious concerns are investigated or where continued access presents a risk."
+            },
+            {
+                "id": "SR 26.2",
+                "title": "Suspension Restrictions",
+                "text": "A suspended staff member must not attempt to use restricted staff permissions or interfere with the investigation."
+            }
+        ]
+    },
+    {
+        "section": "27",
+        "title": "Resignations",
+        "description": "Union Roleplay staff requirements covering resignations.",
+        "rules": [
+            {
+                "id": "SR 27.1",
+                "title": "Notify Senior Staff",
+                "text": "Staff wishing to resign should notify Staff Management or Management through the correct route."
+            },
+            {
+                "id": "SR 27.2",
+                "title": "Handover",
+                "text": "Where possible, outstanding tickets, reports and responsibilities should be handed over."
+            },
+            {
+                "id": "SR 27.3",
+                "title": "Access Removal",
+                "text": "Staff access may be removed immediately or at the confirmed end of service."
+            }
+        ]
+    },
+    {
+        "section": "28",
+        "title": "Staff Removal",
+        "description": "Union Roleplay staff requirements covering staff removal.",
+        "rules": [
+            {
+                "id": "SR 28.1",
+                "title": "Grounds for Removal",
+                "text": "Serious misconduct, repeated policy breaches, abuse of powers, leaking, dishonesty or prolonged inactivity may result in removal."
+            },
+            {
+                "id": "SR 28.2",
+                "title": "Immediate Removal",
+                "text": "A serious breach may justify immediate removal where continued access presents a risk to the community or staff systems."
+            }
+        ]
+    },
+    {
+        "section": "29",
+        "title": "Returning Staff",
+        "description": "Union Roleplay staff requirements covering returning staff.",
+        "rules": [
+            {
+                "id": "SR 29.1",
+                "title": "No Automatic Rank Return",
+                "text": "Former staff are not automatically entitled to their previous rank."
+            },
+            {
+                "id": "SR 29.2",
+                "title": "Return Review",
+                "text": "Previous performance, reason for leaving, time away and current staffing needs may be considered."
+            },
+            {
+                "id": "SR 29.3",
+                "title": "Retraining or Lower Rank",
+                "text": "Returning staff may be required to retrain or return at a lower rank."
+            }
+        ]
+    },
+    {
+        "section": "30",
+        "title": "Management Responsibilities",
+        "description": "Union Roleplay staff requirements covering management responsibilities.",
+        "rules": [
+            {
+                "id": "SR 30.1",
+                "title": "Support the Staff Team",
+                "text": "Management and Staff Management must provide direction, training, escalation support and fair oversight."
+            },
+            {
+                "id": "SR 30.2",
+                "title": "Consistent Standards",
+                "text": "Senior staff must apply policy consistently and must not protect staff members from legitimate accountability."
+            },
+            {
+                "id": "SR 30.3",
+                "title": "Review Serious Matters",
+                "text": "Serious staff complaints, suspensions, removals and abuse allegations require appropriate senior review."
+            }
+        ]
+    },
+    {
+        "section": "31",
+        "title": "Abuse of Staff Powers",
+        "description": "Union Roleplay staff requirements covering abuse of staff powers.",
+        "rules": [
+            {
+                "id": "SR 31.1",
+                "title": "Deliberate Abuse",
+                "text": "Using staff powers for personal gain, retaliation, harassment, leaking information or influencing roleplay is a serious breach."
+            },
+            {
+                "id": "SR 31.2",
+                "title": "Possible Outcome",
+                "text": "Serious abuse may result in immediate suspension, demotion, staff removal and additional community sanctions where appropriate."
+            }
+        ]
+    },
+    {
+        "section": "32",
+        "title": "Social Media and Public Conduct",
+        "description": "Union Roleplay staff requirements covering social media and public conduct.",
+        "rules": [
+            {
+                "id": "SR 32.1",
+                "title": "Public Representation",
+                "text": "Staff should avoid public conduct that seriously damages trust in Union Roleplay or the staff team."
+            },
+            {
+                "id": "SR 32.2",
+                "title": "No Internal Leaks",
+                "text": "Internal disputes, confidential screenshots, disciplinary matters and unreleased information must not be posted publicly."
+            },
+            {
+                "id": "SR 32.3",
+                "title": "Unofficial Statements",
+                "text": "Do not present personal opinions or unofficial statements as official Union Roleplay policy."
+            }
+        ]
+    },
+    {
+        "section": "33",
+        "title": "Staff Discord Conduct",
+        "description": "Union Roleplay staff requirements covering staff discord conduct.",
+        "rules": [
+            {
+                "id": "SR 33.1",
+                "title": "Correct Channels",
+                "text": "Use the correct staff channels for reports, discussion, announcements and escalation."
+            },
+            {
+                "id": "SR 33.2",
+                "title": "Professional Internal Conduct",
+                "text": "Staff Discord channels remain subject to conduct standards. Harassment and persistent hostility are not acceptable."
+            },
+            {
+                "id": "SR 33.3",
+                "title": "Restricted Content",
+                "text": "Do not copy or share content from restricted staff channels with unauthorised people."
+            }
+        ]
+    },
+    {
+        "section": "34",
+        "title": "Staff Inactivity",
+        "description": "Union Roleplay staff requirements covering staff inactivity.",
+        "rules": [
+            {
+                "id": "SR 34.1",
+                "title": "Unexplained Inactivity",
+                "text": "Extended unexplained inactivity may result in contact, warning, demotion or removal."
+            },
+            {
+                "id": "SR 34.2",
+                "title": "Use LOA",
+                "text": "Expected inactivity should be covered by an LOA rather than disappearing without communication."
+            },
+            {
+                "id": "SR 34.3",
+                "title": "Return Review",
+                "text": "Following prolonged inactivity, Staff Management may require retraining or a gradual return to duties."
+            }
+        ]
+    },
+    {
+        "section": "35",
+        "title": "Staff LOA Abuse",
+        "description": "Union Roleplay staff requirements covering staff loa abuse.",
+        "rules": [
+            {
+                "id": "SR 35.1",
+                "title": "No False LOA",
+                "text": "LOA must not be used to avoid disciplinary action, activity expectations or normal staff responsibilities."
+            },
+            {
+                "id": "SR 35.2",
+                "title": "Repeated Patterns",
+                "text": "Repeated or excessive LOA use may be reviewed if it prevents the staff member from reasonably fulfilling the role."
+            },
+            {
+                "id": "SR 35.3",
+                "title": "Honest Extensions",
+                "text": "Request an extension where genuinely needed rather than allowing an LOA to expire while remaining inactive."
+            }
+        ]
+    },
+    {
+        "section": "36",
+        "title": "Staff Accountability",
+        "description": "Union Roleplay staff requirements covering staff accountability.",
+        "rules": [
+            {
+                "id": "SR 36.1",
+                "title": "Own Your Decisions",
+                "text": "Staff are accountable for actions taken through their account and should be able to explain significant staff decisions."
+            },
+            {
+                "id": "SR 36.2",
+                "title": "Correct Mistakes",
+                "text": "A genuine mistake should be acknowledged and corrected where possible. Concealing a mistake may result in stronger action."
+            },
+            {
+                "id": "SR 36.3",
+                "title": "Senior Staff Are Accountable",
+                "text": "Management and senior staff are also subject to staff rules and disciplinary review."
+            }
+        ]
+    },
+    {
+        "section": "37",
+        "title": "Policy Breaches",
+        "description": "Union Roleplay staff requirements covering policy breaches.",
+        "rules": [
+            {
+                "id": "SR 37.1",
+                "title": "Available Outcomes",
+                "text": "Breaches may result in coaching, warning, strike, retraining, demotion, suspension or staff removal depending on severity and history."
+            },
+            {
+                "id": "SR 37.2",
+                "title": "Serious Breaches",
+                "text": "Abuse of powers, leaking, evidence manipulation, dishonesty or serious misconduct may justify immediate suspension or removal."
+            }
+        ]
+    },
+    {
+        "section": "38",
+        "title": "Policy Updates and Changes",
+        "description": "Union Roleplay staff requirements covering policy updates and changes.",
+        "rules": [
+            {
+                "id": "SR 38.1",
+                "title": "Rules Can Be Updated",
+                "text": "Union Roleplay may update staff rules and procedures as the server and staff systems develop."
+            },
+            {
+                "id": "SR 38.2",
+                "title": "Staff Responsibility",
+                "text": "Staff are responsible for keeping themselves up to date with the current Staff Rules & Regulations."
+            },
+            {
+                "id": "SR 38.3",
+                "title": "Current Version",
+                "text": "The version shown in the Staff Panel is the current working version unless Management formally announces otherwise."
             }
         ]
     }
@@ -8395,48 +9050,185 @@ document.addEventListener(
 /* ==========================================================
    STAFF POLICY + LEAVE OF ABSENCE
 ========================================================== */
-const STAFF_POLICY = [{"number": "01", "title": "General Staff Expectations", "text": "Staff are expected to represent Union Roleplay professionally, use good judgement, follow policy and support the quality of the community."}, {"number": "02", "title": "Staff Conduct", "text": "Staff must remain respectful, impartial and professional. Public arguments, intimidation, hostility and misuse of rank are not acceptable."}, {"number": "03", "title": "Staff Activity", "text": "Staff should remain reasonably active and contribute to tickets, reports and moderation. Sustained inactivity may trigger an activity review."}, {"number": "04", "title": "Staff Permissions and Powers", "text": "Administrative permissions are for legitimate staff duties or approved testing only. They must never be used for personal advantage."}, {"number": "05", "title": "Ticket Handling", "text": "Use the correct ticket system, claim only matters you can handle, respond clearly, escalate when needed and close tickets only after the issue is properly dealt with."}, {"number": "06", "title": "Leave of Absence", "text": "Submit an LOA when you expect to be unable to meet activity requirements. Requests should be accurate and, where possible, submitted before the absence begins."}, {"number": "07", "title": "Disciplinary Procedure", "text": "Disciplinary decisions must be evidence-based, fair, proportionate and within the staff member’s authority."}, {"number": "08", "title": "Disciplinary Reports", "text": "Formal disciplinary action must be recorded accurately with the rule or policy breached, outcome and relevant evidence."}, {"number": "09", "title": "Staff Complaints", "text": "Complaints about staff must be taken seriously, handled impartially and escalated where the reviewing staff member has a conflict."}, {"number": "10", "title": "Staff Reports", "text": "Serious misconduct, abuse of powers, confidentiality breaches or other major concerns should be reported through the proper internal route."}, {"number": "11", "title": "Escalation Procedures", "text": "If an issue exceeds your authority, permissions or experience, escalate it rather than guessing or exceeding your rank."}, {"number": "12", "title": "Chain of Command", "text": "Trial Moderator → Moderator/Admin → Staff Manager → Management → Director. Bypass the normal chain only where there is a genuine conflict or urgent serious issue."}, {"number": "13", "title": "Staff Communication", "text": "Use the correct internal channels, provide clear handovers and keep important staff information accessible to those who need it."}, {"number": "14", "title": "Confidentiality", "text": "Tickets, reports, applications, staff notes, disciplinary records, private information and management discussions must remain confidential unless authorised."}, {"number": "15", "title": "Conflict of Interest", "text": "Declare personal involvement or other conflicts and hand the matter to another staff member where impartiality could reasonably be questioned."}, {"number": "16", "title": "Favouritism", "text": "Friends, gangs, departments, businesses and long-standing members must not receive preferential treatment because of their relationship with staff."}, {"number": "17", "title": "In Game Staff Conduct", "text": "While playing normally, remain in character. Never use staff-only knowledge or status to influence roleplay outcomes."}, {"number": "18", "title": "Staff Commands", "text": "Noclip, teleport, spectate, revive, heal, spawning and other staff commands may only be used for legitimate duties or approved testing."}, {"number": "19", "title": "Staff Punishments", "text": "Issue only punishments within your authority, explain the reason where appropriate and never punish from anger, retaliation or personal disagreement."}, {"number": "20", "title": "Evidence Handling", "text": "Review relevant evidence, preserve its integrity and keep sensitive evidence within authorised staff systems."}, {"number": "21", "title": "Staff Meetings", "text": "Attend required meetings where reasonably possible, remain professional and follow official actions or policy changes communicated there."}, {"number": "22", "title": "Staff Training", "text": "Complete mandatory training, ask for guidance when unsure and complete retraining where required."}, {"number": "23", "title": "Promotions", "text": "Promotions are based on conduct, performance, judgement, activity, reliability and staff-team needs. Time served alone does not guarantee promotion."}, {"number": "24", "title": "Demotions", "text": "Demotion may follow repeated poor performance, policy breaches, inactivity, misuse of permissions or inability to meet the responsibilities of the rank."}, {"number": "25", "title": "Staff Strikes and Warnings", "text": "Warnings may address minor concerns. Strikes are for more serious or repeated breaches and may contribute to demotion, suspension or removal."}, {"number": "26", "title": "Staff Suspensions", "text": "A staff member may be temporarily suspended while serious concerns are investigated or when continued access presents a risk."}, {"number": "27", "title": "Resignations", "text": "Notify Staff Management or Management, hand over outstanding responsibilities where possible and expect staff access to be removed at the end of service."}, {"number": "28", "title": "Staff Removal", "text": "Serious misconduct, repeated policy breaches, abuse of powers, leaking, dishonesty or prolonged inactivity may result in staff removal."}, {"number": "29", "title": "Returning Staff", "text": "Former staff are not automatically entitled to their previous rank. Previous conduct, time away, training needs and current staffing requirements may be considered."}, {"number": "30", "title": "Management Responsibilities", "text": "Senior staff must provide direction, training, escalation support, fair oversight and consistent accountability across the staff team."}, {"number": "31", "title": "Abuse of Staff Powers", "text": "Deliberate use of staff powers for personal gain, retaliation, harassment, leaking information or influencing roleplay is a serious policy breach."}, {"number": "32", "title": "Social Media and Public Conduct", "text": "Staff must not publicly leak internal matters or seriously undermine trust in the staff team while presenting themselves as Union staff."}, {"number": "33", "title": "Staff Discord Conduct", "text": "Use correct staff channels, remain professional and never share restricted staff content with unauthorised members."}, {"number": "34", "title": "Staff Inactivity", "text": "Extended unexplained inactivity may result in contact, warning, demotion or removal. Expected inactivity should be covered by an LOA."}, {"number": "35", "title": "Staff LOA Abuse", "text": "LOA must not be used to avoid discipline or repeatedly avoid staff responsibilities. Extensions should be requested honestly where required."}, {"number": "36", "title": "Staff Accountability", "text": "Staff are accountable for actions taken through their account. Mistakes should be corrected rather than concealed, and senior ranks remain subject to policy."}, {"number": "37", "title": "Policy Breaches", "text": "Breaches may result in coaching, warning, strike, retraining, demotion, suspension or removal depending on seriousness and history."}, {"number": "38", "title": "Policy Updates and Changes", "text": "The policy may be updated as Union develops. Staff are responsible for keeping themselves up to date with the current version shown in the Staff Panel."}];
 
-
-function ensureStaffPolicyAndLoaUI(){
+function ensureStaffLoaUI(){
     const heading=[...document.querySelectorAll('.staff-nav-heading')].find(h=>h.textContent.trim().toUpperCase()==='MANAGEMENT');
     const group=heading?.closest('.staff-nav-group');
-    if(group && !document.getElementById('staffPolicyNav')){
-        const b=document.createElement('button'); b.type='button'; b.className='staff-nav-item'; b.id='staffPolicyNav';
-        b.innerHTML='<span class="staff-nav-content"><span class="staff-nav-icon">SP</span><span>Staff Policy</span></span>'; group.appendChild(b);
-    }
+
     if(group && !document.getElementById('staffLoaNav')){
-        const b=document.createElement('button'); b.type='button'; b.className='staff-nav-item'; b.id='staffLoaNav';
-        b.innerHTML='<span class="staff-nav-content"><span class="staff-nav-icon">LO</span><span>LOA Requests</span></span>'; group.appendChild(b);
+        const b=document.createElement('button');
+        b.type='button';
+        b.className='staff-nav-item';
+        b.id='staffLoaNav';
+        b.innerHTML='<span class="staff-nav-content"><span class="staff-nav-icon">LO</span><span>Leave of Absence</span></span>';
+        group.appendChild(b);
     }
-    const panel=document.getElementById('staffPanel'); if(!panel)return;
-    if(!document.getElementById('staffPolicyView')){
-        const v=document.createElement('section'); v.id='staffPolicyView'; v.hidden=true; v.className='staff-policy-view';
-        v.innerHTML=`<div class="staff-policy-hero"><div><span>INTERNAL STAFF POLICY</span><h2>Staff Policy</h2><p>The official day-to-day standards and procedures for every Union Roleplay staff rank.</p></div><div class="staff-policy-current"><span></span>CURRENT POLICY</div></div>
-        <div class="staff-policy-toolbar"><div class="staff-policy-search"><span>⌕</span><input id="staffPolicySearch" type="search" placeholder="Search policy, tickets, LOA, strikes, powers..." autocomplete="off"></div><button type="button" class="discipline-secondary-button" id="staffPolicyExpandAll">Expand All</button></div>
-        <div id="staffPolicyContent" class="staff-policy-content"></div><div id="staffPolicyNoResults" class="member-management-empty" hidden><h3>No matching policy</h3><p>Try another keyword.</p></div>`; panel.appendChild(v);
-    }
-    if(!document.getElementById('staffLoaView')){
-        const v=document.createElement('section'); v.id='staffLoaView'; v.hidden=true; v.className='staff-loa-view';
-        v.innerHTML=`<div class="staff-policy-hero"><div><span>STAFF ACTIVITY</span><h2>Leave of Absence</h2><p>Submit and track an LOA when you cannot meet normal staff activity expectations.</p></div><div class="staff-policy-current"><span></span>STAFF SYSTEM</div></div>
-        <div class="staff-loa-layout"><section class="staff-dashboard-panel"><div class="staff-panel-header"><div><span>NEW REQUEST</span><h2>Request LOA</h2><p>Give accurate dates and a clear reason. You do not need to provide unnecessary private information.</p></div></div><div class="staff-panel-divider"></div>
-        <form id="staffLoaForm"><div class="discipline-field-grid"><div class="discipline-field"><label>Start Date</label><input type="date" id="staffLoaStart" required></div><div class="discipline-field"><label>End Date</label><input type="date" id="staffLoaEnd" required></div></div><div class="discipline-field"><label>Reason</label><textarea id="staffLoaReason" rows="6" maxlength="2500" required></textarea></div><div class="discipline-field"><label>Additional Notes</label><textarea id="staffLoaNotes" rows="4" maxlength="2500"></textarea></div><div class="discipline-confirmation"><label><input type="checkbox" required><span>I confirm this LOA request is accurate.</span></label></div><div class="discipline-form-actions"><button type="reset" class="discipline-secondary-button">Clear</button><button type="submit" class="btn primary" id="staffLoaSubmit">Submit LOA Request</button></div><div id="staffLoaMessage" class="discipline-form-message" hidden></div></form></section>
-        <section class="staff-dashboard-panel"><div class="staff-panel-header"><div><span>MY REQUESTS</span><h2>LOA History</h2></div><button type="button" class="discipline-secondary-button" id="staffLoaRefresh">Refresh</button></div><div class="staff-panel-divider"></div><div id="staffLoaHistory"></div></section></div>
-        <section class="staff-dashboard-panel staff-loa-management" id="staffLoaManagement" hidden><div class="staff-panel-header"><div><span>STAFF MANAGEMENT</span><h2>Review LOA Requests</h2><p>Staff Manager, Management and Director can approve or decline requests.</p></div></div><div class="staff-panel-divider"></div><div id="staffLoaManagementList"></div></section>`; panel.appendChild(v);
-    }
+
+    const panel=document.getElementById('staffPanel');
+    if(!panel || document.getElementById('staffLoaView')) return;
+
+    const v=document.createElement('section');
+    v.id='staffLoaView';
+    v.hidden=true;
+    v.className='staff-loa-view';
+
+    v.innerHTML=`
+        <div class="staff-loa-premium-head">
+            <div>
+                <span>STAFF ACTIVITY</span>
+                <h2>Leave of Absence</h2>
+                <p>Request time away from normal staff activity expectations and track your request status.</p>
+            </div>
+            <div class="staff-loa-secure"><span></span>CONFIDENTIAL STAFF FORM</div>
+        </div>
+
+        <div class="staff-loa-layout">
+            <section class="staff-dashboard-panel staff-loa-request-panel">
+                <div class="staff-panel-header">
+                    <div>
+                        <span>NEW REQUEST</span>
+                        <h2>Request LOA</h2>
+                        <p>Give accurate dates and a clear reason. Do not include unnecessary private information.</p>
+                    </div>
+                    <div class="staff-panel-reference">
+                        <span>VISIBLE TO</span>
+                        <strong>Management Only</strong>
+                    </div>
+                </div>
+                <div class="staff-panel-divider"></div>
+
+                <form id="staffLoaForm">
+                    <div class="discipline-field-grid">
+                        <div class="discipline-field">
+                            <label for="staffLoaStart">Start Date</label>
+                            <input type="date" id="staffLoaStart" required>
+                        </div>
+                        <div class="discipline-field">
+                            <label for="staffLoaEnd">End Date</label>
+                            <input type="date" id="staffLoaEnd" required>
+                        </div>
+                    </div>
+
+                    <div class="discipline-field">
+                        <label for="staffLoaReason">Reason</label>
+                        <textarea id="staffLoaReason" rows="6" maxlength="2500" placeholder="Explain why you require leave..." required></textarea>
+                    </div>
+
+                    <div class="discipline-field">
+                        <label for="staffLoaNotes">Additional Notes</label>
+                        <textarea id="staffLoaNotes" rows="4" maxlength="2500" placeholder="Optional information for Management..."></textarea>
+                    </div>
+
+                    <div class="discipline-confirmation">
+                        <label>
+                            <input type="checkbox" required>
+                            <span>I confirm the dates and information in this request are accurate.</span>
+                        </label>
+                    </div>
+
+                    <div class="discipline-form-actions">
+                        <button type="reset" class="discipline-secondary-button">Clear</button>
+                        <button type="submit" class="btn primary" id="staffLoaSubmit">Submit LOA Request</button>
+                    </div>
+                    <div id="staffLoaMessage" class="discipline-form-message" hidden></div>
+                </form>
+            </section>
+
+            <section class="staff-dashboard-panel">
+                <div class="staff-panel-header">
+                    <div>
+                        <span>MY REQUESTS</span>
+                        <h2>LOA History</h2>
+                        <p>Only you and Management can access these requests.</p>
+                    </div>
+                    <button type="button" class="discipline-secondary-button" id="staffLoaRefresh">Refresh</button>
+                </div>
+                <div class="staff-panel-divider"></div>
+                <div id="staffLoaHistory"></div>
+            </section>
+        </div>
+
+        <section class="staff-dashboard-panel staff-loa-management" id="staffLoaManagement" hidden>
+            <div class="staff-panel-header">
+                <div>
+                    <span>MANAGEMENT ONLY</span>
+                    <h2>Review Staff LOA Requests</h2>
+                    <p>Submitted LOA forms are restricted to Management and Director.</p>
+                </div>
+            </div>
+            <div class="staff-panel-divider"></div>
+            <div id="staffLoaManagementList"></div>
+        </section>
+    `;
+
+    panel.appendChild(v);
 }
-function renderStaffPolicy(q=''){
-    const t=document.getElementById('staffPolicyContent'), empty=document.getElementById('staffPolicyNoResults'); if(!t)return;
-    q=ruleSearchNormalize(q); const toks=ruleSearchTokens(q); let shown=0;
-    t.innerHTML=STAFF_POLICY.map(x=>{const hay=ruleSearchNormalize(`${x.number} ${x.title} ${x.text}`); if(q && !(hay.includes(q)||toks.every(k=>hay.includes(k))))return ''; shown++; return `<details class="staff-policy-section"><summary><span class="staff-policy-number">${escapeHtml(x.number)}</span><strong>${escapeHtml(x.title)}</strong><span class="staff-policy-toggle">+</span></summary><div class="staff-policy-body"><p>${escapeHtml(x.text)}</p><button type="button" class="discipline-secondary-button" data-copy-policy="${escapeHtml(x.number)}">Copy Policy</button></div></details>`}).join('');
-    if(empty)empty.hidden=shown>0;
-    t.querySelectorAll('[data-copy-policy]').forEach(b=>b.addEventListener('click',()=>{const x=STAFF_POLICY.find(v=>v.number===b.dataset.copyPolicy); if(x)copyRuleText(`${x.number} — ${x.title}\n${x.text}`,b)}));
-}
-function showStaffPolicy(){hideAllViews(); const v=document.getElementById('staffPolicyView'); if(v)v.hidden=false; const t=document.getElementById('staffPageTitle'),d=document.getElementById('staffPageDescription'); if(t)t.textContent='Staff Policy'; if(d)d.textContent='Official staff procedures, expectations and accountability standards.'; setTopSearch('',false); renderStaffPolicy(document.getElementById('staffPolicySearch')?.value||'');}
+
 function loaDate(v){if(!v)return 'Unknown'; const d=new Date(v+'T12:00:00'); return Number.isNaN(d.getTime())?v:d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});}
 function loaClass(v){v=String(v||'').toLowerCase(); return ['approved','declined','cancelled'].includes(v)?v:'pending';}
-async function loadMyLoa(){const t=document.getElementById('staffLoaHistory'); if(!t)return; t.innerHTML='<div class="member-management-empty"><h3>Loading...</h3></div>'; try{const d=await staffFetch('/api/staff/loa/me'), a=Array.isArray(d.requests)?d.requests:[]; if(!a.length){t.innerHTML='<div class="member-management-empty"><h3>No LOA requests</h3><p>Your requests will appear here.</p></div>';return;} t.innerHTML=a.map(x=>`<article class="staff-loa-card"><div class="staff-loa-card-head"><div><span>${escapeHtml(x.reference||'#'+x.id)}</span><strong>${loaDate(x.start_date)} → ${loaDate(x.end_date)}</strong></div><span class="staff-loa-status ${loaClass(x.status)}">${escapeHtml(x.status)}</span></div><p>${escapeHtml(x.reason||'')}</p>${x.review_response?`<div class="staff-loa-response"><span>RESPONSE</span><p>${escapeHtml(x.review_response)}</p></div>`:''}${['Pending','Approved'].includes(x.status)?`<button type="button" class="discipline-secondary-button" data-cancel-loa="${x.id}">Cancel Request</button>`:''}</article>`).join(''); t.querySelectorAll('[data-cancel-loa]').forEach(b=>b.addEventListener('click',async()=>{if(!confirm('Cancel this LOA request?'))return; await staffFetch(`/api/staff/loa/${b.dataset.cancelLoa}/cancel`,{method:'POST',body:'{}'}); await loadMyLoa(); if(hasStaffPermission('staff_oversight'))await loadLoaManagement();}));}catch(e){t.innerHTML=`<div class="member-management-empty"><h3>Unable to load LOA</h3><p>${escapeHtml(e.message||'Please try again.')}</p></div>`;}}
-async function loadLoaManagement(){const s=document.getElementById('staffLoaManagement'),t=document.getElementById('staffLoaManagementList'); if(!s||!t)return; if(!hasStaffPermission('staff_oversight')){s.hidden=true;return;} s.hidden=false; try{const d=await staffFetch('/api/staff/loa/manage'),a=Array.isArray(d.requests)?d.requests:[]; t.innerHTML=a.length?a.map(x=>`<article class="staff-loa-card"><div class="staff-loa-card-head"><div><span>${escapeHtml(x.reference||'#'+x.id)}</span><strong>${escapeHtml(x.staff_name||'Union Staff')} · ${escapeHtml(x.staff_role||'Staff')}</strong><small>${loaDate(x.start_date)} → ${loaDate(x.end_date)}</small></div><span class="staff-loa-status ${loaClass(x.status)}">${escapeHtml(x.status)}</span></div><p>${escapeHtml(x.reason||'')}</p>${x.notes?`<div class="staff-loa-response"><span>NOTES</span><p>${escapeHtml(x.notes)}</p></div>`:''}${x.status==='Pending'?`<div class="staff-loa-review"><textarea rows="3" data-loa-response="${x.id}" placeholder="Optional response..."></textarea><div><button class="discipline-secondary-button" data-loa-decline="${x.id}">Decline</button><button class="btn primary" data-loa-approve="${x.id}">Approve</button></div></div>`:''}</article>`).join(''):'<div class="member-management-empty"><h3>No LOA requests</h3></div>'; const review=async(id,status,b)=>{b.disabled=true; const r=t.querySelector(`[data-loa-response="${id}"]`)?.value||''; try{await staffFetch(`/api/staff/loa/${id}/review`,{method:'POST',body:JSON.stringify({status,response:r})}); await Promise.all([loadLoaManagement(),loadMyLoa()]);}catch(e){alert(e.message||'Unable to review LOA');b.disabled=false;}}; t.querySelectorAll('[data-loa-approve]').forEach(b=>b.addEventListener('click',()=>review(b.dataset.loaApprove,'Approved',b))); t.querySelectorAll('[data-loa-decline]').forEach(b=>b.addEventListener('click',()=>review(b.dataset.loaDecline,'Declined',b)));}catch(e){t.innerHTML=`<div class="member-management-empty"><h3>Unable to load requests</h3><p>${escapeHtml(e.message||'')}</p></div>`;}}
-function showStaffLoa(){hideAllViews(); const v=document.getElementById('staffLoaView'); if(v)v.hidden=false; const t=document.getElementById('staffPageTitle'),d=document.getElementById('staffPageDescription'); if(t)t.textContent='Leave of Absence'; if(d)d.textContent='Submit, track and review staff LOA requests.'; setTopSearch('',false); loadMyLoa(); if(hasStaffPermission('staff_oversight'))loadLoaManagement();}
-function setupStaffPolicyAndLoa(){ensureStaffPolicyAndLoaUI(); document.getElementById('staffPolicyNav')?.addEventListener('click',function(){setActiveNav(this);showStaffPolicy();}); document.getElementById('staffLoaNav')?.addEventListener('click',function(){setActiveNav(this);showStaffLoa();}); document.getElementById('staffPolicySearch')?.addEventListener('input',e=>renderStaffPolicy(e.target.value)); document.getElementById('staffPolicyExpandAll')?.addEventListener('click',function(){const a=[...document.querySelectorAll('#staffPolicyContent .staff-policy-section')],open=a.some(x=>!x.open); a.forEach(x=>x.open=open); this.textContent=open?'Collapse All':'Expand All';}); document.getElementById('staffLoaRefresh')?.addEventListener('click',loadMyLoa); const f=document.getElementById('staffLoaForm'); f?.addEventListener('submit',async e=>{e.preventDefault(); const b=document.getElementById('staffLoaSubmit'),m=document.getElementById('staffLoaMessage'); b.disabled=true;b.textContent='Submitting...'; try{const d=await staffFetch('/api/staff/loa',{method:'POST',body:JSON.stringify({start_date:document.getElementById('staffLoaStart').value,end_date:document.getElementById('staffLoaEnd').value,reason:document.getElementById('staffLoaReason').value.trim(),notes:document.getElementById('staffLoaNotes').value.trim()})}); f.reset(); if(m){m.hidden=false;m.textContent=`LOA submitted. Reference: ${d.reference}`;} await loadMyLoa(); if(hasStaffPermission('staff_oversight'))await loadLoaManagement();}catch(err){if(m){m.hidden=false;m.textContent=err.message||'Unable to submit LOA.';}}finally{b.disabled=false;b.textContent='Submit LOA Request';}});}
-document.addEventListener('DOMContentLoaded',()=>{setupStaffPolicyAndLoa();setTimeout(applyStaffPermissions,0);});
+async function loadMyLoa(){const t=document.getElementById('staffLoaHistory'); if(!t)return; t.innerHTML='<div class="member-management-empty"><h3>Loading...</h3></div>'; try{const d=await staffFetch('/api/staff/loa/me'), a=Array.isArray(d.requests)?d.requests:[]; if(!a.length){t.innerHTML='<div class="member-management-empty"><h3>No LOA requests</h3><p>Your requests will appear here.</p></div>';return;} t.innerHTML=a.map(x=>`<article class="staff-loa-card"><div class="staff-loa-card-head"><div><span>${escapeHtml(x.reference||'#'+x.id)}</span><strong>${loaDate(x.start_date)} → ${loaDate(x.end_date)}</strong></div><span class="staff-loa-status ${loaClass(x.status)}">${escapeHtml(x.status)}</span></div><p>${escapeHtml(x.reason||'')}</p>${x.review_response?`<div class="staff-loa-response"><span>RESPONSE</span><p>${escapeHtml(x.review_response)}</p></div>`:''}${['Pending','Approved'].includes(x.status)?`<button type="button" class="discipline-secondary-button" data-cancel-loa="${x.id}">Cancel Request</button>`:''}</article>`).join(''); t.querySelectorAll('[data-cancel-loa]').forEach(b=>b.addEventListener('click',async()=>{if(!confirm('Cancel this LOA request?'))return; await staffFetch(`/api/staff/loa/${b.dataset.cancelLoa}/cancel`,{method:'POST',body:'{}'}); await loadMyLoa(); if((Number(currentStaffPermissions?.staff_level || 0) >= 500))await loadLoaManagement();}));}catch(e){t.innerHTML=`<div class="member-management-empty"><h3>Unable to load LOA</h3><p>${escapeHtml(e.message||'Please try again.')}</p></div>`;}}
+async function loadLoaManagement(){const s=document.getElementById('staffLoaManagement'),t=document.getElementById('staffLoaManagementList'); if(!s||!t)return; if(!(Number(currentStaffPermissions?.staff_level || 0) >= 500)){s.hidden=true;return;} s.hidden=false; try{const d=await staffFetch('/api/staff/loa/manage'),a=Array.isArray(d.requests)?d.requests:[]; t.innerHTML=a.length?a.map(x=>`<article class="staff-loa-card"><div class="staff-loa-card-head"><div><span>${escapeHtml(x.reference||'#'+x.id)}</span><strong>${escapeHtml(x.staff_name||'Union Staff')} · ${escapeHtml(x.staff_role||'Staff')}</strong><small>${loaDate(x.start_date)} → ${loaDate(x.end_date)}</small></div><span class="staff-loa-status ${loaClass(x.status)}">${escapeHtml(x.status)}</span></div><p>${escapeHtml(x.reason||'')}</p>${x.notes?`<div class="staff-loa-response"><span>NOTES</span><p>${escapeHtml(x.notes)}</p></div>`:''}${x.status==='Pending'?`<div class="staff-loa-review"><textarea rows="3" data-loa-response="${x.id}" placeholder="Optional response..."></textarea><div><button class="discipline-secondary-button" data-loa-decline="${x.id}">Decline</button><button class="btn primary" data-loa-approve="${x.id}">Approve</button></div></div>`:''}</article>`).join(''):'<div class="member-management-empty"><h3>No LOA requests</h3></div>'; const review=async(id,status,b)=>{b.disabled=true; const r=t.querySelector(`[data-loa-response="${id}"]`)?.value||''; try{await staffFetch(`/api/staff/loa/${id}/review`,{method:'POST',body:JSON.stringify({status,response:r})}); await Promise.all([loadLoaManagement(),loadMyLoa()]);}catch(e){alert(e.message||'Unable to review LOA');b.disabled=false;}}; t.querySelectorAll('[data-loa-approve]').forEach(b=>b.addEventListener('click',()=>review(b.dataset.loaApprove,'Approved',b))); t.querySelectorAll('[data-loa-decline]').forEach(b=>b.addEventListener('click',()=>review(b.dataset.loaDecline,'Declined',b)));}catch(e){t.innerHTML=`<div class="member-management-empty"><h3>Unable to load requests</h3><p>${escapeHtml(e.message||'')}</p></div>`;}}
+function showStaffLoa(){hideAllViews(); const v=document.getElementById('staffLoaView'); if(v)v.hidden=false; const t=document.getElementById('staffPageTitle'),d=document.getElementById('staffPageDescription'); if(t)t.textContent='Leave of Absence'; if(d)d.textContent='Submit and track your own staff LOA requests.'; setTopSearch('',false); loadMyLoa(); if((Number(currentStaffPermissions?.staff_level || 0) >= 500))loadLoaManagement();}
+function setupStaffLoa(){
+    ensureStaffLoaUI();
+
+    document.getElementById('staffLoaNav')?.addEventListener('click',function(){
+        setActiveNav(this);
+        showStaffLoa();
+    });
+
+    document.getElementById('staffLoaRefresh')?.addEventListener('click',loadMyLoa);
+
+    const f=document.getElementById('staffLoaForm');
+
+    f?.addEventListener('submit',async e=>{
+        e.preventDefault();
+
+        const b=document.getElementById('staffLoaSubmit');
+        const m=document.getElementById('staffLoaMessage');
+
+        b.disabled=true;
+        b.textContent='Submitting...';
+
+        try{
+            const d=await staffFetch('/api/staff/loa',{
+                method:'POST',
+                body:JSON.stringify({
+                    start_date:document.getElementById('staffLoaStart').value,
+                    end_date:document.getElementById('staffLoaEnd').value,
+                    reason:document.getElementById('staffLoaReason').value.trim(),
+                    notes:document.getElementById('staffLoaNotes').value.trim()
+                })
+            });
+
+            f.reset();
+
+            if(m){
+                m.hidden=false;
+                m.className='discipline-form-message success';
+                m.textContent=`LOA submitted. Reference: ${d.reference}`;
+            }
+
+            await loadMyLoa();
+
+            if(Number(currentStaffPermissions?.staff_level || 0) >= 500){
+                await loadLoaManagement();
+            }
+        }catch(err){
+            if(m){
+                m.hidden=false;
+                m.className='discipline-form-message error';
+                m.textContent=err.message||'Unable to submit LOA.';
+            }
+        }finally{
+            b.disabled=false;
+            b.textContent='Submit LOA Request';
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+    setupStaffLoa();
+    setTimeout(applyStaffPermissions,0);
+});
+
