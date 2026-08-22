@@ -1,5 +1,5 @@
 /* ==========================================================
-   UNION ROLEPLAY - APPLICATIONS + APPLY
+   THE DISTRICT - APPLICATIONS + APPLY
 ========================================================== */
 
 
@@ -20,7 +20,7 @@
         ),
         radial-gradient(
             circle at 90% 2%,
-            rgba(139, 92, 246, 0.022),
+            rgba(123, 191, 69, 0.022),
             transparent 24%
         ),
         #08090c;
@@ -383,7 +383,7 @@
         ),
         radial-gradient(
             circle at 85% 30%,
-            rgba(139, 92, 246, 0.035),
+            rgba(123, 191, 69, 0.035),
             transparent 32%
         ),
         linear-gradient(
@@ -710,7 +710,7 @@
 .application-featured-button:hover {
     transform: translateY(-2px);
 
-    background: #8b5cf6;
+    background: #7bbf45;
 
     box-shadow:
         0 16px 34px
@@ -812,7 +812,7 @@
         linear-gradient(
             90deg,
             transparent,
-            rgba(167, 139, 250, 0.7),
+            rgba(167, 224, 111, 0.7),
             transparent
         );
 
@@ -891,10 +891,10 @@
     color: #b9a8ed;
 
     border-color:
-        rgba(139, 92, 246, 0.16);
+        rgba(123, 191, 69, 0.16);
 
     background:
-        rgba(139, 92, 246, 0.04);
+        rgba(123, 191, 69, 0.04);
 }
 
 
@@ -1448,7 +1448,7 @@
 
     border-radius: inherit;
 
-    background: #8b5cf6;
+    background: #7bbf45;
 
     box-shadow:
         0 0 12px
@@ -1572,10 +1572,10 @@
 .apply-step.active
 .apply-step-number {
     border-color:
-        rgba(139, 92, 246, 0.16);
+        rgba(123, 191, 69, 0.16);
 
     background:
-        rgba(139, 92, 246, 0.05);
+        rgba(123, 191, 69, 0.05);
 
     color: #aa97e7;
 }
@@ -1885,13 +1885,13 @@
 .application-question textarea:focus,
 .application-question select:focus {
     border-color:
-        rgba(139, 92, 246, 0.28);
+        rgba(123, 191, 69, 0.28);
 
     background: #0f1014;
 
     box-shadow:
         0 0 0 3px
-        rgba(139, 92, 246, 0.035);
+        rgba(123, 191, 69, 0.035);
 }
 
 
@@ -1986,7 +1986,7 @@
 .staff-review-button:hover {
     transform: translateY(-1px);
 
-    background: #8b5cf6;
+    background: #7bbf45;
 
     box-shadow:
         0 12px 28px

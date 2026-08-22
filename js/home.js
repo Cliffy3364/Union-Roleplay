@@ -1,8 +1,8 @@
 /* ==========================================================
-   UNION ROLEPLAY HOMEPAGE
+   THE DISTRICT HOMEPAGE
 ========================================================== */
 
-const UNION_RELEASE_DATE =
+const DISTRICT_RELEASE_DATE =
     new Date(
         "2026-09-18T18:00:00+01:00"
     );
@@ -80,7 +80,7 @@ function updateReleaseCountdown() {
 
 
     const difference =
-        UNION_RELEASE_DATE.getTime() -
+        DISTRICT_RELEASE_DATE.getTime() -
         now;
 
 
@@ -99,7 +99,7 @@ function updateReleaseCountdown() {
 
         countdown.innerHTML = `
             <div class="hero-countdown-live">
-                UNION ROLEPLAY IS NOW LIVE
+                THE DISTRICT IS NOW LIVE
             </div>
         `;
 

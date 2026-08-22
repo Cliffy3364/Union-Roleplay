@@ -1,5 +1,5 @@
 /* ========================================
-   UNION ROLEPLAY - APPLICATION FORM
+   THE DISTRICT - APPLICATION FORM
 ======================================== */
 
 .apply-page {
@@ -149,7 +149,7 @@
         linear-gradient(
             90deg,
             #7c3aed,
-            #a855f7
+            #93d84f
         );
 
     transition:
@@ -317,7 +317,7 @@
 }
 
 .application-question-number {
-    color: #a78bfa;
+    color: #a7e06f;
 
     font-size: 10px;
     font-weight: 900;

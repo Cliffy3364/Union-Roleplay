@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Signing In | Union Roleplay</title>
+    <title>Signing In | The District</title>
 </head>
 
 <body>
@@ -35,7 +35,7 @@ async function handleLogin() {
             throw new Error(data.error || "Login failed.");
         }
 
-        localStorage.setItem("union_session", data.token);
+        localStorage.setItem("district_session", data.token);
 
         window.location.href = "pages/dashboard.html";
     } catch (error) {

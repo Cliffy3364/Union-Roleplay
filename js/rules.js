@@ -1,5 +1,5 @@
 /* =========================================================
-   UNION ROLEPLAY RULEBOOK
+   THE DISTRICT RULEBOOK
 
    ADDING A RULE:
    Find the correct section below and add:
@@ -26,7 +26,7 @@ const RULEBOOK = [
         title: "Community & Conduct",
 
         description:
-            "Community standards applying across Union Roleplay and its connected platforms.",
+            "Community standards applying across The District and its connected platforms.",
 
         rules: [
 
@@ -40,7 +40,7 @@ const RULEBOOK = [
                     "Bannable",
 
                 description:
-                    "Harassment, discrimination, hate speech, targeted abuse or discriminatory slurs are prohibited within Union Roleplay.",
+                    "Harassment, discrimination, hate speech, targeted abuse or discriminatory slurs are prohibited within The District.",
 
                 enforcement:
                     "Serious incidents may result in an immediate ban. Lower-level or isolated behaviour may receive a warning, strike or temporary ban depending on severity."
@@ -91,7 +91,7 @@ const RULEBOOK = [
                     "Threatening real-world violence, exposing private information, attempting to identify another player or encouraging others to do so is strictly prohibited.",
 
                 enforcement:
-                    "Permanent removal from Union Roleplay. Serious incidents may also be reported to the relevant platform or authorities where appropriate."
+                    "Permanent removal from The District. Serious incidents may also be reported to the relevant platform or authorities where appropriate."
             },
 
             {
@@ -152,7 +152,7 @@ const RULEBOOK = [
                     "Bannable",
 
                 description:
-                    "Players must meet Union Roleplay's minimum age requirement. Providing a false age may result in removal from the community.",
+                    "Players must meet The District's minimum age requirement. Providing a false age may result in removal from the community.",
 
                 enforcement:
                     "Underage players may be banned until they meet the required age. Deliberate deception may result in additional sanctions."
@@ -184,7 +184,7 @@ const RULEBOOK = [
                     "Permanent Ban",
 
                 description:
-                    "Selling or purchasing in-game money, vehicles, businesses, items or services for real-world money outside authorised Union Roleplay systems is prohibited.",
+                    "Selling or purchasing in-game money, vehicles, businesses, items or services for real-world money outside authorised The District systems is prohibited.",
 
                 enforcement:
                     "Permanent ban and removal of any associated assets."
@@ -200,7 +200,7 @@ const RULEBOOK = [
                     "Permanent Ban",
 
                 description:
-                    "Attacking, attempting to damage, exploit or interfere with Union Roleplay infrastructure, bots, databases, websites or services is prohibited.",
+                    "Attacking, attempting to damage, exploit or interfere with The District infrastructure, bots, databases, websites or services is prohibited.",
 
                 enforcement:
                     "Permanent ban."
@@ -216,7 +216,7 @@ const RULEBOOK = [
                     "3-Strike System",
 
                 description:
-                    "Players must not directly message Union Roleplay staff members or developers regarding support requests, player reports, complaints, appeals, bugs, development issues or other server-related matters. All enquiries must be submitted through the appropriate Union Roleplay ticket system unless the staff member or developer has specifically asked you to contact them directly.",
+                    "Players must not directly message The District staff members or developers regarding support requests, player reports, complaints, appeals, bugs, development issues or other server-related matters. All enquiries must be submitted through the appropriate District ticket system unless the staff member or developer has specifically asked you to contact them directly.",
 
                 enforcement:
                     "Players may be redirected to the ticket system for a first minor incident. Repeatedly contacting staff or developers through direct messages after being told to use the correct channels may result in a warning or strike."
@@ -264,7 +264,7 @@ const RULEBOOK = [
                     "Bannable",
 
                 description:
-                    "Sexually explicit roleplay, erotic roleplay, sexual assault roleplay or behaviour intended to create sexually explicit scenes is prohibited within Union Roleplay. Players must not use animations, messages, voice chat, images or other systems to create inappropriate sexual content.",
+                    "Sexually explicit roleplay, erotic roleplay, sexual assault roleplay or behaviour intended to create sexually explicit scenes is prohibited within The District. Players must not use animations, messages, voice chat, images or other systems to create inappropriate sexual content.",
 
                 enforcement:
                     "Content may be stopped immediately by staff. Serious or deliberate breaches may result in a temporary or permanent ban depending on severity."
@@ -280,7 +280,7 @@ const RULEBOOK = [
                     "Bannable",
 
                 description:
-                    "Players must not allow another person to use their Discord, Cfx.re or Union Roleplay account to access the server, bypass whitelist requirements, access restricted roles or avoid disciplinary action.",
+                    "Players must not allow another person to use their Discord, Cfx.re or The District account to access the server, bypass whitelist requirements, access restricted roles or avoid disciplinary action.",
 
                 enforcement:
                     "Account access may be suspended while the incident is investigated. Deliberate account sharing or attempts to bypass restrictions may result in temporary or permanent bans."
@@ -560,7 +560,7 @@ const RULEBOOK = [
             "In-Game Conduct",
 
         description:
-            "Behaviour standards covering general activity throughout Union City.",
+            "Behaviour standards covering general activity throughout the city.",
 
         rules: [
 
@@ -1103,7 +1103,7 @@ const RULEBOOK = [
             "Business Management",
 
         description:
-            "Standards applying to owners and managers of approved Union Roleplay businesses.",
+            "Standards applying to owners and managers of approved The District businesses.",
 
         rules: [
 
@@ -1117,7 +1117,7 @@ const RULEBOOK = [
                     "Business Strike",
 
                 description:
-                    "Businesses must remain reasonably active and meet any minimum opening requirements set by Union Roleplay management.",
+                    "Businesses must remain reasonably active and meet any minimum opening requirements set by The District management.",
 
                 enforcement:
                     "Business warning or strike. Continued inactivity may result in ownership being revoked."

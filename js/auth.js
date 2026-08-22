@@ -6,7 +6,7 @@ async function getCurrentUser() {
 
     const token =
         localStorage.getItem(
-            "union_session"
+            "district_session"
         );
 
     if (!token) {
@@ -39,7 +39,7 @@ async function getCurrentUser() {
         ) {
 
             localStorage.removeItem(
-                "union_session"
+                "district_session"
             );
 
             return null;
@@ -72,15 +72,15 @@ async function getCurrentUser() {
 function logout() {
 
     localStorage.removeItem(
-        "union_session"
+        "district_session"
     );
 
     window.location.href =
-        "/Union-Roleplay/index.html";
+        "/The-District/index.html";
 }
 
 
-window.UnionAuth = {
+window.DistrictAuth = {
 
     getCurrentUser,
 

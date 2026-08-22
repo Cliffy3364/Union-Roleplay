@@ -1,5 +1,5 @@
 /* ==========================================================
-   UNION ROLEPLAY - STAFF SYSTEM
+   THE DISTRICT - STAFF SYSTEM
 ========================================================== */
 
 :root {
@@ -16,8 +16,8 @@
     --staff-muted: #777a83;
     --staff-muted-dark: #5e616a;
 
-    --staff-purple: #8b5cf6;
-    --staff-purple-soft: rgba(139, 92, 246, 0.07);
+    --staff-accent: #7bbf45;
+    --staff-accent-soft: rgba(123, 191, 69, 0.07);
 }
 
 
@@ -411,7 +411,7 @@
         999px;
 
     background:
-        var(--staff-purple);
+        var(--staff-accent);
 }
 
 .staff-nav-item.active
@@ -420,10 +420,10 @@
         #b6a5e9;
 
     border-color:
-        rgba(139, 92, 246, 0.14);
+        rgba(123, 191, 69, 0.14);
 
     background:
-        rgba(139, 92, 246, 0.045);
+        rgba(123, 191, 69, 0.045);
 }
 
 
@@ -465,10 +465,10 @@
 
 .staff-nav-badge.has-applications {
     border-color:
-        rgba(139, 92, 246, 0.14);
+        rgba(123, 191, 69, 0.14);
 
     background:
-        rgba(139, 92, 246, 0.05);
+        rgba(123, 191, 69, 0.05);
 
     color:
         #b5a3ea;
@@ -805,14 +805,14 @@
 
 .staff-topbar-actions input:focus {
     border-color:
-        rgba(139, 92, 246, 0.25);
+        rgba(123, 191, 69, 0.25);
 
     background:
         #111216;
 
     box-shadow:
         0 0 0 3px
-        rgba(139, 92, 246, 0.035);
+        rgba(123, 191, 69, 0.035);
 }
 
 
@@ -1270,7 +1270,7 @@
         999px;
 
     background:
-        var(--staff-purple);
+        var(--staff-accent);
 
     transition:
         height 0.18s ease;
@@ -1509,10 +1509,10 @@
         #d4c9f4;
 
     border-color:
-        rgba(139, 92, 246, 0.13);
+        rgba(123, 191, 69, 0.13);
 
     background:
-        rgba(139, 92, 246, 0.045);
+        rgba(123, 191, 69, 0.045);
 }
 
 
@@ -1581,7 +1581,7 @@
         999px;
 
     background:
-        var(--staff-purple);
+        var(--staff-accent);
 
     transition:
         height 0.18s ease;
@@ -1798,10 +1798,10 @@
 
     border:
         1px solid
-        rgba(139, 92, 246, 0.13);
+        rgba(123, 191, 69, 0.13);
 
     background:
-        rgba(139, 92, 246, 0.045);
+        rgba(123, 191, 69, 0.045);
 }
 
 .staff-application-status.interview {
@@ -1884,13 +1884,13 @@
 
     border:
         1px solid
-        rgba(139, 92, 246, 0.14);
+        rgba(123, 191, 69, 0.14);
 
     border-radius:
         8px;
 
     background:
-        rgba(139, 92, 246, 0.05);
+        rgba(123, 191, 69, 0.05);
 
     color:
         #b7a6ea;
@@ -1924,10 +1924,10 @@
         #ded6f5;
 
     border-color:
-        rgba(139, 92, 246, 0.22);
+        rgba(123, 191, 69, 0.22);
 
     background:
-        rgba(139, 92, 246, 0.075);
+        rgba(123, 191, 69, 0.075);
 
     transform:
         translateY(-1px);
@@ -2125,14 +2125,14 @@
 
 .member-management-search input:focus {
     border-color:
-        rgba(139, 92, 246, 0.24);
+        rgba(123, 191, 69, 0.24);
 
     background:
         #101115;
 
     box-shadow:
         0 0 0 3px
-        rgba(139, 92, 246, 0.035);
+        rgba(123, 191, 69, 0.035);
 }
 
 .member-management-search .btn {
@@ -2390,13 +2390,13 @@
 
     border:
         1px solid
-        rgba(139, 92, 246, 0.13);
+        rgba(123, 191, 69, 0.13);
 
     border-radius:
         7px;
 
     background:
-        rgba(139, 92, 246, 0.045);
+        rgba(123, 191, 69, 0.045);
 
     color:
         #b5a4e7;
@@ -2632,7 +2632,7 @@
 .member-note-form textarea:focus,
 .review-note-input:focus {
     border-color:
-        rgba(139, 92, 246, 0.24);
+        rgba(123, 191, 69, 0.24);
 }
 
 .member-notes-list,
@@ -2807,13 +2807,13 @@
 
     border:
         1px solid
-        rgba(139, 92, 246, 0.13);
+        rgba(123, 191, 69, 0.13);
 
     border-radius:
         999px;
 
     background:
-        rgba(139, 92, 246, 0.045);
+        rgba(123, 191, 69, 0.045);
 
     color:
         #c2b4eb;
@@ -2841,7 +2841,7 @@
         50%;
 
     background:
-        var(--staff-purple);
+        var(--staff-accent);
 }
 
 .review-header-actions {
@@ -2856,13 +2856,13 @@
 
     border:
         1px solid
-        rgba(139, 92, 246, 0.13);
+        rgba(123, 191, 69, 0.13);
 
     border-radius:
         8px;
 
     background:
-        rgba(139, 92, 246, 0.045);
+        rgba(123, 191, 69, 0.045);
 
     color:
         #b8a8e7;
@@ -3186,13 +3186,13 @@
 
     border:
         1px solid
-        rgba(139, 92, 246, 0.12);
+        rgba(123, 191, 69, 0.12);
 
     border-radius:
         7px;
 
     background:
-        rgba(139, 92, 246, 0.04);
+        rgba(123, 191, 69, 0.04);
 
     color:
         #ad9ce2;
@@ -3333,10 +3333,10 @@
 .review-action-primary {
     border:
         1px solid
-        rgba(139, 92, 246, 0.15);
+        rgba(123, 191, 69, 0.15);
 
     background:
-        rgba(139, 92, 246, 0.05);
+        rgba(123, 191, 69, 0.05);
 
     color:
         #c0b1ea;
@@ -3404,13 +3404,13 @@
 
     border:
         1px solid
-        rgba(139, 92, 246, 0.13);
+        rgba(123, 191, 69, 0.13);
 
     border-radius:
         8px;
 
     background:
-        rgba(139, 92, 246, 0.045);
+        rgba(123, 191, 69, 0.045);
 
     color:
         #b7a7e5;
@@ -3473,7 +3473,7 @@
         50%;
 
     background:
-        var(--staff-purple);
+        var(--staff-accent);
 }
 
 .review-activity-empty strong {
@@ -3690,10 +3690,10 @@
 .review-modal-confirm {
     border:
         1px solid
-        rgba(139, 92, 246, 0.14);
+        rgba(123, 191, 69, 0.14);
 
     background:
-        rgba(139, 92, 246, 0.055);
+        rgba(123, 191, 69, 0.055);
 
     color:
         #c1b3e9;
@@ -4251,13 +4251,13 @@
 .discipline-field select:focus,
 .discipline-field textarea:focus,
 .discipline-member-search-row input:focus {
-    border-color: rgba(139, 92, 246, 0.22);
+    border-color: rgba(123, 191, 69, 0.22);
 
     background: #101115;
 
     box-shadow:
         0 0 0 3px
-        rgba(139, 92, 246, 0.03);
+        rgba(123, 191, 69, 0.03);
 }
 
 
@@ -4438,13 +4438,13 @@
 
     padding: 12px;
 
-    border: 1px solid rgba(139, 92, 246, 0.12);
+    border: 1px solid rgba(123, 191, 69, 0.12);
     border-radius: 10px;
 
     background:
         linear-gradient(
             180deg,
-            rgba(139, 92, 246, 0.035),
+            rgba(123, 191, 69, 0.035),
             rgba(255, 255, 255, 0.008)
         ),
         #121318;
@@ -4571,7 +4571,7 @@
 
     flex-shrink: 0;
 
-    accent-color: var(--staff-purple);
+    accent-color: var(--staff-accent);
 }
 
 
@@ -4629,9 +4629,9 @@
 }
 
 .discipline-form-message.info {
-    border: 1px solid rgba(139, 92, 246, 0.12);
+    border: 1px solid rgba(123, 191, 69, 0.12);
 
-    background: rgba(139, 92, 246, 0.035);
+    background: rgba(123, 191, 69, 0.035);
 
     color: #bcaee8;
 }
@@ -5150,11 +5150,11 @@
 }
 
 .discipline-security-status > span {
-    background: #8b5cf6;
+    background: #7bbf45;
 
     box-shadow:
         0 0 8px
-        rgba(139, 92, 246, 0.22);
+        rgba(123, 191, 69, 0.22);
 }
 
 /* Keep both right-hand cards visible while staff work through the form. */
@@ -5553,7 +5553,7 @@
 
 .discipline-records-toolbar input:focus,
 .discipline-records-toolbar select:focus {
-    border-color: rgba(139, 92, 246, 0.22);
+    border-color: rgba(123, 191, 69, 0.22);
 }
 
 .discipline-records-layout {
@@ -5622,7 +5622,7 @@
 .discipline-global-row.active {
     box-shadow:
         inset 2px 0 0
-        rgba(139, 92, 246, 0.72);
+        rgba(123, 191, 69, 0.72);
 }
 
 .discipline-global-reference {
@@ -6232,13 +6232,13 @@
 
 .rule-search-field textarea:focus {
     border-color:
-        rgba(139, 92, 246, 0.25);
+        rgba(123, 191, 69, 0.25);
 
     background: #101115;
 
     box-shadow:
         0 0 0 3px
-        rgba(139, 92, 246, 0.035);
+        rgba(123, 191, 69, 0.035);
 }
 
 .rule-search-actions {
@@ -6392,12 +6392,12 @@
 
     border:
         1px solid
-        rgba(139, 92, 246, 0.13);
+        rgba(123, 191, 69, 0.13);
 
     border-radius: 9px;
 
     background:
-        rgba(139, 92, 246, 0.04);
+        rgba(123, 191, 69, 0.04);
 
     color: #ad9ae3;
 
@@ -6481,10 +6481,10 @@
 
     border:
         1px solid
-        rgba(139, 92, 246, 0.12);
+        rgba(123, 191, 69, 0.12);
 
     background:
-        rgba(139, 92, 246, 0.035);
+        rgba(123, 191, 69, 0.035);
 }
 
 .rule-search-result-body {
@@ -7217,7 +7217,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #a78bfa;
+    background: #a7e06f;
 }
 
 .staff-loa-request-panel {

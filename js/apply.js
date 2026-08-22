@@ -19,7 +19,7 @@ const APPLICATION_CONFIG = {
             "Whitelist Application",
 
         description:
-            "Union Roleplay operates a strict whitelist. Take your time and provide detailed, original answers. Low-effort, copied or AI-generated applications may be declined.",
+            "The District operates a strict whitelist. Take your time and provide detailed, original answers. Low-effort, copied or AI-generated applications may be declined.",
 
         questions: [
 
@@ -42,7 +42,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "characterBackstory",
                 label:
-                    "What is your character's full name and backstory? Tell us about their previous life, personality, experiences, motivations and what has brought them to Union.",
+                    "What is your character's full name and backstory? Tell us about their previous life, personality, experiences, motivations and what has brought them to The District.",
                 type: "textarea",
                 required: true
             },
@@ -50,7 +50,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "characterPlans",
                 label:
-                    "What are your plans for your character within Union Roleplay? Explain the type of story you want to create and what you would like your character to achieve over time.",
+                    "What are your plans for your character within The District? Explain the type of story you want to create and what you would like your character to achieve over time.",
                 type: "textarea",
                 required: true
             },
@@ -90,7 +90,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "whyUnion",
                 label:
-                    "Why should we accept you into Union Roleplay? Tell us what you can bring to the server and what we can expect from you as a member of the community.",
+                    "Why should we accept you into The District? Tell us what you can bring to the server and what we can expect from you as a member of the community.",
                 type: "textarea",
                 required: true
             }
@@ -109,7 +109,7 @@ const APPLICATION_CONFIG = {
             "Staff Application",
 
         description:
-            "Apply to join the Union Roleplay staff team. We are looking for mature, fair and trustworthy people who can maintain our community standards.",
+            "Apply to join The District staff team. We are looking for mature, fair and trustworthy people who can maintain our community standards.",
 
         questions: [
 
@@ -132,7 +132,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "whyStaff",
                 label:
-                    "Why do you want to join the Union Roleplay staff team, and why should we choose you over another applicant?",
+                    "Why do you want to join The District staff team, and why should we choose you over another applicant?",
                 type: "textarea",
                 required: true
             },
@@ -191,7 +191,7 @@ const APPLICATION_CONFIG = {
             "QA Tester Application",
 
         description:
-            "Apply to test scripts, systems and updates before they reach the live Union Roleplay server.",
+            "Apply to test scripts, systems and updates before they reach the live The District server.",
 
         questions: [
 
@@ -214,7 +214,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "whyQa",
                 label:
-                    "Why do you want to become a QA Tester for Union Roleplay?",
+                    "Why do you want to become a QA Tester for The District?",
                 type: "textarea",
                 required: true
             },
@@ -265,7 +265,7 @@ const APPLICATION_CONFIG = {
             "Social Media Manager Application",
 
         description:
-            "Apply to manage Union Roleplay's social media presence and coordinate the wider media team.",
+            "Apply to manage The District's social media presence and coordinate the wider media team.",
 
         questions: [
 
@@ -296,7 +296,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "platforms",
                 label:
-                    "Which social media platforms are you most experienced with, and what type of content would you use on each platform for Union Roleplay?",
+                    "Which social media platforms are you most experienced with, and what type of content would you use on each platform for The District?",
                 type: "textarea",
                 required: true
             },
@@ -304,7 +304,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "growthStrategy",
                 label:
-                    "If Union Roleplay's social media engagement was low, what would you do to improve reach and attract new members without relying on spam?",
+                    "If The District's social media engagement was low, what would you do to improve reach and attract new members without relying on spam?",
                 type: "textarea",
                 required: true
             },
@@ -320,7 +320,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "qualityControl",
                 label:
-                    "A member of the Media Team submits content that does not meet the quality expected for Union Roleplay. How would you handle it?",
+                    "A member of the Media Team submits content that does not meet the quality expected for The District. How would you handle it?",
                 type: "textarea",
                 required: true
             },
@@ -328,7 +328,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "availability",
                 label:
-                    "How frequently would you be available to manage Union Roleplay's social media and coordinate the Media Team?",
+                    "How frequently would you be available to manage The District's social media and coordinate the Media Team?",
                 type: "textarea",
                 required: true
             }
@@ -347,7 +347,7 @@ const APPLICATION_CONFIG = {
             "Media Team Application",
 
         description:
-            "Apply to create screenshots, videos, trailers and promotional content for Union Roleplay.",
+            "Apply to create screenshots, videos, trailers and promotional content for The District.",
 
         questions: [
 
@@ -402,7 +402,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "availability",
                 label:
-                    "How often would you realistically be available to create media for Union Roleplay?",
+                    "How often would you realistically be available to create media for The District?",
                 type: "textarea",
                 required: true
             }
@@ -421,7 +421,7 @@ const APPLICATION_CONFIG = {
             "Script Developer Application",
 
         description:
-            "Apply to help develop, maintain and improve scripts and systems used by Union Roleplay.",
+            "Apply to help develop, maintain and improve scripts and systems used by The District.",
 
         questions: [
 
@@ -484,7 +484,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "availability",
                 label:
-                    "How much time can you realistically dedicate to Union Roleplay development each week?",
+                    "How much time can you realistically dedicate to The District development each week?",
                 type: "textarea",
                 required: true
             }
@@ -503,7 +503,7 @@ const APPLICATION_CONFIG = {
             "Vehicle Developer Application",
 
         description:
-            "Apply to develop, maintain and optimise vehicles used throughout Union Roleplay.",
+            "Apply to develop, maintain and optimise vehicles used throughout The District.",
 
         questions: [
 
@@ -558,7 +558,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "standards",
                 label:
-                    "How would you make sure vehicles you add to Union match our British theme and quality standards?",
+                    "How would you make sure vehicles you add to The District match our British theme and quality standards?",
                 type: "textarea",
                 required: true
             },
@@ -566,7 +566,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "availability",
                 label:
-                    "How often are you realistically available to work on the Union Roleplay vehicle fleet?",
+                    "How often are you realistically available to work on The District vehicle fleet?",
                 type: "textarea",
                 required: true
             }
@@ -585,7 +585,7 @@ const APPLICATION_CONFIG = {
             "EUP Developer Application",
 
         description:
-            "Apply to create and maintain uniforms, clothing and department assets used throughout Union Roleplay.",
+            "Apply to create and maintain uniforms, clothing and department assets used throughout The District.",
 
         questions: [
 
@@ -632,7 +632,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "departmentScenario",
                 label:
-                    "You are asked to create a new uniform pack for one of Union's emergency services. Explain how you would plan the pack and keep it consistent with the department.",
+                    "You are asked to create a new uniform pack for one of The District's emergency services. Explain how you would plan the pack and keep it consistent with the department.",
                 type: "textarea",
                 required: true
             },
@@ -648,7 +648,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "availability",
                 label:
-                    "How often are you realistically available to work on Union Roleplay EUP?",
+                    "How often are you realistically available to work on The District EUP?",
                 type: "textarea",
                 required: true
             }
@@ -667,7 +667,7 @@ const APPLICATION_CONFIG = {
             "UPD Command Application",
 
         description:
-            "Apply for a senior leadership position within Union Police. Command applicants are expected to demonstrate strong leadership, realistic policing standards and the ability to manage officers fairly.",
+            "Apply for a senior leadership position within District Police. Command applicants are expected to demonstrate strong leadership, realistic policing standards and the ability to manage officers fairly.",
 
         questions: [
 
@@ -690,7 +690,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "leadershipStyle",
                 label:
-                    "Describe your leadership style and how you would apply it when managing officers within Union Police.",
+                    "Describe your leadership style and how you would apply it when managing officers within District Police.",
                 type: "textarea",
                 required: true
             },
@@ -722,7 +722,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "roleplayStandards",
                 label:
-                    "How would you ensure Union Police creates good roleplay for civilians rather than focusing solely on winning pursuits, arrests or incidents?",
+                    "How would you ensure District Police creates good roleplay for civilians rather than focusing solely on winning pursuits, arrests or incidents?",
                 type: "textarea",
                 required: true
             },
@@ -738,7 +738,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "availability",
                 label:
-                    "How active can you realistically be within Union Police, and how much time can you commit to command responsibilities?",
+                    "How active can you realistically be within District Police, and how much time can you commit to command responsibilities?",
                 type: "textarea",
                 required: true
             }
@@ -757,7 +757,7 @@ const APPLICATION_CONFIG = {
             "UHS Command Application",
 
         description:
-            "Apply for a senior leadership position within Union Health Service. Command applicants should demonstrate strong leadership and a commitment to high-quality medical roleplay.",
+            "Apply for a senior leadership position within District Health Service. Command applicants should demonstrate strong leadership and a commitment to high-quality medical roleplay.",
 
         questions: [
 
@@ -780,7 +780,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "leadershipStyle",
                 label:
-                    "Describe your leadership style and how you would apply it while managing members of Union Health Service.",
+                    "Describe your leadership style and how you would apply it while managing members of District Health Service.",
                 type: "textarea",
                 required: true
             },
@@ -828,7 +828,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "availability",
                 label:
-                    "How active can you realistically be within Union Health Service, and how much time can you commit to command responsibilities?",
+                    "How active can you realistically be within District Health Service, and how much time can you commit to command responsibilities?",
                 type: "textarea",
                 required: true
             }
@@ -1066,7 +1066,7 @@ let isSubmitting = false;
 
 function getToken() {
     return localStorage.getItem(
-        "union_session"
+        "district_session"
     );
 }
 
@@ -2136,7 +2136,7 @@ async function submitApplication() {
 
                     paragraph.innerHTML = `
                         Your application has been sent to
-                        Union Roleplay staff for review.
+                        The District staff for review.
 
                         <br><br>
 
@@ -2296,7 +2296,7 @@ async function initialiseApplicationForm() {
     }
 
 
-    if (!window.UnionAuth) {
+    if (!window.DistrictAuth) {
 
         setPageMessage(
             "Unable to load application",
@@ -2308,7 +2308,7 @@ async function initialiseApplicationForm() {
 
 
     const user =
-        await UnionAuth.getCurrentUser();
+        await DistrictAuth.getCurrentUser();
 
 
     if (!user) {

@@ -1,11 +1,11 @@
-/* UNION ROLEPLAY - COMMUNITY */
+/* THE DISTRICT - COMMUNITY */
 .community-page-shell{min-height:100vh;padding-top:76px;background:radial-gradient(circle at 18% 0%,rgba(139,92,246,.08),transparent 30%),#090a0d;color:#f4f4f5}
 .community-container{width:min(1180px,calc(100% - 40px));margin:0 auto}
 .community-hero{padding:92px 0 62px;border-bottom:1px solid rgba(255,255,255,.05)}
 .community-hero-layout{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:70px;align-items:center}
 .community-eyebrow,.community-section-heading>div>span,.community-info-panel>div>span{color:#797b85;font-size:10px;font-weight:900;letter-spacing:1.5px}
 .community-hero h1{max-width:700px;margin:10px 0 0;font-size:clamp(48px,7vw,76px);line-height:.98;letter-spacing:-3px}
-.community-hero h1 span{display:block;color:#a78bfa}
+.community-hero h1 span{display:block;color:#a7e06f}
 .community-hero p{max-width:660px;margin:20px 0 0;color:#858790;font-size:14px;line-height:1.8}
 .community-hero-actions{display:flex;gap:10px;margin-top:27px}
 .community-secondary-button{display:inline-flex;align-items:center;padding:11px 17px;border:1px solid rgba(255,255,255,.08);border-radius:8px;background:#111217;color:#d7d7dc;font-size:12px;font-weight:800;text-decoration:none}
@@ -21,7 +21,7 @@
 .server-player-display strong{display:block;margin-top:7px;font-size:48px;letter-spacing:-2px}
 .server-player-display small{color:#656872;font-size:18px}
 .server-capacity{height:5px;margin-top:17px;border-radius:99px;background:#1c1d23;overflow:hidden}
-.server-capacity span{display:block;width:0;height:100%;border-radius:inherit;background:#8b5cf6;transition:width .4s ease}
+.server-capacity span{display:block;width:0;height:100%;border-radius:inherit;background:#7bbf45;transition:width .4s ease}
 .server-meta{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(255,255,255,.055)}
 .server-meta div{padding:15px 20px}.server-meta div+div{border-left:1px solid rgba(255,255,255,.055)}
 .server-meta strong{display:block;margin-top:5px;color:#d4d5d9;font-size:10px}

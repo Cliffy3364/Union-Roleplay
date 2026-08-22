@@ -1,10 +1,10 @@
 {
-  "name": "Union Roleplay",
-  "short_name": "Union RP",
+  "name": "The District",
+  "short_name": "District",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#07111f",
-  "theme_color": "#07111f",
+  "background_color": "#080b08",
+  "theme_color": "#0d140d",
   "icons": [
     {
       "src": "assets/images/logo.png",

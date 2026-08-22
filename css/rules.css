@@ -1,5 +1,5 @@
 /* ========================================
-   UNION ROLEPLAY - RULES
+   THE DISTRICT - RULES
 ======================================== */
 
 .rules-page-shell {
@@ -531,7 +531,7 @@
         ),
         radial-gradient(
             circle at 85% 3%,
-            rgba(139, 92, 246, 0.025),
+            rgba(123, 191, 69, 0.025),
             transparent 25%
         ),
         #090a0d;
@@ -582,7 +582,7 @@
 .rules-hero h1 span {
     display: block;
 
-    color: #a78bfa;
+    color: #a7e06f;
 }
 
 .rules-hero p {
@@ -793,11 +793,11 @@
 
 .rules-search:focus {
     border-color:
-        rgba(139, 92, 246, 0.3);
+        rgba(123, 191, 69, 0.3);
 
     box-shadow:
         0 0 0 3px
-        rgba(139, 92, 246, 0.04);
+        rgba(123, 191, 69, 0.04);
 }
 
 .rules-navigation {
@@ -841,7 +841,7 @@
 
     border-radius: 999px;
 
-    background: #8b5cf6;
+    background: #7bbf45;
 
     transition:
         height 0.16s ease;

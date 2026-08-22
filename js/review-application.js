@@ -21,7 +21,7 @@ const REVIEW_QUESTION_CONFIG = {
         roleplayExperience:
             "Tell us about your previous roleplay experience.",
         whyUnion:
-            "Why do you want to join Union Roleplay?",
+            "Why do you want to join The District?",
         scenario:
             "You are stopped by police after a pursuit. Explain how you would roleplay the situation."
     },
@@ -32,7 +32,7 @@ const REVIEW_QUESTION_CONFIG = {
         experience:
             "Do you have any previous staff experience? Tell us about it.",
         whyStaff:
-            "Why do you want to join the Union Roleplay staff team?",
+            "Why do you want to join The District staff team?",
         strengths:
             "What strengths would you bring to the staff team?",
         staffScenario:
@@ -49,7 +49,7 @@ const REVIEW_QUESTION_CONFIG = {
         bugReporting:
             "How would you report a bug clearly to a developer?",
         whyQa:
-            "Why do you want to become a QA Tester for Union Roleplay?"
+            "Why do you want to become a QA Tester for The District?"
     },
 
 
@@ -60,9 +60,9 @@ const REVIEW_QUESTION_CONFIG = {
         portfolio:
             "Provide links or details for at least three examples of your previous FiveM videos or images.",
         strategy:
-            "How would you grow Union Roleplay's social media accounts?",
+            "How would you grow The District's social media accounts?",
         management:
-            "How would you organise and request content from the Union Roleplay media team?"
+            "How would you organise and request content from The District media team?"
     },
 
 
@@ -75,7 +75,7 @@ const REVIEW_QUESTION_CONFIG = {
         tools:
             "What editing or capture software do you use?",
         availability:
-            "How often would you be available to create media for Union Roleplay?"
+            "How often would you be available to create media for The District?"
     },
 
 
@@ -152,7 +152,7 @@ const REVIEW_QUESTION_CONFIG = {
 function getReviewToken() {
 
     return localStorage.getItem(
-        "union_session"
+        "district_session"
     );
 }
 
@@ -291,7 +291,7 @@ function isAssignedToCurrentStaff(app) {
 function currentStaffName() {
 
     if (!currentStaffUser) {
-        return "Union Staff";
+        return "District Staff";
     }
 
     return (
@@ -301,7 +301,7 @@ function currentStaffName() {
         currentStaffUser.displayName ||
         currentStaffUser.discord_username ||
         currentStaffUser.username ||
-        "Union Staff"
+        "District Staff"
     );
 }
 
@@ -497,7 +497,7 @@ function renderApplicant(app) {
             <div>
 
                 <span>
-                    Union ID
+                    District ID
                 </span>
 
                 <strong>
@@ -1092,7 +1092,7 @@ function renderActivity(activity) {
 
                     const actor =
                         item.actor_name ||
-                        "Union Staff";
+                        "District Staff";
 
                     const action =
                         item.action ||
@@ -1892,7 +1892,7 @@ document.addEventListener(
 
         try {
 
-            if (!window.UnionAuth) {
+            if (!window.DistrictAuth) {
 
                 throw new Error(
                     "Authentication system unavailable."
@@ -1900,7 +1900,7 @@ document.addEventListener(
             }
 
             currentStaffUser =
-                await UnionAuth.getCurrentUser();
+                await DistrictAuth.getCurrentUser();
 
             if (
                 !currentStaffUser ||

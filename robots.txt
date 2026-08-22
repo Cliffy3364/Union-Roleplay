@@ -4,4 +4,4 @@ Disallow: /staff-panel.html
 Disallow: /portal.html
 Disallow: /profile.html
 Disallow: /callback.html
-Sitemap: https://cliffy3364.github.io/Union-Roleplay/sitemap.xml
+Sitemap: https://cliffy3364.github.io/The-District/sitemap.xml

@@ -78,7 +78,7 @@ async function setupNavbarUser() {
     }
 
 
-    if (!window.UnionAuth) {
+    if (!window.DistrictAuth) {
 
         setupLoginButton(
             loginButton
@@ -91,7 +91,7 @@ async function setupNavbarUser() {
     try {
 
         const user =
-            await UnionAuth.getCurrentUser();
+            await DistrictAuth.getCurrentUser();
 
 
         if (!user) {
@@ -129,7 +129,7 @@ async function setupNavbarUser() {
             logoutButton.addEventListener(
                 "click",
                 () => {
-                    UnionAuth.logout();
+                    DistrictAuth.logout();
                 }
             );
         }

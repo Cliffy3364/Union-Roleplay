@@ -263,7 +263,7 @@ img {
 
     border:
         1px solid
-        rgba(168, 85, 247, 0.35);
+        rgba(147, 216, 79, 0.35);
 
     border-radius: 999px;
 
@@ -398,7 +398,7 @@ img {
 
 .section-heading span,
 .cta-content > span {
-    color: #a855f7;
+    color: #93d84f;
 
     font-size: 12px;
     font-weight: 800;
@@ -481,7 +481,7 @@ img {
 .feature-number {
     margin-bottom: 40px;
 
-    color: #a855f7;
+    color: #93d84f;
 
     font-size: 13px;
     font-weight: 900;
@@ -526,7 +526,7 @@ img {
 
     border:
         1px solid
-        rgba(168, 85, 247, 0.24);
+        rgba(147, 216, 79, 0.24);
 
     background:
         radial-gradient(
@@ -625,7 +625,7 @@ footer p {
 
 .dashboard-eyebrow,
 .card-label {
-    color: #a855f7;
+    color: #93d84f;
 
     font-size: 12px;
     font-weight: 800;
@@ -1116,12 +1116,12 @@ footer p {
 
 .staff-nav-item.active {
     background:
-        rgba(139, 92, 246, 0.12);
+        rgba(123, 191, 69, 0.12);
 
     color: #ffffff;
 
     box-shadow:
-        inset 3px 0 0 #8b5cf6;
+        inset 3px 0 0 #7bbf45;
 }
 
 .staff-main {
@@ -1173,7 +1173,7 @@ footer p {
 
 .staff-topbar-actions input:focus {
     border-color:
-        rgba(139, 92, 246, 0.7);
+        rgba(123, 191, 69, 0.7);
 }
 
 .staff-stat-grid {
@@ -1415,16 +1415,16 @@ footer p {
     }
 }
 /* ==========================================================
-   UNION ROLEPLAY - PREMIUM VISUAL POLISH
+   THE DISTRICT - PREMIUM VISUAL POLISH
 ========================================================== */
 
 :root {
-    --union-purple: #8b5cf6;
-    --union-purple-bright: #a855f7;
-    --union-purple-soft: rgba(139, 92, 246, 0.14);
+    --district-purple: #7bbf45;
+    --district-purple-bright: #93d84f;
+    --district-purple-soft: rgba(123, 191, 69, 0.14);
 
-    --union-surface: #111117;
-    --union-border: rgba(255, 255, 255, 0.075);
+    --district-surface: #111117;
+    --district-border: rgba(255, 255, 255, 0.075);
 
     --mouse-x: 50vw;
     --mouse-y: 50vh;
@@ -1436,12 +1436,12 @@ footer p {
 ========================================================== */
 
 ::selection {
-    background: rgba(139, 92, 246, 0.38);
+    background: rgba(123, 191, 69, 0.38);
     color: #ffffff;
 }
 
 ::-moz-selection {
-    background: rgba(139, 92, 246, 0.38);
+    background: rgba(123, 191, 69, 0.38);
     color: #ffffff;
 }
 
@@ -1453,7 +1453,7 @@ footer p {
 html {
     scrollbar-width: thin;
     scrollbar-color:
-        rgba(139, 92, 246, 0.55)
+        rgba(123, 191, 69, 0.55)
         #09070f;
 }
 
@@ -1482,8 +1482,8 @@ html {
     background:
         linear-gradient(
             180deg,
-            #8b5cf6,
-            #a855f7
+            #7bbf45,
+            #93d84f
         );
 }
 
@@ -1516,7 +1516,7 @@ body::before {
         ),
         radial-gradient(
             circle at 85% 45%,
-            rgba(168, 85, 247, 0.035),
+            rgba(147, 216, 79, 0.035),
             transparent 30%
         ),
         radial-gradient(
@@ -1594,7 +1594,7 @@ body::after {
         linear-gradient(
             90deg,
             transparent,
-            rgba(139, 92, 246, 0.35),
+            rgba(123, 191, 69, 0.35),
             transparent
         );
 
@@ -1606,7 +1606,7 @@ body::after {
         rgba(8, 6, 13, 0.97);
 
     border-color:
-        rgba(139, 92, 246, 0.10);
+        rgba(123, 191, 69, 0.10);
 
     box-shadow:
         0 12px 45px
@@ -1640,12 +1640,12 @@ body::after {
         linear-gradient(
             90deg,
             #7c3aed,
-            #a855f7
+            #93d84f
         );
 
     box-shadow:
         0 0 12px
-        rgba(139, 92, 246, 0.5);
+        rgba(123, 191, 69, 0.5);
 
     transition:
         width 0.2s ease;
@@ -1679,11 +1679,11 @@ body::after {
     -webkit-text-fill-color: transparent;
 
     animation:
-        unionBrandShimmer
+        districtBrandShimmer
         7s linear infinite;
 }
 
-@keyframes unionBrandShimmer {
+@keyframes districtBrandShimmer {
     0% {
         background-position:
             200% center;
@@ -1764,7 +1764,7 @@ body::after {
         0 14px 42px
         rgba(124, 58, 237, 0.34),
         0 0 0 1px
-        rgba(168, 85, 247, 0.08);
+        rgba(147, 216, 79, 0.08);
 }
 
 .btn.secondary:hover {
@@ -1783,11 +1783,11 @@ body::after {
 
 .hero-overlay {
     animation:
-        unionHeroGlow
+        districtHeroGlow
         9s ease-in-out infinite;
 }
 
-@keyframes unionHeroGlow {
+@keyframes districtHeroGlow {
     0%,
     100% {
         transform:
@@ -1819,11 +1819,11 @@ body::after {
         rgba(124, 58, 237, 0.08);
 
     animation:
-        unionBadgeFloat
+        districtBadgeFloat
         5s ease-in-out infinite;
 }
 
-@keyframes unionBadgeFloat {
+@keyframes districtBadgeFloat {
     0%,
     100% {
         transform:
@@ -1848,11 +1848,11 @@ body::after {
         180% auto;
 
     animation:
-        unionHeroText
+        districtHeroText
         7s ease-in-out infinite;
 }
 
-@keyframes unionHeroText {
+@keyframes districtHeroText {
     0%,
     100% {
         background-position:
@@ -1893,7 +1893,7 @@ body::after {
         translateY(-5px);
 
     border-color:
-        rgba(139, 92, 246, 0.24);
+        rgba(123, 191, 69, 0.24);
 
     box-shadow:
         0 22px 55px
@@ -1919,7 +1919,7 @@ body::after {
             500px circle
             at var(--card-x, 50%)
             var(--card-y, 50%),
-            rgba(139, 92, 246, 0.10),
+            rgba(123, 191, 69, 0.10),
             transparent 45%
         );
 
@@ -1939,7 +1939,7 @@ body::after {
         translateY(-3px);
 
     border-color:
-        rgba(139, 92, 246, 0.22);
+        rgba(123, 191, 69, 0.22);
 
     box-shadow:
         0 18px 45px
@@ -1948,7 +1948,7 @@ body::after {
 
 .dashboard-applications-panel:hover {
     border-color:
-        rgba(139, 92, 246, 0.16);
+        rgba(123, 191, 69, 0.16);
 }
 
 .dashboard-application-row:hover {
@@ -1968,7 +1968,7 @@ body::after {
         translateY(-2px);
 
     border-color:
-        rgba(139, 92, 246, 0.18);
+        rgba(123, 191, 69, 0.18);
 
     box-shadow:
         0 14px 38px
@@ -2065,7 +2065,7 @@ textarea:focus,
 select:focus {
     box-shadow:
         0 0 0 3px
-        rgba(139, 92, 246, 0.07);
+        rgba(123, 191, 69, 0.07);
 }
 
 
@@ -2099,7 +2099,7 @@ select:focus {
     border-radius: 50%;
 
     background:
-        rgba(139, 92, 246, 0.18);
+        rgba(123, 191, 69, 0.18);
 
     filter:
         blur(80px);
@@ -2109,7 +2109,7 @@ select:focus {
 
 .cta-content:hover {
     border-color:
-        rgba(168, 85, 247, 0.35);
+        rgba(147, 216, 79, 0.35);
 
     box-shadow:
         0 25px 70px
@@ -2143,7 +2143,7 @@ footer::before {
         linear-gradient(
             90deg,
             transparent,
-            rgba(139, 92, 246, 0.32),
+            rgba(123, 191, 69, 0.32),
             transparent
         );
 }
@@ -2153,7 +2153,7 @@ footer::before {
    PAGE LOAD ANIMATION
 ========================================================== */
 
-@keyframes unionPageEntrance {
+@keyframes districtPageEntrance {
     from {
         opacity: 0;
         transform:
@@ -2169,7 +2169,7 @@ footer::before {
 
 main {
     animation:
-        unionPageEntrance
+        districtPageEntrance
         0.5s ease both;
 }
 
@@ -2182,7 +2182,7 @@ main {
 .dashboard-header > .dashboard-container,
 .section-heading {
     animation:
-        unionHeadingEntrance
+        districtHeadingEntrance
         0.65s
         cubic-bezier(
             0.2,
@@ -2193,7 +2193,7 @@ main {
         both;
 }
 
-@keyframes unionHeadingEntrance {
+@keyframes districtHeadingEntrance {
     from {
         opacity: 0;
 
@@ -2218,7 +2218,7 @@ main {
 
 .feature-card {
     animation:
-        unionCardEntrance
+        districtCardEntrance
         0.6s ease both;
 }
 
@@ -2237,7 +2237,7 @@ main {
         0.19s;
 }
 
-@keyframes unionCardEntrance {
+@keyframes districtCardEntrance {
     from {
         opacity: 0;
 
@@ -2258,7 +2258,7 @@ main {
    LOADING SHIMMER UTILITY
 ========================================================== */
 
-.union-skeleton {
+.district-skeleton {
     position: relative;
 
     overflow: hidden;
@@ -2269,7 +2269,7 @@ main {
         rgba(255, 255, 255, 0.035);
 }
 
-.union-skeleton::after {
+.district-skeleton::after {
     content: "";
 
     position: absolute;
@@ -2287,11 +2287,11 @@ main {
         );
 
     animation:
-        unionSkeleton
+        districtSkeleton
         1.5s infinite;
 }
 
-@keyframes unionSkeleton {
+@keyframes districtSkeleton {
     100% {
         transform:
             translateX(100%);
@@ -2330,35 +2330,35 @@ main {
     }
 }
 /* ==========================================================
-   UNION ROLEPLAY - DARK NEUTRAL THEME OVERRIDES
+   THE DISTRICT - DARK NEUTRAL THEME OVERRIDES
 ========================================================== */
 
 :root {
-    --union-bg: #08090c;
-    --union-bg-soft: #0c0d11;
+    --district-bg: #08090c;
+    --district-bg-soft: #0c0d11;
 
-    --union-surface: #111216;
-    --union-surface-raised: #15161b;
-    --union-surface-hover: #191a20;
+    --district-surface: #111216;
+    --district-surface-raised: #15161b;
+    --district-surface-hover: #191a20;
 
-    --union-border: rgba(255, 255, 255, 0.07);
-    --union-border-strong: rgba(255, 255, 255, 0.11);
+    --district-border: rgba(255, 255, 255, 0.07);
+    --district-border-strong: rgba(255, 255, 255, 0.11);
 
-    --union-text: #f4f4f5;
-    --union-text-soft: #c7c8ce;
-    --union-muted: #858791;
+    --district-text: #f4f4f5;
+    --district-text-soft: #c7c8ce;
+    --district-muted: #858791;
 
-    --union-accent: #8b5cf6;
-    --union-accent-bright: #a78bfa;
-    --union-accent-soft: rgba(139, 92, 246, 0.10);
+    --district-accent: #7bbf45;
+    --district-accent-bright: #a7e06f;
+    --district-accent-soft: rgba(123, 191, 69, 0.10);
 }
 
 
 /* GLOBAL */
 
 body {
-    background: var(--union-bg);
-    color: var(--union-text);
+    background: var(--district-bg);
+    color: var(--district-text);
 }
 
 body::before {
@@ -2372,7 +2372,7 @@ body::before {
         ),
         radial-gradient(
             circle at 80% 20%,
-            rgba(139, 92, 246, 0.025),
+            rgba(123, 191, 69, 0.025),
             transparent 30%
         );
 }
@@ -2390,7 +2390,7 @@ body::after {
 
     border-bottom:
         1px solid
-        var(--union-border);
+        var(--district-border);
 
     box-shadow: none;
 }
@@ -2400,7 +2400,7 @@ body::after {
         rgba(8, 9, 12, 0.98);
 
     border-color:
-        var(--union-border);
+        var(--district-border);
 
     box-shadow:
         0 12px 35px
@@ -2438,7 +2438,7 @@ body::after {
 }
 
 .navbar-link::after {
-    background: var(--union-accent);
+    background: var(--district-accent);
 
     box-shadow: none;
 }
@@ -2455,7 +2455,7 @@ body::after {
         ),
         radial-gradient(
             circle at 80% 30%,
-            rgba(139, 92, 246, 0.04),
+            rgba(123, 191, 69, 0.04),
             transparent 32%
         ),
         linear-gradient(
@@ -2469,7 +2469,7 @@ body::after {
     opacity: 0.22;
 
     background:
-        rgba(139, 92, 246, 0.06);
+        rgba(123, 191, 69, 0.06);
 
     filter: blur(110px);
 }
@@ -2532,7 +2532,7 @@ body::after {
 .btn.primary:hover,
 .navbar-actions .btn.primary:hover {
     background:
-        #8b5cf6;
+        #7bbf45;
 
     box-shadow:
         0 12px 28px
@@ -2565,7 +2565,7 @@ body::after {
 
 .features {
     background:
-        var(--union-bg);
+        var(--district-bg);
 }
 
 .feature-card {
@@ -2575,10 +2575,10 @@ body::after {
             rgba(255, 255, 255, 0.022),
             rgba(255, 255, 255, 0.008)
         ),
-        var(--union-surface);
+        var(--district-surface);
 
     border-color:
-        var(--union-border);
+        var(--district-border);
 
     box-shadow:
         0 10px 30px
@@ -2603,7 +2603,7 @@ body::after {
 
 .feature-card::after {
     background:
-        rgba(139, 92, 246, 0.055);
+        rgba(123, 191, 69, 0.055);
 }
 
 .feature-number {
@@ -2649,12 +2649,12 @@ body::after {
 
 .cta {
     background:
-        var(--union-bg);
+        var(--district-bg);
 }
 
 .cta-content {
     border-color:
-        var(--union-border);
+        var(--district-border);
 
     background:
         linear-gradient(
@@ -2692,7 +2692,7 @@ body::after {
             rgba(255, 255, 255, 0.025),
             transparent 28%
         ),
-        var(--union-bg);
+        var(--district-bg);
 }
 
 .dashboard-card,
@@ -2703,16 +2703,16 @@ body::after {
             rgba(255, 255, 255, 0.02),
             rgba(255, 255, 255, 0.007)
         ),
-        var(--union-surface);
+        var(--district-surface);
 
     border-color:
-        var(--union-border);
+        var(--district-border);
 }
 
 .dashboard-card:hover,
 .dashboard-applications-panel:hover {
     border-color:
-        var(--union-border-strong);
+        var(--district-border-strong);
 
     box-shadow:
         0 16px 40px
@@ -2721,7 +2721,7 @@ body::after {
 
 .dashboard-link {
     color:
-        #a78bfa;
+        #a7e06f;
 }
 
 .dashboard-link:hover {
@@ -2753,7 +2753,7 @@ body::after {
 
 .staff-shell {
     background:
-        var(--union-bg);
+        var(--district-bg);
 }
 
 .staff-sidebar {
@@ -2761,26 +2761,26 @@ body::after {
         #0d0e12;
 
     border-color:
-        var(--union-border);
+        var(--district-border);
 }
 
 .staff-nav-item.active {
     background:
-        rgba(139, 92, 246, 0.08);
+        rgba(123, 191, 69, 0.08);
 
     box-shadow:
         inset 3px 0 0
-        var(--union-accent);
+        var(--district-accent);
 }
 
 .staff-stat,
 .staff-dashboard-panel,
 #staffQueueView {
     background:
-        var(--union-surface);
+        var(--district-surface);
 
     border-color:
-        var(--union-border);
+        var(--district-border);
 }
 
 .staff-stat:hover {
@@ -2812,11 +2812,11 @@ input:focus,
 textarea:focus,
 select:focus {
     border-color:
-        rgba(139, 92, 246, 0.35);
+        rgba(123, 191, 69, 0.35);
 
     box-shadow:
         0 0 0 3px
-        rgba(139, 92, 246, 0.045);
+        rgba(123, 191, 69, 0.045);
 }
 
 
@@ -2827,7 +2827,7 @@ footer {
         #07080a;
 
     border-color:
-        var(--union-border);
+        var(--district-border);
 }
 
 footer::before {
@@ -2843,7 +2843,7 @@ footer::before {
         );
 }
 /* ==========================================================
-   UNION ROLEPLAY - ADVANCED HOMEPAGE HERO
+   THE DISTRICT - ADVANCED HOMEPAGE HERO
 ========================================================== */
 
 .hero {
@@ -2928,7 +2928,7 @@ footer::before {
     top: 20%;
 
     background:
-        rgba(139, 92, 246, 0.055);
+        rgba(123, 191, 69, 0.055);
 }
 
 
@@ -3224,7 +3224,7 @@ footer::before {
     height: 12px;
 
     background:
-        #8b5cf6;
+        #7bbf45;
 
     animation:
         heroScrollPulse
@@ -3677,13 +3677,13 @@ footer::before {
 
 .home-info-item:hover > span {
     color:
-        #a78bfa;
+        #a7e06f;
 
     border-color:
-        rgba(139, 92, 246, 0.18);
+        rgba(123, 191, 69, 0.18);
 
     background:
-        rgba(139, 92, 246, 0.05);
+        rgba(123, 191, 69, 0.05);
 }
 
 
@@ -3833,10 +3833,10 @@ footer::before {
         translateY(-2px);
 
     border-color:
-        rgba(139, 92, 246, 0.18);
+        rgba(123, 191, 69, 0.18);
 
     background:
-        rgba(139, 92, 246, 0.055);
+        rgba(123, 191, 69, 0.055);
 }
 
 
@@ -3983,7 +3983,7 @@ footer::before {
         scale(1.25);
 
     background:
-        rgba(139, 92, 246, 0.035);
+        rgba(123, 191, 69, 0.035);
 }
 
 
@@ -4138,7 +4138,7 @@ footer::before {
 .cta h2 strong {
     display: block;
 
-    color: #a78bfa;
+    color: #a7e06f;
 
     font-weight: inherit;
 }
@@ -4244,7 +4244,7 @@ footer::before {
         linear-gradient(
             90deg,
             transparent,
-            rgba(167, 139, 250, 0.75),
+            rgba(167, 224, 111, 0.75),
             transparent
         );
 }
@@ -4297,7 +4297,7 @@ footer::before {
         ),
         radial-gradient(
             circle at 85% 0%,
-            rgba(139, 92, 246, 0.035),
+            rgba(123, 191, 69, 0.035),
             transparent 28%
         ),
         #090a0d;
@@ -5033,7 +5033,7 @@ footer::before {
         999px;
 
     background:
-        rgba(139, 92, 246, 0.75);
+        rgba(123, 191, 69, 0.75);
 
     transition:
         height 0.18s ease;
@@ -5074,13 +5074,13 @@ footer::before {
 
 .dashboard-overview-item:hover > span {
     color:
-        #a78bfa;
+        #a7e06f;
 
     border-color:
-        rgba(139, 92, 246, 0.16);
+        rgba(123, 191, 69, 0.16);
 
     background:
-        rgba(139, 92, 246, 0.04);
+        rgba(123, 191, 69, 0.04);
 }
 
 
@@ -5123,7 +5123,7 @@ footer::before {
     }
 }
 
-/* UNION MOBILE FOUNDATION */
+/* DISTRICT MOBILE FOUNDATION */
 html, body { overflow-x: hidden; }
 img, video, iframe, canvas, svg { max-width: 100%; }
 button, input, select, textarea, a { -webkit-tap-highlight-color: transparent; }

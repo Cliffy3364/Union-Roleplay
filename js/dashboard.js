@@ -5,7 +5,7 @@ const DASHBOARD_API =
 async function dashboardFetch(path) {
 
     const token =
-        localStorage.getItem("union_session");
+        localStorage.getItem("district_session");
 
     if (!token) {
         throw new Error("Not logged in.");
@@ -220,14 +220,14 @@ document.addEventListener(
     "DOMContentLoaded",
     async () => {
 
-        if (!window.UnionAuth) {
+        if (!window.DistrictAuth) {
             return;
         }
 
         try {
 
             const user =
-                await UnionAuth.getCurrentUser();
+                await DistrictAuth.getCurrentUser();
 
             const accountButton =
                 document.getElementById(
@@ -276,7 +276,7 @@ document.addEventListener(
                     user.discord_display_name ||
                     user.discord_username ||
                     user.username ||
-                    "Union Member";
+                    "District Member";
             }
 
 
@@ -284,7 +284,7 @@ document.addEventListener(
 
                 subtitle.textContent =
                     user.union_id ||
-                    "Union Roleplay Member";
+                    "District Member";
             }
 
 

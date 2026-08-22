@@ -358,7 +358,7 @@ let selectedGlobalDisciplineRecord = null;
 function getToken() {
 
     return localStorage.getItem(
-        "union_session"
+        "district_session"
     );
 }
 
@@ -916,7 +916,7 @@ function showDashboard() {
     if (description) {
 
         description.textContent =
-            "Review applications and manage the Union Roleplay community.";
+            "Review applications and manage The District community.";
     }
 
 
@@ -1071,7 +1071,7 @@ function showStaffDiscipline() {
     if (description) {
 
         description.textContent =
-            "Create and review formal disciplinary records for Union Roleplay players.";
+            "Create and review formal disciplinary records for The District players.";
     }
 
 
@@ -1387,7 +1387,7 @@ function renderGlobalDisciplineRecords(
                                 <small>
                                     ${escapeHtml(
                                         record.union_id ||
-                                        "No Union ID"
+                                        "No District ID"
                                     )}
                                     ·
                                     ${escapeHtml(
@@ -1418,7 +1418,7 @@ function renderGlobalDisciplineRecords(
                                 <strong>
                                     ${escapeHtml(
                                         record.issued_by_name ||
-                                        "Union Staff"
+                                        "District Staff"
                                     )}
                                 </strong>
 
@@ -1635,7 +1635,7 @@ function renderGlobalDisciplineDetail(
             <small>
                 ${escapeHtml(
                     record.union_id ||
-                    "No Union ID"
+                    "No District ID"
                 )}
                 ·
                 ${escapeHtml(
@@ -1684,7 +1684,7 @@ function renderGlobalDisciplineDetail(
                 <strong>
                     ${escapeHtml(
                         record.issued_by_name ||
-                        "Union Staff"
+                        "District Staff"
                     )}
                 </strong>
             </div>
@@ -2882,7 +2882,7 @@ function renderDisciplineHistory(
                                     By
                                     ${escapeHtml(
                                         record.issued_by_name ||
-                                        "Union Staff"
+                                        "District Staff"
                                     )}
                                 </span>
 
@@ -3561,7 +3561,7 @@ function showApplicationManagement() {
 
     if (title) title.textContent = "Application Management";
     if (description) description.textContent =
-        "Control which Union Roleplay applications are currently accepting submissions.";
+        "Control which The District applications are currently accepting submissions.";
 
     setTopSearch("",false);
     loadApplicationManagement();
@@ -3946,7 +3946,7 @@ function ensureRuleSearchUI() {
                             <h2>Possible Rule Breaches</h2>
                             <p>
                                 Describe what happened. The system will compare the incident
-                                against the official Union Roleplay rulebook.
+                                against the official The District rulebook.
                             </p>
                         </div>
 
@@ -4087,7 +4087,7 @@ function loadRuleSearchRulebook() {
 
                 const existing =
                     document.querySelector(
-                        'script[data-union-rulebook]'
+                        'script[data-district-rulebook]'
                     );
 
 
@@ -4127,7 +4127,7 @@ function loadRuleSearchRulebook() {
                 script.src =
                     "../js/rules.js";
 
-                script.dataset.unionRulebook =
+                script.dataset.districtRulebook =
                     "true";
 
                 script.onload =
@@ -4145,7 +4145,7 @@ function loadRuleSearchRulebook() {
 
                         reject(
                             new Error(
-                                "The Union rulebook could not be loaded."
+                                "The District rulebook could not be loaded."
                             )
                         );
                     };
@@ -4943,7 +4943,7 @@ function showRuleSearch() {
     if (description) {
 
         description.textContent =
-            "Describe an incident and compare it against the official Union Roleplay rulebook.";
+            "Describe an incident and compare it against the official The District rulebook.";
     }
 
 
@@ -5547,7 +5547,7 @@ function renderQueue(applications) {
 
                                     ${escapeHtml(
                                         app.union_id ||
-                                        "No Union ID"
+                                        "No District ID"
                                     )}
 
                                     ·
@@ -5875,7 +5875,7 @@ function renderMemberSearchResults(
                 </h3>
 
                 <p>
-                    Try searching with a Union ID,
+                    Try searching with a District ID,
                     Discord username or Discord ID.
                 </p>
 
@@ -5924,7 +5924,7 @@ function renderMemberSearchResults(
                                 <span>
                                     ${escapeHtml(
                                         member.union_id ||
-                                        "No Union ID"
+                                        "No District ID"
                                     )}
                                 </span>
 
@@ -6154,7 +6154,7 @@ function renderMemberNotes(notes) {
                         <strong>
                             ${escapeHtml(
                                 note.actor_name ||
-                                "Union Staff"
+                                "District Staff"
                             )}
                         </strong>
 
@@ -6293,7 +6293,7 @@ async function loadMemberProfile(
                     <p>
                         ${escapeHtml(
                             member.union_id ||
-                            "No Union ID"
+                            "No District ID"
                         )}
                     </p>
 
@@ -6308,7 +6308,7 @@ async function loadMemberProfile(
                 <div>
 
                     <span>
-                        Union ID
+                        District ID
                     </span>
 
                     <strong>
@@ -6723,7 +6723,7 @@ document.addEventListener(
             );
 
 
-        if (!window.UnionAuth) {
+        if (!window.DistrictAuth) {
 
             if (loading) {
 
@@ -6742,7 +6742,7 @@ document.addEventListener(
 
 
         const user =
-            await UnionAuth.getCurrentUser();
+            await DistrictAuth.getCurrentUser();
 
 
         if (loading) {
@@ -7816,12 +7816,12 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "01",
         "title": "General Staff Expectations",
-        "description": "Union Roleplay staff requirements covering general staff expectations.",
+        "description": "The District staff requirements covering general staff expectations.",
         "rules": [
             {
                 "id": "SR 01.1",
                 "title": "Professional Standard",
-                "text": "Every staff member represents Union Roleplay while holding a staff role. Staff must use good judgement, support the community and maintain a professional standard at all times."
+                "text": "Every staff member represents The District while holding a staff role. Staff must use good judgement, support the community and maintain a professional standard at all times."
             },
             {
                 "id": "SR 01.2",
@@ -7838,7 +7838,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "02",
         "title": "Staff Conduct",
-        "description": "Union Roleplay staff requirements covering staff conduct.",
+        "description": "The District staff requirements covering staff conduct.",
         "rules": [
             {
                 "id": "SR 02.1",
@@ -7860,7 +7860,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "03",
         "title": "Staff Activity",
-        "description": "Union Roleplay staff requirements covering staff activity.",
+        "description": "The District staff requirements covering staff activity.",
         "rules": [
             {
                 "id": "SR 03.1",
@@ -7882,7 +7882,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "04",
         "title": "Staff Permissions and Powers",
-        "description": "Union Roleplay staff requirements covering staff permissions and powers.",
+        "description": "The District staff requirements covering staff permissions and powers.",
         "rules": [
             {
                 "id": "SR 04.1",
@@ -7904,7 +7904,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "05",
         "title": "Ticket Handling",
-        "description": "Union Roleplay staff requirements covering ticket handling.",
+        "description": "The District staff requirements covering ticket handling.",
         "rules": [
             {
                 "id": "SR 05.1",
@@ -7931,7 +7931,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "06",
         "title": "Leave of Absence",
-        "description": "Union Roleplay staff requirements covering leave of absence.",
+        "description": "The District staff requirements covering leave of absence.",
         "rules": [
             {
                 "id": "SR 06.1",
@@ -7958,7 +7958,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "07",
         "title": "Disciplinary Procedure",
-        "description": "Union Roleplay staff requirements covering disciplinary procedure.",
+        "description": "The District staff requirements covering disciplinary procedure.",
         "rules": [
             {
                 "id": "SR 07.1",
@@ -7980,7 +7980,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "08",
         "title": "Disciplinary Reports",
-        "description": "Union Roleplay staff requirements covering disciplinary reports.",
+        "description": "The District staff requirements covering disciplinary reports.",
         "rules": [
             {
                 "id": "SR 08.1",
@@ -8002,7 +8002,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "09",
         "title": "Staff Complaints",
-        "description": "Union Roleplay staff requirements covering staff complaints.",
+        "description": "The District staff requirements covering staff complaints.",
         "rules": [
             {
                 "id": "SR 09.1",
@@ -8024,7 +8024,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "10",
         "title": "Staff Reports",
-        "description": "Union Roleplay staff requirements covering staff reports.",
+        "description": "The District staff requirements covering staff reports.",
         "rules": [
             {
                 "id": "SR 10.1",
@@ -8041,7 +8041,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "11",
         "title": "Escalation Procedures",
-        "description": "Union Roleplay staff requirements covering escalation procedures.",
+        "description": "The District staff requirements covering escalation procedures.",
         "rules": [
             {
                 "id": "SR 11.1",
@@ -8058,7 +8058,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "12",
         "title": "Chain of Command",
-        "description": "Union Roleplay staff requirements covering chain of command.",
+        "description": "The District staff requirements covering chain of command.",
         "rules": [
             {
                 "id": "SR 12.1",
@@ -8075,7 +8075,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "13",
         "title": "Staff Communication",
-        "description": "Union Roleplay staff requirements covering staff communication.",
+        "description": "The District staff requirements covering staff communication.",
         "rules": [
             {
                 "id": "SR 13.1",
@@ -8097,7 +8097,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "14",
         "title": "Confidentiality",
-        "description": "Union Roleplay staff requirements covering confidentiality.",
+        "description": "The District staff requirements covering confidentiality.",
         "rules": [
             {
                 "id": "SR 14.1",
@@ -8119,7 +8119,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "15",
         "title": "Conflict of Interest",
-        "description": "Union Roleplay staff requirements covering conflict of interest.",
+        "description": "The District staff requirements covering conflict of interest.",
         "rules": [
             {
                 "id": "SR 15.1",
@@ -8141,7 +8141,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "16",
         "title": "Favouritism",
-        "description": "Union Roleplay staff requirements covering favouritism.",
+        "description": "The District staff requirements covering favouritism.",
         "rules": [
             {
                 "id": "SR 16.1",
@@ -8158,7 +8158,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "17",
         "title": "In Game Staff Conduct",
-        "description": "Union Roleplay staff requirements covering in game staff conduct.",
+        "description": "The District staff requirements covering in game staff conduct.",
         "rules": [
             {
                 "id": "SR 17.1",
@@ -8180,7 +8180,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "18",
         "title": "Staff Commands",
-        "description": "Union Roleplay staff requirements covering staff commands.",
+        "description": "The District staff requirements covering staff commands.",
         "rules": [
             {
                 "id": "SR 18.1",
@@ -8202,7 +8202,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "19",
         "title": "Staff Punishments",
-        "description": "Union Roleplay staff requirements covering staff punishments.",
+        "description": "The District staff requirements covering staff punishments.",
         "rules": [
             {
                 "id": "SR 19.1",
@@ -8224,7 +8224,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "20",
         "title": "Evidence Handling",
-        "description": "Union Roleplay staff requirements covering evidence handling.",
+        "description": "The District staff requirements covering evidence handling.",
         "rules": [
             {
                 "id": "SR 20.1",
@@ -8246,7 +8246,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "21",
         "title": "Staff Meetings",
-        "description": "Union Roleplay staff requirements covering staff meetings.",
+        "description": "The District staff requirements covering staff meetings.",
         "rules": [
             {
                 "id": "SR 21.1",
@@ -8268,7 +8268,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "22",
         "title": "Staff Training",
-        "description": "Union Roleplay staff requirements covering staff training.",
+        "description": "The District staff requirements covering staff training.",
         "rules": [
             {
                 "id": "SR 22.1",
@@ -8290,7 +8290,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "23",
         "title": "Promotions",
-        "description": "Union Roleplay staff requirements covering promotions.",
+        "description": "The District staff requirements covering promotions.",
         "rules": [
             {
                 "id": "SR 23.1",
@@ -8312,7 +8312,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "24",
         "title": "Demotions",
-        "description": "Union Roleplay staff requirements covering demotions.",
+        "description": "The District staff requirements covering demotions.",
         "rules": [
             {
                 "id": "SR 24.1",
@@ -8329,7 +8329,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "25",
         "title": "Staff Strikes and Warnings",
-        "description": "Union Roleplay staff requirements covering staff strikes and warnings.",
+        "description": "The District staff requirements covering staff strikes and warnings.",
         "rules": [
             {
                 "id": "SR 25.1",
@@ -8351,7 +8351,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "26",
         "title": "Staff Suspensions",
-        "description": "Union Roleplay staff requirements covering staff suspensions.",
+        "description": "The District staff requirements covering staff suspensions.",
         "rules": [
             {
                 "id": "SR 26.1",
@@ -8368,7 +8368,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "27",
         "title": "Resignations",
-        "description": "Union Roleplay staff requirements covering resignations.",
+        "description": "The District staff requirements covering resignations.",
         "rules": [
             {
                 "id": "SR 27.1",
@@ -8390,7 +8390,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "28",
         "title": "Staff Removal",
-        "description": "Union Roleplay staff requirements covering staff removal.",
+        "description": "The District staff requirements covering staff removal.",
         "rules": [
             {
                 "id": "SR 28.1",
@@ -8407,7 +8407,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "29",
         "title": "Returning Staff",
-        "description": "Union Roleplay staff requirements covering returning staff.",
+        "description": "The District staff requirements covering returning staff.",
         "rules": [
             {
                 "id": "SR 29.1",
@@ -8429,7 +8429,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "30",
         "title": "Management Responsibilities",
-        "description": "Union Roleplay staff requirements covering management responsibilities.",
+        "description": "The District staff requirements covering management responsibilities.",
         "rules": [
             {
                 "id": "SR 30.1",
@@ -8451,7 +8451,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "31",
         "title": "Abuse of Staff Powers",
-        "description": "Union Roleplay staff requirements covering abuse of staff powers.",
+        "description": "The District staff requirements covering abuse of staff powers.",
         "rules": [
             {
                 "id": "SR 31.1",
@@ -8468,12 +8468,12 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "32",
         "title": "Social Media and Public Conduct",
-        "description": "Union Roleplay staff requirements covering social media and public conduct.",
+        "description": "The District staff requirements covering social media and public conduct.",
         "rules": [
             {
                 "id": "SR 32.1",
                 "title": "Public Representation",
-                "text": "Staff should avoid public conduct that seriously damages trust in Union Roleplay or the staff team."
+                "text": "Staff should avoid public conduct that seriously damages trust in The District or the staff team."
             },
             {
                 "id": "SR 32.2",
@@ -8483,14 +8483,14 @@ const STAFF_RULES_REGULATIONS = [
             {
                 "id": "SR 32.3",
                 "title": "Unofficial Statements",
-                "text": "Do not present personal opinions or unofficial statements as official Union Roleplay policy."
+                "text": "Do not present personal opinions or unofficial statements as official The District policy."
             }
         ]
     },
     {
         "section": "33",
         "title": "Staff Discord Conduct",
-        "description": "Union Roleplay staff requirements covering staff discord conduct.",
+        "description": "The District staff requirements covering staff discord conduct.",
         "rules": [
             {
                 "id": "SR 33.1",
@@ -8512,7 +8512,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "34",
         "title": "Staff Inactivity",
-        "description": "Union Roleplay staff requirements covering staff inactivity.",
+        "description": "The District staff requirements covering staff inactivity.",
         "rules": [
             {
                 "id": "SR 34.1",
@@ -8534,7 +8534,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "35",
         "title": "Staff LOA Abuse",
-        "description": "Union Roleplay staff requirements covering staff loa abuse.",
+        "description": "The District staff requirements covering staff loa abuse.",
         "rules": [
             {
                 "id": "SR 35.1",
@@ -8556,7 +8556,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "36",
         "title": "Staff Accountability",
-        "description": "Union Roleplay staff requirements covering staff accountability.",
+        "description": "The District staff requirements covering staff accountability.",
         "rules": [
             {
                 "id": "SR 36.1",
@@ -8578,7 +8578,7 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "37",
         "title": "Policy Breaches",
-        "description": "Union Roleplay staff requirements covering policy breaches.",
+        "description": "The District staff requirements covering policy breaches.",
         "rules": [
             {
                 "id": "SR 37.1",
@@ -8595,12 +8595,12 @@ const STAFF_RULES_REGULATIONS = [
     {
         "section": "38",
         "title": "Policy Updates and Changes",
-        "description": "Union Roleplay staff requirements covering policy updates and changes.",
+        "description": "The District staff requirements covering policy updates and changes.",
         "rules": [
             {
                 "id": "SR 38.1",
                 "title": "Rules Can Be Updated",
-                "text": "Union Roleplay may update staff rules and procedures as the server and staff systems develop."
+                "text": "The District may update staff rules and procedures as the server and staff systems develop."
             },
             {
                 "id": "SR 38.2",
@@ -8698,7 +8698,7 @@ function ensureStaffRulesUI() {
                     <span>INTERNAL DOCUMENT</span>
                     <h2>Staff Rules & Regulations</h2>
                     <p>
-                        These standards apply to every Union Roleplay staff member.
+                        These standards apply to every The District staff member.
                         Staff rank does not exempt anyone from these requirements.
                     </p>
                 </div>
@@ -9167,7 +9167,7 @@ function ensureStaffLoaUI(){
 function loaDate(v){if(!v)return 'Unknown'; const d=new Date(v+'T12:00:00'); return Number.isNaN(d.getTime())?v:d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});}
 function loaClass(v){v=String(v||'').toLowerCase(); return ['approved','declined','cancelled'].includes(v)?v:'pending';}
 async function loadMyLoa(){const t=document.getElementById('staffLoaHistory'); if(!t)return; t.innerHTML='<div class="member-management-empty"><h3>Loading...</h3></div>'; try{const d=await staffFetch('/api/staff/loa/me'), a=Array.isArray(d.requests)?d.requests:[]; if(!a.length){t.innerHTML='<div class="member-management-empty"><h3>No LOA requests</h3><p>Your requests will appear here.</p></div>';return;} t.innerHTML=a.map(x=>`<article class="staff-loa-card"><div class="staff-loa-card-head"><div><span>${escapeHtml(x.reference||'#'+x.id)}</span><strong>${loaDate(x.start_date)} → ${loaDate(x.end_date)}</strong></div><span class="staff-loa-status ${loaClass(x.status)}">${escapeHtml(x.status)}</span></div><p>${escapeHtml(x.reason||'')}</p>${x.review_response?`<div class="staff-loa-response"><span>RESPONSE</span><p>${escapeHtml(x.review_response)}</p></div>`:''}${['Pending','Approved'].includes(x.status)?`<button type="button" class="discipline-secondary-button" data-cancel-loa="${x.id}">Cancel Request</button>`:''}</article>`).join(''); t.querySelectorAll('[data-cancel-loa]').forEach(b=>b.addEventListener('click',async()=>{if(!confirm('Cancel this LOA request?'))return; await staffFetch(`/api/staff/loa/${b.dataset.cancelLoa}/cancel`,{method:'POST',body:'{}'}); await loadMyLoa(); if((Number(currentStaffPermissions?.staff_level || 0) >= 500))await loadLoaManagement();}));}catch(e){t.innerHTML=`<div class="member-management-empty"><h3>Unable to load LOA</h3><p>${escapeHtml(e.message||'Please try again.')}</p></div>`;}}
-async function loadLoaManagement(){const s=document.getElementById('staffLoaManagement'),t=document.getElementById('staffLoaManagementList'); if(!s||!t)return; if(!(Number(currentStaffPermissions?.staff_level || 0) >= 500)){s.hidden=true;return;} s.hidden=false; try{const d=await staffFetch('/api/staff/loa/manage'),a=Array.isArray(d.requests)?d.requests:[]; t.innerHTML=a.length?a.map(x=>`<article class="staff-loa-card"><div class="staff-loa-card-head"><div><span>${escapeHtml(x.reference||'#'+x.id)}</span><strong>${escapeHtml(x.staff_name||'Union Staff')} · ${escapeHtml(x.staff_role||'Staff')}</strong><small>${loaDate(x.start_date)} → ${loaDate(x.end_date)}</small></div><span class="staff-loa-status ${loaClass(x.status)}">${escapeHtml(x.status)}</span></div><p>${escapeHtml(x.reason||'')}</p>${x.notes?`<div class="staff-loa-response"><span>NOTES</span><p>${escapeHtml(x.notes)}</p></div>`:''}${x.status==='Pending'?`<div class="staff-loa-review"><textarea rows="3" data-loa-response="${x.id}" placeholder="Optional response..."></textarea><div><button class="discipline-secondary-button" data-loa-decline="${x.id}">Decline</button><button class="btn primary" data-loa-approve="${x.id}">Approve</button></div></div>`:''}</article>`).join(''):'<div class="member-management-empty"><h3>No LOA requests</h3></div>'; const review=async(id,status,b)=>{b.disabled=true; const r=t.querySelector(`[data-loa-response="${id}"]`)?.value||''; try{await staffFetch(`/api/staff/loa/${id}/review`,{method:'POST',body:JSON.stringify({status,response:r})}); await Promise.all([loadLoaManagement(),loadMyLoa()]);}catch(e){alert(e.message||'Unable to review LOA');b.disabled=false;}}; t.querySelectorAll('[data-loa-approve]').forEach(b=>b.addEventListener('click',()=>review(b.dataset.loaApprove,'Approved',b))); t.querySelectorAll('[data-loa-decline]').forEach(b=>b.addEventListener('click',()=>review(b.dataset.loaDecline,'Declined',b)));}catch(e){t.innerHTML=`<div class="member-management-empty"><h3>Unable to load requests</h3><p>${escapeHtml(e.message||'')}</p></div>`;}}
+async function loadLoaManagement(){const s=document.getElementById('staffLoaManagement'),t=document.getElementById('staffLoaManagementList'); if(!s||!t)return; if(!(Number(currentStaffPermissions?.staff_level || 0) >= 500)){s.hidden=true;return;} s.hidden=false; try{const d=await staffFetch('/api/staff/loa/manage'),a=Array.isArray(d.requests)?d.requests:[]; t.innerHTML=a.length?a.map(x=>`<article class="staff-loa-card"><div class="staff-loa-card-head"><div><span>${escapeHtml(x.reference||'#'+x.id)}</span><strong>${escapeHtml(x.staff_name||'District Staff')} · ${escapeHtml(x.staff_role||'Staff')}</strong><small>${loaDate(x.start_date)} → ${loaDate(x.end_date)}</small></div><span class="staff-loa-status ${loaClass(x.status)}">${escapeHtml(x.status)}</span></div><p>${escapeHtml(x.reason||'')}</p>${x.notes?`<div class="staff-loa-response"><span>NOTES</span><p>${escapeHtml(x.notes)}</p></div>`:''}${x.status==='Pending'?`<div class="staff-loa-review"><textarea rows="3" data-loa-response="${x.id}" placeholder="Optional response..."></textarea><div><button class="discipline-secondary-button" data-loa-decline="${x.id}">Decline</button><button class="btn primary" data-loa-approve="${x.id}">Approve</button></div></div>`:''}</article>`).join(''):'<div class="member-management-empty"><h3>No LOA requests</h3></div>'; const review=async(id,status,b)=>{b.disabled=true; const r=t.querySelector(`[data-loa-response="${id}"]`)?.value||''; try{await staffFetch(`/api/staff/loa/${id}/review`,{method:'POST',body:JSON.stringify({status,response:r})}); await Promise.all([loadLoaManagement(),loadMyLoa()]);}catch(e){alert(e.message||'Unable to review LOA');b.disabled=false;}}; t.querySelectorAll('[data-loa-approve]').forEach(b=>b.addEventListener('click',()=>review(b.dataset.loaApprove,'Approved',b))); t.querySelectorAll('[data-loa-decline]').forEach(b=>b.addEventListener('click',()=>review(b.dataset.loaDecline,'Declined',b)));}catch(e){t.innerHTML=`<div class="member-management-empty"><h3>Unable to load requests</h3><p>${escapeHtml(e.message||'')}</p></div>`;}}
 function showStaffLoa(){hideAllViews(); const v=document.getElementById('staffLoaView'); if(v)v.hidden=false; const t=document.getElementById('staffPageTitle'),d=document.getElementById('staffPageDescription'); if(t)t.textContent='Leave of Absence'; if(d)d.textContent='Submit and track your own staff LOA requests.'; setTopSearch('',false); loadMyLoa(); if((Number(currentStaffPermissions?.staff_level || 0) >= 500))loadLoaManagement();}
 function setupStaffLoa(){
     ensureStaffLoaUI();
