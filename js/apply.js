@@ -412,6 +412,96 @@ const APPLICATION_CONFIG = {
 
 
     /* ==========================================================
+       STREAMER APPLICATION
+    ========================================================== */
+
+    "Streamer Application": {
+
+        title:
+            "Streamer Application",
+
+        description:
+            "Apply to join The District creator network as an official streamer. We are looking for consistent creators who can represent the community professionally and produce enjoyable FiveM content.",
+
+        questions: [
+
+            {
+                key: "age",
+                label:
+                    "How old are you?",
+                type: "number",
+                required: true
+            },
+
+            {
+                key: "channelDetails",
+                label:
+                    "What name do you create content under, which platform or platforms do you stream on, and what are your channel links?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "streamingExperience",
+                label:
+                    "Tell us about your previous streaming or content creation experience, including the type of content you normally create.",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "audience",
+                label:
+                    "Tell us about your current audience. Include your approximate follower count, average live viewers or typical video views where relevant.",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "contentStyle",
+                label:
+                    "What type of content would you create in The District, and how would you make your streams entertaining without damaging serious roleplay?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "communityStandards",
+                label:
+                    "As an official creator you would represent The District publicly. How would you handle rule breaks, conflict, stream sniping or other situations that could affect the community's reputation?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "schedule",
+                label:
+                    "How often do you currently stream, and how frequently could you realistically create content in The District?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "clips",
+                label:
+                    "Provide links to at least three examples of your previous streams, clips, videos or other content that best represents your work.",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "whyCreator",
+                label:
+                    "Why do you want to become an official streamer for The District, and what would you bring to the creator programme?",
+                type: "textarea",
+                required: true
+            }
+
+        ]
+    },
+
+
+    /* ==========================================================
        SCRIPT DEVELOPER
     ========================================================== */
 
@@ -892,6 +982,18 @@ const APPLICATION_MINIMUM_LENGTHS = {
         feedback: 150,
         availability: 100
     },
+
+    "Streamer Application": {
+        channelDetails: 80,
+        streamingExperience: 140,
+        audience: 80,
+        contentStyle: 180,
+        communityStandards: 180,
+        schedule: 100,
+        clips: 80,
+        whyCreator: 160
+    },
+
 
     "Script Developer Application": {
         experience: 150,

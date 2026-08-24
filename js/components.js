@@ -37,6 +37,8 @@ async function loadNavbar() {
         navbar.innerHTML =
             await response.text();
 
+        setActiveNavbarLink();
+
         await setupNavbarUser();
 
         setupMobileNavbar();
@@ -48,6 +50,46 @@ async function loadNavbar() {
             error
         );
     }
+}
+
+
+function setActiveNavbarLink() {
+
+    const currentPath =
+        window.location.pathname
+            .replace(/\/+$/, "") ||
+        "/index.html";
+
+    document
+        .querySelectorAll(
+            "#navbar .navbar-link"
+        )
+        .forEach(link => {
+
+            const linkPath =
+                new URL(
+                    link.href,
+                    window.location.origin
+                ).pathname
+                    .replace(/\/+$/, "");
+
+            const homeMatch =
+                (
+                    currentPath === "" ||
+                    currentPath === "/" ||
+                    currentPath === "/index.html"
+                ) &&
+                (
+                    linkPath === "/" ||
+                    linkPath === "/index.html"
+                );
+
+            link.classList.toggle(
+                "active",
+                homeMatch ||
+                linkPath === currentPath
+            );
+        });
 }
 
 

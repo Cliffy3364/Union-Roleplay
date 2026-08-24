@@ -1,0 +1,863 @@
+/* ==========================================================
+   THE DISTRICT - CREATORS
+========================================================== */
+
+.creators-page {
+    min-height: 100vh;
+    padding-top: 76px;
+    background:
+        radial-gradient(
+            circle at 8% 0%,
+            rgba(124, 58, 237, 0.10),
+            transparent 27%
+        ),
+        radial-gradient(
+            circle at 92% 16%,
+            rgba(123, 191, 69, 0.045),
+            transparent 28%
+        ),
+        #08090c;
+    color: #f5f5f7;
+}
+
+.creators-container {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.creators-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 92px 0 62px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.creators-hero::before {
+    content: "CREATORS";
+    position: absolute;
+    right: -15px;
+    bottom: -48px;
+    color: rgba(255, 255, 255, 0.018);
+    font-size: clamp(110px, 19vw, 260px);
+    font-weight: 900;
+    line-height: 0.8;
+    letter-spacing: -11px;
+    pointer-events: none;
+}
+
+.creators-hero-layout {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 330px;
+    align-items: end;
+    gap: 72px;
+}
+
+.creators-hero-copy {
+    max-width: 790px;
+}
+
+.creators-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 17px;
+    color: #747780;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+}
+
+.creators-kicker span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #7c3aed;
+    box-shadow: 0 0 12px rgba(124, 58, 237, 0.45);
+}
+
+.creators-hero h1 {
+    margin: 0;
+    max-width: 810px;
+    color: #f5f5f6;
+    font-size: clamp(52px, 7vw, 82px);
+    line-height: 0.94;
+    letter-spacing: -4px;
+}
+
+.creators-hero h1 span {
+    display: block;
+    color: #a9abb3;
+}
+
+.creators-hero-copy > p {
+    max-width: 680px;
+    margin-top: 22px;
+    color: #858790;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.creators-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+}
+
+.creators-primary-button,
+.creators-secondary-button {
+    min-height: 46px;
+    padding: 0 17px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.25px;
+    transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.creators-primary-button {
+    background: #7c3aed;
+    color: #ffffff;
+    box-shadow: 0 12px 28px rgba(124, 58, 237, 0.18);
+}
+
+.creators-primary-button:hover {
+    transform: translateY(-2px);
+    background: #8b46ef;
+    box-shadow: 0 15px 34px rgba(124, 58, 237, 0.25);
+}
+
+.creators-primary-button span {
+    font-size: 15px;
+}
+
+.creators-secondary-button {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.025);
+    color: #c8c9ce;
+}
+
+.creators-secondary-button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.045);
+}
+
+
+/* ==========================================================
+   HERO STATUS
+========================================================== */
+
+.creators-status-panel {
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.065);
+    border-radius: 15px;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.018),
+            rgba(255, 255, 255, 0.005)
+        ),
+        #101115;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+}
+
+.creators-status-header,
+.creators-status-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 16px;
+}
+
+.creators-status-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.creators-status-header > span,
+.creators-status-footer > span {
+    color: #62656e;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 1.1px;
+}
+
+.creators-status-header strong {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #86efac;
+    font-size: 9px;
+    font-weight: 900;
+}
+
+.creators-status-header i {
+    width: 6px;
+    height: 6px;
+    display: block;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.35);
+}
+
+.creators-status-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.creators-status-grid > div {
+    padding: 18px 16px;
+}
+
+.creators-status-grid > div + div {
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.creators-status-grid span {
+    display: block;
+    color: #62656e;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 0.9px;
+}
+
+.creators-status-grid strong {
+    display: block;
+    margin-top: 4px;
+    color: #f1f1f3;
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.creators-status-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.creators-status-footer strong {
+    color: #b9a8ed;
+    font-size: 9px;
+    font-weight: 900;
+}
+
+
+/* ==========================================================
+   CONTENT + SECTION HEADERS
+========================================================== */
+
+.creators-content {
+    padding: 54px 0 120px;
+}
+
+.creator-section + .creator-section {
+    margin-top: 65px;
+}
+
+.creator-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 20px;
+    padding-bottom: 17px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.creator-section-heading > div > span {
+    display: block;
+    color: #686b74;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+}
+
+.creator-section-heading h2 {
+    margin-top: 5px;
+    color: #f1f1f3;
+    font-size: 27px;
+    letter-spacing: -0.8px;
+}
+
+.creator-section-heading > p {
+    max-width: 420px;
+    color: #696c75;
+    font-size: 10px;
+    text-align: right;
+}
+
+
+/* ==========================================================
+   LIVE CARDS
+========================================================== */
+
+.creator-live-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.creator-live-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.065);
+    border-radius: 16px;
+    background: #101115;
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.13);
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.creator-live-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(124, 58, 237, 0.25);
+    box-shadow: 0 24px 54px rgba(0, 0, 0, 0.22);
+}
+
+.creator-live-preview {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 25% 18%, rgba(124, 58, 237, 0.30), transparent 30%),
+        linear-gradient(145deg, #15131f, #0c0c11 72%);
+}
+
+.creator-live-preview::after {
+    content: "DISTRICT";
+    position: absolute;
+    right: -8px;
+    bottom: -13px;
+    color: rgba(255, 255, 255, 0.035);
+    font-size: 45px;
+    font-weight: 900;
+    letter-spacing: -3px;
+}
+
+.creator-live-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.creator-live-pill {
+    position: absolute;
+    z-index: 3;
+    top: 12px;
+    left: 12px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 0.7px;
+    box-shadow: 0 7px 18px rgba(239, 68, 68, 0.22);
+}
+
+.creator-live-viewers {
+    position: absolute;
+    z-index: 3;
+    right: 12px;
+    bottom: 12px;
+    padding: 5px 8px;
+    border-radius: 6px;
+    background: rgba(7, 8, 11, 0.84);
+    color: #eeeeef;
+    font-size: 9px;
+    font-weight: 800;
+    backdrop-filter: blur(6px);
+}
+
+.creator-live-body {
+    padding: 17px;
+}
+
+.creator-live-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.creator-avatar {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    background: #0b0c10;
+    color: #b9a8ed;
+    font-size: 10px;
+    font-weight: 900;
+}
+
+.creator-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.creator-live-name {
+    min-width: 0;
+    flex: 1;
+}
+
+.creator-live-name strong {
+    display: block;
+    overflow: hidden;
+    color: #f1f1f3;
+    font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.creator-live-name span {
+    display: block;
+    margin-top: 2px;
+    overflow: hidden;
+    color: #767982;
+    font-size: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.creator-platform-badge {
+    flex-shrink: 0;
+    padding: 5px 7px;
+    border: 1px solid rgba(124, 58, 237, 0.18);
+    border-radius: 6px;
+    background: rgba(124, 58, 237, 0.07);
+    color: #b9a8ed;
+    font-size: 7px;
+    font-weight: 900;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+}
+
+.creator-live-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 13px;
+}
+
+.creator-live-tags span {
+    padding: 5px 7px;
+    border: 1px solid rgba(255, 255, 255, 0.055);
+    border-radius: 999px;
+    color: #696c75;
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: 0.35px;
+}
+
+.creator-live-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 17px 17px;
+    padding-top: 13px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: #c7c8cd;
+    font-size: 9px;
+    font-weight: 900;
+}
+
+.creator-live-link span:last-child {
+    color: #9f7aea;
+    font-size: 15px;
+    transition: transform 0.18s ease;
+}
+
+.creator-live-card:hover .creator-live-link span:last-child {
+    transform: translateX(3px);
+}
+
+
+/* ==========================================================
+   OFFLINE / ROSTER CARDS
+========================================================== */
+
+.creator-roster-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.creator-roster-card {
+    min-height: 145px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 15px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.016), rgba(255, 255, 255, 0.004)),
+        #101115;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.creator-roster-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.11);
+    background: #131419;
+}
+
+.creator-roster-top {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.creator-roster-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.creator-roster-info strong {
+    display: block;
+    overflow: hidden;
+    color: #e5e5e8;
+    font-size: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.creator-roster-info span {
+    display: block;
+    margin-top: 3px;
+    color: #646770;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 0.75px;
+    text-transform: uppercase;
+}
+
+.creator-roster-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #5f626b;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 0.55px;
+}
+
+.creator-roster-status i {
+    width: 5px;
+    height: 5px;
+    display: block;
+    border-radius: 50%;
+    background: #51545c;
+}
+
+.creator-roster-status.live {
+    color: #86efac;
+}
+
+.creator-roster-status.live i {
+    background: #22c55e;
+    box-shadow: 0 0 7px rgba(34, 197, 94, 0.32);
+}
+
+.creator-roster-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.045);
+}
+
+.creator-roster-handle {
+    overflow: hidden;
+    color: #777a83;
+    font-size: 9px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.creator-roster-link {
+    flex-shrink: 0;
+    color: #a78bfa;
+    font-size: 9px;
+    font-weight: 900;
+}
+
+
+/* ==========================================================
+   EMPTY STATES
+========================================================== */
+
+.creator-empty-state {
+    grid-column: 1 / -1;
+    min-height: 210px;
+    padding: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.08), transparent 48%),
+        rgba(255, 255, 255, 0.012);
+    text-align: center;
+}
+
+.creator-empty-state > div {
+    max-width: 460px;
+}
+
+.creator-empty-icon {
+    width: 42px;
+    height: 42px;
+    margin: 0 auto 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    border-radius: 11px;
+    background: rgba(255, 255, 255, 0.025);
+    color: #9f7aea;
+    font-size: 10px;
+    font-weight: 900;
+}
+
+.creator-empty-state h3 {
+    color: #e5e5e7;
+    font-size: 18px;
+    letter-spacing: -0.4px;
+}
+
+.creator-empty-state p {
+    margin-top: 7px;
+    color: #6b6e77;
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+.creator-empty-state a {
+    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #a78bfa;
+    font-size: 9px;
+    font-weight: 900;
+}
+
+
+/* ==========================================================
+   APPLICATION CTA
+========================================================== */
+
+.creators-application-cta {
+    margin-top: 65px;
+    padding: 25px;
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid rgba(124, 58, 237, 0.12);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 12% 50%, rgba(124, 58, 237, 0.10), transparent 27%),
+        #101115;
+}
+
+.creators-application-mark {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(124, 58, 237, 0.20);
+    border-radius: 12px;
+    background: rgba(124, 58, 237, 0.07);
+    color: #b9a8ed;
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.creators-application-copy > span {
+    color: #757880;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.creators-application-copy h2 {
+    margin-top: 3px;
+    color: #ededf0;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+}
+
+.creators-application-copy p {
+    max-width: 650px;
+    margin-top: 5px;
+    color: #6d7079;
+    font-size: 10px;
+    line-height: 1.65;
+}
+
+.creators-application-cta > a {
+    min-width: 155px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    border-radius: 9px;
+    background: #7c3aed;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 900;
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease;
+}
+
+.creators-application-cta > a:hover {
+    transform: translateY(-2px);
+    background: #8b46ef;
+}
+
+.creators-application-cta > a span {
+    font-size: 14px;
+}
+
+.creators-application-disabled {
+    opacity: 0.45;
+    cursor: not-allowed !important;
+    pointer-events: auto;
+}
+
+.creators-application-disabled:hover {
+    transform: none !important;
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 980px) {
+    .creators-hero-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .creators-status-panel {
+        max-width: 520px;
+    }
+
+    .creator-live-grid,
+    .creator-roster-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .creators-page {
+        padding-top: 70px;
+    }
+
+    .creators-container {
+        width: min(100% - 28px, 1180px);
+    }
+
+    .creators-hero {
+        padding: 52px 0 42px;
+    }
+
+    .creators-hero h1 {
+        font-size: clamp(40px, 13vw, 58px);
+        letter-spacing: -2.6px;
+    }
+
+    .creator-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .creator-section-heading > p {
+        text-align: left;
+    }
+
+    .creator-live-grid,
+    .creator-roster-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .creators-application-cta {
+        grid-template-columns: 44px minmax(0, 1fr);
+    }
+
+    .creators-application-mark {
+        width: 44px;
+        height: 44px;
+    }
+
+    .creators-application-cta > a {
+        grid-column: 1 / -1;
+        width: 100%;
+    }
+}
+
+@media (max-width: 460px) {
+    .creators-hero-actions {
+        flex-direction: column;
+    }
+
+    .creators-primary-button,
+    .creators-secondary-button {
+        width: 100%;
+    }
+
+    .creators-status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .creators-status-grid > div + div {
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-left: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .creator-live-card,
+    .creator-roster-card,
+    .creators-primary-button,
+    .creators-secondary-button,
+    .creators-application-cta > a {
+        transition: none;
+    }
+}

@@ -79,6 +79,27 @@ const REVIEW_QUESTION_CONFIG = {
     },
 
 
+    "Streamer Application": {
+        age: "How old are you?",
+        channelDetails:
+            "What name do you create content under, which platform or platforms do you stream on, and what are your channel links?",
+        streamingExperience:
+            "Tell us about your previous streaming or content creation experience, including the type of content you normally create.",
+        audience:
+            "Tell us about your current audience, including approximate followers and average viewers or views.",
+        contentStyle:
+            "What type of content would you create in The District, and how would you keep it entertaining while protecting serious roleplay?",
+        communityStandards:
+            "How would you handle rule breaks, conflict, stream sniping or situations that could affect The District's reputation?",
+        schedule:
+            "How often do you stream and how frequently could you create content in The District?",
+        clips:
+            "Provide links to at least three examples of your previous streams, clips, videos or other content.",
+        whyCreator:
+            "Why do you want to become an official streamer for The District, and what would you bring to the creator programme?"
+    },
+
+
     "Script Developer Application": {
         age: "How old are you?",
         experience:

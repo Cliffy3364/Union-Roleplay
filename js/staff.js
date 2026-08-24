@@ -8,6 +8,7 @@ const APPLICATION_TYPES = [
     "QA Tester Application",
     "Social Media Manager Application",
     "Media Application",
+    "Streamer Application",
     "Script Developer Application",
     "Vehicle Developer Application",
     "EUP Developer Application",
@@ -31,6 +32,9 @@ const APPLICATION_BADGES = {
 
     "Media Application":
         "nav-count-media",
+
+    "Streamer Application":
+        "nav-count-streamer",
 
     "Script Developer Application":
         "nav-count-script",
@@ -3439,7 +3443,7 @@ function ensureApplicationManagementUI() {
                     </div>
                     <div class="staff-panel-reference">
                         <span>LIVE CONFIGURATION</span>
-                        <strong>10 Application Types</strong>
+                        <strong>11 Application Types</strong>
                     </div>
                 </div>
                 <div class="staff-panel-divider"></div>

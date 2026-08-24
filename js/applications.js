@@ -278,15 +278,16 @@ function setCardAvailability(
 }
 
 
-function setOverallRecruitmentStatus(
-    rows
-) {
+function setOverallRecruitmentStatus() {
 
     const statuses =
-        rows.map(
-            row =>
+        [...document.querySelectorAll(
+            "[data-application-card]"
+        )].map(
+            card =>
                 normalizeAvailabilityStatus(
-                    row.status
+                    card.dataset.applicationAvailability ||
+                    "open"
                 )
         );
 
@@ -435,9 +436,7 @@ async function loadApplicationAvailability() {
             );
 
 
-        setOverallRecruitmentStatus(
-            rows
-        );
+        setOverallRecruitmentStatus();
 
 
     } catch (error) {
