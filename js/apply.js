@@ -1,5 +1,5 @@
 const APPLY_API =
-    "https://union-roleplay-api.danielclifford2808.workers.dev";
+    "https://the-district-api.danielclifford2808.workers.dev";
 
 
 const DISCORD_LOGIN_URL =

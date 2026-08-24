@@ -1,5 +1,5 @@
 const API_URL =
-    "https://union-roleplay-api.danielclifford2808.workers.dev";
+    "https://the-district-api.danielclifford2808.workers.dev";
 
 
 async function getCurrentUser() {

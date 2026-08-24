@@ -1,4 +1,4 @@
-const COMMUNITY_API = "https://union-roleplay-api.danielclifford2808.workers.dev";
+const COMMUNITY_API = "https://the-district-api.danielclifford2808.workers.dev";
 const SERVER_ADDRESS = "185.223.29.112:30120";
 
 function setServerDisplay(data) {
