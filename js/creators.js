@@ -21,7 +21,7 @@
    }
 ========================================================== */
 
-const DISTRICT_CREATORS = [];
+let DISTRICT_CREATORS = [];
 
 const CREATORS_API =
     "https://the-district-api.danielclifford2808.workers.dev";
@@ -427,6 +427,70 @@ function renderCreatorsPage() {
 }
 
 
+async function loadCreatorsFromApi() {
+
+    try {
+
+        const response = await fetch(
+            "/api/creators",
+            { cache: "no-store" }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(
+                data.error ||
+                "Creator roster could not be loaded."
+            );
+        }
+
+        DISTRICT_CREATORS = Array.isArray(data.creators)
+            ? data.creators
+            : [];
+
+        renderCreatorsPage();
+
+    } catch (error) {
+
+        console.warn(
+            "Creator roster could not be loaded:",
+            error
+        );
+
+        const liveTarget =
+            document.getElementById(
+                "liveCreators"
+            );
+
+        const rosterTarget =
+            document.getElementById(
+                "creatorRosterGrid"
+            );
+
+        if (liveTarget) {
+            liveTarget.innerHTML =
+                renderLiveEmptyState();
+        }
+
+        if (rosterTarget && DISTRICT_CREATORS.length === 0) {
+            rosterTarget.innerHTML = `
+                <div class="creator-empty-state">
+                    <div>
+                        <div class="creator-empty-icon">!</div>
+                        <h3>Creator network unavailable</h3>
+                        <p>
+                            The creator roster could not be loaded right now.
+                            Please check back shortly.
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+    }
+}
+
+
 function normalizeCreatorApplicationStatus(value) {
 
     const status = String(value || "open")
@@ -565,6 +629,16 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
         renderCreatorsPage();
+        loadCreatorsFromApi();
         loadStreamerApplicationStatus();
+
+        window.setInterval(
+            () => {
+                if (document.visibilityState === "visible") {
+                    loadCreatorsFromApi();
+                }
+            },
+            60000
+        );
     }
 );

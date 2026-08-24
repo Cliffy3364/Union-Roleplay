@@ -7247,3 +7247,233 @@
         flex-direction: column;
     }
 }
+
+/* ==========================================================
+   CREATOR MANAGEMENT
+========================================================== */
+
+.creator-management-panel,
+.creator-management-roster-panel {
+    margin-bottom: 18px;
+}
+
+.creator-management-form {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.8fr) minmax(150px, 0.55fr) minmax(280px, 1.4fr) auto;
+    gap: 12px;
+    align-items: end;
+}
+
+.creator-management-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.creator-management-field label {
+    color: #8e929d;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+}
+
+.creator-management-field input,
+.creator-management-field select {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 13px;
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    border-radius: 9px;
+    outline: none;
+    background: #0e1014;
+    color: #f1f2f4;
+    font: inherit;
+    transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.creator-management-field input:focus,
+.creator-management-field select:focus {
+    border-color: rgba(124, 58, 237, 0.62);
+    background: #101219;
+}
+
+.creator-management-add {
+    min-width: 126px;
+    min-height: 44px;
+}
+
+.creator-management-message {
+    margin-top: 14px;
+    padding: 11px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 9px;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.creator-management-message.success {
+    border-color: rgba(34, 197, 94, 0.22);
+    background: rgba(34, 197, 94, 0.07);
+    color: #9ee7b2;
+}
+
+.creator-management-message.error {
+    border-color: rgba(239, 68, 68, 0.22);
+    background: rgba(239, 68, 68, 0.07);
+    color: #f6a7a7;
+}
+
+.creator-management-list {
+    display: grid;
+    gap: 9px;
+}
+
+.creator-management-card {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) auto auto;
+    gap: 14px;
+    align-items: center;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 11px;
+    background: rgba(255, 255, 255, 0.018);
+}
+
+.creator-management-card-mark {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(124, 58, 237, 0.24);
+    border-radius: 10px;
+    background: rgba(124, 58, 237, 0.08);
+    color: #bca9f4;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+.creator-management-card-main {
+    min-width: 0;
+}
+
+.creator-management-card-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 9px;
+}
+
+.creator-management-card-title strong {
+    color: #f4f4f6;
+    font-size: 13px;
+}
+
+.creator-management-card-main > span,
+.creator-management-card-main > small {
+    display: block;
+    margin-top: 4px;
+    color: #747780;
+    font-size: 10px;
+}
+
+.creator-management-card-main > small {
+    color: #5f626b;
+}
+
+.creator-management-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 22px;
+    padding: 0 8px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 999px;
+    color: #7d8088;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+}
+
+.creator-management-status i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #5d6068;
+}
+
+.creator-management-status.live {
+    border-color: rgba(34, 197, 94, 0.2);
+    background: rgba(34, 197, 94, 0.07);
+    color: #8fe5aa;
+}
+
+.creator-management-status.live i {
+    background: #22c55e;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.35);
+}
+
+.creator-management-channel,
+.creator-management-remove {
+    min-height: 36px;
+    padding: 0 11px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 850;
+    white-space: nowrap;
+}
+
+.creator-management-channel {
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    background: rgba(255, 255, 255, 0.025);
+    color: #c5c7cc;
+}
+
+.creator-management-remove {
+    border: 1px solid rgba(239, 68, 68, 0.14);
+    background: rgba(239, 68, 68, 0.045);
+    color: #d99696;
+    cursor: pointer;
+}
+
+.creator-management-remove:hover {
+    border-color: rgba(239, 68, 68, 0.28);
+    background: rgba(239, 68, 68, 0.08);
+}
+
+@media (max-width: 1050px) {
+    .creator-management-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .creator-management-link-field {
+        grid-column: 1 / -1;
+    }
+
+    .creator-management-add {
+        justify-self: start;
+    }
+}
+
+@media (max-width: 760px) {
+    .creator-management-form {
+        grid-template-columns: 1fr;
+    }
+
+    .creator-management-link-field {
+        grid-column: auto;
+    }
+
+    .creator-management-card {
+        grid-template-columns: 42px minmax(0, 1fr);
+    }
+
+    .creator-management-channel,
+    .creator-management-remove {
+        grid-column: auto;
+    }
+}

@@ -87,16 +87,20 @@ const REVIEW_QUESTION_CONFIG = {
             "Tell us about your previous streaming or content creation experience, including the type of content you normally create.",
         audience:
             "Tell us about your current audience, including approximate followers and average viewers or views.",
+        schedule:
+            "The programme requires a minimum of 2 streams per week or 12 hours per month. Which requirement will you meet, and what would your usual streaming schedule look like?",
+        serverActivity:
+            "How active are you currently within The District, and how will you remain consistently active while part of the Streamer Programme?",
+        disciplinaryHistory:
+            "Have you had any disciplinary reports within the last month or any repeated or serious rule breaches?",
         contentStyle:
-            "What type of content would you create in The District, and how would you keep it entertaining while protecting serious roleplay?",
+            "What type of content would you create in The District, and how would you promote the server through good-quality roleplay?",
         communityStandards:
             "How would you handle rule breaks, conflict, stream sniping or situations that could affect The District's reputation?",
-        schedule:
-            "How often do you stream and how frequently could you create content in The District?",
         clips:
             "Provide links to at least three examples of your previous streams, clips, videos or other content.",
         whyCreator:
-            "Why do you want to become an official streamer for The District, and what would you bring to the creator programme?"
+            "Why do you want to become a District Community Streamer, and what would you bring to the Streamer Programme?"
     },
 
 

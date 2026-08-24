@@ -181,6 +181,18 @@
                     </span>
                 </button>
 
+                <button
+                    type="button"
+                    class="staff-nav-item"
+                    data-view="creators"
+                    id="creatorManagementNav"
+                >
+                    <span class="staff-nav-content">
+                        <span class="staff-nav-icon">CR</span>
+                        <span>Creators</span>
+                    </span>
+                </button>
+
             </div>
 
             <div class="staff-nav-group">
@@ -480,6 +492,116 @@
                     <div class="staff-panel-divider"></div>
 
                     <div id="memberProfileContent"></div>
+
+                </section>
+
+            </section>
+
+            <section
+                id="staffCreatorsView"
+                hidden
+            >
+
+                <section class="staff-dashboard-panel creator-management-panel">
+
+                    <div class="staff-panel-header">
+
+                        <div>
+                            <span>CREATOR MANAGEMENT</span>
+                            <h2>Add New Streamer</h2>
+                            <p>Add an approved streamer using their Twitch, YouTube, Kick or TikTok account link.</p>
+                        </div>
+
+                        <div class="staff-panel-reference">
+                            <span>CREATOR NETWORK</span>
+                            <strong>Live Tracking</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="staff-panel-divider"></div>
+
+                    <form id="creatorManagementForm" class="creator-management-form">
+
+                        <div class="creator-management-field">
+                            <label for="creatorManagementName">Creator Name</label>
+                            <input
+                                id="creatorManagementName"
+                                type="text"
+                                maxlength="60"
+                                placeholder="e.g. Cliffy"
+                                autocomplete="off"
+                                required
+                            >
+                        </div>
+
+                        <div class="creator-management-field">
+                            <label for="creatorManagementPlatform">Platform</label>
+                            <select id="creatorManagementPlatform" required>
+                                <option value="">Select platform...</option>
+                                <option value="Twitch">Twitch</option>
+                                <option value="YouTube">YouTube</option>
+                                <option value="Kick">Kick</option>
+                                <option value="TikTok">TikTok</option>
+                            </select>
+                        </div>
+
+                        <div class="creator-management-field creator-management-link-field">
+                            <label for="creatorManagementUrl">Account Link</label>
+                            <input
+                                id="creatorManagementUrl"
+                                type="url"
+                                placeholder="https://twitch.tv/username"
+                                autocomplete="off"
+                                required
+                            >
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn primary creator-management-add"
+                            id="creatorManagementAdd"
+                        >
+                            Add Streamer
+                        </button>
+
+                    </form>
+
+                    <div
+                        id="creatorManagementMessage"
+                        class="creator-management-message"
+                        hidden
+                    ></div>
+
+                </section>
+
+                <section class="staff-dashboard-panel creator-management-roster-panel">
+
+                    <div class="staff-panel-header">
+                        <div>
+                            <span>OFFICIAL CREATORS</span>
+                            <h2>Streamer Roster</h2>
+                            <p>Live status is checked automatically. Online creators are promoted to the Live Now section of the public Creators page.</p>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="discipline-secondary-button"
+                            id="creatorManagementRefresh"
+                        >
+                            Refresh Status
+                        </button>
+                    </div>
+
+                    <div class="staff-panel-divider"></div>
+
+                    <div id="creatorManagementList">
+                        <div class="member-management-empty">
+                            <div class="member-empty-icon">CR</div>
+                            <h3>Loading creators...</h3>
+                            <p>Checking the creator network.</p>
+                        </div>
+                    </div>
 
                 </section>
 

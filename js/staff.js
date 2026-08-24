@@ -103,6 +103,14 @@ function hasStaffPermission(name) {
     );
 }
 
+function canManageCreators() {
+    return (
+        hasStaffPermission("member_management") ||
+        hasStaffPermission("application_availability") ||
+        Number(currentStaffPermissions?.staff_level || 0) >= 500
+    );
+}
+
 function setPermissionVisibility(
     element,
     visible
@@ -171,6 +179,11 @@ function applyStaffPermissions() {
             "memberManagementNav"
         );
 
+    const creatorManagementNav =
+        document.getElementById(
+            "creatorManagementNav"
+        );
+
     const disciplineNav =
         document.getElementById(
             "staffDisciplineNav"
@@ -197,6 +210,11 @@ function applyStaffPermissions() {
         hasStaffPermission(
             "member_management"
         )
+    );
+
+    setPermissionVisibility(
+        creatorManagementNav,
+        canManageCreators()
     );
 
     setPermissionVisibility(
@@ -241,6 +259,18 @@ function applyStaffPermissions() {
         const view =
             document.getElementById(
                 "staffMembersView"
+            );
+
+        if (view) {
+            view.hidden = true;
+        }
+    }
+
+
+    if (!canManageCreators()) {
+        const view =
+            document.getElementById(
+                "staffCreatorsView"
             );
 
         if (view) {
@@ -758,6 +788,11 @@ function hideAllViews() {
             "staffMembersView"
         );
 
+    const creators =
+        document.getElementById(
+            "staffCreatorsView"
+        );
+
     const discipline =
         document.getElementById(
             "staffDisciplineView"
@@ -802,6 +837,12 @@ function hideAllViews() {
     if (members) {
 
         members.hidden = true;
+    }
+
+
+    if (creators) {
+
+        creators.hidden = true;
     }
 
 
@@ -1007,6 +1048,320 @@ function showMemberManagement() {
             memberSearch?.focus();
         }
     );
+}
+
+
+/* ========================================
+   CREATOR MANAGEMENT VIEW
+======================================== */
+
+let creatorManagementLoading = false;
+let creatorManagementRefreshTimer = null;
+
+async function creatorManagementFetch(path, options = {}) {
+    const token = getToken();
+
+    if (!token) {
+        throw new Error("Not logged in.");
+    }
+
+    const response = await fetch(path, {
+        ...options,
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            ...(options.headers || {})
+        }
+    });
+
+    let data;
+
+    try {
+        data = await response.json();
+    } catch {
+        data = {
+            success: false,
+            error: "The creator service returned an invalid response."
+        };
+    }
+
+    if (!response.ok || !data.success) {
+        throw new Error(data.error || "Creator request failed.");
+    }
+
+    return data;
+}
+
+function creatorManagementStatusMarkup(creator) {
+    const isLive = creator?.live === true;
+
+    return `
+        <span class="creator-management-status ${isLive ? "live" : "offline"}">
+            <i></i>
+            ${isLive ? "LIVE" : "OFFLINE"}
+        </span>
+    `;
+}
+
+function creatorManagementViewerText(creator) {
+    if (creator?.live !== true) {
+        return "Not currently live";
+    }
+
+    const viewers = Number(creator?.viewers);
+
+    if (!Number.isFinite(viewers) || viewers < 0) {
+        return "Live now";
+    }
+
+    return `${viewers.toLocaleString("en-GB")} watching`;
+}
+
+function creatorManagementRender(creators) {
+    const target = document.getElementById("creatorManagementList");
+
+    if (!target) return;
+
+    if (!Array.isArray(creators) || creators.length === 0) {
+        target.innerHTML = `
+            <div class="member-management-empty">
+                <div class="member-empty-icon">CR</div>
+                <h3>No streamers added</h3>
+                <p>Add an approved creator above and they will appear on the public Creators page.</p>
+            </div>
+        `;
+        return;
+    }
+
+    target.innerHTML = `
+        <div class="creator-management-list">
+            ${creators.map(creator => `
+                <article class="creator-management-card">
+                    <div class="creator-management-card-mark">
+                        ${escapeHtml(String(creator.platform || "CR").slice(0, 2).toUpperCase())}
+                    </div>
+
+                    <div class="creator-management-card-main">
+                        <div class="creator-management-card-title">
+                            <strong>${escapeHtml(creator.name || "Creator")}</strong>
+                            ${creatorManagementStatusMarkup(creator)}
+                        </div>
+
+                        <span>${escapeHtml(creator.platform || "Creator")} · ${escapeHtml(creator.handle ? `@${creator.handle}` : "Account linked")}</span>
+                        <small>${escapeHtml(creatorManagementViewerText(creator))}</small>
+                    </div>
+
+                    <a
+                        class="creator-management-channel"
+                        href="${escapeHtml(creator.channelUrl || "#")}" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        View Channel
+                    </a>
+
+                    <button
+                        type="button"
+                        class="creator-management-remove"
+                        data-creator-remove="${Number(creator.id)}"
+                        data-creator-name="${escapeHtml(creator.name || "this streamer")}" 
+                    >
+                        Remove
+                    </button>
+                </article>
+            `).join("")}
+        </div>
+    `;
+
+    target
+        .querySelectorAll("[data-creator-remove]")
+        .forEach(button => {
+            button.addEventListener("click", async () => {
+                const id = Number(button.dataset.creatorRemove);
+                const name = button.dataset.creatorName || "this streamer";
+
+                if (!id) return;
+
+                const confirmed = window.confirm(
+                    `Remove ${name} from the creator roster?`
+                );
+
+                if (!confirmed) return;
+
+                button.disabled = true;
+
+                try {
+                    await creatorManagementFetch(
+                        `/api/staff/creators?id=${encodeURIComponent(id)}`,
+                        { method: "DELETE" }
+                    );
+
+                    showCreatorManagementMessage(
+                        `${name} was removed from the creator roster.`,
+                        "success"
+                    );
+
+                    await loadCreatorManagement(true);
+                } catch (error) {
+                    showCreatorManagementMessage(
+                        error.message || "Unable to remove streamer.",
+                        "error"
+                    );
+                    button.disabled = false;
+                }
+            });
+        });
+}
+
+function showCreatorManagementMessage(message, type = "success") {
+    const target = document.getElementById("creatorManagementMessage");
+
+    if (!target) return;
+
+    target.hidden = false;
+    target.className = `creator-management-message ${type}`;
+    target.textContent = message;
+
+    window.clearTimeout(showCreatorManagementMessage.timer);
+    showCreatorManagementMessage.timer = window.setTimeout(() => {
+        target.hidden = true;
+    }, 4500);
+}
+
+async function loadCreatorManagement(forceRefresh = false) {
+    const target = document.getElementById("creatorManagementList");
+
+    if (!target || creatorManagementLoading) return;
+
+    creatorManagementLoading = true;
+
+    if (!target.querySelector(".creator-management-card")) {
+        target.innerHTML = `
+            <div class="member-management-empty">
+                <div class="member-empty-icon">CR</div>
+                <h3>Checking creators...</h3>
+                <p>Reading the creator roster and checking live status.</p>
+            </div>
+        `;
+    }
+
+    try {
+        const data = await creatorManagementFetch(
+            `/api/staff/creators${forceRefresh ? "?refresh=1" : ""}`
+        );
+
+        creatorManagementRender(data.creators || []);
+    } catch (error) {
+        target.innerHTML = `
+            <div class="member-management-empty">
+                <div class="member-empty-icon">!</div>
+                <h3>Unable to load creators</h3>
+                <p>${escapeHtml(error.message || "Please try again.")}</p>
+            </div>
+        `;
+    } finally {
+        creatorManagementLoading = false;
+    }
+}
+
+function updateCreatorLinkPlaceholder() {
+    const platform = document.getElementById("creatorManagementPlatform")?.value || "";
+    const input = document.getElementById("creatorManagementUrl");
+
+    if (!input) return;
+
+    const placeholders = {
+        Twitch: "https://twitch.tv/username",
+        YouTube: "https://youtube.com/@channel",
+        Kick: "https://kick.com/username",
+        TikTok: "https://tiktok.com/@username"
+    };
+
+    input.placeholder = placeholders[platform] || "Paste the creator's account link";
+}
+
+async function submitCreatorManagementForm(event) {
+    event.preventDefault();
+
+    const form = document.getElementById("creatorManagementForm");
+    const button = document.getElementById("creatorManagementAdd");
+    const name = document.getElementById("creatorManagementName")?.value.trim() || "";
+    const platform = document.getElementById("creatorManagementPlatform")?.value || "";
+    const channelUrl = document.getElementById("creatorManagementUrl")?.value.trim() || "";
+
+    if (!name || !platform || !channelUrl) {
+        showCreatorManagementMessage("Complete all three streamer fields.", "error");
+        return;
+    }
+
+    if (button) {
+        button.disabled = true;
+        button.textContent = "Adding...";
+    }
+
+    try {
+        await creatorManagementFetch("/api/staff/creators", {
+            method: "POST",
+            body: JSON.stringify({
+                name,
+                platform,
+                channel_url: channelUrl
+            })
+        });
+
+        form?.reset();
+        updateCreatorLinkPlaceholder();
+
+        showCreatorManagementMessage(
+            `${name} has been added to the creator roster.`,
+            "success"
+        );
+
+        await loadCreatorManagement(true);
+    } catch (error) {
+        showCreatorManagementMessage(
+            error.message || "Unable to add streamer.",
+            "error"
+        );
+    } finally {
+        if (button) {
+            button.disabled = false;
+            button.textContent = "Add Streamer";
+        }
+    }
+}
+
+function showCreatorManagement() {
+    if (currentStaffPermissions && !canManageCreators()) {
+        showDashboard();
+        return;
+    }
+
+    hideAllViews();
+    currentQueueType = null;
+
+    const view = document.getElementById("staffCreatorsView");
+    const title = document.getElementById("staffPageTitle");
+    const description = document.getElementById("staffPageDescription");
+
+    if (view) view.hidden = false;
+    if (title) title.textContent = "Creator Management";
+    if (description) {
+        description.textContent =
+            "Add approved streamers and automatically track when they are live.";
+    }
+
+    setTopSearch("", false);
+    loadCreatorManagement(false);
+
+    window.clearInterval(creatorManagementRefreshTimer);
+    creatorManagementRefreshTimer = window.setInterval(() => {
+        const currentView = document.getElementById("staffCreatorsView");
+
+        if (currentView && !currentView.hidden) {
+            loadCreatorManagement(false);
+        }
+    }, 60000);
 }
 
 
@@ -6845,6 +7200,66 @@ document.addEventListener(
                 }
             );
         }
+
+
+        /* ========================================
+           CREATOR MANAGEMENT BUTTON
+        ======================================== */
+
+        const creatorManagementButton =
+            document.querySelector(
+                '.staff-nav-item[data-view="creators"]'
+            );
+
+        if (creatorManagementButton) {
+            creatorManagementButton.addEventListener(
+                "click",
+                () => {
+                    setActiveNav(creatorManagementButton);
+                    showCreatorManagement();
+                }
+            );
+        }
+
+        const creatorManagementForm =
+            document.getElementById(
+                "creatorManagementForm"
+            );
+
+        const creatorManagementPlatform =
+            document.getElementById(
+                "creatorManagementPlatform"
+            );
+
+        const creatorManagementRefresh =
+            document.getElementById(
+                "creatorManagementRefresh"
+            );
+
+        creatorManagementForm?.addEventListener(
+            "submit",
+            submitCreatorManagementForm
+        );
+
+        creatorManagementPlatform?.addEventListener(
+            "change",
+            updateCreatorLinkPlaceholder
+        );
+
+        creatorManagementRefresh?.addEventListener(
+            "click",
+            async () => {
+                creatorManagementRefresh.disabled = true;
+                creatorManagementRefresh.textContent = "Checking...";
+
+                try {
+                    await loadCreatorManagement(true);
+                } finally {
+                    creatorManagementRefresh.disabled = false;
+                    creatorManagementRefresh.textContent = "Refresh Status";
+                }
+            }
+        );
 
 
         /* ========================================

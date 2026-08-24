@@ -76,7 +76,7 @@ function logout() {
     );
 
     window.location.href =
-        "/The-District/index.html";
+        "/index.html";
 }
 
 

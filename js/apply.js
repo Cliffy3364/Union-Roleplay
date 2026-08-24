@@ -421,7 +421,7 @@ const APPLICATION_CONFIG = {
             "Streamer Application",
 
         description:
-            "Apply to join The District creator network as an official streamer. We are looking for consistent creators who can represent the community professionally and produce enjoyable FiveM content.",
+            "Apply to join The District Streamer Programme. Every accepted creator starts as a District Community Streamer. You must stream at least 2 times per week or 12 hours per month, promote The District through good-quality roleplay, remain consistently active, avoid repeated or serious rule breaches, and have no disciplinary reports within the month before applying.",
 
         questions: [
 
@@ -458,9 +458,33 @@ const APPLICATION_CONFIG = {
             },
 
             {
+                key: "schedule",
+                label:
+                    "The programme requires a minimum of 2 streams per week or 12 hours per month. Which requirement will you meet, and what would your usual streaming schedule look like?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "serverActivity",
+                label:
+                    "How active are you currently within The District, and how will you make sure you remain consistently active while part of the Streamer Programme?",
+                type: "textarea",
+                required: true
+            },
+
+            {
+                key: "disciplinaryHistory",
+                label:
+                    "Please confirm whether you have had any disciplinary reports within the last month or any repeated or serious rule breaches. If yes, explain what happened.",
+                type: "textarea",
+                required: true
+            },
+
+            {
                 key: "contentStyle",
                 label:
-                    "What type of content would you create in The District, and how would you make your streams entertaining without damaging serious roleplay?",
+                    "What type of content would you create in The District, and how would you promote the server through good-quality roleplay without damaging serious roleplay?",
                 type: "textarea",
                 required: true
             },
@@ -469,14 +493,6 @@ const APPLICATION_CONFIG = {
                 key: "communityStandards",
                 label:
                     "As an official creator you would represent The District publicly. How would you handle rule breaks, conflict, stream sniping or other situations that could affect the community's reputation?",
-                type: "textarea",
-                required: true
-            },
-
-            {
-                key: "schedule",
-                label:
-                    "How often do you currently stream, and how frequently could you realistically create content in The District?",
                 type: "textarea",
                 required: true
             },
@@ -492,7 +508,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "whyCreator",
                 label:
-                    "Why do you want to become an official streamer for The District, and what would you bring to the creator programme?",
+                    "Why do you want to become a District Community Streamer, and what would you bring to the Streamer Programme?",
                 type: "textarea",
                 required: true
             }
@@ -985,13 +1001,15 @@ const APPLICATION_MINIMUM_LENGTHS = {
 
     "Streamer Application": {
         channelDetails: 80,
-        streamingExperience: 140,
-        audience: 80,
-        contentStyle: 180,
-        communityStandards: 180,
-        schedule: 100,
-        clips: 80,
-        whyCreator: 160
+        streamingExperience: 120,
+        audience: 60,
+        schedule: 80,
+        serverActivity: 100,
+        disciplinaryHistory: 40,
+        contentStyle: 160,
+        communityStandards: 160,
+        clips: 60,
+        whyCreator: 140
     },
 
 
