@@ -9,7 +9,7 @@
     background:
         radial-gradient(
             circle at top left,
-            rgba(124, 58, 237, 0.08),
+            rgba(181, 255, 54, 0.08),
             transparent 32%
         ),
         #09090d;
@@ -148,8 +148,8 @@
     background:
         linear-gradient(
             90deg,
-            #7c3aed,
-            #93d84f
+            #b5ff36,
+            #a8ff2f
         );
 
     transition:
@@ -227,19 +227,19 @@
 
 .apply-step.active {
     border-color:
-        rgba(124, 92, 255, 0.25);
+        rgba(179, 255, 92, 0.25);
 
     background:
-        rgba(124, 92, 255, 0.08);
+        rgba(179, 255, 92, 0.08);
 
-    color: #d5ccff;
+    color: #e5ffc7;
 }
 
 .apply-step.active .apply-step-number {
     background:
-        rgba(124, 92, 255, 0.18);
+        rgba(179, 255, 92, 0.18);
 
-    color: #d7cdff;
+    color: #e5ffc7;
 }
 
 .apply-step.completed {
@@ -317,7 +317,7 @@
 }
 
 .application-question-number {
-    color: #a7e06f;
+    color: #c8ff7c;
 
     font-size: 10px;
     font-weight: 900;
@@ -401,7 +401,7 @@
 .application-question textarea:focus,
 .application-question select:focus {
     border-color:
-        rgba(124, 92, 255, 0.45);
+        rgba(179, 255, 92, 0.45);
 
     background: #0e0e14;
 }
@@ -468,13 +468,13 @@
 .staff-review-button {
     border:
         1px solid
-        rgba(124, 92, 255, 0.24);
+        rgba(179, 255, 92, 0.24);
 
     background:
         linear-gradient(
             135deg,
-            rgba(124, 58, 237, 0.95),
-            rgba(147, 51, 234, 0.95)
+            rgba(181, 255, 54, 0.95),
+            rgba(131, 255, 0, 0.95)
         );
 
     color: #ffffff;

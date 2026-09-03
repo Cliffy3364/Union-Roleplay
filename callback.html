@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0f0b">
     <title>Signing In | The District</title>
+    <link rel="stylesheet" href="css/rebrand.css">
+    <style>body{min-height:100vh;display:grid;place-items:center;padding:30px}.auth-bridge{width:min(440px,100%);padding:34px;border:1px solid rgba(181,255,54,.12);border-radius:20px;background:#090d09;text-align:center}.auth-bridge img{width:100px;margin:0 auto 16px}.auth-bridge span{color:#b5ff36;font-size:9px;font-weight:900;letter-spacing:.18em}.auth-bridge h1{margin-top:8px;font-size:28px}.auth-bridge p{margin-top:8px;color:#788373;font-size:12px}</style>
 </head>
 
 <body>
+<div class="auth-bridge" id="authBridge"><img src="assets/images/logo.png" alt=""><span>SECURE SIGN-IN</span><h1>Connecting your District account</h1><p>Completing Discord authentication...</p></div>
 
 <script>
 const API_URL = "https://the-district-api.danielclifford2808.workers.dev";
@@ -41,9 +45,7 @@ async function handleLogin() {
     } catch (error) {
         console.error(error);
         document.body.innerHTML = `
-            <h2>Login failed</h2>
-            <p>${error.message}</p>
-            <a href="index.html">Return Home</a>
+            <div class="auth-bridge"><img src="assets/images/logo.png" alt=""><span>AUTHENTICATION ERROR</span><h1>Login failed</h1><p>${error.message}</p><p><a class="btn primary" href="index.html">Return Home</a></p></div>
         `;
     }
 }

@@ -20,7 +20,7 @@
         ),
         radial-gradient(
             circle at 90% 2%,
-            rgba(123, 191, 69, 0.022),
+            rgba(181, 255, 54, 0.022),
             transparent 24%
         ),
         #08090c;
@@ -383,7 +383,7 @@
         ),
         radial-gradient(
             circle at 85% 30%,
-            rgba(123, 191, 69, 0.035),
+            rgba(181, 255, 54, 0.035),
             transparent 32%
         ),
         linear-gradient(
@@ -688,7 +688,7 @@
 
     border-radius: 10px;
 
-    background: #7c3aed;
+    background: #b5ff36;
 
     color: #ffffff;
 
@@ -699,7 +699,7 @@
 
     box-shadow:
         0 12px 28px
-        rgba(124, 58, 237, 0.17);
+        rgba(181, 255, 54, 0.17);
 
     transition:
         transform 0.18s ease,
@@ -710,11 +710,11 @@
 .application-featured-button:hover {
     transform: translateY(-2px);
 
-    background: #7bbf45;
+    background: #b5ff36;
 
     box-shadow:
         0 16px 34px
-        rgba(124, 58, 237, 0.24);
+        rgba(181, 255, 54, 0.24);
 }
 
 .application-featured-button > span {
@@ -812,7 +812,7 @@
         linear-gradient(
             90deg,
             transparent,
-            rgba(167, 224, 111, 0.7),
+            rgba(200, 255, 124, 0.7),
             transparent
         );
 
@@ -888,13 +888,13 @@
 .application-role-icon {
     transform: translateY(-2px);
 
-    color: #b9a8ed;
+    color: #c8ee96;
 
     border-color:
-        rgba(123, 191, 69, 0.16);
+        rgba(181, 255, 54, 0.16);
 
     background:
-        rgba(123, 191, 69, 0.04);
+        rgba(181, 255, 54, 0.04);
 }
 
 
@@ -1003,7 +1003,7 @@
 }
 
 .application-role-action > strong {
-    color: #a995e5;
+    color: #b8df84;
 
     font-size: 15px;
 
@@ -1017,7 +1017,7 @@
 }
 
 .application-role-action:hover > strong {
-    color: #c4b5fd;
+    color: #d8ffa5;
 
     transform: translateX(3px);
 }
@@ -1121,7 +1121,7 @@
 }
 
 .applications-bottom-note > a {
-    color: #a995e5;
+    color: #b8df84;
 
     font-size: 10px;
     font-weight: 900;
@@ -1134,7 +1134,7 @@
 }
 
 .applications-bottom-note > a:hover {
-    color: #c4b5fd;
+    color: #d8ffa5;
 
     transform: translateX(2px);
 }
@@ -1448,11 +1448,11 @@
 
     border-radius: inherit;
 
-    background: #7bbf45;
+    background: #b5ff36;
 
     box-shadow:
         0 0 12px
-        rgba(124, 58, 237, 0.18);
+        rgba(181, 255, 54, 0.18);
 
     transition:
         width 0.35s ease;
@@ -1572,12 +1572,12 @@
 .apply-step.active
 .apply-step-number {
     border-color:
-        rgba(123, 191, 69, 0.16);
+        rgba(181, 255, 54, 0.16);
 
     background:
-        rgba(123, 191, 69, 0.05);
+        rgba(181, 255, 54, 0.05);
 
-    color: #aa97e7;
+    color: #c2e797;
 }
 
 .apply-step.completed
@@ -1885,13 +1885,13 @@
 .application-question textarea:focus,
 .application-question select:focus {
     border-color:
-        rgba(123, 191, 69, 0.28);
+        rgba(181, 255, 54, 0.28);
 
     background: #0f1014;
 
     box-shadow:
         0 0 0 3px
-        rgba(123, 191, 69, 0.035);
+        rgba(181, 255, 54, 0.035);
 }
 
 
@@ -1972,25 +1972,25 @@
 .staff-review-button {
     border:
         1px solid
-        rgba(124, 92, 255, 0.20);
+        rgba(179, 255, 92, 0.20);
 
-    background: #7c3aed;
+    background: #b5ff36;
 
     color: #ffffff;
 
     box-shadow:
         0 9px 24px
-        rgba(124, 58, 237, 0.14);
+        rgba(181, 255, 54, 0.14);
 }
 
 .staff-review-button:hover {
     transform: translateY(-1px);
 
-    background: #7bbf45;
+    background: #b5ff36;
 
     box-shadow:
         0 12px 28px
-        rgba(124, 58, 237, 0.20);
+        rgba(181, 255, 54, 0.20);
 }
 
 

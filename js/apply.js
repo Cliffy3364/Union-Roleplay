@@ -804,7 +804,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "departmentPlans",
                 label:
-                    "What would you bring to UPD Command, and what would your priorities be during your first few weeks?",
+                    "What would you bring to TDPS Command, and what would your priorities be during your first few weeks?",
                 type: "textarea",
                 required: true
             },
@@ -894,7 +894,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "departmentPlans",
                 label:
-                    "What would you bring to UHS Command, and what would your priorities be during your first few weeks?",
+                    "What would you bring to Ambulance Command, and what would your priorities be during your first few weeks?",
                 type: "textarea",
                 required: true
             },
@@ -910,7 +910,7 @@ const APPLICATION_CONFIG = {
             {
                 key: "staffPerformance",
                 label:
-                    "A long-serving member of UHS repeatedly provides poor medical roleplay despite previous guidance. How would you handle the situation?",
+                    "A long-serving member of the ambulance service repeatedly provides poor medical roleplay despite previous guidance. How would you handle the situation?",
                 type: "textarea",
                 required: true
             },

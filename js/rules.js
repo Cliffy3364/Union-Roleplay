@@ -507,7 +507,7 @@ const RULEBOOK = [
                     "FailRP",
 
                 description:
-                    "Players must not deliberately provoke police, UHS or other emergency services purely to create a pursuit, confrontation, arrest or other form of action. Criminal behaviour must have a believable in-character reason beyond simply attempting to gain emergency-service attention.",
+                    "Players must not deliberately provoke police, ambulance or other emergency services purely to create a pursuit, confrontation, arrest or other form of action. Criminal behaviour must have a believable in-character reason beyond simply attempting to gain emergency-service attention.",
 
                 enforcement:
                     "Minor incidents may result in a warning or strike. Repeated or blatant baiting may result in a temporary ban."
@@ -672,7 +672,7 @@ const RULEBOOK = [
         number: "04",
 
         title:
-            "Police, UHS & Civil Services",
+            "Police, Ambulance & Civil Services",
 
         description:
             "Standards applying to emergency services and public-service roleplay.",

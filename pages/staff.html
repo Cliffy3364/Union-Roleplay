@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0f0b">
 
     <title>Staff Panel | The District</title>
 
@@ -30,6 +31,8 @@
         href="../css/staff.css"
     >
 
+    <link rel="stylesheet" href="../css/rebrand.css">
+
 </head>
 
 <body>
@@ -42,9 +45,7 @@
 
         <div class="staff-sidebar-brand">
 
-            <div class="staff-sidebar-logo">
-                U
-            </div>
+            <div class="staff-sidebar-logo" aria-label="The District"></div>
 
             <div>
                 <span>THE DISTRICT</span>
@@ -148,12 +149,12 @@
                         </button>
 
                         <button type="button" class="staff-nav-item staff-nav-subitem" data-type="UPD Command Application">
-                            <span class="staff-nav-content"><span class="staff-nav-icon">PD</span><span>UPD Command</span></span>
+                            <span class="staff-nav-content"><span class="staff-nav-icon">PD</span><span>TDPS Command</span></span>
                             <span class="staff-nav-badge" id="nav-count-upd">0</span>
                         </button>
 
                         <button type="button" class="staff-nav-item staff-nav-subitem" data-type="UHS Command Application">
-                            <span class="staff-nav-content"><span class="staff-nav-icon">HS</span><span>UHS Command</span></span>
+                            <span class="staff-nav-content"><span class="staff-nav-icon">HS</span><span>Ambulance Command</span></span>
                             <span class="staff-nav-badge" id="nav-count-uhs">0</span>
                         </button>
 
@@ -190,6 +191,18 @@
                     <span class="staff-nav-content">
                         <span class="staff-nav-icon">CR</span>
                         <span>Creators</span>
+                    </span>
+                </button>
+
+                <button
+                    type="button"
+                    class="staff-nav-item"
+                    data-view="changelog"
+                    id="changeLogNav"
+                >
+                    <span class="staff-nav-content">
+                        <span class="staff-nav-icon">CL</span>
+                        <span>Change Logs</span>
                     </span>
                 </button>
 
@@ -243,7 +256,7 @@
             id="staffLoading"
             class="staff-access-state"
         >
-            <div class="staff-access-icon">U</div>
+            <div class="staff-access-icon" aria-label="The District"></div>
             <span>STAFF AUTHENTICATION</span>
             <h1>Checking permissions...</h1>
             <p>Verifying your Discord account and staff permissions.</p>
@@ -605,6 +618,161 @@
 
                 </section>
 
+            </section>
+
+
+            <section id="staffChangeLogView" class="changelog-view" hidden>
+                <div class="changelog-hero">
+                    <div>
+                        <span>DEVELOPMENT / BROADCAST</span>
+                        <h2>Change Log Publisher</h2>
+                        <p>Build a proper development update, preview the Discord embed live and publish it straight from the Staff Control Centre.</p>
+                    </div>
+                    <div class="changelog-destination">
+                        <span>DISCORD DESTINATION</span>
+                        <strong>#1520180829727232010</strong>
+                    </div>
+                </div>
+
+                <div class="changelog-layout">
+                    <section class="staff-dashboard-panel changelog-form-panel">
+                        <div class="staff-panel-header">
+                            <div>
+                                <span>COMPOSE UPDATE</span>
+                                <h2>Development Change Log</h2>
+                                <p>One change per line. Empty sections are automatically removed from the final embed.</p>
+                            </div>
+                            <div class="staff-panel-reference">
+                                <span>FORMAT</span>
+                                <strong>District Broadcast</strong>
+                            </div>
+                        </div>
+                        <div class="staff-panel-divider"></div>
+
+                        <form id="changeLogForm" class="changelog-form">
+                            <div class="changelog-section-title"><span>01</span> Release information</div>
+                            <div class="changelog-field-grid">
+                                <div class="changelog-field full">
+                                    <label for="changeLogTitle">Update Title</label>
+                                    <input id="changeLogTitle" maxlength="120" value="The District Development Update" required>
+                                </div>
+                                <div class="changelog-field">
+                                    <label for="changeLogVersion">Build / Version</label>
+                                    <input id="changeLogVersion" maxlength="40" placeholder="e.g. Build 0.9.4">
+                                </div>
+                                <div class="changelog-field">
+                                    <label for="changeLogEnvironment">Environment</label>
+                                    <select id="changeLogEnvironment">
+                                        <option value="Live Server">Live Server</option>
+                                        <option value="Beta / Testing">Beta / Testing</option>
+                                        <option value="Development">Development</option>
+                                        <option value="Website / Services">Website / Services</option>
+                                    </select>
+                                </div>
+                                <div class="changelog-field">
+                                    <label for="changeLogDeveloperLevel">Developer Level</label>
+                                    <select id="changeLogDeveloperLevel">
+                                        <option value="Director / Lead Developer">Director / Lead Developer</option>
+                                        <option value="Lead Developer">Lead Developer</option>
+                                        <option value="Senior Developer" selected>Senior Developer</option>
+                                        <option value="Developer">Developer</option>
+                                        <option value="QA / Testing">QA / Testing</option>
+                                    </select>
+                                </div>
+                                <div class="changelog-field">
+                                    <label for="changeLogType">Update Type</label>
+                                    <select id="changeLogType">
+                                        <option value="Major Update">Major Update</option>
+                                        <option value="Feature Update">Feature Update</option>
+                                        <option value="Hotfix">Hotfix</option>
+                                        <option value="Maintenance">Maintenance</option>
+                                        <option value="Website Update">Website Update</option>
+                                    </select>
+                                </div>
+                                <div class="changelog-field full">
+                                    <label for="changeLogSummary">Summary / Headline</label>
+                                    <textarea id="changeLogSummary" rows="3" maxlength="900" placeholder="Short overview of what this update focuses on..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="changelog-section-title"><span>02</span> Changes</div>
+                            <div class="changelog-field-grid">
+                                <div class="changelog-field">
+                                    <label for="changeLogAdded">Added to game</label>
+                                    <textarea id="changeLogAdded" placeholder="New phone system
+Updated vehicle handling
+New business interiors"></textarea>
+                                    <small>One item per line.</small>
+                                </div>
+                                <div class="changelog-field">
+                                    <label for="changeLogRemoved">Removed from game</label>
+                                    <textarea id="changeLogRemoved" placeholder="Old phone
+Legacy police job"></textarea>
+                                    <small>Leave empty if nothing was removed.</small>
+                                </div>
+                                <div class="changelog-field">
+                                    <label for="changeLogChanged">Changed in game</label>
+                                    <textarea id="changeLogChanged" placeholder="Added FiveManage to phone
+Fixed listing bugs"></textarea>
+                                </div>
+                                <div class="changelog-field">
+                                    <label for="changeLogExternal">Changed out of game</label>
+                                    <textarea id="changeLogExternal" placeholder="Website redesign
+Discord bot changes"></textarea>
+                                </div>
+                                <div class="changelog-field full">
+                                    <label for="changeLogKnownIssues">Known issues / next steps</label>
+                                    <textarea id="changeLogKnownIssues" rows="3" placeholder="Optional: anything still being worked on or known to be unfinished."></textarea>
+                                </div>
+                            </div>
+
+                            <div id="changeLogMessage" class="changelog-form-message" hidden></div>
+
+                            <div class="changelog-form-actions">
+                                <span class="changelog-publish-note">Mentions are disabled automatically to prevent accidental pings.</span>
+                                <div>
+                                    <button type="reset" class="discipline-secondary-button" id="changeLogReset">Clear</button>
+                                    <button type="submit" class="btn primary" id="changeLogSubmit">Publish to Discord ↗</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+
+                    <aside class="staff-dashboard-panel changelog-preview-panel">
+                        <div class="staff-panel-header">
+                            <div>
+                                <span>LIVE PREVIEW</span>
+                                <h2>Discord Output</h2>
+                                <p>This is a close preview of the embed that will be sent.</p>
+                            </div>
+                        </div>
+                        <div class="staff-panel-divider"></div>
+
+                        <div class="discord-preview-shell">
+                            <div class="discord-preview-top">
+                                <img src="../assets/images/logo.png" class="discord-preview-app" alt="">
+                                <div class="discord-preview-author">
+                                    <strong>District Core <i class="discord-preview-bot">APP</i></strong>
+                                    <small>just now</small>
+                                </div>
+                            </div>
+                            <div class="discord-preview-embed">
+                                <img src="../assets/images/logo.png" class="discord-preview-thumb" alt="">
+                                <h3 id="changeLogPreviewTitle">The District Development Update</h3>
+                                <p class="discord-preview-summary" id="changeLogPreviewSummary">A new development update is ready for The District.</p>
+                                <div id="changeLogPreviewFields"></div>
+                                <div class="discord-preview-meta">
+                                    <div><strong>Developer Level</strong><span id="changeLogPreviewLevel">Senior Developer</span></div>
+                                    <div><strong>Update Type</strong><span id="changeLogPreviewType">Major Update</span></div>
+                                    <div><strong>Environment</strong><span id="changeLogPreviewEnvironment">Live Server</span></div>
+                                    <div><strong>Build</strong><span id="changeLogPreviewVersion">Current Build</span></div>
+                                </div>
+                                <div class="discord-preview-footer"><img src="../assets/images/logo.png" alt=""><span>The District Development • Staff Control Centre</span></div>
+                            </div>
+                        </div>
+                        <p class="changelog-preview-help">The actual Discord embed uses the same Signal Lime identity, staff attribution and structured change sections.</p>
+                    </aside>
+                </div>
             </section>
 
             <section
@@ -1202,6 +1370,8 @@
 <script src="../js/auth.js"></script>
 <script src="../js/staff.js"></script>
 <script src="../js/components.js"></script>
+
+<script src="../js/rebrand.js"></script>
 
 </body>
 

@@ -150,7 +150,7 @@ const REVIEW_QUESTION_CONFIG = {
         leadership:
             "Describe your leadership style.",
         plans:
-            "What would you bring to UPD Command?",
+            "What would you bring to TDPS Command?",
         standards:
             "How would you maintain high roleplay and policing standards within the department?"
     },
@@ -163,7 +163,7 @@ const REVIEW_QUESTION_CONFIG = {
         leadership:
             "Describe your leadership style.",
         plans:
-            "What would you bring to UHS Command?",
+            "What would you bring to Ambulance Command?",
         standards:
             "How would you maintain high medical roleplay and departmental standards?"
     }

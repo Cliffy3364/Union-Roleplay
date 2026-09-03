@@ -820,6 +820,7 @@ function hideAllViews() {
             "staffRulesView"
         );
     const staffLoaView = document.getElementById("staffLoaView");
+    const staffChangeLogView = document.getElementById("staffChangeLogView");
 
 
     if (dashboard) {
@@ -873,6 +874,7 @@ function hideAllViews() {
         staffRulesView.hidden = true;
     }
     if (staffLoaView) staffLoaView.hidden = true;
+    if (staffChangeLogView) staffChangeLogView.hidden = true;
 
 
     const staffPanel =
@@ -9651,3 +9653,205 @@ document.addEventListener('DOMContentLoaded',()=>{
     setTimeout(applyStaffPermissions,0);
 });
 
+
+/* ==========================================================
+   DEVELOPMENT CHANGE LOG PUBLISHER
+========================================================== */
+
+function changeLogLines(value) {
+    return String(value || "")
+        .split(/\r?\n/)
+        .map(line => line.trim().replace(/^[-•+]\s*/, ""))
+        .filter(Boolean)
+        .slice(0, 30);
+}
+
+function changeLogListPreview(value) {
+    const lines = changeLogLines(value);
+    return lines.length
+        ? lines.map(line => `• ${line}`).join("\n")
+        : "N/A";
+}
+
+function changeLogFieldMarkup(label, icon, value) {
+    const lines = changeLogLines(value);
+    if (!lines.length) return "";
+
+    return `
+        <div class="discord-preview-field">
+            <strong>${icon} ${escapeHtml(label)}</strong>
+            <p>${escapeHtml(lines.map(line => `• ${line}`).join("\n"))}</p>
+        </div>
+    `;
+}
+
+function updateChangeLogPreview() {
+    const title = document.getElementById("changeLogTitle")?.value.trim() || "The District Development Update";
+    const summary = document.getElementById("changeLogSummary")?.value.trim() || "A new development update is ready for The District.";
+    const level = document.getElementById("changeLogDeveloperLevel")?.value || "Senior Developer";
+    const type = document.getElementById("changeLogType")?.value || "Major Update";
+    const environment = document.getElementById("changeLogEnvironment")?.value || "Live Server";
+    const version = document.getElementById("changeLogVersion")?.value.trim() || "Current Build";
+
+    const titleTarget = document.getElementById("changeLogPreviewTitle");
+    const summaryTarget = document.getElementById("changeLogPreviewSummary");
+    const levelTarget = document.getElementById("changeLogPreviewLevel");
+    const typeTarget = document.getElementById("changeLogPreviewType");
+    const environmentTarget = document.getElementById("changeLogPreviewEnvironment");
+    const versionTarget = document.getElementById("changeLogPreviewVersion");
+    const fieldsTarget = document.getElementById("changeLogPreviewFields");
+
+    if (titleTarget) titleTarget.textContent = title;
+    if (summaryTarget) summaryTarget.textContent = summary;
+    if (levelTarget) levelTarget.textContent = level;
+    if (typeTarget) typeTarget.textContent = type;
+    if (environmentTarget) environmentTarget.textContent = environment;
+    if (versionTarget) versionTarget.textContent = version;
+
+    if (fieldsTarget) {
+        const markup = [
+            changeLogFieldMarkup("Added to game", "➕", document.getElementById("changeLogAdded")?.value),
+            changeLogFieldMarkup("Removed from game", "➖", document.getElementById("changeLogRemoved")?.value),
+            changeLogFieldMarkup("Changed in game", "🛠️", document.getElementById("changeLogChanged")?.value),
+            changeLogFieldMarkup("Changed out of game", "🌐", document.getElementById("changeLogExternal")?.value),
+            changeLogFieldMarkup("Known issues / next steps", "⚠️", document.getElementById("changeLogKnownIssues")?.value)
+        ].filter(Boolean).join("");
+
+        fieldsTarget.innerHTML = markup || `
+            <div class="discord-preview-field">
+                <strong>CHANGE SUMMARY</strong>
+                <p>Add your changes on the left to build the Discord embed.</p>
+            </div>
+        `;
+    }
+}
+
+function showChangeLogPublisher() {
+    hideAllViews();
+    currentQueueType = null;
+
+    const view = document.getElementById("staffChangeLogView");
+    const title = document.getElementById("staffPageTitle");
+    const description = document.getElementById("staffPageDescription");
+
+    if (view) view.hidden = false;
+    if (title) title.textContent = "Development Change Logs";
+    if (description) description.textContent = "Compose, preview and publish polished development updates to Discord.";
+
+    setTopSearch("", false);
+    updateChangeLogPreview();
+}
+
+async function submitChangeLog(event) {
+    event.preventDefault();
+
+    const submitButton = document.getElementById("changeLogSubmit");
+    const message = document.getElementById("changeLogMessage");
+    const token = getToken();
+
+    if (!token) {
+        if (message) {
+            message.hidden = false;
+            message.className = "changelog-form-message error";
+            message.textContent = "Your staff session has expired. Log in again before publishing.";
+        }
+        return;
+    }
+
+    const payload = {
+        title: document.getElementById("changeLogTitle")?.value.trim(),
+        version: document.getElementById("changeLogVersion")?.value.trim(),
+        environment: document.getElementById("changeLogEnvironment")?.value,
+        developer_level: document.getElementById("changeLogDeveloperLevel")?.value,
+        update_type: document.getElementById("changeLogType")?.value,
+        summary: document.getElementById("changeLogSummary")?.value.trim(),
+        added: changeLogLines(document.getElementById("changeLogAdded")?.value),
+        removed: changeLogLines(document.getElementById("changeLogRemoved")?.value),
+        changed: changeLogLines(document.getElementById("changeLogChanged")?.value),
+        external: changeLogLines(document.getElementById("changeLogExternal")?.value),
+        known_issues: changeLogLines(document.getElementById("changeLogKnownIssues")?.value)
+    };
+
+    const hasChanges = [payload.added, payload.removed, payload.changed, payload.external, payload.known_issues]
+        .some(items => items.length > 0);
+
+    if (!hasChanges) {
+        if (message) {
+            message.hidden = false;
+            message.className = "changelog-form-message error";
+            message.textContent = "Add at least one change before publishing.";
+        }
+        return;
+    }
+
+    if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Publishing...";
+    }
+
+    if (message) message.hidden = true;
+
+    try {
+        const response = await fetch("/api/staff/changelog", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(payload)
+        });
+
+        let data;
+        try {
+            data = await response.json();
+        } catch {
+            data = { success: false, error: "The website returned an invalid response." };
+        }
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.error || "Unable to publish the change log.");
+        }
+
+        if (message) {
+            message.hidden = false;
+            message.className = "changelog-form-message success";
+            message.textContent = data.reference ? `Change log published to Discord successfully. Reference: ${data.reference}` : "Change log published to Discord successfully.";
+        }
+    } catch (error) {
+        if (message) {
+            message.hidden = false;
+            message.className = "changelog-form-message error";
+            message.textContent = error.message || "Unable to publish the change log.";
+        }
+    } finally {
+        if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = "Publish to Discord ↗";
+        }
+    }
+}
+
+function setupChangeLogPublisher() {
+    const nav = document.getElementById("changeLogNav");
+    const form = document.getElementById("changeLogForm");
+
+    nav?.addEventListener("click", function () {
+        setActiveNav(this);
+        showChangeLogPublisher();
+    });
+
+    form?.addEventListener("submit", submitChangeLog);
+    form?.addEventListener("input", updateChangeLogPreview);
+    form?.addEventListener("change", updateChangeLogPreview);
+    form?.addEventListener("reset", () => {
+        window.setTimeout(() => {
+            const message = document.getElementById("changeLogMessage");
+            if (message) message.hidden = true;
+            updateChangeLogPreview();
+        }, 0);
+    });
+
+    updateChangeLogPreview();
+}
+
+document.addEventListener("DOMContentLoaded", setupChangeLogPublisher);

@@ -8,7 +8,7 @@
     background:
         radial-gradient(
             circle at top left,
-            rgba(124, 58, 237, 0.08),
+            rgba(181, 255, 54, 0.08),
             transparent 30%
         ),
         #09090d;
@@ -172,7 +172,7 @@
 }
 
 .rules-search:focus {
-    border-color: rgba(124, 92, 255, 0.4);
+    border-color: rgba(179, 255, 92, 0.4);
 }
 
 
@@ -241,10 +241,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(124, 92, 255, 0.18);
+    border: 1px solid rgba(179, 255, 92, 0.18);
     border-radius: 12px;
-    background: rgba(124, 92, 255, 0.08);
-    color: #c2b4ff;
+    background: rgba(179, 255, 92, 0.08);
+    color: #dcffb4;
     font-size: 13px;
     font-weight: 900;
 }
@@ -295,7 +295,7 @@
 }
 
 .rule-id {
-    color: #9284d6;
+    color: #b0d684;
     font-size: 10px;
     font-weight: 900;
     letter-spacing: 0.4px;
@@ -374,9 +374,9 @@
 }
 
 .punishment-strike {
-    color: #c4b5fd;
-    background: rgba(124, 92, 255, 0.08);
-    border: 1px solid rgba(124, 92, 255, 0.17);
+    color: #d8ffa5;
+    background: rgba(179, 255, 92, 0.08);
+    border: 1px solid rgba(179, 255, 92, 0.17);
 }
 
 .punishment-business-shutdown {
@@ -488,12 +488,12 @@
 
     border:
         1px solid
-        rgba(124, 92, 255, 0.12);
+        rgba(179, 255, 92, 0.12);
 
     border-radius: 9px;
 
     background:
-        rgba(124, 92, 255, 0.045);
+        rgba(179, 255, 92, 0.045);
 }
 
 .rule-enforcement strong {
@@ -501,7 +501,7 @@
 
     margin-bottom: 5px;
 
-    color: #b9a9ff;
+    color: #d7ffa9;
 
     font-size: 9px;
     font-weight: 900;
@@ -531,7 +531,7 @@
         ),
         radial-gradient(
             circle at 85% 3%,
-            rgba(123, 191, 69, 0.025),
+            rgba(181, 255, 54, 0.025),
             transparent 25%
         ),
         #090a0d;
@@ -582,7 +582,7 @@
 .rules-hero h1 span {
     display: block;
 
-    color: #a7e06f;
+    color: #c8ff7c;
 }
 
 .rules-hero p {
@@ -793,11 +793,11 @@
 
 .rules-search:focus {
     border-color:
-        rgba(123, 191, 69, 0.3);
+        rgba(181, 255, 54, 0.3);
 
     box-shadow:
         0 0 0 3px
-        rgba(123, 191, 69, 0.04);
+        rgba(181, 255, 54, 0.04);
 }
 
 .rules-navigation {
@@ -841,7 +841,7 @@
 
     border-radius: 999px;
 
-    background: #7bbf45;
+    background: #b5ff36;
 
     transition:
         height 0.16s ease;
@@ -1007,7 +1007,7 @@
 }
 
 .rule-id {
-    color: #9583d0;
+    color: #acd083;
 }
 
 .rule-title {
@@ -1039,7 +1039,7 @@
 }
 
 .rule-enforcement strong {
-    color: #a995e5;
+    color: #b8df84;
 }
 
 .rule-enforcement span {
