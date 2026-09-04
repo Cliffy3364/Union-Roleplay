@@ -1,0 +1,18 @@
+:root {
+    --td-bg: #05070a !important;
+    --td-bg-soft: #080c11 !important;
+    --td-surface: #0c1117 !important;
+    --td-surface-2: #101820 !important;
+    --td-surface-3: #13202a !important;
+    --td-line: rgba(159, 211, 226, .12) !important;
+    --td-line-strong: rgba(0, 229, 255, .34) !important;
+    --td-acid: #00e5ff !important;
+    --td-acid-2: #6bf4ff !important;
+    --td-acid-dim: rgba(0, 229, 255, .08) !important;
+    --td-acid-glow: rgba(0, 229, 255, .22) !important;
+    --td-white: #f6fbff !important;
+    --td-muted: #8c9ba5 !important;
+    --td-muted-2: #5d6e79 !important;
+    --td-danger: #ff6578 !important;
+    --td-warning: #ffb800 !important;
+}
