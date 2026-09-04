@@ -45,6 +45,21 @@ function addField(fields, name, items) {
     });
 }
 
+function envDiagnostics(env = {}) {
+    const names = Object.keys(env)
+        .filter(name => /DISCORD|CHANGELOG|CF_PAGES/i.test(name))
+        .sort();
+
+    return {
+        webhook_binding_present: Boolean(cleanString(env.DISCORD_CHANGELOG_WEBHOOK, 1000)),
+        bot_token_present: Boolean(cleanString(env.DISCORD_BOT_TOKEN, 300)),
+        changelog_channel_present: Boolean(cleanString(env.CHANGELOG_CHANNEL_ID, 40)),
+        matching_binding_names: names,
+        pages_branch: cleanString(env.CF_PAGES_BRANCH, 100) || null,
+        pages_url: cleanString(env.CF_PAGES_URL, 300) || null
+    };
+}
+
 async function validateStaff(token) {
     const [permissionsResponse, userResponse] = await Promise.all([
         fetch(`${STAFF_API}/api/staff/permissions`, {
@@ -219,9 +234,12 @@ export async function onRequestPost(context) {
         } else if (botToken) {
             await sendViaBot(botToken, channelId, messageBody);
         } else {
+            const diagnostics = envDiagnostics(context.env);
+            console.error("Change log Discord binding missing:", diagnostics);
             return json({
                 success: false,
-                error: "Discord publishing is not configured. Add DISCORD_CHANGELOG_WEBHOOK or DISCORD_BOT_TOKEN to the Cloudflare Pages environment variables."
+                error: "Discord publishing is not configured in this Cloudflare deployment.",
+                diagnostics
             }, 503);
         }
 
