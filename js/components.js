@@ -2,10 +2,10 @@ const COMPONENTS_API =
     "https://the-district-api.danielclifford2808.workers.dev";
 
 /* ==========================================================
-   DISTRICT V2 GLOBAL ASSETS
+   DISTRICT GLOBAL ASSETS
    Loaded here because components.js is included across the site.
 ========================================================== */
-(function loadDistrictV2Assets() {
+(function loadDistrictVisualAssets() {
     if (!document.querySelector('link[href$="district-v2.css"]')) {
         const style = document.createElement("link");
         style.rel = "stylesheet";
@@ -26,6 +26,22 @@ const COMPONENTS_API =
         const script = document.createElement("script");
         script.src = "/js/district-v2.js";
         script.dataset.districtV2 = "true";
+        script.defer = true;
+        document.head.appendChild(script);
+    }
+
+    if (!document.querySelector('link[href$="district-v3.css"]')) {
+        const style = document.createElement("link");
+        style.rel = "stylesheet";
+        style.href = "/css/district-v3.css";
+        style.dataset.districtV3 = "true";
+        document.head.appendChild(style);
+    }
+
+    if (!document.querySelector('script[data-district-v3]')) {
+        const script = document.createElement("script");
+        script.src = "/js/district-v3.js";
+        script.dataset.districtV3 = "true";
         script.defer = true;
         document.head.appendChild(script);
     }
