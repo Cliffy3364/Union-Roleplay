@@ -6,12 +6,20 @@ const COMPONENTS_API =
    Loaded here because components.js is included across the site.
 ========================================================== */
 (function loadDistrictV2Assets() {
-    if (!document.querySelector('link[data-district-v2]')) {
+    if (!document.querySelector('link[href$="district-v2.css"]')) {
         const style = document.createElement("link");
         style.rel = "stylesheet";
         style.href = "/css/district-v2.css";
         style.dataset.districtV2 = "true";
         document.head.appendChild(style);
+    }
+
+    if (!document.querySelector('link[href$="district-v2-compat.css"]')) {
+        const compat = document.createElement("link");
+        compat.rel = "stylesheet";
+        compat.href = "/css/district-v2-compat.css";
+        compat.dataset.districtV2Compat = "true";
+        document.head.appendChild(compat);
     }
 
     if (!document.querySelector('script[data-district-v2]')) {
