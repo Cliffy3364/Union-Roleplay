@@ -3,6 +3,119 @@ const DEFAULT_CHANNEL_ID = "1520180829727232010";
 const DEFAULT_LOGO_URL = "https://the-district.pages.dev/assets/images/logo.png";
 const EMBED_COLOUR = 0xb5ff36;
 
+const CHANGE_AREAS = {
+    game: {
+        label: "Game / Server",
+        title: "The District Development Update",
+        fields: {
+            added: "➕ Added to game",
+            removed: "➖ Removed from game",
+            changed: "🛠️ Changed in game",
+            fixed: "✅ Fixed in game"
+        }
+    },
+    website: {
+        label: "Website",
+        title: "The District Website Update",
+        fields: {
+            added: "➕ Added to website",
+            removed: "➖ Removed from website",
+            changed: "🛠️ Changed in website",
+            fixed: "✅ Fixed in website"
+        }
+    },
+    discord: {
+        label: "Discord",
+        title: "The District Discord Update",
+        fields: {
+            added: "➕ Added to Discord",
+            removed: "➖ Removed from Discord",
+            changed: "🛠️ Changed in Discord",
+            fixed: "✅ Fixed in Discord"
+        }
+    },
+    backend: {
+        label: "Backend / API",
+        title: "The District Systems Update",
+        fields: {
+            added: "➕ Added to backend",
+            removed: "➖ Removed from backend",
+            changed: "🛠️ Changed in backend",
+            fixed: "✅ Fixed in backend"
+        }
+    },
+    scripts: {
+        label: "Scripts / Systems",
+        title: "The District Script Update",
+        fields: {
+            added: "➕ Scripts added",
+            removed: "➖ Scripts removed",
+            changed: "🛠️ Scripts changed",
+            fixed: "✅ Script fixes"
+        }
+    },
+    phone: {
+        label: "Phone System",
+        title: "The District Phone Update",
+        fields: {
+            added: "➕ Added to phone",
+            removed: "➖ Removed from phone",
+            changed: "🛠️ Changed in phone",
+            fixed: "✅ Fixed in phone"
+        }
+    },
+    police: {
+        label: "Police / Emergency Services",
+        title: "The District Emergency Services Update",
+        fields: {
+            added: "➕ Added to emergency services",
+            removed: "➖ Removed from emergency services",
+            changed: "🛠️ Changed in emergency services",
+            fixed: "✅ Fixed in emergency services"
+        }
+    },
+    vehicles: {
+        label: "Vehicles",
+        title: "The District Vehicle Update",
+        fields: {
+            added: "➕ Vehicles added",
+            removed: "➖ Vehicles removed",
+            changed: "🛠️ Vehicles changed",
+            fixed: "✅ Vehicle fixes"
+        }
+    },
+    maps: {
+        label: "Maps / MLOs",
+        title: "The District Map Update",
+        fields: {
+            added: "➕ Added to map",
+            removed: "➖ Removed from map",
+            changed: "🛠️ Changed in map",
+            fixed: "✅ Fixed in map"
+        }
+    },
+    eup: {
+        label: "EUP / Clothing",
+        title: "The District EUP Update",
+        fields: {
+            added: "➕ Added to EUP",
+            removed: "➖ Removed from EUP",
+            changed: "🛠️ Changed in EUP",
+            fixed: "✅ Fixed in EUP"
+        }
+    },
+    community: {
+        label: "Community / Other",
+        title: "The District Community Update",
+        fields: {
+            added: "➕ Added",
+            removed: "➖ Removed",
+            changed: "🛠️ Changed",
+            fixed: "✅ Fixed"
+        }
+    }
+};
+
 function json(data, status = 200) {
     return new Response(JSON.stringify(data), {
         status,
@@ -43,6 +156,14 @@ function addField(fields, name, items) {
         value: listValue(items),
         inline: false
     });
+}
+
+function resolveChangeArea(value) {
+    const key = cleanString(value, 40).toLowerCase();
+    return {
+        key: CHANGE_AREAS[key] ? key : "game",
+        ...(CHANGE_AREAS[key] || CHANGE_AREAS.game)
+    };
 }
 
 function envDiagnostics(env = {}) {
@@ -170,8 +291,9 @@ export async function onRequestPost(context) {
             return json({ success: false, error: "Invalid JSON payload." }, 400);
         }
 
-        const title = cleanString(payload?.title, 120) || "The District Development Update";
+        const area = resolveChangeArea(payload?.change_area);
         const summary = cleanString(payload?.summary, 900);
+        const title = cleanString(payload?.title, 120) || area.title;
         const version = cleanString(payload?.version, 40) || "Current Build";
         const environment = cleanString(payload?.environment, 60) || "Live Server";
         const developerLevel = cleanString(payload?.developer_level, 70) || cleanString(staff.permissions?.staff_role, 70) || "Developer";
@@ -180,23 +302,31 @@ export async function onRequestPost(context) {
         const added = cleanItems(payload?.added);
         const removed = cleanItems(payload?.removed);
         const changed = cleanItems(payload?.changed);
-        const external = cleanItems(payload?.external);
+        const fixed = cleanItems(payload?.fixed);
+        const legacyExternal = cleanItems(payload?.external);
         const knownIssues = cleanItems(payload?.known_issues);
 
-        if (![added, removed, changed, external, knownIssues].some(items => items.length)) {
-            return json({ success: false, error: "Add at least one change before publishing." }, 400);
+        const hasStructuredChanges = [added, removed, changed, fixed, legacyExternal, knownIssues]
+            .some(items => items.length);
+
+        if (!hasStructuredChanges && !summary) {
+            return json({ success: false, error: "Add a summary or at least one change before publishing." }, 400);
         }
 
         const fields = [];
-        addField(fields, "➕ Added to game", added);
-        addField(fields, "➖ Removed from game", removed);
-        addField(fields, "🛠️ Changed in game", changed);
-        addField(fields, "🌐 Changed out of game", external);
+        addField(fields, area.fields.added, added);
+        addField(fields, area.fields.removed, removed);
+        addField(fields, area.fields.changed, changed);
+        addField(fields, area.fields.fixed, fixed);
+
+        /* Backwards compatibility for older versions of the staff page. */
+        addField(fields, "🌐 Changed out of game", legacyExternal);
         addField(fields, "⚠️ Known issues / next steps", knownIssues);
 
         fields.push(
             { name: "Developer Level", value: developerLevel, inline: true },
             { name: "Submitted By", value: staffName(staff), inline: true },
+            { name: "Change Area", value: area.label, inline: true },
             { name: "Update Type", value: updateType, inline: true },
             { name: "Environment", value: environment, inline: true },
             { name: "Build", value: version, inline: true }
@@ -213,12 +343,12 @@ export async function onRequestPost(context) {
                 icon_url: logoUrl
             },
             title,
-            description: summary || "A new development update has been submitted for The District.",
+            description: summary || `A new ${area.label.toLowerCase()} update has been published for The District.`,
             color: EMBED_COLOUR,
             thumbnail: { url: logoUrl },
             fields,
             footer: {
-                text: `The District Development • ${reference}`,
+                text: `The District Development • ${area.label} • ${reference}`,
                 icon_url: logoUrl
             },
             timestamp: now.toISOString()
@@ -243,7 +373,13 @@ export async function onRequestPost(context) {
             }, 503);
         }
 
-        return json({ success: true, channel_id: channelId, reference });
+        return json({
+            success: true,
+            channel_id: channelId,
+            reference,
+            change_area: area.key,
+            change_area_label: area.label
+        });
     } catch (error) {
         console.error("Change log publish error:", error);
         return json({ success: false, error: error?.message || "Unable to publish the change log." }, 500);
