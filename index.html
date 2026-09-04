@@ -3,215 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>The District | British FiveM Roleplay</title>
-    <meta name="description" content="The District is a serious British FiveM roleplay community built around detailed systems, player-led stories and high standards.">
-    <meta name="theme-color" content="#0a0d0a">
+    <title>The District | 16+ British FiveM Roleplay</title>
+    <meta name="description" content="The District is a 16+ British FiveM roleplay community built around detailed systems, player-led stories, public services, businesses and active development.">
+    <meta name="theme-color" content="#05070a">
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/rebrand.css">
+    <link rel="stylesheet" href="css/district-v2.css">
 </head>
-<body class="district-home">
+<body class="district-v2-home">
     <div id="navbar"></div>
 
     <main>
-        <section class="district-hero">
-            <div class="district-hero-grid"></div>
-            <div class="district-orbit district-orbit-one"></div>
-            <div class="district-orbit district-orbit-two"></div>
-
-            <div class="district-hero-shell">
-                <div class="district-hero-copy">
-                    <div class="district-signal-pill">
-                        <span></span>
-                        DISTRICT NETWORK // APPLICATIONS OPEN
-                    </div>
-
-                    <p class="district-overline">SERIOUS BRITISH ROLEPLAY • LOS SANTOS</p>
-                    <h1>Welcome to<br><em>The District.</em></h1>
-                    <p class="district-hero-lead">
-                        A city designed to feel alive. Build a career, run a business, join a public service,
-                        enter the criminal world or create something nobody else saw coming.
+        <section class="v2-hero">
+            <div class="v2-hero-grid"></div>
+            <div class="v2-wrap v2-hero-inner">
+                <div class="v2-hero-copy">
+                    <div class="v2-livebar"><i></i> DISTRICT NETWORK // PREPARING FOR RELEASE</div>
+                    <span class="v2-eyebrow">16+ BRITISH ROLEPLAY // LOS SANTOS</span>
+                    <h1>A city with<br><span>something behind it.</span></h1>
+                    <p>
+                        The District is built around detailed systems, believable progression and roleplay that actually
+                        gives people a reason to stay involved. Work, build a business, serve the public, create a name
+                        for yourself or take a completely different route through the city.
                     </p>
-
-                    <div class="district-hero-actions">
-                        <a href="pages/applications.html" class="btn primary district-action-primary">Start your application <span>↗</span></a>
-                        <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer" class="btn secondary district-action-secondary">Enter the Discord</a>
+                    <div class="v2-actions">
+                        <a href="pages/applications.html" class="btn primary">Start your application <span>↗</span></a>
+                        <a href="pages/wiki.html" class="btn secondary">Open the District Wiki</a>
+                        <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer" class="btn secondary">Join Discord</a>
                     </div>
-
-                    <div class="district-hero-proof">
-                        <div><strong>01</strong><span>Strict whitelist</span></div>
-                        <div><strong>02</strong><span>UK-focused systems</span></div>
-                        <div><strong>03</strong><span>Player-led economy</span></div>
+                    <div class="v2-hero-facts">
+                        <div><strong>16+</strong><span>Minimum age</span></div>
+                        <div><strong>British RP</strong><span>Community style</span></div>
+                        <div><strong>Whitelist</strong><span>Quality control</span></div>
+                        <div><strong>Active Dev</strong><span>Ongoing updates</span></div>
                     </div>
                 </div>
 
-                <aside class="district-command-card" aria-label="The District launch status">
-                    <div class="district-command-top">
-                        <div>
-                            <span>TD // LAUNCH CONTROL</span>
-                            <strong>Release Sequence</strong>
-                        </div>
-                        <span class="district-command-live"><i></i> LIVE</span>
+                <aside class="v2-console" aria-label="The District release control">
+                    <div class="v2-console-head">
+                        <div><span>TD // NETWORK CONTROL</span><strong>Release status</strong></div>
+                        <span class="v2-console-status"><i></i> ONLINE</span>
                     </div>
-
-                    <div class="district-emblem-stage">
-                        <div class="district-emblem-ring district-emblem-ring-a"></div>
-                        <div class="district-emblem-ring district-emblem-ring-b"></div>
+                    <div class="v2-console-logo">
                         <img src="assets/images/logo.png" alt="The District">
                     </div>
-
-                    <div class="district-launch-date">
-                        <span>PUBLIC RELEASE</span>
-                        <strong>18.09.2026</strong>
-                        <small>18:00 BST</small>
+                    <div class="v2-console-release">
+                        <div><span>PUBLIC RELEASE</span><strong>18.09.2026</strong></div>
+                        <div class="v2-age-chip">16+</div>
                     </div>
-
-                    <div class="district-countdown" id="releaseCountdown">
+                    <div class="v2-countdown" id="releaseCountdown">
                         <div><strong id="countdownDays">00</strong><span>DAYS</span></div>
-                        <div><strong id="countdownHours">00</strong><span>HRS</span></div>
-                        <div><strong id="countdownMinutes">00</strong><span>MIN</span></div>
-                        <div><strong id="countdownSeconds">00</strong><span>SEC</span></div>
-                    </div>
-
-                    <div class="district-command-footer">
-                        <span><i class="online"></i> Website operational</span>
-                        <span><i class="online"></i> Applications open</span>
+                        <div><strong id="countdownHours">00</strong><span>HOURS</span></div>
+                        <div><strong id="countdownMinutes">00</strong><span>MINUTES</span></div>
+                        <div><strong id="countdownSeconds">00</strong><span>SECONDS</span></div>
                     </div>
                 </aside>
             </div>
+        </section>
 
-            <div class="district-marquee" aria-hidden="true">
-                <div>THE DISTRICT • BUILT DIFFERENT • BRITISH ROLEPLAY • PLAYER DRIVEN • THE DISTRICT • BUILT DIFFERENT • BRITISH ROLEPLAY • PLAYER DRIVEN •</div>
+        <section class="v2-section">
+            <div class="v2-wrap">
+                <div class="v2-section-head">
+                    <div><span class="v2-eyebrow">CITY ECOSYSTEM</span><h2>Pick a direction. The city reacts.</h2></div>
+                    <p>The server is being built so different parts of the city feed into each other instead of existing as isolated scripts. Businesses need customers, public services need incidents, criminals need contacts and civilians need places worth visiting.</p>
+                </div>
+
+                <div class="v2-bento">
+                    <article class="v2-card large">
+                        <span class="v2-card-index">01 / PUBLIC SERVICES</span><span class="v2-card-icon">PS</span>
+                        <h3>Structured services with actual progression.</h3>
+                        <p>The District Police Service and other emergency-service roles are built around ranks, responsibility, training and specialist routes rather than everybody having everything on day one.</p>
+                        <div class="v2-card-tags"><span>TDPS</span><span>RESPONSE</span><span>SPECIALIST UNITS</span><span>AMBULANCE</span><span>TRAINING</span></div>
+                    </article>
+
+                    <article class="v2-card large amber">
+                        <span class="v2-card-index">02 / PLAYER ECONOMY</span><span class="v2-card-icon">£</span>
+                        <h3>Work should lead somewhere.</h3>
+                        <p>Jobs, player businesses, vehicles and services are there to create progression and interaction. The point is not to collect money as fast as possible; it is to build a life other players recognise.</p>
+                        <div class="v2-card-tags"><span>CITY HALL</span><span>BUSINESSES</span><span>VEHICLES</span><span>SERVICES</span></div>
+                    </article>
+
+                    <article class="v2-card medium">
+                        <span class="v2-card-index">03 / BUSINESSES</span><span class="v2-card-icon">BZ</span>
+                        <h3>Businesses are roleplay hubs.</h3>
+                        <p>Recruit staff, serve customers, advertise, build a reputation and make your location part of somebody else's story.</p>
+                    </article>
+
+                    <article class="v2-card medium amber">
+                        <span class="v2-card-index">04 / CRIMINAL</span><span class="v2-card-icon">CR</span>
+                        <h3>Crime with pressure.</h3>
+                        <p>Planning, contacts, escalation and consequences matter more than treating criminal content like a speedrun.</p>
+                    </article>
+
+                    <article class="v2-card medium">
+                        <span class="v2-card-index">05 / CIVILIAN</span><span class="v2-card-icon">CV</span>
+                        <h3>You do not need a badge or a gang.</h3>
+                        <p>Everyday civilian roleplay, employment, friendships, events, vehicles and businesses should be enough to build a long-running character.</p>
+                    </article>
+
+                    <article class="v2-card wide">
+                        <span class="v2-card-index">06 / DEVELOPMENT</span><span class="v2-card-icon">DEV</span>
+                        <h3>The city keeps moving after launch.</h3>
+                        <p>Release is not the end of development. The website, server systems, jobs, phone, vehicles, maps and community tooling are all designed to keep receiving fixes, refinements and new content.</p>
+                        <div class="v2-card-tags"><span>CHANGE LOGS</span><span>BUG FIXES</span><span>NEW SYSTEMS</span><span>QUALITY OF LIFE</span><span>COMMUNITY FEEDBACK</span></div>
+                    </article>
+
+                    <article class="v2-card small amber">
+                        <span class="v2-card-index">07 / CREATORS</span><span class="v2-card-icon">LIVE</span>
+                        <h3>Creator support.</h3>
+                        <p>Approved streamers have their own programme and public creator presence.</p>
+                    </article>
+
+                    <article class="v2-card small">
+                        <span class="v2-card-index">08 / EVENTS</span><span class="v2-card-icon">EV</span>
+                        <h3>Reasons to log in.</h3>
+                        <p>Race nights, recruitment, ride-alongs and city events keep things moving.</p>
+                    </article>
+                </div>
             </div>
         </section>
 
-        <section class="district-section district-intel-section">
-            <div class="district-section-head">
+        <section class="v2-section">
+            <div class="v2-wrap v2-standard">
+                <div class="v2-standard-lead">
+                    <strong class="age">16+ COMMUNITY</strong>
+                    <h2>Serious roleplay without making it miserable.</h2>
+                    <p>We want players who can take scenes seriously, respect other people and understand that losing, getting injured or facing consequences can create better roleplay than always winning.</p>
+                </div>
+                <div class="v2-standard-grid">
+                    <article class="v2-standard-item"><span>01</span><strong>Believable characters</strong><p>Your character should have goals, flaws and consistency instead of changing personality whenever it becomes convenient.</p></article>
+                    <article class="v2-standard-item"><span>02</span><strong>Give and take</strong><p>Good scenes are collaborative. Give other players time to react and something meaningful to work with.</p></article>
+                    <article class="v2-standard-item"><span>03</span><strong>Consequences matter</strong><p>Injuries, arrests, losses, damaged vehicles and failed plans are part of the story rather than problems to bypass.</p></article>
+                    <article class="v2-standard-item"><span>04</span><strong>Community conduct</strong><p>16+ is the minimum age, not an excuse for toxicity. Discord and in-game behaviour still have clear standards.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="v2-section">
+            <div class="v2-wrap">
+                <div class="v2-section-head">
+                    <div><span class="v2-eyebrow">NEW PLAYER ROUTE</span><h2>From Discord to your first proper scene.</h2></div>
+                    <p>The route into The District is meant to be clear. The wiki explains each stage in more detail if you get stuck.</p>
+                </div>
+                <div class="v2-route">
+                    <article><span>STEP 01</span><strong>Join Discord</strong><p>Get announcements, support and community access.</p></article>
+                    <article><span>STEP 02</span><strong>Read Rules</strong><p>Know the roleplay and conduct standard before applying.</p></article>
+                    <article><span>STEP 03</span><strong>Login</strong><p>Connect your Discord account to the District website.</p></article>
+                    <article><span>STEP 04</span><strong>Whitelist</strong><p>Submit a proper application and wait for staff review.</p></article>
+                    <article><span>STEP 05</span><strong>Create</strong><p>Build a character with a reason to exist in the city.</p></article>
+                    <article><span>STEP 06</span><strong>Start RP</strong><p>Find work, meet people and start building a reputation.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="v2-section">
+            <div class="v2-wrap">
+                <div class="v2-section-head">
+                    <div><span class="v2-eyebrow">DISTRICT KNOWLEDGE</span><h2>Stop guessing where things are.</h2></div>
+                    <p>The new District Wiki is the player handbook for the city. It explains systems in plain English and gives new players somewhere to look before opening a support ticket.</p>
+                </div>
+                <div class="v2-knowledge">
+                    <div class="v2-wiki-banner">
+                        <span class="v2-eyebrow">NEW // DISTRICT WIKI</span>
+                        <h2>How to do shit.<br>Where stuff is.</h2>
+                        <p>Joining, City Hall jobs, PDM, driving licences, phone basics, TDPS, medical roleplay, businesses, support, bug reports, common RP terms and more — all in one searchable place.</p>
+                        <a href="pages/wiki.html" class="btn primary">Open the Wiki <span>↗</span></a>
+                    </div>
+                    <div class="v2-knowledge-list">
+                        <a href="pages/wiki.html#wiki-join"><b>01</b><div><strong>How to join</strong><span>Discord → rules → whitelist → city.</span></div></a>
+                        <a href="pages/wiki.html#wiki-locations"><b>02</b><div><strong>Where things are</strong><span>City Hall, PDM, businesses, emergency services.</span></div></a>
+                        <a href="pages/wiki.html#wiki-driving"><b>03</b><div><strong>Driving licence</strong><span>Theory, practical and the current DMV location.</span></div></a>
+                        <a href="pages/wiki.html#wiki-phone"><b>04</b><div><strong>Phone guide</strong><span>Contacts, camera, maps and everyday use.</span></div></a>
+                        <a href="pages/wiki.html#wiki-rp-terms"><b>05</b><div><strong>RP terminology</strong><span>RDM, VDM, meta, powergaming, FearRP and NLR.</span></div></a>
+                        <a href="pages/wiki.html#wiki-support"><b>06</b><div><strong>Getting support</strong><span>Tickets, reports, evidence and bug reports.</span></div></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="v2-section">
+            <div class="v2-wrap">
+                <div class="v2-section-head">
+                    <div><span class="v2-eyebrow">OPENING MONTH</span><h2>Launch is only day one.</h2></div>
+                    <p>The opening calendar is built around getting different parts of the community interacting from the start.</p>
+                </div>
+                <div class="v2-events">
+                    <article class="v2-event"><div class="v2-event-date"><strong>18</strong><span>SEP</span></div><div><small>LAUNCH NIGHT</small><h3>Server Release</h3><p>The District opens for its first public night.</p></div><b>EVENT 01</b></article>
+                    <article class="v2-event"><div class="v2-event-date"><strong>20</strong><span>SEP</span></div><div><small>COMMUNITY</small><h3>Race Night</h3><p>Drivers, spectators and a reason for the city to gather.</p></div><b>EVENT 02</b></article>
+                    <article class="v2-event"><div class="v2-event-date"><strong>23</strong><span>SEP</span></div><div><small>BUSINESS</small><h3>Business Recruitment Night</h3><p>Meet owners, find work and get involved with player businesses.</p></div><b>EVENT 03</b></article>
+                    <article class="v2-event"><div class="v2-event-date"><strong>26</strong><span>SEP</span></div><div><small>TDPS</small><h3>Police Ride-Along Night</h3><p>See frontline policing and learn more about TDPS.</p></div><b>EVENT 04</b></article>
+                    <article class="v2-event"><div class="v2-event-date"><strong>30</strong><span>SEP</span></div><div><small>CITY EVENT</small><h3>Treasure Hunt</h3><p>Follow clues across Los Santos and explore the city.</p></div><b>EVENT 05</b></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="v2-section">
+            <div class="v2-wrap">
+                <div class="v2-section-head">
+                    <div><span class="v2-eyebrow">COMMON QUESTIONS</span><h2>Before you ask in Discord.</h2></div>
+                    <p>The quick answers below cover the things new players normally want to know first.</p>
+                </div>
+                <div class="v2-faq">
+                    <details><summary>How old do I need to be?</summary><p>The District is a 16+ server. You need to be at least 16 to participate.</p></details>
+                    <details><summary>Do I need to whitelist?</summary><p>Yes. Use the website Applications section after joining Discord and reading the current rules.</p></details>
+                    <details><summary>Where do I get a starter job?</summary><p>City Hall is the starting point for available public starter jobs. Whitelisted departments and specialist roles use separate recruitment.</p></details>
+                    <details><summary>Where do I get my driving licence?</summary><p>The temporary DMV is currently based at PDM while the dedicated driving-school setup is developed.</p></details>
+                    <details><summary>How do I join TDPS?</summary><p>Follow current TDPS recruitment/application information. Police is not a standard City Hall job.</p></details>
+                    <details><summary>What if I find a bug?</summary><p>Use the official bug-report route and include the steps, what you expected, what actually happened and evidence if possible.</p></details>
+                    <details><summary>Can I own a business?</summary><p>Business opportunities depend on current availability and recruitment. Keep an eye on official business announcements and applications.</p></details>
+                    <details><summary>Where can I learn the server systems?</summary><p>Use the new District Wiki. It is searchable and is designed to grow as more systems are added.</p></details>
+                </div>
+            </div>
+        </section>
+
+        <section class="v2-section">
+            <div class="v2-wrap v2-final">
                 <div>
-                    <span class="district-kicker">CITY INTELLIGENCE</span>
-                    <h2>More than a FiveM server.</h2>
+                    <span class="v2-eyebrow">READY WHEN YOU ARE</span>
+                    <h2>Build something people remember.</h2>
+                    <p>Join the community, understand the standard, create a character with direction and let the city do the rest.</p>
                 </div>
-                <p>
-                    The District is built as a full community ecosystem. Your choices should create consequences,
-                    progression and stories that continue long after one session ends.
-                </p>
-            </div>
-
-            <div class="district-intel-grid">
-                <article class="district-feature-card feature-wide">
-                    <span class="district-card-index">01 / PUBLIC SERVICES</span>
-                    <h3>Structured services with real progression.</h3>
-                    <p>Join British-inspired policing, ambulance and other public-service careers with specialist pathways, clear ranks and meaningful responsibility.</p>
-                    <div class="district-tag-row"><span>TDPS</span><span>AMBULANCE</span><span>SPECIALIST UNITS</span></div>
-                </article>
-
-                <article class="district-feature-card">
-                    <span class="district-card-index">02 / ECONOMY</span>
-                    <h3>Own it.</h3>
-                    <p>Work, save, invest, run businesses and make your name matter across the city.</p>
-                    <span class="district-card-arrow">↗</span>
-                </article>
-
-                <article class="district-feature-card">
-                    <span class="district-card-index">03 / CRIMINAL</span>
-                    <h3>Risk has weight.</h3>
-                    <p>Criminal progression is designed around planning, connections and believable roleplay.</p>
-                    <span class="district-card-arrow">↗</span>
-                </article>
-
-                <article class="district-feature-card">
-                    <span class="district-card-index">04 / BUSINESSES</span>
-                    <h3>Built for owners.</h3>
-                    <p>Recruit teams, build a reputation and turn a small operation into part of the city.</p>
-                    <span class="district-card-arrow">↗</span>
-                </article>
-
-                <article class="district-feature-card">
-                    <span class="district-card-index">05 / COMMUNITY</span>
-                    <h3>Events that move.</h3>
-                    <p>Race nights, recruitment events, ride-alongs and city-wide activities keep the server moving.</p>
-                    <span class="district-card-arrow">↗</span>
-                </article>
-            </div>
-        </section>
-
-        <section class="district-section district-experience-section">
-            <div class="district-experience-panel">
-                <div class="district-experience-copy">
-                    <span class="district-kicker">THE DISTRICT STANDARD</span>
-                    <h2>Every system should give you something to do.</h2>
-                    <p>
-                        We are building around depth rather than clutter: better interactions, stronger roleplay hooks,
-                        cleaner UI and progression that gives both new and long-term players a reason to stay involved.
-                    </p>
-                    <a href="pages/community.html" class="district-text-link">Explore the community <span>→</span></a>
-                </div>
-
-                <div class="district-spec-list">
-                    <div><span>01</span><strong>Custom systems</strong><small>Purpose-built experiences instead of a pile of disconnected scripts.</small></div>
-                    <div><span>02</span><strong>Detailed roleplay</strong><small>Serious standards without making the server feel lifeless.</small></div>
-                    <div><span>03</span><strong>Active development</strong><small>Regular change logs, fixes and new features after release.</small></div>
-                    <div><span>04</span><strong>Creator support</strong><small>A dedicated programme for people who showcase the community.</small></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="district-section district-events-section">
-            <div class="district-section-head compact">
-                <div>
-                    <span class="district-kicker">OPENING MONTH</span>
-                    <h2>The launch calendar.</h2>
-                </div>
-                <p>Release is the start, not the finish. The first two weeks already have reasons to get involved.</p>
-            </div>
-
-            <div class="district-event-rail">
-                <article class="district-event-card featured">
-                    <div class="district-event-date"><strong>18</strong><span>SEP</span></div>
-                    <div><small>LAUNCH NIGHT</small><h3>Server Release</h3><p>The District opens its doors.</p></div>
-                    <b>01</b>
-                </article>
-                <article class="district-event-card">
-                    <div class="district-event-date"><strong>20</strong><span>SEP</span></div>
-                    <div><small>COMMUNITY EVENT</small><h3>Race Night</h3><p>Drivers, spectators and bragging rights.</p></div>
-                    <b>02</b>
-                </article>
-                <article class="district-event-card">
-                    <div class="district-event-date"><strong>23</strong><span>SEP</span></div>
-                    <div><small>CAREERS</small><h3>Business Recruitment</h3><p>Meet owners and find your next role.</p></div>
-                    <b>03</b>
-                </article>
-                <article class="district-event-card">
-                    <div class="district-event-date"><strong>26</strong><span>SEP</span></div>
-                    <div><small>TDPS</small><h3>Police Ride-Along</h3><p>Get a look inside frontline policing.</p></div>
-                    <b>04</b>
-                </article>
-                <article class="district-event-card">
-                    <div class="district-event-date"><strong>30</strong><span>SEP</span></div>
-                    <div><small>CITY EVENT</small><h3>Treasure Hunt</h3><p>Follow the trail across Los Santos.</p></div>
-                    <b>05</b>
-                </article>
-            </div>
-        </section>
-
-        <section class="district-section district-join-section">
-            <div class="district-join-card">
-                <div class="district-join-copy">
-                    <span class="district-kicker">ACCESS PROTOCOL</span>
-                    <h2>Four steps. Then the city is yours.</h2>
-                    <p>We keep access clear and simple while protecting the roleplay standard of the community.</p>
-                </div>
-
-                <div class="district-join-steps">
-                    <article><span>01</span><div><strong>Join Discord</strong><small>Get announcements, support and community access.</small></div></article>
-                    <article><span>02</span><div><strong>Read the rules</strong><small>Know the standards before submitting anything.</small></div></article>
-                    <article><span>03</span><div><strong>Apply</strong><small>Complete the whitelist application through your District account.</small></div></article>
-                    <article><span>04</span><div><strong>Enter The District</strong><small>Once approved, connect and start building your story.</small></div></article>
-                </div>
-
-                <div class="district-join-actions">
-                    <a href="pages/applications.html" class="btn primary">Open Applications <span>↗</span></a>
-                    <a href="rules.html" class="btn secondary">Read Rules</a>
+                <div class="v2-actions">
+                    <a href="pages/applications.html" class="btn primary">Apply now <span>↗</span></a>
+                    <a href="pages/wiki.html" class="btn secondary">Read the Wiki</a>
                 </div>
             </div>
         </section>
@@ -221,9 +236,10 @@
         <div class="district-footer-main">
             <div class="district-footer-brand">
                 <img src="assets/images/logo.png" alt="The District logo">
-                <div><strong>THE DISTRICT</strong><span>BRITISH FIVEM ROLEPLAY</span></div>
+                <div><strong>THE DISTRICT</strong><span>16+ BRITISH FIVEM ROLEPLAY</span></div>
             </div>
             <div class="district-footer-links">
+                <a href="pages/wiki.html">Wiki</a>
                 <a href="pages/applications.html">Applications</a>
                 <a href="pages/creators.html">Creators</a>
                 <a href="pages/community.html">Community</a>
@@ -231,7 +247,7 @@
                 <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer">Discord</a>
             </div>
         </div>
-        <div class="district-footer-bottom"><span>© 2026 The District. All rights reserved.</span><span>TD NETWORK // BUILD 2026.09</span></div>
+        <div class="district-footer-bottom"><span>© 2026 The District. All rights reserved.</span><span>TD NETWORK // V2</span></div>
     </footer>
 
     <script src="js/auth.js"></script>
