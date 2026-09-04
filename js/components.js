@@ -1,6 +1,28 @@
 const COMPONENTS_API =
     "https://the-district-api.danielclifford2808.workers.dev";
 
+/* ==========================================================
+   DISTRICT V2 GLOBAL ASSETS
+   Loaded here because components.js is included across the site.
+========================================================== */
+(function loadDistrictV2Assets() {
+    if (!document.querySelector('link[data-district-v2]')) {
+        const style = document.createElement("link");
+        style.rel = "stylesheet";
+        style.href = "/css/district-v2.css";
+        style.dataset.districtV2 = "true";
+        document.head.appendChild(style);
+    }
+
+    if (!document.querySelector('script[data-district-v2]')) {
+        const script = document.createElement("script");
+        script.src = "/js/district-v2.js";
+        script.dataset.districtV2 = "true";
+        script.defer = true;
+        document.head.appendChild(script);
+    }
+})();
+
 
 async function loadNavbar() {
 
@@ -153,11 +175,6 @@ async function setupNavbarUser() {
                 user.discord_username ||
                 user.username ||
                 "Account";
-
-            /*
-                CLOUDFLARE PAGES:
-                Site now runs from the domain root.
-            */
 
             loginButton.href =
                 "/pages/dashboard.html";
