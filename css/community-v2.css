@@ -1,0 +1,61 @@
+/* The District community page — V2 */
+.community-page-shell { padding-top:0 !important; background:transparent !important; }
+.community-page-shell main { min-height:100vh; }
+.community-v2-hero { padding:138px 0 70px; position:relative; overflow:hidden; }
+.community-v2-hero::after { content:"COMMUNITY / LIVE CITY"; position:absolute; left:-15px; bottom:-20px; font-size:100px; font-weight:950; letter-spacing:-.06em; color:rgba(0,229,255,.032); white-space:nowrap; pointer-events:none; }
+.community-v2-layout { display:grid; grid-template-columns:1.05fr .75fr; gap:42px; align-items:center; }
+.community-v2-copy h1 { margin:12px 0 20px; font-size:clamp(58px,7vw,106px); line-height:.86; letter-spacing:-.07em; }
+.community-v2-copy h1 span { color:var(--v2-cyan); }
+.community-v2-copy > p { max-width:720px; color:#8fa0aa; line-height:1.78; font-size:16px; }
+.community-v2-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:28px; }
+.community-live-console { padding:23px; border:1px solid rgba(0,229,255,.18); border-radius:26px; background:linear-gradient(180deg,rgba(0,229,255,.045),transparent 30%),var(--v2-panel); box-shadow:var(--v2-shadow); }
+.community-live-console .server-card-heading { display:flex; justify-content:space-between; gap:20px; padding-bottom:16px; border-bottom:1px solid var(--v2-line); }
+.community-live-console .server-card-heading span { color:#607580; font-size:9px; font-weight:900; letter-spacing:.15em; }
+.community-live-console .server-card-heading strong { display:block; margin-top:4px; font-size:17px; }
+.community-live-console .server-state { display:flex; align-items:center; gap:7px; color:#90a2ac; font-size:10px; font-weight:900; }
+.community-live-console .server-state i { width:7px; height:7px; border-radius:50%; background:#667681; }
+.community-live-console .server-state.online { color:var(--v2-good); }
+.community-live-console .server-state.online i { background:var(--v2-good); box-shadow:0 0 12px rgba(69,240,165,.65); }
+.community-live-console .server-state.offline { color:var(--v2-danger); }
+.community-live-console .server-state.offline i { background:var(--v2-danger); }
+.community-live-console .server-player-display { padding:28px 0 21px; }
+.community-live-console .server-player-display > span { color:#607580; font-size:9px; font-weight:900; letter-spacing:.15em; }
+.community-live-console .server-player-display > strong { display:block; margin:8px 0 16px; font-size:64px; line-height:.9; letter-spacing:-.065em; }
+.community-live-console .server-player-display small { color:#536772; font-size:20px; }
+.community-live-console .server-capacity { height:5px; border-radius:999px; background:#111d24; overflow:hidden; }
+.community-live-console .server-capacity > span { display:block; width:0; height:100%; background:linear-gradient(90deg,var(--v2-cyan),var(--v2-cyan-2)); transition:width .35s ease; }
+.community-live-console .server-meta { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.community-live-console .server-meta > div { padding:12px; border:1px solid var(--v2-line); border-radius:12px; background:rgba(255,255,255,.015); }
+.community-live-console .server-meta span { color:#546873; font-size:8px; font-weight:900; letter-spacing:.12em; }
+.community-live-console .server-meta strong { display:block; margin-top:4px; font-size:11px; overflow:hidden; text-overflow:ellipsis; }
+.community-v2-content { padding:72px 0 96px; }
+.community-section-heading { display:flex !important; align-items:end !important; justify-content:space-between !important; gap:30px !important; margin-bottom:24px !important; }
+.community-section-heading span { color:#637781 !important; }
+.community-section-heading h2 { color:#fff !important; font-size:clamp(38px,4vw,58px) !important; letter-spacing:-.05em !important; }
+.community-section-heading p { color:#7d8e98 !important; }
+.community-live-label { color:var(--v2-good) !important; }
+.community-live-label i { background:var(--v2-good) !important; box-shadow:0 0 12px rgba(69,240,165,.5) !important; }
+.leaderboard-grid { gap:12px !important; }
+.leaderboard-card { border:1px solid var(--v2-line) !important; border-radius:22px !important; background:var(--v2-panel) !important; overflow:hidden !important; }
+.leaderboard-header { border-bottom:1px solid var(--v2-line) !important; }
+.leaderboard-header > div > span { color:#001218 !important; background:var(--v2-cyan) !important; }
+.leaderboard-header h3 { color:#fff !important; }
+.leaderboard-header small { color:#526671 !important; }
+.leaderboard-row { border-bottom-color:rgba(137,180,193,.08) !important; }
+.leaderboard-rank { color:var(--v2-cyan) !important; }
+.leaderboard-name { color:#dce7ec !important; }
+.leaderboard-value { color:#8497a1 !important; }
+.leaderboard-empty { color:#60737e !important; }
+.community-stats-grid { gap:12px !important; margin-top:12px !important; }
+.community-stats-grid article { border:1px solid var(--v2-line) !important; border-radius:18px !important; background:var(--v2-panel) !important; }
+.community-stats-grid article > span { color:#58707b !important; }
+.community-stats-grid article strong { color:#fff !important; }
+.community-stats-grid article p { color:#6e808a !important; }
+.community-info-panel { border:1px solid rgba(0,229,255,.15) !important; border-radius:22px !important; background:linear-gradient(120deg,rgba(0,229,255,.055),transparent 42%),var(--v2-panel) !important; }
+.community-info-panel > div > span { color:#667b86 !important; }
+.community-info-panel h2 { color:#fff !important; }
+.community-info-panel p { color:#778a95 !important; }
+.community-panel-link { color:var(--v2-cyan) !important; }
+.community-v2-extra { margin-top:70px; }
+@media(max-width:900px){.community-v2-layout{grid-template-columns:1fr}.community-v2-hero{padding-top:116px}.community-live-console{max-width:680px}.community-v2-hero::after{font-size:64px}.community-section-heading{align-items:flex-start !important;flex-direction:column !important}}
+@media(max-width:560px){.community-v2-hero{padding-top:104px}.community-v2-copy h1{font-size:54px}.community-live-console .server-player-display > strong{font-size:50px}.community-live-console .server-meta{grid-template-columns:1fr}}
