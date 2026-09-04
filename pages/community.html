@@ -3,65 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0b0f0b">
+    <meta name="theme-color" content="#05070a">
     <title>Community | The District</title>
-    <meta name="description" content="The District community dashboard, live server status and leaderboards.">
+    <meta name="description" content="The District community dashboard with live server status, leaderboards, city information and ways to get involved.">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/community.css">
     <link rel="stylesheet" href="../css/rebrand.css">
-
+    <link rel="stylesheet" href="../css/district-v2.css">
+    <link rel="stylesheet" href="../css/community-v2.css">
 </head>
 <body class="community-page-shell">
     <div id="navbar"></div>
 
     <main>
-        <section class="community-hero">
-            <div class="community-container">
-                <div class="community-hero-layout">
-                    <div>
-                        <span class="community-eyebrow">DISTRICT COMMUNITY</span>
-                        <h1>The city never <span>stands still.</span></h1>
-                        <p>See the live state of The District, who's making their mark and how the community stacks up.</p>
-                        <div class="community-hero-actions">
-                            <a class="btn primary" href="fivem://connect/185.223.29.112:30120">Connect to The District</a>
-                            <a class="community-secondary-button" href="#leaderboards">View Leaderboards</a>
-                        </div>
+        <section class="community-v2-hero">
+            <div class="v2-wrap community-v2-layout">
+                <div class="community-v2-copy">
+                    <span class="v2-eyebrow">COMMUNITY / LIVE CITY</span>
+                    <h1>The people make<br><span>The District.</span></h1>
+                    <p>
+                        Check the live server, see who is making their mark and find the next way to get involved.
+                        The District is a 16+ British roleplay community built around people creating stories together,
+                        not just logging in to grind systems alone.
+                    </p>
+                    <div class="community-v2-actions">
+                        <a class="btn primary" href="fivem://connect/185.223.29.112:30120">Connect to The District <span>↗</span></a>
+                        <a class="btn secondary" href="wiki.html">New player wiki</a>
+                        <a class="btn secondary" href="#leaderboards">Leaderboards</a>
                     </div>
-
-                    <aside class="server-card">
-                        <div class="server-card-heading">
-                            <div>
-                                <span>LIVE SERVER</span>
-                                <strong>The District</strong>
-                            </div>
-                            <div class="server-state" id="serverState">
-                                <i></i><span>Checking...</span>
-                            </div>
-                        </div>
-
-                        <div class="server-player-display">
-                            <span>PLAYERS ONLINE</span>
-                            <strong><span id="serverPlayers">--</span><small> / <span id="serverMaxPlayers">--</span></small></strong>
-                            <div class="server-capacity"><span id="serverCapacityBar"></span></div>
-                        </div>
-
-                        <div class="server-meta">
-                            <div><span>SERVER</span><strong id="serverHostname">The District</strong></div>
-                            <div><span>ADDRESS</span><strong>185.223.29.112:30120</strong></div>
-                        </div>
-                    </aside>
                 </div>
+
+                <aside class="community-live-console">
+                    <div class="server-card-heading">
+                        <div><span>LIVE SERVER</span><strong id="serverHostname">The District</strong></div>
+                        <div class="server-state" id="serverState"><i></i><span>Checking...</span></div>
+                    </div>
+                    <div class="server-player-display">
+                        <span>PLAYERS ONLINE</span>
+                        <strong><span id="serverPlayers">--</span><small> / <span id="serverMaxPlayers">--</span></small></strong>
+                        <div class="server-capacity"><span id="serverCapacityBar"></span></div>
+                    </div>
+                    <div class="server-meta">
+                        <div><span>COMMUNITY</span><strong>16+ British RP</strong></div>
+                        <div><span>ADDRESS</span><strong>185.223.29.112:30120</strong></div>
+                        <div><span>ACCESS</span><strong>Whitelist</strong></div>
+                        <div><span>DEVELOPMENT</span><strong>Active</strong></div>
+                    </div>
+                </aside>
             </div>
         </section>
 
-        <section class="community-content" id="leaderboards">
-            <div class="community-container">
+        <section class="community-v2-content" id="leaderboards">
+            <div class="v2-wrap">
                 <div class="community-section-heading">
                     <div>
                         <span>COMMUNITY COMPETITION</span>
-                        <h2>Leaderboards</h2>
-                        <p>See who's leading the city across The District's community rankings.</p>
+                        <h2>Live leaderboards</h2>
+                        <p>Extra community competition without replacing the roleplay that matters.</p>
                     </div>
                     <div class="community-live-label"><i></i> LIVE DATA</div>
                 </div>
@@ -89,28 +88,30 @@
                 </div>
 
                 <div class="community-stats-grid">
-                    <article>
-                        <span>SERVER STATUS</span>
-                        <strong id="statServerStatus">Checking</strong>
-                        <p>Current FiveM server availability</p>
-                    </article>
-                    <article>
-                        <span>ONLINE NOW</span>
-                        <strong id="statPlayers">--</strong>
-                        <p>Players currently in The District</p>
-                    </article>
-                    <article>
-                        <span>COMMUNITY</span>
-                        <strong>Strict RP</strong>
-                        <p>Serious whitelist roleplay</p>
-                    </article>
+                    <article><span>SERVER STATUS</span><strong id="statServerStatus">Checking</strong><p>Current FiveM server availability</p></article>
+                    <article><span>ONLINE NOW</span><strong id="statPlayers">--</strong><p>Players currently in The District</p></article>
+                    <article><span>COMMUNITY</span><strong>16+ Strict RP</strong><p>British-inspired whitelist roleplay</p></article>
+                </div>
+
+                <div class="community-v2-extra">
+                    <div class="v2-section-head">
+                        <div><span class="v2-eyebrow">GET INVOLVED</span><h2>There is more than one way into the community.</h2></div>
+                        <p>Whether you want to play, create content, work for a business or build a career in public services, there should be a clear route to get started.</p>
+                    </div>
+                    <div class="v2-bento">
+                        <article class="v2-card medium"><span class="v2-card-index">01 / NEW PLAYER</span><span class="v2-card-icon">NEW</span><h3>Start with the Wiki.</h3><p>Learn the 16+ requirement, how to join, where City Hall and PDM fit in, how licences work and where to get help.</p><div class="v2-card-tags"><span>WIKI</span><span>LOCATIONS</span><span>HOW-TO</span></div></article>
+                        <article class="v2-card medium amber"><span class="v2-card-index">02 / BUSINESSES</span><span class="v2-card-icon">BZ</span><h3>Work where people gather.</h3><p>Player businesses such as Burgershot, Redline Mechanic and District Towing create jobs and everyday roleplay.</p><div class="v2-card-tags"><span>RECRUITMENT</span><span>EMPLOYMENT</span><span>PLAYER-RUN</span></div></article>
+                        <article class="v2-card medium"><span class="v2-card-index">03 / CREATORS</span><span class="v2-card-icon">LIVE</span><h3>Showcase the city.</h3><p>The District creator programme gives approved streamers a dedicated place within the community and on the website.</p><div class="v2-card-tags"><span>TWITCH</span><span>YOUTUBE</span><span>KICK</span><span>TIKTOK</span></div></article>
+                        <article class="v2-card large"><span class="v2-card-index">04 / PUBLIC SERVICES</span><span class="v2-card-icon">PS</span><h3>Join something with structure.</h3><p>TDPS and other public-service routes are built around training, ranks and specialist progression. These are separate from ordinary City Hall starter jobs.</p><div class="v2-card-tags"><span>TDPS</span><span>AMBULANCE</span><span>TRAINING</span><span>SPECIALIST PATHWAYS</span></div></article>
+                        <article class="v2-card large amber"><span class="v2-card-index">05 / COMMUNITY EVENTS</span><span class="v2-card-icon">EV</span><h3>Be there when the city gathers.</h3><p>Race nights, business recruitment, police ride-alongs and larger city events are designed to give everyone a reason to meet outside their usual circle.</p><div class="v2-card-tags"><span>RACE NIGHT</span><span>RECRUITMENT</span><span>RIDE-ALONG</span><span>CITY EVENTS</span></div></article>
+                    </div>
                 </div>
 
                 <section class="community-info-panel">
                     <div>
                         <span>MAKE YOUR MARK</span>
                         <h2>Your story contributes to the city.</h2>
-                        <p>Leaderboards are designed to give the community something extra to compete for without replacing quality roleplay. More rankings and community achievements can be added as The District grows.</p>
+                        <p>Leaderboards can show activity and progression, but the people you meet, the reputation you build and the scenes you create are what actually make The District feel alive.</p>
                     </div>
                     <a href="applications.html" class="community-panel-link">Join The District <span>→</span></a>
                 </section>
@@ -118,10 +119,22 @@
         </section>
     </main>
 
+    <footer class="district-footer">
+        <div class="district-footer-main">
+            <div class="district-footer-brand">
+                <img src="../assets/images/logo.png" alt="The District logo">
+                <div><strong>THE DISTRICT</strong><span>16+ BRITISH FIVEM ROLEPLAY</span></div>
+            </div>
+            <div class="district-footer-links">
+                <a href="../index.html">Home</a><a href="wiki.html">Wiki</a><a href="applications.html">Applications</a><a href="creators.html">Creators</a><a href="../rules.html">Rules</a>
+            </div>
+        </div>
+        <div class="district-footer-bottom"><span>© 2026 The District. All rights reserved.</span><span>COMMUNITY // LIVE CITY</span></div>
+    </footer>
+
     <script src="../js/auth.js"></script>
     <script src="../js/components.js"></script>
     <script src="../js/community.js"></script>
-<script src="../js/rebrand.js"></script>
-
+    <script src="../js/rebrand.js"></script>
 </body>
 </html>
