@@ -1,0 +1,71 @@
+/* ==========================================================
+   THE DISTRICT — RULEBOOK V7 READABLE ROWS
+========================================================== */
+
+body.rules-page-shell .rule-category-items {
+    display: grid !important;
+    gap: 10px !important;
+}
+
+body.rules-page-shell details.rule-item {
+    display: block !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    border: 1px solid rgba(92, 181, 239, .10) !important;
+    border-radius: 10px !important;
+    background: rgba(4, 18, 30, .46) !important;
+}
+
+body.rules-page-shell details.rule-item:hover {
+    border-color: rgba(71, 177, 247, .19) !important;
+    background: rgba(5, 23, 38, .58) !important;
+}
+
+body.rules-page-shell details.rule-item > summary {
+    pointer-events: none !important;
+    cursor: default !important;
+    padding: 14px 14px 5px !important;
+}
+
+body.rules-page-shell details.rule-item > .rule-body,
+body.rules-page-shell details.rule-item:not([open]) > .rule-body {
+    display: grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 14px 15px !important;
+}
+
+body.rules-page-shell .rule-body > p {
+    margin-top: 2px !important;
+}
+
+body.rules-page-shell .rule-enforcement {
+    margin-top: 9px !important;
+    border-radius: 6px !important;
+}
+
+body.rules-page-shell .rule-category-header {
+    margin-bottom: 12px !important;
+}
+
+body.rules-page-shell .rule-category + .rule-category {
+    margin-top: 34px !important;
+}
+
+@media (max-width: 620px) {
+    body.rules-page-shell .rule-category-items {
+        gap: 8px !important;
+    }
+
+    body.rules-page-shell details.rule-item > summary {
+        padding: 12px 10px 4px !important;
+    }
+
+    body.rules-page-shell details.rule-item > .rule-body,
+    body.rules-page-shell details.rule-item:not([open]) > .rule-body {
+        padding: 0 10px 13px !important;
+    }
+}
