@@ -1,5 +1,5 @@
 /* ==========================================================
-   THE DISTRICT — RULEBOOK V7 READABLE ROWS
+   THE DISTRICT — RULEBOOK V8 STATIC READABLE CARDS
 ========================================================== */
 
 html,
@@ -9,10 +9,12 @@ body.rules-page-shell {
     overflow-x: hidden !important;
     overflow-y: auto !important;
     touch-action: pan-y !important;
+    overscroll-behavior-y: auto !important;
 }
 
 body.rules-page-shell main,
 body.rules-page-shell .rules-rulebook,
+body.rules-page-shell .rules-layout,
 body.rules-page-shell .rules-content,
 body.rules-page-shell #rulesContent {
     height: auto !important;
@@ -25,7 +27,7 @@ body.rules-page-shell .rule-category-items {
     gap: 14px !important;
 }
 
-body.rules-page-shell details.rule-item {
+body.rules-page-shell .rule-item {
     display: block !important;
     margin: 0 !important;
     overflow: visible !important;
@@ -35,26 +37,32 @@ body.rules-page-shell details.rule-item {
     box-shadow: 0 8px 26px rgba(0, 0, 0, .08) !important;
 }
 
-body.rules-page-shell details.rule-item:hover {
+body.rules-page-shell .rule-item[hidden] {
+    display: none !important;
+}
+
+body.rules-page-shell .rule-item:hover {
     border-color: rgba(71, 177, 247, .21) !important;
     background: rgba(5, 23, 38, .62) !important;
 }
 
-body.rules-page-shell details.rule-item > summary {
-    pointer-events: none !important;
-    cursor: default !important;
-    padding: 15px 15px 6px !important;
+body.rules-page-shell .rule-head {
+    display: grid !important;
+    grid-template-columns: 48px minmax(0, 1fr) auto !important;
+    gap: 14px !important;
+    align-items: center !important;
+    min-height: 50px !important;
+    padding: 15px 15px 7px !important;
 }
 
-body.rules-page-shell details.rule-item > .rule-body,
-body.rules-page-shell details.rule-item:not([open]) > .rule-body {
-    display: grid !important;
+body.rules-page-shell .rule-body {
+    display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     height: auto !important;
     max-height: none !important;
     overflow: visible !important;
-    padding: 0 15px 16px 73px !important;
+    padding: 0 15px 16px 77px !important;
 }
 
 body.rules-page-shell .rule-body > p {
@@ -72,6 +80,9 @@ body.rules-page-shell .rule-enforcement {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
+    gap: 8px !important;
+    align-items: baseline !important;
+    max-width: 900px !important;
     margin-top: 10px !important;
     padding: 8px 10px !important;
     border-left: 2px solid rgba(49, 176, 255, .28) !important;
@@ -79,9 +90,14 @@ body.rules-page-shell .rule-enforcement {
     background: rgba(7, 152, 255, .035) !important;
 }
 
+body.rules-page-shell .rule-enforcement strong {
+    flex: 0 0 auto !important;
+}
+
 body.rules-page-shell .rule-enforcement span {
     color: #7f9fb4 !important;
     font-size: 9px !important;
+    line-height: 1.55 !important;
 }
 
 body.rules-page-shell .rule-category-header {
@@ -92,18 +108,31 @@ body.rules-page-shell .rule-category + .rule-category {
     margin-top: 38px !important;
 }
 
-@media (max-width: 620px) {
-    body.rules-page-shell .rule-category-items {
+/* The rulebook is no longer an accordion. If an old details node appears
+   briefly while JS loads, keep it expanded-looking until it is replaced. */
+body.rules-page-shell details.rule-item {
+    display: block !important;
+}
+
+body.rules-page-shell details.rule-item > summary {
+    pointer-events: none !important;
+}
+
+@media (max-width: 760px) {
+    body.rules-page-shell .rule-head {
+        grid-template-columns: 42px minmax(0, 1fr) !important;
         gap: 10px !important;
+        padding: 13px 11px 6px !important;
     }
 
-    body.rules-page-shell details.rule-item > summary {
-        padding: 13px 11px 5px !important;
+    body.rules-page-shell .punishment {
+        grid-column: 2 !important;
+        justify-self: start !important;
+        margin-top: 1px !important;
     }
 
-    body.rules-page-shell details.rule-item > .rule-body,
-    body.rules-page-shell details.rule-item:not([open]) > .rule-body {
-        padding: 0 11px 14px !important;
+    body.rules-page-shell .rule-body {
+        padding: 0 11px 14px 63px !important;
     }
 
     body.rules-page-shell .rule-body > p {
@@ -114,5 +143,15 @@ body.rules-page-shell .rule-category + .rule-category {
     body.rules-page-shell .rule-enforcement {
         display: grid !important;
         gap: 4px !important;
+    }
+}
+
+@media (max-width: 520px) {
+    body.rules-page-shell .rule-category-items {
+        gap: 10px !important;
+    }
+
+    body.rules-page-shell .rule-body {
+        padding-left: 11px !important;
     }
 }
