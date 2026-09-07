@@ -1,90 +1,41 @@
 /* ==========================================================
-   THE DISTRICT — BUSINESS OWNERSHIP APPLICATION CARD
+   THE DISTRICT — APPLICATION SYSTEM BOOTSTRAP V8
+   Legacy business-card injection retired. The public page now
+   comes from the managed catalog and Staff gets an editor.
 ========================================================== */
 (function () {
-    async function injectBusinessApplication() {
-        if (!document.querySelector(".applications-page") || document.querySelector('[data-application-type="Business Ownership Application"]')) {
-            return;
+    function loadScript(src, dataName) {
+        if (document.querySelector(`script[${dataName}]`)) return;
+        const script = document.createElement("script");
+        script.src = src;
+        script.defer = true;
+        script.setAttribute(dataName, "true");
+        document.head.appendChild(script);
+    }
+
+    function loadStyle(href, dataName) {
+        if (document.querySelector(`link[${dataName}]`)) return;
+        const style = document.createElement("link");
+        style.rel = "stylesheet";
+        style.href = href;
+        style.setAttribute(dataName, "true");
+        document.head.appendChild(style);
+    }
+
+    function bootstrap() {
+        if (document.querySelector(".applications-page")) {
+            loadScript("/js/applications-managed-v8.js", "data-applications-managed-v8");
         }
 
-        const groups = [...document.querySelectorAll(".applications-group")];
-        const developmentGroup = groups.find(group =>
-            group.querySelector(".applications-group-heading span")?.textContent.trim().toUpperCase() === "DEVELOPMENT"
-        );
-
-        if (!developmentGroup) return;
-
-        const section = document.createElement("div");
-        section.className = "applications-group";
-        section.innerHTML = `
-            <div class="applications-group-heading">
-                <div>
-                    <span>BUSINESSES</span>
-                    <h2>Own something in the city</h2>
-                </div>
-                <p>Apply to own and operate a player-run business within The District.</p>
-            </div>
-
-            <div class="applications-role-grid">
-                <article
-                    class="application-role-card"
-                    data-application-card
-                    data-application-type="Business Ownership Application"
-                >
-                    <div class="application-role-top">
-                        <div class="application-role-icon">BO</div>
-                        <span class="application-role-status" data-application-status>
-                            <span></span>
-                            OPEN
-                        </span>
-                    </div>
-
-                    <div class="application-role-content">
-                        <span class="application-role-category">PLAYER BUSINESS</span>
-                        <h3>Business Ownership</h3>
-                        <p>
-                            Pitch your business, explain how you would run it and show how it would create proper roleplay for customers, employees and the wider city.
-                        </p>
-                    </div>
-
-                    <a
-                        href="apply.html?type=Business%20Ownership%20Application"
-                        class="application-role-action"
-                        data-application-link
-                    >
-                        <span data-application-link-text>Business Ownership Application</span>
-                        <strong>→</strong>
-                    </a>
-                </article>
-            </div>
-        `;
-
-        developmentGroup.insertAdjacentElement("beforebegin", section);
-
-        const count = document.getElementById("applicationsAvailableCount");
-        if (count) {
-            count.textContent = String(document.querySelectorAll("[data-application-card]").length);
-        }
-
-        /* applications.js may have already loaded availability before this dynamically-added card existed. */
-        if (typeof window.loadApplicationAvailability === "function") {
-            try {
-                await window.loadApplicationAvailability();
-            } catch (error) {
-                console.warn("Business Ownership availability refresh failed:", error);
-            }
-        } else if (typeof loadApplicationAvailability === "function") {
-            try {
-                await loadApplicationAvailability();
-            } catch (error) {
-                console.warn("Business Ownership availability refresh failed:", error);
-            }
+        if (document.querySelector(".staff-shell")) {
+            loadStyle("/css/staff-applications-manager-v8.css", "data-staff-applications-manager-v8");
+            loadScript("/js/staff-applications-manager-v8.js", "data-staff-applications-manager-v8");
         }
     }
 
     if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", injectBusinessApplication, { once: true });
+        document.addEventListener("DOMContentLoaded", bootstrap, { once: true });
     } else {
-        injectBusinessApplication();
+        bootstrap();
     }
 })();
