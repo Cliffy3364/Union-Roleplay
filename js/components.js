@@ -62,6 +62,14 @@ const COMPONENTS_API =
         document.head.appendChild(style);
     }
 
+    if (!document.querySelector('link[href$="district-v4-pages.css"]')) {
+        const style = document.createElement("link");
+        style.rel = "stylesheet";
+        style.href = "/css/district-v4-pages.css";
+        style.dataset.districtV4Pages = "true";
+        document.head.appendChild(style);
+    }
+
     if (!document.querySelector('link[href$="changelog-multiarea.css"]')) {
         const style = document.createElement("link");
         style.rel = "stylesheet";
@@ -74,6 +82,14 @@ const COMPONENTS_API =
         const script = document.createElement("script");
         script.src = "/js/changelog-multiarea.js";
         script.dataset.changelogMultiarea = "true";
+        script.defer = true;
+        document.head.appendChild(script);
+    }
+
+    if (!document.querySelector('script[data-changelog-cleanup]')) {
+        const script = document.createElement("script");
+        script.src = "/js/changelog-cleanup.js";
+        script.dataset.changelogCleanup = "true";
         script.defer = true;
         document.head.appendChild(script);
     }
@@ -235,10 +251,13 @@ async function setupNavbarUser() {
         if (loginButton) {
 
             loginButton.textContent =
+                "My District";
+
+            loginButton.title =
                 user.discord_display_name ||
                 user.discord_username ||
                 user.username ||
-                "Account";
+                "District account";
 
             loginButton.href =
                 "/pages/dashboard.html";
