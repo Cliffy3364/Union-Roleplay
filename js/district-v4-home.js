@@ -70,27 +70,23 @@
             const label = link.textContent.replace(/\s+/g, " ").trim().toLowerCase();
 
             if (label === "community") {
-                link.href = "https://discord.gg/qyUKU9HtyN";
-                link.target = "_blank";
-                link.rel = "noopener noreferrer";
-                link.textContent = "Discord";
+                link.href = "pages/factions.html";
+                link.textContent = "Factions";
                 return;
             }
 
             if (label.includes("see community")) {
-                link.href = "https://discord.gg/qyUKU9HtyN";
-                link.target = "_blank";
-                link.rel = "noopener noreferrer";
-                link.textContent = "Join Discord";
+                link.href = "pages/factions.html";
+                link.textContent = "Explore Factions";
                 return;
             }
 
             if (label.includes("explore the city")) {
-                link.href = "pages/wiki.html#wiki-locations";
+                link.href = "pages/factions.html";
                 return;
             }
 
-            link.href = "pages/wiki.html";
+            link.href = "pages/factions.html";
         });
     }
 
