@@ -54,6 +54,14 @@ const COMPONENTS_API =
         document.head.appendChild(style);
     }
 
+    if (!document.querySelector('link[href$="district-v4-assets.css"]')) {
+        const style = document.createElement("link");
+        style.rel = "stylesheet";
+        style.href = "/css/district-v4-assets.css";
+        style.dataset.districtV4Assets = "true";
+        document.head.appendChild(style);
+    }
+
     if (!document.querySelector('link[href$="changelog-multiarea.css"]')) {
         const style = document.createElement("link");
         style.rel = "stylesheet";
