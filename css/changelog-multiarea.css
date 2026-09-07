@@ -110,9 +110,27 @@
     font-size: 11px;
 }
 
+/* Keep the cleaned follow-up section visually consistent with the multi-area cards. */
+.changelog-follow-up-section {
+    margin-top: 4px;
+}
+
+.changelog-follow-up-grid {
+    grid-template-columns: 1fr !important;
+}
+
+.changelog-follow-up-grid .changelog-field {
+    margin: 0 !important;
+}
+
+.changelog-follow-up-grid textarea {
+    min-height: 96px;
+}
+
 /* The original single-area autosave badge can still exist after the editor upgrade.
    Hide it once the multi-area editor owns the form so staff only see one accurate status. */
-#changeLogForm[data-multi-area-editor="true"] #changeLogDraftState {
+#changeLogForm[data-multi-area-editor="true"] #changeLogDraftState,
+#changeLogForm.changelog-clean-layout #changeLogDraftState {
     display: none !important;
 }
 
@@ -142,8 +160,15 @@
     white-space: pre-line;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 980px) {
     .changelog-area-panel-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 620px) {
+    .changelog-area-choice {
+        flex: 1 1 calc(50% - 8px);
+        text-align: left;
     }
 }
