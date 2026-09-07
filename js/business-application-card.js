@@ -1,7 +1,5 @@
 /* ==========================================================
-   THE DISTRICT — APPLICATION SYSTEM BOOTSTRAP V8
-   Legacy business-card injection retired. The public page now
-   comes from the managed catalog and Staff gets an editor.
+   THE DISTRICT — APPLICATION SYSTEM BOOTSTRAP V9
 ========================================================== */
 (function () {
     function loadScript(src, dataName) {
@@ -29,7 +27,7 @@
 
         if (document.querySelector(".staff-shell")) {
             loadStyle("/css/staff-applications-manager-v8.css", "data-staff-applications-manager-v8");
-            loadScript("/js/staff-applications-manager-v8.js", "data-staff-applications-manager-v8");
+            loadScript("/js/staff-applications-manager-v9.js", "data-staff-applications-manager-v9");
         }
     }
 
