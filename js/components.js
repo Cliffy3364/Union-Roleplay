@@ -69,6 +69,14 @@ const COMPONENTS_API =
         script.defer = true;
         document.head.appendChild(script);
     }
+
+    if (!document.querySelector('script[data-business-application-card]')) {
+        const script = document.createElement("script");
+        script.src = "/js/business-application-card.js";
+        script.dataset.businessApplicationCard = "true";
+        script.defer = true;
+        document.head.appendChild(script);
+    }
 })();
 
 
