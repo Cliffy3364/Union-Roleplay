@@ -1,6 +1,6 @@
 /* ==========================================================
-   THE DISTRICT — RULEBOOK V7 READABILITY
-   Rules are always visible; no accordion interaction required.
+   THE DISTRICT — RULEBOOK V8 STATIC READABILITY
+   Removes accordion behaviour completely from the public rulebook.
 ========================================================== */
 (function () {
     function unlockPageScroll() {
@@ -14,6 +14,7 @@
             document.body.style.setProperty("height", "auto", "important");
             document.body.style.setProperty("min-height", "100vh", "important");
             document.body.style.setProperty("touch-action", "pan-y", "important");
+            document.body.style.setProperty("overscroll-behavior-y", "auto", "important");
         }
 
         const main = document.querySelector("body.rules-page-shell main");
@@ -24,49 +25,73 @@
         }
     }
 
-    function expandEverything() {
-        document.querySelectorAll("details.rule-item").forEach(rule => {
-            rule.open = true;
-            rule.setAttribute("open", "");
+    function staticiseRule(details) {
+        if (!details || details.tagName !== "DETAILS") return false;
 
-            const body = rule.querySelector(":scope > .rule-body");
-            if (body) {
-                body.style.setProperty("display", "grid", "important");
-                body.style.setProperty("visibility", "visible", "important");
-                body.style.setProperty("opacity", "1", "important");
-                body.style.setProperty("height", "auto", "important");
-                body.style.setProperty("max-height", "none", "important");
-                body.style.setProperty("overflow", "visible", "important");
-            }
+        const article = document.createElement("article");
+        article.className = `${details.className || "rule-item"} rule-static`;
+
+        Array.from(details.attributes).forEach(attribute => {
+            if (attribute.name === "class" || attribute.name === "open") return;
+            article.setAttribute(attribute.name, attribute.value);
         });
+
+        if (details.hidden) article.hidden = true;
+
+        const summary = details.querySelector(":scope > summary");
+        const body = details.querySelector(":scope > .rule-body");
+        const head = document.createElement("div");
+        head.className = "rule-head";
+
+        if (summary) {
+            Array.from(summary.children).forEach(child => {
+                if (child.classList.contains("rule-toggle")) return;
+                head.appendChild(child.cloneNode(true));
+            });
+        }
+
+        article.appendChild(head);
+        if (body) article.appendChild(body.cloneNode(true));
+
+        details.replaceWith(article);
+        return true;
+    }
+
+    function staticiseEverything() {
+        let changed = false;
+
+        document.querySelectorAll("details.rule-item").forEach(details => {
+            changed = staticiseRule(details) || changed;
+        });
+
+        if (changed || document.querySelector("article.rule-item")) {
+            document.documentElement.classList.add("district-static-rulebook");
+        }
     }
 
     function initialise() {
         unlockPageScroll();
-        expandEverything();
+        staticiseEverything();
 
-        const content = document.getElementById("rulesContent");
-        if (content) {
-            const observer = new MutationObserver(() => {
-                expandEverything();
-                unlockPageScroll();
-            });
-            observer.observe(content, { childList: true, subtree: true });
-
-            window.setTimeout(() => observer.disconnect(), 5000);
-        }
-
+        /* rules.js renders at DOMContentLoaded. Poll briefly so this remains
+           reliable regardless of which dynamically loaded asset arrives first. */
         let passes = 0;
         const timer = window.setInterval(() => {
             unlockPageScroll();
-            expandEverything();
+            staticiseEverything();
             passes += 1;
-            if (passes >= 24) window.clearInterval(timer);
-        }, 125);
+
+            if (passes >= 30 || (
+                document.querySelector("article.rule-item") &&
+                !document.querySelector("details.rule-item")
+            )) {
+                window.clearInterval(timer);
+            }
+        }, 100);
 
         document.getElementById("rulesSearch")?.addEventListener("input", () => {
             window.requestAnimationFrame(() => {
-                expandEverything();
+                staticiseEverything();
                 unlockPageScroll();
             });
         });
@@ -74,7 +99,7 @@
         window.addEventListener("resize", unlockPageScroll, { passive: true });
         window.addEventListener("pageshow", () => {
             unlockPageScroll();
-            expandEverything();
+            staticiseEverything();
         });
     }
 
