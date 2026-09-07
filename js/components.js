@@ -70,6 +70,42 @@ const COMPONENTS_API =
         document.head.appendChild(style);
     }
 
+    if (document.body?.classList.contains("wiki-v2")) {
+        if (!document.querySelector('link[href$="wiki-simple-v5.css"]')) {
+            const style = document.createElement("link");
+            style.rel = "stylesheet";
+            style.href = "/css/wiki-simple-v5.css";
+            style.dataset.wikiSimpleV5 = "true";
+            document.head.appendChild(style);
+        }
+
+        if (!document.querySelector('script[data-wiki-simple-v5]')) {
+            const script = document.createElement("script");
+            script.src = "/js/wiki-simple-v5.js";
+            script.dataset.wikiSimpleV5 = "true";
+            script.defer = true;
+            document.head.appendChild(script);
+        }
+    }
+
+    if (document.body?.classList.contains("rules-page-shell")) {
+        if (!document.querySelector('link[href$="rules-simple-v5.css"]')) {
+            const style = document.createElement("link");
+            style.rel = "stylesheet";
+            style.href = "/css/rules-simple-v5.css";
+            style.dataset.rulesSimpleV5 = "true";
+            document.head.appendChild(style);
+        }
+
+        if (!document.querySelector('script[data-rules-simple-v5]')) {
+            const script = document.createElement("script");
+            script.src = "/js/rules-simple-v5.js";
+            script.dataset.rulesSimpleV5 = "true";
+            script.defer = true;
+            document.head.appendChild(script);
+        }
+    }
+
     if (!document.querySelector('link[href$="changelog-multiarea.css"]')) {
         const style = document.createElement("link");
         style.rel = "stylesheet";
