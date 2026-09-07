@@ -1,0 +1,325 @@
+/* ==========================================================
+   THE DISTRICT — STAFF CONTENT MANAGEMENT V6
+========================================================== */
+
+.v3-nav-new {
+    display: none !important;
+}
+
+.rules-manager-v6[hidden] {
+    display: none !important;
+}
+
+.rules-manager-v6 {
+    display: block;
+}
+
+.rules-manager-hero {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 28px;
+    margin-bottom: 18px;
+    padding: 24px 26px;
+    border: 1px solid rgba(74, 176, 248, .15);
+    border-radius: 18px;
+    background:
+        radial-gradient(circle at 92% 0%, rgba(18, 151, 255, .12), transparent 34%),
+        linear-gradient(145deg, rgba(7, 28, 46, .96), rgba(4, 17, 29, .98));
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .22);
+}
+
+.rules-manager-hero > div:first-child {
+    max-width: 760px;
+}
+
+.rules-manager-hero > div:first-child > span {
+    display: block;
+    color: #48bfff;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: .15em;
+}
+
+.rules-manager-hero h2 {
+    margin: 7px 0 0;
+    color: #fff;
+    font-size: clamp(30px, 4vw, 44px);
+    letter-spacing: -.045em;
+}
+
+.rules-manager-hero p {
+    max-width: 720px;
+    margin: 9px 0 0;
+    color: #8aa9bd;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.rules-manager-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.03fr) minmax(420px, .97fr);
+    gap: 16px;
+    align-items: start;
+}
+
+.rules-manager-editor,
+.rules-manager-library {
+    min-width: 0;
+    border-color: rgba(89, 181, 244, .14) !important;
+    background:
+        linear-gradient(180deg, rgba(8, 29, 47, .92), rgba(4, 16, 27, .96)) !important;
+}
+
+.rules-manager-library {
+    position: sticky;
+    top: 94px;
+}
+
+.rules-manager-field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.rules-manager-field-grid .full {
+    grid-column: 1 / -1;
+}
+
+.rules-manager-v6 .changelog-field label {
+    color: #8eabba !important;
+}
+
+.rules-manager-v6 input,
+.rules-manager-v6 textarea,
+.rules-manager-v6 select {
+    border-color: rgba(97, 181, 238, .17) !important;
+    background: #06111d !important;
+    color: #eef8ff !important;
+}
+
+.rules-manager-v6 input:focus,
+.rules-manager-v6 textarea:focus,
+.rules-manager-v6 select:focus {
+    border-color: rgba(34, 169, 255, .5) !important;
+    box-shadow: 0 0 0 3px rgba(7, 152, 255, .075) !important;
+}
+
+.rules-manager-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+    margin-top: 16px;
+}
+
+.rules-manager-library-head {
+    align-items: center !important;
+}
+
+.rules-manager-search {
+    position: relative;
+    margin: 0 0 13px;
+}
+
+.rules-manager-search > span {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #5c8fae;
+    pointer-events: none;
+}
+
+.rules-manager-search input {
+    width: 100%;
+    min-height: 42px;
+    padding: 0 13px 0 36px;
+    border: 1px solid rgba(88, 181, 244, .14);
+    border-radius: 10px;
+    background: #05101b;
+    color: #fff;
+    outline: none;
+}
+
+.rules-manager-list {
+    display: grid;
+    gap: 14px;
+    max-height: min(68vh, 780px);
+    overflow-y: auto;
+    padding-right: 3px;
+    scrollbar-width: thin;
+}
+
+.rules-manager-section {
+    display: grid;
+    gap: 5px;
+}
+
+.rules-manager-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 3px 8px;
+}
+
+.rules-manager-section-title > span {
+    width: 31px;
+    height: 31px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(57, 171, 247, .19);
+    border-radius: 8px;
+    background: rgba(7, 152, 255, .055);
+    color: #51c0ff;
+    font-size: 8px;
+    font-weight: 950;
+}
+
+.rules-manager-section-title strong {
+    display: block;
+    color: #edf8ff;
+    font-size: 11px;
+}
+
+.rules-manager-section-title small {
+    display: block;
+    margin-top: 2px;
+    color: #58758a;
+    font-size: 8px;
+}
+
+.rules-manager-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 34px;
+    gap: 6px;
+    border: 1px solid rgba(90, 177, 237, .10);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .012);
+    transition: border-color .16s ease, background .16s ease, transform .16s ease;
+}
+
+.rules-manager-row:hover,
+.rules-manager-row.selected {
+    border-color: rgba(49, 176, 255, .28);
+    background: rgba(7, 152, 255, .045);
+}
+
+.rules-manager-row-main {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+}
+
+.rules-manager-row-id {
+    min-height: 25px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(66, 175, 247, .16);
+    border-radius: 6px;
+    color: #4ab7f6;
+    font-size: 8px;
+    font-weight: 900;
+}
+
+.rules-manager-row-copy {
+    min-width: 0;
+}
+
+.rules-manager-row-copy strong {
+    display: block;
+    overflow: hidden;
+    color: #eaf7ff;
+    font-size: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.rules-manager-row-copy small {
+    display: block;
+    margin-top: 3px;
+    overflow: hidden;
+    color: #6d8aa0;
+    font-size: 8px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.rules-manager-delete {
+    margin: 6px 6px 6px 0;
+    border: 1px solid rgba(255, 91, 111, .14);
+    border-radius: 8px;
+    background: rgba(255, 64, 92, .035);
+    color: #ff8091;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.rules-manager-delete:hover {
+    background: rgba(255, 64, 92, .10);
+}
+
+/* Wiki manager: keep the library readable now it includes all core articles too. */
+.v3-wiki-library-panel {
+    max-height: none !important;
+}
+
+# WikiManagerLibrary,
+#wikiManagerLibrary {
+    max-height: 66vh;
+    overflow-y: auto;
+    padding-right: 2px;
+    scrollbar-width: thin;
+}
+
+@media (max-width: 1180px) {
+    .rules-manager-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .rules-manager-library {
+        position: static;
+    }
+
+    .rules-manager-list,
+    #wikiManagerLibrary {
+        max-height: none;
+    }
+}
+
+@media (max-width: 720px) {
+    .rules-manager-hero {
+        align-items: stretch;
+        flex-direction: column;
+        padding: 18px;
+    }
+
+    .rules-manager-hero-actions a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .rules-manager-field-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rules-manager-field-grid .full {
+        grid-column: auto;
+    }
+
+    .rules-manager-form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .rules-manager-form-actions > * {
+        width: 100%;
+    }
+}
