@@ -110,6 +110,16 @@
     font-size: 11px;
 }
 
+/* The original single-area autosave badge can still exist after the editor upgrade.
+   Hide it once the multi-area editor owns the form so staff only see one accurate status. */
+#changeLogForm[data-multi-area-editor="true"] #changeLogDraftState {
+    display: none !important;
+}
+
+#changeLogMultiDraftState {
+    margin-top: 9px;
+}
+
 .discord-preview-area-block {
     padding: 9px 0 2px;
 }
