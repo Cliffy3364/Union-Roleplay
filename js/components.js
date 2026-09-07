@@ -86,6 +86,14 @@ const COMPONENTS_API =
             script.defer = true;
             document.head.appendChild(script);
         }
+
+        if (!document.querySelector('script[data-wiki-public-v6]')) {
+            const script = document.createElement("script");
+            script.src = "/js/wiki-public-v6.js";
+            script.dataset.wikiPublicV6 = "true";
+            script.defer = true;
+            document.head.appendChild(script);
+        }
     }
 
     if (document.body?.classList.contains("rules-page-shell")) {
@@ -101,6 +109,32 @@ const COMPONENTS_API =
             const script = document.createElement("script");
             script.src = "/js/rules-simple-v5.js";
             script.dataset.rulesSimpleV5 = "true";
+            script.defer = true;
+            document.head.appendChild(script);
+        }
+
+        if (!document.querySelector('link[href$="rules-v6.css"]')) {
+            const style = document.createElement("link");
+            style.rel = "stylesheet";
+            style.href = "/css/rules-v6.css";
+            style.dataset.rulesV6 = "true";
+            document.head.appendChild(style);
+        }
+    }
+
+    if (document.querySelector(".staff-shell")) {
+        if (!document.querySelector('link[href$="staff-content-v6.css"]')) {
+            const style = document.createElement("link");
+            style.rel = "stylesheet";
+            style.href = "/css/staff-content-v6.css";
+            style.dataset.staffContentV6 = "true";
+            document.head.appendChild(style);
+        }
+
+        if (!document.querySelector('script[data-staff-content-v6]')) {
+            const script = document.createElement("script");
+            script.src = "/js/staff-content-v6.js";
+            script.dataset.staffContentV6 = "true";
             script.defer = true;
             document.head.appendChild(script);
         }
