@@ -45,6 +45,30 @@ const COMPONENTS_API =
         script.defer = true;
         document.head.appendChild(script);
     }
+
+    if (!document.querySelector('link[href$="district-v4.css"]')) {
+        const style = document.createElement("link");
+        style.rel = "stylesheet";
+        style.href = "/css/district-v4.css";
+        style.dataset.districtV4 = "true";
+        document.head.appendChild(style);
+    }
+
+    if (!document.querySelector('link[href$="changelog-multiarea.css"]')) {
+        const style = document.createElement("link");
+        style.rel = "stylesheet";
+        style.href = "/css/changelog-multiarea.css";
+        style.dataset.changelogMultiarea = "true";
+        document.head.appendChild(style);
+    }
+
+    if (!document.querySelector('script[data-changelog-multiarea]')) {
+        const script = document.createElement("script");
+        script.src = "/js/changelog-multiarea.js";
+        script.dataset.changelogMultiarea = "true";
+        script.defer = true;
+        document.head.appendChild(script);
+    }
 })();
 
 
@@ -251,7 +275,7 @@ function setupLoginButton(
 
 
     loginButton.textContent =
-        "Login with Discord";
+        "Sign In";
 
     loginButton.href =
         `${COMPONENTS_API}/api/auth/discord`;
