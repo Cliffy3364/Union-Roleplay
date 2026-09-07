@@ -1,0 +1,345 @@
+/* ==========================================================
+   THE DISTRICT — RULEBOOK V5
+   Cleaner flat rule rows with a compact sticky navigator.
+========================================================== */
+
+body.rules-page-shell {
+    background:
+        radial-gradient(circle at 14% -8%, rgba(0, 139, 255, .14), transparent 32%),
+        linear-gradient(180deg, #041422 0%, #03111d 42%, #020b13 100%) !important;
+}
+
+body.rules-page-shell .rules-hero {
+    padding: 138px 0 54px !important;
+    border-bottom: 1px solid rgba(99,183,241,.13) !important;
+    background:
+        radial-gradient(circle at 78% 28%, rgba(15,151,255,.12), transparent 30%),
+        transparent !important;
+}
+
+body.rules-page-shell .rules-hero-layout {
+    grid-template-columns: minmax(0, 1fr) 330px !important;
+    gap: 48px !important;
+}
+
+body.rules-page-shell .rules-eyebrow,
+body.rules-page-shell .rules-category-label,
+body.rules-page-shell .rules-content-heading > div > span {
+    color: #55c3ff !important;
+}
+
+body.rules-page-shell .rules-hero h1 {
+    color: #fff !important;
+    font-size: clamp(52px, 6.4vw, 92px) !important;
+    line-height: .92 !important;
+    letter-spacing: -.055em !important;
+}
+
+body.rules-page-shell .rules-hero h1 span {
+    color: #1ba8ff !important;
+}
+
+body.rules-page-shell .rules-hero-main > p,
+body.rules-page-shell .rules-notice p,
+body.rules-page-shell .rule-category-header p,
+body.rules-page-shell .rule-body p {
+    color: #a8c1d2 !important;
+}
+
+body.rules-page-shell .rules-hero-meta,
+body.rules-page-shell .rules-notice {
+    border-color: rgba(104,185,241,.15) !important;
+    background: linear-gradient(180deg, rgba(8,30,49,.82), rgba(4,17,29,.91)) !important;
+    box-shadow: 0 24px 70px rgba(0,0,0,.24) !important;
+}
+
+body.rules-page-shell .rules-introduction {
+    padding: 18px 0 0 !important;
+}
+
+body.rules-page-shell .rules-rulebook {
+    padding: 24px 0 100px !important;
+}
+
+body.rules-page-shell .rules-layout {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+}
+
+body.rules-page-shell .rules-sidebar {
+    position: sticky !important;
+    top: 88px !important;
+    z-index: 25 !important;
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: minmax(240px, .46fr) minmax(0, 1.54fr) !important;
+    gap: 12px !important;
+    padding: 10px !important;
+    border: 1px solid rgba(102,184,241,.15) !important;
+    border-radius: 15px !important;
+    background: rgba(3,15,26,.91) !important;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 50px rgba(0,0,0,.28) !important;
+}
+
+body.rules-page-shell .rules-sidebar-header,
+body.rules-page-shell .rules-sidebar-divider {
+    display: none !important;
+}
+
+body.rules-page-shell .rules-search-wrapper {
+    margin: 0 !important;
+}
+
+body.rules-page-shell .rules-search-wrapper label {
+    display: none !important;
+}
+
+body.rules-page-shell .rules-search {
+    width: 100% !important;
+    min-height: 43px !important;
+    padding: 0 13px !important;
+    border: 1px solid rgba(100,184,241,.14) !important;
+    border-radius: 10px !important;
+    background: rgba(255,255,255,.025) !important;
+    color: white !important;
+    font-size: 11px !important;
+}
+
+body.rules-page-shell .rules-search:focus {
+    outline: none !important;
+    border-color: rgba(28,167,255,.48) !important;
+    box-shadow: 0 0 0 3px rgba(7,152,255,.08) !important;
+}
+
+body.rules-page-shell .rules-navigation {
+    min-width: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    overflow-x: auto !important;
+    padding: 0 !important;
+    scrollbar-width: thin;
+}
+
+body.rules-page-shell .rules-navigation a {
+    flex: 0 0 auto !important;
+    min-height: 38px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 0 11px !important;
+    border: 1px solid transparent !important;
+    border-radius: 9px !important;
+    color: #89a8bd !important;
+    background: transparent !important;
+    font-size: 9px !important;
+    font-weight: 850 !important;
+    text-decoration: none !important;
+}
+
+body.rules-page-shell .rules-navigation a:hover {
+    color: #fff !important;
+    border-color: rgba(48,170,248,.19) !important;
+    background: rgba(7,152,255,.07) !important;
+}
+
+body.rules-page-shell .rules-content {
+    min-width: 0 !important;
+}
+
+body.rules-page-shell .rules-content-heading {
+    padding: 18px 2px 14px !important;
+    border-bottom: 1px solid rgba(101,184,241,.11) !important;
+}
+
+body.rules-page-shell .rule-category {
+    margin: 0 !important;
+    padding: 34px 0 0 !important;
+    scroll-margin-top: 162px !important;
+}
+
+body.rules-page-shell .rule-category + .rule-category {
+    margin-top: 20px !important;
+}
+
+body.rules-page-shell .rule-category-header {
+    display: grid !important;
+    grid-template-columns: 48px minmax(0, 1fr) !important;
+    gap: 15px !important;
+    align-items: start !important;
+    margin-bottom: 8px !important;
+    padding: 0 10px 15px !important;
+    border-bottom: 1px solid rgba(97,180,238,.10) !important;
+}
+
+body.rules-page-shell .rule-number {
+    width: 42px !important;
+    height: 42px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid rgba(63,174,248,.18) !important;
+    border-radius: 10px !important;
+    background: rgba(7,152,255,.07) !important;
+    color: #54c2ff !important;
+    font-size: 11px !important;
+    font-weight: 950 !important;
+}
+
+body.rules-page-shell .rule-category-header h2 {
+    margin: 2px 0 5px !important;
+    color: #fff !important;
+    font-size: 27px !important;
+    letter-spacing: -.025em !important;
+}
+
+body.rules-page-shell .rule-category-items {
+    display: block !important;
+}
+
+body.rules-page-shell .rule-item {
+    display: block !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(97,180,238,.09) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+body.rules-page-shell .rule-item[hidden] { display: none !important; }
+
+body.rules-page-shell .rule-item summary {
+    display: grid !important;
+    grid-template-columns: 48px minmax(0, 1fr) auto !important;
+    gap: 15px !important;
+    align-items: center !important;
+    min-height: 56px !important;
+    padding: 15px 10px 5px !important;
+    list-style: none !important;
+    cursor: default !important;
+}
+
+body.rules-page-shell .rule-item summary::-webkit-details-marker { display: none !important; }
+
+body.rules-page-shell .rule-id {
+    min-width: 40px !important;
+    height: 24px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid rgba(87,177,240,.13) !important;
+    border-radius: 6px !important;
+    background: rgba(7,152,255,.04) !important;
+    color: #4fa9df !important;
+    font-size: 8px !important;
+    font-weight: 900 !important;
+}
+
+body.rules-page-shell .rule-title {
+    color: #fff !important;
+    font-size: 13px !important;
+    font-weight: 850 !important;
+}
+
+body.rules-page-shell .punishment {
+    justify-self: end !important;
+    padding: 4px 7px !important;
+    border-radius: 5px !important;
+    font-size: 7px !important;
+    font-weight: 950 !important;
+    letter-spacing: .09em !important;
+    text-transform: uppercase !important;
+}
+
+body.rules-page-shell .punishment-bannable,
+body.rules-page-shell .punishment-strike {
+    color: #ffd05b !important;
+    border-color: rgba(255,192,55,.22) !important;
+    background: rgba(255,184,35,.07) !important;
+}
+
+body.rules-page-shell .punishment-failrp {
+    color: #8fcfff !important;
+    border-color: rgba(86,181,247,.20) !important;
+    background: rgba(60,159,231,.07) !important;
+}
+
+body.rules-page-shell .punishment-permanent-ban,
+body.rules-page-shell .punishment-business-shutdown {
+    color: #ff7788 !important;
+    border-color: rgba(255,89,112,.21) !important;
+    background: rgba(255,71,98,.07) !important;
+}
+
+body.rules-page-shell .rule-toggle {
+    display: none !important;
+}
+
+body.rules-page-shell .rule-body {
+    display: grid !important;
+    grid-template-columns: 48px minmax(0, 1fr) !important;
+    gap: 15px !important;
+    padding: 0 10px 17px !important;
+}
+
+body.rules-page-shell .rule-body::before {
+    content: "";
+}
+
+body.rules-page-shell .rule-body > p {
+    margin: 0 !important;
+    max-width: 930px !important;
+    font-size: 12px !important;
+    line-height: 1.75 !important;
+}
+
+body.rules-page-shell .rule-enforcement {
+    grid-column: 2 !important;
+    margin-top: 7px !important;
+    padding: 8px 10px !important;
+    border-left: 2px solid rgba(46,169,249,.34) !important;
+    background: rgba(7,152,255,.035) !important;
+}
+
+body.rules-page-shell .rule-enforcement strong {
+    color: #7dcfff !important;
+    font-size: 8px !important;
+    letter-spacing: .09em !important;
+    text-transform: uppercase !important;
+}
+
+body.rules-page-shell .rule-enforcement span {
+    color: #7898ad !important;
+    font-size: 10px !important;
+    line-height: 1.6 !important;
+}
+
+body.rules-page-shell .rules-no-results {
+    border-color: rgba(99,184,241,.14) !important;
+    background: rgba(6,28,46,.76) !important;
+}
+
+@media (max-width: 980px) {
+    body.rules-page-shell .rules-hero-layout { grid-template-columns: 1fr !important; }
+    body.rules-page-shell .rules-hero-meta { display: none !important; }
+    body.rules-page-shell .rules-sidebar {
+        position: sticky !important;
+        top: 76px !important;
+        grid-template-columns: 1fr !important;
+    }
+    body.rules-page-shell .rule-category { scroll-margin-top: 178px !important; }
+}
+
+@media (max-width: 620px) {
+    body.rules-page-shell .rules-hero { padding-top: 116px !important; }
+    body.rules-page-shell .rules-introduction { display: none !important; }
+    body.rules-page-shell .rule-category-header { grid-template-columns: 38px minmax(0,1fr) !important; padding-inline: 2px !important; }
+    body.rules-page-shell .rule-number { width: 34px !important; height: 34px !important; }
+    body.rules-page-shell .rule-item summary { grid-template-columns: 40px minmax(0,1fr) !important; gap: 9px !important; padding-inline: 2px !important; }
+    body.rules-page-shell .punishment { grid-column: 2 !important; justify-self: start !important; margin-top: 2px !important; }
+    body.rules-page-shell .rule-body { grid-template-columns: 40px minmax(0,1fr) !important; gap: 9px !important; padding-inline: 2px !important; }
+    body.rules-page-shell .rule-category-header h2 { font-size: 22px !important; }
+}
