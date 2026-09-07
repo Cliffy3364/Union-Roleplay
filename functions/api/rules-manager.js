@@ -174,7 +174,14 @@ function parseRulebook(source) {
     const { arrayStart, arrayEnd } = locateRulebook(source);
     let literal = source.slice(arrayStart, arrayEnd + 1);
     literal = stripJsComments(literal);
-    literal = literal.replace(/([{,]\s*)([A-Za-z_$][\w$]*)\s*:/g, '$1"$2":');
+
+    /* The rulebook source keeps keys on their own lines. Quote only
+       those known keys so wording such as "Example: something" inside
+       descriptions can never be changed by the parser. */
+    literal = literal.replace(
+        /^(\s*)(number|title|description|rules|id|punishment|enforcement)\s*:/gm,
+        '$1"$2":'
+    );
     literal = literal.replace(/,\s*([}\]])/g, "$1");
 
     let rulebook;
