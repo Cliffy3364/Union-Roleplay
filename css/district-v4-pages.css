@@ -1,0 +1,983 @@
+/* ==========================================================
+   THE DISTRICT — V4 SUBPAGES / PORTRAIT / MOBILE
+   Extends the cinematic blue + white homepage design across
+   Applications, Apply, Wiki, Creators, Rules, My District and Staff.
+========================================================== */
+
+:root {
+    --v4-page-bg: #020a13;
+    --v4-page-panel: rgba(5, 19, 32, .90);
+    --v4-page-panel-2: rgba(8, 30, 49, .82);
+    --v4-page-line: rgba(111, 190, 246, .18);
+    --v4-page-line-strong: rgba(29, 162, 255, .44);
+    --v4-page-text: #c6d9e7;
+    --v4-page-muted: #7894a8;
+}
+
+body:not(.district-v4-home) {
+    background:
+        radial-gradient(circle at 12% -8%, rgba(0, 140, 255, .16), transparent 30%),
+        radial-gradient(circle at 96% 10%, rgba(0, 104, 224, .09), transparent 25%),
+        linear-gradient(180deg, #04111d 0%, #03101b 43%, #020a13 100%) !important;
+    color: #f6fbff !important;
+}
+
+body:not(.district-v4-home) main {
+    position: relative;
+    z-index: 1;
+}
+
+body:not(.district-v4-home) main::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        linear-gradient(rgba(29, 137, 215, .025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(29, 137, 215, .025) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,.82), transparent 78%);
+}
+
+/* Shared page widths */
+.applications-container,
+.creators-container,
+.dashboard-container,
+.rules-container,
+.wiki-shell,
+.apply-shell {
+    width: min(1380px, calc(100% - 42px)) !important;
+}
+
+/* ==========================================================
+   APPLICATIONS
+========================================================== */
+
+.applications-page {
+    padding-top: 92px !important;
+    background: transparent !important;
+}
+
+.applications-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 110px 0 72px !important;
+    border-bottom: 1px solid var(--v4-page-line) !important;
+    background:
+        linear-gradient(90deg, rgba(3,14,25,.91) 0%, rgba(3,14,25,.64) 45%, rgba(3,14,25,.83) 100%),
+        linear-gradient(180deg, rgba(3,14,25,.15), #03101b 98%),
+        var(--v4-business-image) center 52% / cover no-repeat !important;
+}
+
+.applications-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 78% 40%, rgba(7,152,255,.18), transparent 27%);
+}
+
+.applications-hero-layout {
+    position: relative;
+    z-index: 2;
+    grid-template-columns: minmax(0, 1.18fr) 350px !important;
+    gap: clamp(32px, 6vw, 86px) !important;
+}
+
+.applications-hero-kicker,
+.applications-group-heading > div > span,
+.application-featured-category,
+.application-role-category {
+    color: #5ebfff !important;
+}
+
+.applications-live-dot {
+    background: #48e7a6 !important;
+    box-shadow: 0 0 14px rgba(72,231,166,.55) !important;
+}
+
+.applications-hero h1 {
+    color: #fff !important;
+    font-size: clamp(54px, 6.5vw, 94px) !important;
+    line-height: .92 !important;
+    letter-spacing: -.055em !important;
+    text-shadow: 0 20px 60px rgba(0,0,0,.38);
+}
+
+.applications-hero h1 span {
+    color: #1ca8ff !important;
+}
+
+.applications-hero p,
+.applications-group-heading > p,
+.application-featured-content > p,
+.application-role-content p,
+.applications-bottom-note p {
+    color: var(--v4-page-text) !important;
+}
+
+.applications-hero-tags span {
+    color: #b8d7ed !important;
+    border-color: rgba(89,183,245,.20) !important;
+    background: rgba(3,26,43,.58) !important;
+}
+
+.applications-hero-side,
+.application-featured-card,
+.application-role-card,
+.applications-bottom-note {
+    border-color: var(--v4-page-line) !important;
+    background:
+        linear-gradient(180deg, rgba(8,31,50,.86), rgba(4,16,28,.95)) !important;
+    box-shadow: 0 24px 70px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.025) !important;
+}
+
+.applications-hero-side {
+    backdrop-filter: blur(15px);
+}
+
+.applications-hero-side-top,
+.applications-hero-side-row + .applications-hero-side-row,
+.applications-group-heading,
+.application-featured-details,
+.application-featured-action {
+    border-color: rgba(111,190,246,.13) !important;
+}
+
+.application-featured-card {
+    background:
+        radial-gradient(circle at 82% 20%, rgba(0,146,255,.10), transparent 33%),
+        linear-gradient(145deg, rgba(8,34,55,.96), rgba(3,15,26,.98)) !important;
+}
+
+.application-featured-background span {
+    color: rgba(76,174,242,.035) !important;
+}
+
+.application-featured-icon,
+.application-role-icon {
+    border-color: rgba(54,174,255,.24) !important;
+    background: rgba(7,152,255,.08) !important;
+    color: #8cd4ff !important;
+}
+
+.application-featured-content h2,
+.application-role-content h3,
+.applications-group-heading h2,
+.applications-bottom-note strong {
+    color: #f7fbff !important;
+}
+
+.application-featured-details > div {
+    background: rgba(2,15,26,.75) !important;
+}
+
+.application-featured-details span,
+.application-role-status,
+.application-featured-details strong {
+    color: #8fabbe !important;
+}
+
+.application-featured-button,
+.application-role-action {
+    border-color: rgba(89,193,255,.35) !important;
+}
+
+.application-role-card:hover,
+.application-featured-card:hover {
+    border-color: rgba(51,177,255,.42) !important;
+    box-shadow: 0 28px 80px rgba(0,0,0,.40), 0 0 34px rgba(0,128,255,.07) !important;
+}
+
+.application-role-action {
+    color: #cfeaff !important;
+}
+
+/* ==========================================================
+   APPLY FLOW
+========================================================== */
+
+.apply-page {
+    padding-top: 98px !important;
+    background: transparent !important;
+}
+
+.apply-header {
+    position: relative;
+    overflow: hidden;
+    margin-top: 22px;
+    padding: 48px !important;
+    border: 1px solid var(--v4-page-line) !important;
+    border-radius: 20px !important;
+    background:
+        linear-gradient(90deg, rgba(3,16,28,.94), rgba(4,27,45,.72)),
+        var(--v4-street-image) center 50% / cover no-repeat !important;
+    box-shadow: 0 30px 86px rgba(0,0,0,.36) !important;
+}
+
+.apply-header h1 {
+    color: white !important;
+    font-size: clamp(44px, 6vw, 78px) !important;
+    line-height: .96 !important;
+    letter-spacing: -.045em !important;
+}
+
+.apply-header p,
+.apply-progress-footer small,
+.application-question p,
+.apply-state p {
+    color: var(--v4-page-text) !important;
+}
+
+.apply-layout {
+    gap: 18px !important;
+    align-items: start !important;
+}
+
+.apply-progress-panel,
+.apply-form-panel,
+.apply-state,
+.application-question {
+    border-color: var(--v4-page-line) !important;
+    background: linear-gradient(180deg, rgba(7,29,47,.88), rgba(3,15,26,.96)) !important;
+    box-shadow: 0 22px 68px rgba(0,0,0,.28) !important;
+}
+
+.apply-progress-panel {
+    position: sticky !important;
+    top: 98px !important;
+}
+
+.apply-progress-fill {
+    background: linear-gradient(90deg, #0798ff, #42c5ff) !important;
+    box-shadow: 0 0 20px rgba(7,152,255,.28) !important;
+}
+
+.apply-step.active,
+.apply-step.completed {
+    border-color: rgba(36,171,255,.35) !important;
+    background: rgba(7,152,255,.08) !important;
+}
+
+.apply-step-number,
+.application-question-number,
+.applications-eyebrow {
+    color: #66c7ff !important;
+}
+
+.application-question input,
+.application-question textarea,
+.apply-form-panel input,
+.apply-form-panel textarea,
+.apply-form-panel select {
+    border-color: rgba(105,180,229,.17) !important;
+    background: rgba(1,12,21,.82) !important;
+    color: #f4faff !important;
+}
+
+.application-question input:focus,
+.application-question textarea:focus,
+.apply-form-panel input:focus,
+.apply-form-panel textarea:focus,
+.apply-form-panel select:focus {
+    border-color: rgba(43,176,255,.60) !important;
+    box-shadow: 0 0 0 3px rgba(7,152,255,.07) !important;
+}
+
+/* ==========================================================
+   CREATORS
+========================================================== */
+
+.creators-page {
+    padding-top: 92px !important;
+    background: transparent !important;
+}
+
+.creators-hero {
+    padding: 110px 0 74px !important;
+    border-color: var(--v4-page-line) !important;
+    background:
+        linear-gradient(90deg, rgba(3,14,25,.90), rgba(3,14,25,.60), rgba(3,14,25,.88)),
+        linear-gradient(180deg, transparent, #03101b 98%),
+        var(--v4-car-image) center 52% / cover no-repeat !important;
+}
+
+.creators-hero::before {
+    color: rgba(53,174,255,.045) !important;
+}
+
+.creators-hero-layout {
+    grid-template-columns: minmax(0, 1.15fr) 360px !important;
+    gap: clamp(34px, 6vw, 82px) !important;
+}
+
+.creators-kicker,
+.creator-section-heading > div > span,
+.creators-application-copy > span {
+    color: #65c6ff !important;
+}
+
+.creators-kicker span {
+    background: #36b7ff !important;
+    box-shadow: 0 0 13px rgba(54,183,255,.55) !important;
+}
+
+.creators-hero h1 {
+    color: #fff !important;
+    font-size: clamp(52px, 6.4vw, 90px) !important;
+    line-height: .92 !important;
+    letter-spacing: -.052em !important;
+}
+
+.creators-hero h1 span {
+    color: #21aaff !important;
+}
+
+.creators-hero-copy > p,
+.creator-section-heading > p,
+.creator-live-name span,
+.creator-roster-card p,
+.creators-application-copy p {
+    color: var(--v4-page-text) !important;
+}
+
+.creators-status-panel,
+.creator-live-card,
+.creator-roster-card,
+.creators-application-cta {
+    border-color: var(--v4-page-line) !important;
+    background: linear-gradient(180deg, rgba(8,31,50,.86), rgba(4,16,28,.96)) !important;
+    box-shadow: 0 22px 68px rgba(0,0,0,.30) !important;
+}
+
+.creator-live-card:hover,
+.creator-roster-card:hover {
+    border-color: rgba(46,174,255,.42) !important;
+}
+
+.creator-platform-badge {
+    color: #79ccff !important;
+    border-color: rgba(36,169,255,.25) !important;
+    background: rgba(7,152,255,.08) !important;
+}
+
+.creator-live-link span:last-child,
+.creators-status-footer strong {
+    color: #61c8ff !important;
+}
+
+/* ==========================================================
+   WIKI
+========================================================== */
+
+.wiki-v2 {
+    padding-top: 96px !important;
+    background: transparent !important;
+}
+
+.wiki-shell {
+    padding: 48px 0 110px !important;
+}
+
+.wiki-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 54px !important;
+    border: 1px solid var(--v4-page-line) !important;
+    border-radius: 22px !important;
+    background:
+        linear-gradient(90deg, rgba(3,16,28,.94), rgba(3,16,28,.66), rgba(3,16,28,.88)),
+        var(--v4-street-image) center 58% / cover no-repeat !important;
+    box-shadow: 0 30px 90px rgba(0,0,0,.38) !important;
+}
+
+.wiki-hero h1 {
+    color: #fff !important;
+    font-size: clamp(52px, 6.4vw, 88px) !important;
+    line-height: .92 !important;
+    letter-spacing: -.055em !important;
+}
+
+.wiki-hero h1 span {
+    color: #1faaff !important;
+}
+
+.wiki-hero p,
+.wiki-card p,
+.wiki-step span,
+.wiki-location span,
+.wiki-side-note,
+.wiki-results-head > span {
+    color: var(--v4-page-text) !important;
+}
+
+.wiki-hero-chips span,
+.wiki-card-tag,
+.wiki-card-id {
+    color: #8ed7ff !important;
+    border-color: rgba(50,177,255,.23) !important;
+    background: rgba(7,152,255,.08) !important;
+}
+
+.wiki-searchbar,
+.wiki-side-card,
+.wiki-side-note,
+.wiki-card {
+    border-color: var(--v4-page-line) !important;
+    background: linear-gradient(180deg, rgba(7,28,46,.88), rgba(3,15,26,.96)) !important;
+    box-shadow: 0 20px 62px rgba(0,0,0,.25) !important;
+}
+
+.wiki-searchbar {
+    position: sticky !important;
+    top: 90px !important;
+    z-index: 30 !important;
+    backdrop-filter: blur(18px);
+}
+
+#wikiSearch {
+    color: #fff !important;
+    background: rgba(2,13,23,.78) !important;
+    border-color: rgba(91,182,240,.18) !important;
+}
+
+#wikiSearch:focus {
+    border-color: rgba(45,176,255,.56) !important;
+    box-shadow: 0 0 0 3px rgba(7,152,255,.07) !important;
+}
+
+.wiki-category-list button,
+.wiki-links a {
+    color: #9db6c8 !important;
+}
+
+.wiki-category-list button:hover,
+.wiki-category-list button.active,
+.wiki-links a:hover {
+    color: #fff !important;
+    border-color: rgba(48,180,255,.32) !important;
+    background: rgba(7,152,255,.09) !important;
+}
+
+.wiki-card h3,
+.wiki-results-head h2,
+.wiki-side-card h3,
+.wiki-step strong,
+.wiki-location strong {
+    color: #f7fbff !important;
+}
+
+.wiki-callout,
+.wiki-callout.amber {
+    color: #bfe1f7 !important;
+    border-color: rgba(62,184,255,.22) !important;
+    background: rgba(7,152,255,.07) !important;
+}
+
+/* ==========================================================
+   RULES
+========================================================== */
+
+.rules-page-shell {
+    padding-top: 92px !important;
+    background: transparent !important;
+}
+
+.rules-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 110px 0 75px !important;
+    background:
+        linear-gradient(90deg, rgba(3,14,25,.94), rgba(3,14,25,.63), rgba(3,14,25,.90)),
+        linear-gradient(180deg, transparent, #03101b 98%),
+        var(--v4-police-image) center 58% / cover no-repeat !important;
+    border-bottom: 1px solid var(--v4-page-line) !important;
+}
+
+.rules-hero-layout {
+    grid-template-columns: minmax(0, 1.1fr) 360px !important;
+    gap: clamp(36px, 6vw, 88px) !important;
+}
+
+.rules-eyebrow,
+.rules-notice-label,
+.rules-content-heading > div > span,
+.rules-sidebar-header span {
+    color: #62c8ff !important;
+}
+
+.rules-hero h1 {
+    color: white !important;
+    font-size: clamp(58px, 6.8vw, 96px) !important;
+    line-height: .92 !important;
+    letter-spacing: -.055em !important;
+}
+
+.rules-hero h1 span {
+    color: #1da9ff !important;
+}
+
+.rules-hero p,
+.rules-notice p,
+.rules-content p {
+    color: var(--v4-page-text) !important;
+}
+
+.rules-hero-meta,
+.rules-notice,
+.rules-sidebar,
+.rules-content,
+.rule-card {
+    border-color: var(--v4-page-line) !important;
+    background: linear-gradient(180deg, rgba(7,29,47,.90), rgba(3,15,26,.97)) !important;
+    box-shadow: 0 22px 70px rgba(0,0,0,.28) !important;
+}
+
+.rules-sidebar {
+    position: sticky !important;
+    top: 98px !important;
+}
+
+.rules-search {
+    color: #fff !important;
+    background: rgba(2,13,23,.82) !important;
+    border-color: rgba(95,181,239,.18) !important;
+}
+
+.rules-search:focus {
+    border-color: rgba(44,176,255,.56) !important;
+    box-shadow: 0 0 0 3px rgba(7,152,255,.07) !important;
+}
+
+.rules-navigation button:hover,
+.rules-navigation button.active {
+    color: #fff !important;
+    border-color: rgba(41,170,255,.28) !important;
+    background: rgba(7,152,255,.09) !important;
+}
+
+/* ==========================================================
+   MY DISTRICT (formerly Dashboard)
+========================================================== */
+
+.dashboard-page {
+    padding-top: 92px !important;
+    background: transparent !important;
+}
+
+.dashboard-header {
+    padding: 106px 0 70px !important;
+    border-bottom: 1px solid var(--v4-page-line) !important;
+    background:
+        linear-gradient(90deg, rgba(3,14,25,.91), rgba(3,14,25,.63), rgba(3,14,25,.89)),
+        linear-gradient(180deg, transparent, #03101b 98%),
+        var(--v4-hero-image) center 55% / cover no-repeat !important;
+}
+
+.dashboard-hero {
+    grid-template-columns: minmax(0, 1fr) 360px !important;
+    gap: clamp(32px, 6vw, 80px) !important;
+}
+
+.dashboard-eyebrow,
+.card-label {
+    color: #66c8ff !important;
+}
+
+.dashboard-hero h1 {
+    color: #fff !important;
+    font-size: clamp(54px, 6.6vw, 92px) !important;
+    line-height: .93 !important;
+    letter-spacing: -.052em !important;
+}
+
+.dashboard-hero-main p,
+.dashboard-card p,
+.dashboard-panel-heading p {
+    color: var(--v4-page-text) !important;
+}
+
+.dashboard-hero-status,
+.dashboard-overview-strip,
+.dashboard-card,
+.dashboard-applications-panel {
+    border-color: var(--v4-page-line) !important;
+    background: linear-gradient(180deg, rgba(8,31,50,.88), rgba(4,16,28,.97)) !important;
+    box-shadow: 0 22px 70px rgba(0,0,0,.30) !important;
+}
+
+.dashboard-card h2,
+.dashboard-panel-heading h2,
+.profile-placeholder h2,
+.dashboard-overview-item strong {
+    color: #f7fbff !important;
+}
+
+.dashboard-link {
+    color: #68caff !important;
+}
+
+/* ==========================================================
+   STAFF — SAME BRAND + PORTRAIT FRIENDLY
+========================================================== */
+
+.staff-shell {
+    padding-top: 92px !important;
+    background: transparent !important;
+    --staff-accent: #0798ff !important;
+    --staff-accent-soft: rgba(7,152,255,.08) !important;
+    --staff-bg: #020a13 !important;
+    --staff-sidebar: #04111d !important;
+    --staff-surface: #061827 !important;
+    --staff-surface-raised: #082038 !important;
+    --staff-hover: #0a2740 !important;
+    --staff-border: rgba(111,190,246,.13) !important;
+    --staff-border-strong: rgba(111,190,246,.22) !important;
+    --staff-muted: #7894a8 !important;
+}
+
+.staff-sidebar {
+    top: 92px !important;
+    height: calc(100vh - 92px) !important;
+    border-color: var(--v4-page-line) !important;
+    background: linear-gradient(180deg, #041420, #020b13) !important;
+}
+
+.staff-nav-item.active::before {
+    background: #20adff !important;
+    box-shadow: 0 0 12px rgba(32,173,255,.50) !important;
+}
+
+.staff-nav-item.active .staff-nav-icon,
+.staff-nav-badge.has-applications {
+    color: #88d5ff !important;
+    border-color: rgba(48,181,255,.28) !important;
+    background: rgba(7,152,255,.08) !important;
+}
+
+.staff-dashboard-panel,
+.staff-stat,
+.member-profile-panel,
+.review-card,
+.changelog-publisher-card,
+.discord-preview-shell {
+    border-color: var(--v4-page-line) !important;
+    background: linear-gradient(180deg, rgba(7,29,47,.90), rgba(3,15,26,.97)) !important;
+    box-shadow: 0 18px 58px rgba(0,0,0,.25) !important;
+}
+
+.staff-main input,
+.staff-main textarea,
+.staff-main select,
+.review-note-input {
+    border-color: rgba(101,181,235,.17) !important;
+    background: rgba(1,12,21,.78) !important;
+    color: #f6fbff !important;
+}
+
+.staff-main input:focus,
+.staff-main textarea:focus,
+.staff-main select:focus,
+.review-note-input:focus {
+    border-color: rgba(43,176,255,.58) !important;
+    box-shadow: 0 0 0 3px rgba(7,152,255,.07) !important;
+}
+
+/* ==========================================================
+   PORTRAIT MONITORS / TABLETS
+========================================================== */
+
+@media (max-width: 1180px), (max-aspect-ratio: 4/5) {
+    .applications-container,
+    .creators-container,
+    .dashboard-container,
+    .rules-container,
+    .wiki-shell,
+    .apply-shell {
+        width: min(940px, calc(100% - 34px)) !important;
+    }
+
+    .applications-hero-layout,
+    .creators-hero-layout,
+    .rules-hero-layout,
+    .dashboard-hero,
+    .apply-layout,
+    .wiki-layout {
+        grid-template-columns: 1fr !important;
+    }
+
+    .applications-hero-side,
+    .creators-status-panel,
+    .rules-hero-meta,
+    .dashboard-hero-status {
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    .application-featured-card {
+        grid-template-columns: 1fr !important;
+        min-height: 0 !important;
+    }
+
+    .application-featured-action {
+        padding: 22px 0 0 !important;
+        border-left: 0 !important;
+        border-top: 1px solid rgba(111,190,246,.13) !important;
+    }
+
+    .applications-role-grid-three,
+    .creator-live-grid,
+    .creator-roster-grid,
+    .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .apply-progress-panel,
+    .rules-sidebar,
+    .wiki-searchbar {
+        position: static !important;
+        top: auto !important;
+    }
+
+    .apply-progress-panel {
+        order: 0;
+    }
+
+    .apply-steps {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+    }
+
+    .wiki-sidebar {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+    }
+
+    .wiki-side-note {
+        grid-column: 1 / -1 !important;
+    }
+
+    .rules-sidebar {
+        display: grid !important;
+        grid-template-columns: minmax(180px, .65fr) minmax(0, 1.35fr) !important;
+        gap: 14px !important;
+        align-items: start !important;
+    }
+
+    .rules-sidebar-divider { display: none !important; }
+
+    .rules-navigation {
+        max-height: 300px !important;
+        overflow: auto !important;
+    }
+
+    .staff-shell {
+        display: block !important;
+    }
+
+    .staff-sidebar {
+        position: sticky !important;
+        top: 84px !important;
+        z-index: 75 !important;
+        width: 100% !important;
+        height: auto !important;
+        max-height: 250px !important;
+        padding: 11px 14px !important;
+        border-right: 0 !important;
+        border-bottom: 1px solid var(--v4-page-line) !important;
+        overflow-x: auto !important;
+        overflow-y: auto !important;
+    }
+
+    .staff-sidebar-brand,
+    .staff-sidebar-status,
+    .staff-sidebar-footer {
+        display: none !important;
+    }
+
+    .staff-sidebar-nav {
+        min-width: max-content !important;
+        flex-direction: row !important;
+        gap: 8px !important;
+        align-items: flex-start !important;
+    }
+
+    .staff-nav-group {
+        min-width: 170px !important;
+    }
+
+    .staff-nav-heading { padding-left: 4px !important; }
+    .staff-main { padding: 26px 20px 70px !important; }
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 760px) {
+    body:not(.district-v4-home) {
+        overflow-x: hidden !important;
+    }
+
+    .applications-container,
+    .creators-container,
+    .dashboard-container,
+    .rules-container,
+    .wiki-shell,
+    .apply-shell {
+        width: min(100% - 24px, 620px) !important;
+    }
+
+    .applications-page,
+    .creators-page,
+    .dashboard-page,
+    .rules-page-shell,
+    .wiki-v2,
+    .apply-page {
+        padding-top: 76px !important;
+    }
+
+    .applications-hero,
+    .creators-hero,
+    .rules-hero,
+    .dashboard-header {
+        padding: 74px 0 48px !important;
+    }
+
+    .applications-hero h1,
+    .creators-hero h1,
+    .rules-hero h1,
+    .dashboard-hero h1,
+    .wiki-hero h1,
+    .apply-header h1 {
+        font-size: clamp(42px, 13vw, 64px) !important;
+        letter-spacing: -.045em !important;
+    }
+
+    .wiki-shell { padding-top: 22px !important; }
+    .wiki-hero,
+    .apply-header { padding: 28px 22px !important; border-radius: 16px !important; }
+
+    .applications-role-grid,
+    .applications-role-grid-three,
+    .creator-live-grid,
+    .creator-roster-grid,
+    .dashboard-grid,
+    .application-featured-details,
+    .wiki-sidebar,
+    .rules-sidebar,
+    .apply-steps {
+        grid-template-columns: 1fr !important;
+    }
+
+    .application-featured-card {
+        padding: 22px !important;
+        border-radius: 16px !important;
+    }
+
+    .applications-group-heading,
+    .creator-section-heading,
+    .dashboard-panel-heading,
+    .rules-content-heading {
+        align-items: flex-start !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+
+    .applications-group-heading > p,
+    .creator-section-heading > p {
+        text-align: left !important;
+    }
+
+    .applications-hero-tags,
+    .creators-hero-actions,
+    .rules-hero-actions {
+        gap: 7px !important;
+    }
+
+    .apply-form-actions,
+    .apply-form-actions-right {
+        width: 100% !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+
+    .apply-form-actions button,
+    .apply-form-actions-right button {
+        width: 100% !important;
+    }
+
+    .wiki-searchbar {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+        padding: 12px !important;
+    }
+
+    .wiki-category-list {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 7px !important;
+    }
+
+    .rules-navigation {
+        max-height: 260px !important;
+    }
+
+    .staff-sidebar {
+        top: 72px !important;
+        max-height: 210px !important;
+    }
+
+    .staff-sidebar-nav {
+        min-width: 720px !important;
+    }
+
+    .staff-topbar {
+        align-items: stretch !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+    }
+
+    .staff-topbar-actions {
+        width: 100% !important;
+    }
+
+    .staff-stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .changelog-area-panel-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 460px) {
+    .applications-container,
+    .creators-container,
+    .dashboard-container,
+    .rules-container,
+    .wiki-shell,
+    .apply-shell {
+        width: calc(100% - 18px) !important;
+    }
+
+    .wiki-category-list,
+    .staff-stat-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .navbar-apply {
+        display: none !important;
+    }
+
+    .navbar-account {
+        max-width: 112px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+}
