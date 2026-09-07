@@ -2,7 +2,7 @@
    THE DISTRICT — BUSINESS OWNERSHIP APPLICATION CARD
 ========================================================== */
 (function () {
-    function injectBusinessApplication() {
+    async function injectBusinessApplication() {
         if (!document.querySelector(".applications-page") || document.querySelector('[data-application-type="Business Ownership Application"]')) {
             return;
         }
@@ -64,6 +64,21 @@
         const count = document.getElementById("applicationsAvailableCount");
         if (count) {
             count.textContent = String(document.querySelectorAll("[data-application-card]").length);
+        }
+
+        /* applications.js may have already loaded availability before this dynamically-added card existed. */
+        if (typeof window.loadApplicationAvailability === "function") {
+            try {
+                await window.loadApplicationAvailability();
+            } catch (error) {
+                console.warn("Business Ownership availability refresh failed:", error);
+            }
+        } else if (typeof loadApplicationAvailability === "function") {
+            try {
+                await loadApplicationAvailability();
+            } catch (error) {
+                console.warn("Business Ownership availability refresh failed:", error);
+            }
         }
     }
 
