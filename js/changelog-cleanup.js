@@ -26,6 +26,10 @@
         const knownField = document.getElementById("changeLogKnownIssues")?.closest(".changelog-field");
         const legacyGrid = legacyFields[0]?.closest(".changelog-field-grid") || knownField?.closest(".changelog-field-grid");
 
+        if (legacyGrid) {
+            legacyGrid.classList.add("changelog-multi-wrapper-grid");
+        }
+
         if (knownField) {
             let followUp = document.getElementById("changeLogFollowUpSection");
 
@@ -52,11 +56,6 @@
         }
 
         legacyFields.forEach(field => field.remove());
-
-        if (legacyGrid && legacyGrid !== knownField?.parentElement) {
-            const remainingFields = legacyGrid.querySelectorAll(".changelog-field");
-            if (!remainingFields.length) legacyGrid.remove();
-        }
 
         [...form.querySelectorAll(".changelog-section-title")].forEach(heading => {
             const text = heading.textContent.replace(/\s+/g, " ").trim().toLowerCase();
