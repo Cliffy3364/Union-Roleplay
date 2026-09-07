@@ -1,0 +1,9 @@
+/* Verified public imagery for the District V4 public website. */
+:root {
+    --v4-hero-image: url("https://images.unsplash.com/photo-1587011197021-85fe37d896c7?auto=format&fit=crop&fm=jpg&q=82&w=3000");
+    --v4-car-image: url("https://images.unsplash.com/photo-1752560937193-218c47323b73?auto=format&fit=crop&fm=jpg&q=82&w=2400");
+    --v4-street-image: url("https://images.unsplash.com/photo-1770958421033-3ee3e4583e93?auto=format&fit=crop&fm=jpg&q=82&w=2400");
+    --v4-police-image: url("https://images.unsplash.com/photo-1759933633339-2382db138c2f?auto=format&fit=crop&fm=jpg&q=82&w=2200");
+    --v4-ems-image: url("https://images.unsplash.com/photo-1773139780754-df8cf8d1ee93?auto=format&fit=crop&fm=jpg&q=82&w=2200");
+    --v4-business-image: url("https://images.unsplash.com/photo-1778880983945-2fb04793264d?auto=format&fit=crop&fm=jpg&q=82&w=2200");
+}
