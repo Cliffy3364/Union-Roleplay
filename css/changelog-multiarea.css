@@ -1,0 +1,139 @@
+/* The District staff change log — multi-area editor */
+.changelog-area-multiselect {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.changelog-area-choice {
+    appearance: none;
+    border: 1px solid rgba(112, 177, 225, .16);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .025);
+    color: #9db3c3;
+    min-height: 38px;
+    padding: 0 12px;
+    font: inherit;
+    font-size: 10px;
+    font-weight: 850;
+    cursor: pointer;
+    transition: .16s ease;
+}
+
+.changelog-area-choice:hover {
+    color: #fff;
+    border-color: rgba(41, 170, 255, .32);
+    background: rgba(7, 152, 255, .06);
+}
+
+.changelog-area-choice.selected {
+    color: #fff;
+    border-color: rgba(48, 180, 255, .52);
+    background: linear-gradient(135deg, rgba(7, 152, 255, .20), rgba(7, 152, 255, .09));
+    box-shadow: inset 0 0 20px rgba(7, 152, 255, .055), 0 0 18px rgba(7, 152, 255, .045);
+}
+
+.changelog-area-choice.selected::before {
+    content: "✓";
+    display: inline-block;
+    margin-right: 7px;
+    color: #62caff;
+}
+
+.changelog-multi-help {
+    display: block;
+    margin-top: 9px;
+    color: #6e8799;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.changelog-area-panels {
+    display: grid;
+    gap: 12px;
+    margin: 16px 0 20px;
+}
+
+.changelog-area-panel {
+    overflow: hidden;
+    border: 1px solid rgba(105, 182, 236, .15);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(8, 29, 47, .76), rgba(4, 17, 29, .88));
+}
+
+.changelog-area-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 13px 15px;
+    border-bottom: 1px solid rgba(105, 182, 236, .10);
+    background: rgba(7, 152, 255, .035);
+}
+
+.changelog-area-panel-head strong {
+    color: #f5fbff;
+    font-size: 12px;
+}
+
+.changelog-area-panel-head span {
+    color: #62c8ff;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.changelog-area-panel-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding: 14px;
+}
+
+.changelog-area-panel .changelog-field {
+    margin: 0 !important;
+}
+
+.changelog-area-panel textarea {
+    min-height: 118px;
+    resize: vertical;
+}
+
+.changelog-area-empty {
+    padding: 18px;
+    border: 1px dashed rgba(109, 180, 226, .16);
+    border-radius: 12px;
+    color: #6d879a;
+    text-align: center;
+    font-size: 11px;
+}
+
+.discord-preview-area-block {
+    padding: 9px 0 2px;
+}
+
+.discord-preview-area-block + .discord-preview-area-block {
+    border-top: 1px solid rgba(255,255,255,.06);
+    margin-top: 8px;
+}
+
+.discord-preview-area-block > strong {
+    display: block;
+    margin-bottom: 7px;
+    color: #57c6ff;
+    font-size: 11px;
+}
+
+.discord-preview-area-subsection {
+    margin-top: 6px;
+    color: inherit;
+    white-space: pre-line;
+}
+
+@media (max-width: 760px) {
+    .changelog-area-panel-grid {
+        grid-template-columns: 1fr;
+    }
+}
