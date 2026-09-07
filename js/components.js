@@ -120,6 +120,22 @@ const COMPONENTS_API =
             style.dataset.rulesV6 = "true";
             document.head.appendChild(style);
         }
+
+        if (!document.querySelector('link[href$="rules-readable-v7.css"]')) {
+            const style = document.createElement("link");
+            style.rel = "stylesheet";
+            style.href = "/css/rules-readable-v7.css";
+            style.dataset.rulesReadableV7 = "true";
+            document.head.appendChild(style);
+        }
+
+        if (!document.querySelector('script[data-rules-readable-v7]')) {
+            const script = document.createElement("script");
+            script.src = "/js/rules-readable-v7.js";
+            script.dataset.rulesReadableV7 = "true";
+            script.defer = true;
+            document.head.appendChild(script);
+        }
     }
 
     if (document.querySelector(".staff-shell")) {
@@ -131,10 +147,20 @@ const COMPONENTS_API =
             document.head.appendChild(style);
         }
 
-        if (!document.querySelector('script[data-staff-content-v6]')) {
+        if (!document.querySelector('link[href$="staff-stability-v7.css"]')) {
+            const style = document.createElement("link");
+            style.rel = "stylesheet";
+            style.href = "/css/staff-stability-v7.css";
+            style.dataset.staffStabilityV7 = "true";
+            document.head.appendChild(style);
+        }
+
+        /* V6 JS was intentionally retired because its mutation observer could
+           repeatedly rewrite the Staff DOM and lock up the page. */
+        if (!document.querySelector('script[data-staff-content-v7]')) {
             const script = document.createElement("script");
-            script.src = "/js/staff-content-v6.js";
-            script.dataset.staffContentV6 = "true";
+            script.src = "/js/staff-content-v7.js";
+            script.dataset.staffContentV7 = "true";
             script.defer = true;
             document.head.appendChild(script);
         }
