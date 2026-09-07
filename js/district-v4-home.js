@@ -65,6 +65,35 @@
         line.textContent = `${pad(days)}D ${pad(hours)}H ${pad(minutes)}M UNTIL RELEASE`;
     }
 
+    function retireCommunityLinks() {
+        document.querySelectorAll('a[href*="community.html"]').forEach(link => {
+            const label = link.textContent.replace(/\s+/g, " ").trim().toLowerCase();
+
+            if (label === "community") {
+                link.href = "https://discord.gg/qyUKU9HtyN";
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+                link.textContent = "Discord";
+                return;
+            }
+
+            if (label.includes("see community")) {
+                link.href = "https://discord.gg/qyUKU9HtyN";
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+                link.textContent = "Join Discord";
+                return;
+            }
+
+            if (label.includes("explore the city")) {
+                link.href = "pages/wiki.html#wiki-locations";
+                return;
+            }
+
+            link.href = "pages/wiki.html";
+        });
+    }
+
     function setupReveal() {
         if (!("IntersectionObserver" in window)) return;
         if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) return;
@@ -104,6 +133,7 @@
     }
 
     function initialise() {
+        retireCommunityLinks();
         loadServerStatus();
         updateReleaseLine();
         setupReveal();
