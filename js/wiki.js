@@ -119,7 +119,19 @@
         window.setTimeout(() => target.scrollIntoView({ behavior: "smooth", block: "start" }), 250);
     }
 
+    function retireCommunityQuickLink() {
+        document.querySelectorAll('a[href="community.html"], a[href="./community.html"]').forEach(link => {
+            link.href = "https://discord.gg/qyUKU9HtyN";
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            if (link.textContent.trim().toLowerCase() === "community") {
+                link.textContent = "Discord";
+            }
+        });
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
+        retireCommunityQuickLink();
         setupCategories();
         setupSearch();
         updateWiki();
