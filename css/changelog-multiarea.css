@@ -49,14 +49,21 @@
     line-height: 1.5;
 }
 
+.changelog-multi-wrapper-grid {
+    display: block !important;
+    grid-template-columns: 1fr !important;
+}
+
 .changelog-area-panels {
     display: grid;
     gap: 12px;
+    width: 100%;
     margin: 16px 0 20px;
 }
 
 .changelog-area-panel {
     overflow: hidden;
+    width: 100%;
     border: 1px solid rgba(105, 182, 236, .15);
     border-radius: 14px;
     background: linear-gradient(180deg, rgba(8, 29, 47, .76), rgba(4, 17, 29, .88));
@@ -112,6 +119,7 @@
 
 /* Keep the cleaned follow-up section visually consistent with the multi-area cards. */
 .changelog-follow-up-section {
+    width: 100%;
     margin-top: 4px;
 }
 
