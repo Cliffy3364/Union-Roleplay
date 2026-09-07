@@ -2,6 +2,7 @@ const STAFF_API = "https://the-district-api.danielclifford2808.workers.dev";
 const DEFAULT_REPO = "Cliffy3364/Union-Roleplay";
 const DEFAULT_BRANCH = "main";
 const WIKI_PATH = "data/wiki-articles.json";
+const CORE_WIKI_PATH = "pages/wiki.html";
 
 function json(data, status = 200) {
     return new Response(JSON.stringify(data), {
@@ -100,6 +101,25 @@ function staffName(staff) {
     );
 }
 
+async function fetchRepoText(repo, branch, token, path) {
+    const url = `https://api.github.com/repos/${repo}/contents/${path}?ref=${encodeURIComponent(branch)}`;
+    const response = await fetch(url, {
+        headers: githubHeaders(token),
+        cf: { cacheTtl: 0 }
+    });
+
+    if (!response.ok) {
+        const detail = await response.text();
+        throw new Error(`Unable to read ${path} from GitHub (${response.status}): ${detail.slice(0, 180)}`);
+    }
+
+    const file = await response.json();
+    return {
+        sha: file.sha || null,
+        text: base64ToText(file.content || "")
+    };
+}
+
 async function readWikiFile(env) {
     const repo = clean(env.GITHUB_WIKI_REPO, 120) || DEFAULT_REPO;
     const branch = clean(env.GITHUB_WIKI_BRANCH, 80) || DEFAULT_BRANCH;
@@ -117,7 +137,7 @@ async function readWikiFile(env) {
             branch,
             token,
             sha: null,
-            data: { version: 1, updated_at: null, articles: [] }
+            data: { version: 2, updated_at: null, articles: [], deleted_core_ids: [] }
         };
     }
 
@@ -131,10 +151,11 @@ async function readWikiFile(env) {
     try {
         parsed = JSON.parse(base64ToText(file.content));
     } catch {
-        parsed = { version: 1, updated_at: null, articles: [] };
+        parsed = { version: 2, updated_at: null, articles: [], deleted_core_ids: [] };
     }
 
     if (!Array.isArray(parsed.articles)) parsed.articles = [];
+    if (!Array.isArray(parsed.deleted_core_ids)) parsed.deleted_core_ids = [];
 
     return {
         repo,
@@ -173,6 +194,122 @@ async function writeWikiFile(state, data, commitMessage) {
     }
 
     return response.json();
+}
+
+function decodeEntities(value) {
+    return String(value || "")
+        .replace(/&nbsp;/gi, " ")
+        .replace(/&amp;/gi, "&")
+        .replace(/&lt;/gi, "<")
+        .replace(/&gt;/gi, ">")
+        .replace(/&quot;/gi, '"')
+        .replace(/&#039;|&#39;/gi, "'")
+        .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code) || 32));
+}
+
+function textFromHtml(value) {
+    return clean(
+        decodeEntities(String(value || "").replace(/<br\s*\/?\s*>/gi, "\n").replace(/<[^>]+>/g, " "))
+            .replace(/\s*\n\s*/g, "\n")
+            .replace(/[ \t]+/g, " "),
+        12000
+    );
+}
+
+function attr(openingTag, name) {
+    const match = String(openingTag || "").match(new RegExp(`${name}\\s*=\\s*["']([^"']*)["']`, "i"));
+    return clean(match?.[1], 1200);
+}
+
+function firstMatch(block, pattern) {
+    const match = String(block || "").match(pattern);
+    return match ? textFromHtml(match[1]) : "";
+}
+
+function parseCoreWikiArticles(html) {
+    const allowed = new Set(["start", "locations", "systems", "services", "roleplay", "support"]);
+    const blocks = String(html || "").match(/<article\b[^>]*class=["'][^"']*\bwiki-card\b[^"']*["'][^>]*>[\s\S]*?<\/article>/gi) || [];
+
+    return blocks.map((block, index) => {
+        const opening = block.match(/^<article\b[^>]*>/i)?.[0] || "";
+        const id = attr(opening, "id") || `core-wiki-${index + 1}`;
+        const categories = attr(opening, "data-category").split(/\s+/).filter(item => allowed.has(item));
+        const category = categories[0] || "start";
+        const secondary = categories.slice(1).filter(item => item !== category);
+        const classes = attr(opening, "class");
+        const title = firstMatch(block, /<h3[^>]*>([\s\S]*?)<\/h3>/i) || "Untitled Wiki Article";
+        const ref = firstMatch(block, /<span[^>]*class=["'][^"']*wiki-card-id[^"']*["'][^>]*>([\s\S]*?)<\/span>/i) || `KB-${String(index + 1).padStart(3, "0")}`;
+        const summary = firstMatch(block, /<p(?:\s[^>]*)?>([\s\S]*?)<\/p>/i);
+
+        const steps = [...block.matchAll(/<div[^>]*class=["'][^"']*wiki-step[^"']*["'][^>]*>[\s\S]*?<strong[^>]*>([\s\S]*?)<\/strong>[\s\S]*?<span[^>]*>([\s\S]*?)<\/span>[\s\S]*?<\/div>\s*<\/div>/gi)]
+            .map(match => ({ title: textFromHtml(match[1]), text: textFromHtml(match[2]) }))
+            .filter(step => step.title || step.text);
+
+        const facts = [...block.matchAll(/<div[^>]*class=["'][^"']*wiki-location[^"']*["'][^>]*>\s*<strong[^>]*>([\s\S]*?)<\/strong>\s*<span[^>]*>([\s\S]*?)<\/span>\s*<\/div>/gi)]
+            .map(match => ({ label: textFromHtml(match[1]), value: textFromHtml(match[2]) }))
+            .filter(item => item.label || item.value);
+
+        const calloutMatch = block.match(/<div[^>]*class=["']([^"']*wiki-callout[^"']*)["'][^>]*>([\s\S]*?)<\/div>/i);
+        const callout = calloutMatch ? textFromHtml(calloutMatch[2]) : "";
+        const calloutStyle = calloutMatch?.[1]?.includes("amber") ? "amber" : "default";
+
+        return {
+            id,
+            ref,
+            title,
+            category,
+            secondary_categories: secondary,
+            search_keywords: attr(opening, "data-search"),
+            summary,
+            body: "",
+            steps,
+            facts,
+            callout,
+            callout_style: calloutStyle,
+            image_url: "",
+            featured: classes.split(/\s+/).includes("wide"),
+            created_at: null,
+            updated_at: null,
+            created_by: "Core Wiki",
+            updated_by: "Core Wiki",
+            source: "core"
+        };
+    }).filter(article => article.id && article.title);
+}
+
+async function readCoreWiki(state) {
+    try {
+        const file = await fetchRepoText(state.repo, state.branch, state.token, CORE_WIKI_PATH);
+        return parseCoreWikiArticles(file.text);
+    } catch (error) {
+        console.warn("Core Wiki parse failed:", error);
+        return [];
+    }
+}
+
+async function mergedWikiArticles(state) {
+    const core = await readCoreWiki(state);
+    const deleted = new Set(cleanArray(state.data.deleted_core_ids, 300, 120));
+    const dynamic = (Array.isArray(state.data.articles) ? state.data.articles : [])
+        .filter(article => article && article.id && article.title);
+    const dynamicById = new Map(dynamic.map(article => [article.id, article]));
+    const coreIds = new Set(core.map(article => article.id));
+
+    const mergedCore = core
+        .filter(article => !deleted.has(article.id))
+        .map(article => {
+            const override = dynamicById.get(article.id);
+            return override
+                ? { ...override, source: "core-override" }
+                : article;
+        });
+
+    const dynamicOnly = dynamic
+        .filter(article => !coreIds.has(article.id))
+        .map(article => ({ ...article, source: "managed" }))
+        .sort((a, b) => String(b.updated_at || "").localeCompare(String(a.updated_at || "")));
+
+    return [...dynamicOnly, ...mergedCore];
 }
 
 function sanitiseArticle(input, existing = null) {
@@ -233,14 +370,15 @@ function sanitiseArticle(input, existing = null) {
 export async function onRequestGet(context) {
     try {
         const state = await readWikiFile(context.env);
-        const articles = [...state.data.articles]
-            .filter(article => article && article.id && article.title)
-            .sort((a, b) => String(b.updated_at || "").localeCompare(String(a.updated_at || "")));
+        const articles = await mergedWikiArticles(state);
 
         return json({
             success: true,
             updated_at: state.data.updated_at || null,
-            articles
+            articles,
+            total: articles.length,
+            core_count: articles.filter(article => String(article.source).startsWith("core")).length,
+            managed_count: articles.filter(article => article.source === "managed").length
         });
     } catch (error) {
         console.error("Wiki GET error:", error);
@@ -275,25 +413,48 @@ export async function onRequestPost(context) {
         }
 
         const state = await readWikiFile(context.env);
+        const coreArticles = await readCoreWiki(state);
+        const coreById = new Map(coreArticles.map(article => [article.id, article]));
         const articles = Array.isArray(state.data.articles) ? [...state.data.articles] : [];
+        const deletedCoreIds = new Set(cleanArray(state.data.deleted_core_ids, 300, 120));
         const actor = staffName(staff);
         const now = new Date().toISOString();
         let article = null;
 
         if (action === "delete") {
             const id = clean(payload?.id, 120);
-            const index = articles.findIndex(item => item?.id === id);
-            if (index === -1) return json({ success: false, error: "Wiki article could not be found." }, 404);
-            article = articles[index];
-            articles.splice(index, 1);
+            const dynamicIndex = articles.findIndex(item => item?.id === id);
+            const coreArticle = coreById.get(id);
+
+            if (dynamicIndex === -1 && !coreArticle) {
+                return json({ success: false, error: "Wiki article could not be found." }, 404);
+            }
+
+            if (dynamicIndex !== -1) {
+                article = articles[dynamicIndex];
+                articles.splice(dynamicIndex, 1);
+            } else {
+                article = coreArticle;
+            }
+
+            if (coreArticle) deletedCoreIds.add(id);
         } else if (action === "update") {
             const id = clean(payload?.id, 120);
-            const index = articles.findIndex(item => item?.id === id);
-            if (index === -1) return json({ success: false, error: "Wiki article could not be found." }, 404);
-            article = sanitiseArticle(payload?.article, articles[index]);
-            article.created_by = articles[index].created_by || actor;
+            const dynamicIndex = articles.findIndex(item => item?.id === id);
+            const existing = dynamicIndex !== -1 ? articles[dynamicIndex] : coreById.get(id);
+
+            if (!existing) {
+                return json({ success: false, error: "Wiki article could not be found." }, 404);
+            }
+
+            article = sanitiseArticle(payload?.article, existing);
+            article.created_by = existing.created_by || actor;
             article.updated_by = actor;
-            articles[index] = article;
+
+            if (dynamicIndex !== -1) articles[dynamicIndex] = article;
+            else articles.unshift(article);
+
+            deletedCoreIds.delete(id);
         } else {
             if (articles.length >= 150) {
                 return json({ success: false, error: "The dynamic Wiki article limit has been reached." }, 409);
@@ -305,9 +466,10 @@ export async function onRequestPost(context) {
         }
 
         const next = {
-            version: 1,
+            version: 2,
             updated_at: now,
-            articles
+            articles,
+            deleted_core_ids: [...deletedCoreIds]
         };
 
         const actionLabel = action === "delete" ? "Delete" : action === "update" ? "Update" : "Publish";
