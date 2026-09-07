@@ -1,0 +1,94 @@
+/* ==========================================================
+   THE DISTRICT — STAFF V7 STABILITY / VISUAL FIXES
+========================================================== */
+
+/* Remove the solid black header block shown over Dashboard. */
+.staff-topbar,
+.staff-topbar::before,
+.staff-topbar::after {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.staff-topbar {
+    padding: 0 0 22px !important;
+    margin-bottom: 26px !important;
+    border-bottom: 1px solid rgba(91, 181, 240, .12) !important;
+}
+
+.staff-topbar-main,
+.staff-topbar-actions {
+    position: relative;
+    z-index: 1;
+}
+
+.staff-topbar h1 {
+    color: #f8fcff !important;
+    text-shadow: none !important;
+}
+
+.staff-topbar-main > p {
+    color: #7f9aab !important;
+}
+
+/* Keep the main dashboard on the blue/white system instead of black slabs. */
+.staff-dashboard-intro,
+.staff-dashboard-panel,
+.staff-stat {
+    background-color: transparent;
+}
+
+.staff-dashboard-intro {
+    min-height: 62px;
+    padding: 14px 18px !important;
+    border: 1px solid rgba(93, 181, 238, .11);
+    border-radius: 13px;
+    background: rgba(5, 22, 36, .55) !important;
+}
+
+/* Neutral scrollbar colours: the previous green bar looked like a broken edge. */
+.staff-sidebar,
+.staff-main,
+.rules-manager-list,
+#wikiManagerLibrary {
+    scrollbar-color: rgba(53, 169, 238, .42) rgba(2, 12, 21, .35);
+}
+
+/* The manager should never overlay Dashboard while hidden. */
+#staffRulesManagerView[hidden],
+#staffWikiManagerView[hidden],
+#staffChangeLogView[hidden],
+#staffMembersView[hidden],
+#staffCreatorsView[hidden],
+#staffQueueView[hidden],
+#staffDashboardView[hidden] {
+    display: none !important;
+}
+
+/* More comfortable layout on portrait / smaller screens. */
+@media (max-width: 1250px), (max-aspect-ratio: 4/5) {
+    .staff-main {
+        padding: 28px 24px 70px !important;
+    }
+
+    .staff-topbar {
+        align-items: stretch !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+    }
+
+    .staff-topbar-actions {
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    .staff-stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .staff-stat-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
