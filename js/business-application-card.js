@@ -1,5 +1,5 @@
 /* ==========================================================
-   THE DISTRICT — APPLICATION SYSTEM BOOTSTRAP V9
+   THE DISTRICT — APPLICATION SYSTEM BOOTSTRAP V10
 ========================================================== */
 (function () {
     function loadScript(src, dataName) {
@@ -29,6 +29,9 @@
             loadStyle("/css/staff-applications-manager-v8.css", "data-staff-applications-manager-v8");
             loadScript("/js/staff-applications-manager-v9.js", "data-staff-applications-manager-v9");
         }
+
+        /* Always load this last so the old signal-lime styling cannot win. */
+        loadStyle("/css/district-blue-v9.css", "data-district-blue-v9");
     }
 
     if (document.readyState === "loading") {
