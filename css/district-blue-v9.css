@@ -1,0 +1,422 @@
+/* ==========================================================
+   THE DISTRICT — BLUE THEME V9
+   Final presentation override. Removes the previous signal-lime
+   identity and makes the site use blue / navy accents throughout.
+========================================================== */
+
+:root {
+    --td-bg: #04111d !important;
+    --td-bg-soft: #061624 !important;
+    --td-surface: #071a2a !important;
+    --td-surface-2: #0a2134 !important;
+    --td-surface-3: #0d2940 !important;
+    --td-line: rgba(91, 184, 255, 0.12) !important;
+    --td-line-strong: rgba(46, 169, 255, 0.34) !important;
+    --td-acid: #2ea9ff !important;
+    --td-acid-2: #0b8dff !important;
+    --td-acid-dim: rgba(46, 169, 255, 0.10) !important;
+    --td-acid-glow: rgba(46, 169, 255, 0.25) !important;
+    --td-white: #f3f9ff !important;
+    --td-muted: #9db4c6 !important;
+    --td-muted-2: #6f8ca2 !important;
+
+    --staff-bg: #04111d !important;
+    --staff-sidebar: #051522 !important;
+    --staff-surface: #071a2a !important;
+    --staff-surface-raised: #0a2134 !important;
+    --staff-hover: #0d2940 !important;
+    --staff-border: rgba(91, 184, 255, 0.10) !important;
+    --staff-border-strong: rgba(91, 184, 255, 0.18) !important;
+    --staff-text: #f3f9ff !important;
+    --staff-muted: #819bad !important;
+    --staff-muted-dark: #5f7b90 !important;
+    --staff-accent: #2ea9ff !important;
+    --staff-accent-soft: rgba(46, 169, 255, 0.08) !important;
+}
+
+html,
+body {
+    background: #04111d !important;
+}
+
+body {
+    background:
+        radial-gradient(circle at 10% 0%, rgba(46, 169, 255, .09), transparent 30%),
+        radial-gradient(circle at 90% 16%, rgba(0, 117, 255, .055), transparent 27%),
+        linear-gradient(180deg, #061827 0%, #04111d 100%) !important;
+}
+
+::selection {
+    background: #2ea9ff !important;
+    color: #03101b !important;
+}
+
+::-webkit-scrollbar-track {
+    background: #04111d !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #125586 !important;
+    border-color: #04111d !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1976b8 !important;
+}
+
+/* ---------- Navigation ---------- */
+#navbar,
+.navbar {
+    background: rgba(4, 17, 29, .82) !important;
+    border-bottom-color: rgba(46, 169, 255, .14) !important;
+}
+
+#navbar.navbar-scrolled,
+.navbar.navbar-scrolled {
+    background: rgba(4, 17, 29, .96) !important;
+    border-bottom-color: rgba(46, 169, 255, .24) !important;
+}
+
+.navbar-brand-logo,
+.footer-brand img {
+    filter: drop-shadow(0 0 14px rgba(46, 169, 255, .15)) !important;
+}
+
+.navbar-link::after {
+    background: #2ea9ff !important;
+    box-shadow: 0 0 12px rgba(46, 169, 255, .32) !important;
+}
+
+.navbar-staff-link {
+    border-color: rgba(46, 169, 255, .20) !important;
+    background: rgba(46, 169, 255, .055) !important;
+}
+
+/* ---------- Buttons / inputs ---------- */
+.navbar-actions .btn.primary,
+.btn.primary,
+.district-action-primary,
+.creators-primary-button,
+.application-featured-button,
+.staff-review-button,
+#changeLogSubmit,
+#rulesManagerSave,
+#applicationManagerSave,
+#applicationManagementSave {
+    color: #f7fbff !important;
+    background: linear-gradient(135deg, #49b7ff 0%, #178fe8 52%, #0875cf 100%) !important;
+    border-color: rgba(126, 205, 255, .64) !important;
+    box-shadow: 0 12px 32px rgba(0, 127, 232, .20), inset 0 1px 0 rgba(255,255,255,.30) !important;
+}
+
+.navbar-actions .btn.primary:hover,
+.btn.primary:hover,
+.creators-primary-button:hover,
+.application-featured-button:hover,
+.staff-review-button:hover,
+#changeLogSubmit:hover,
+#rulesManagerSave:hover,
+#applicationManagerSave:hover,
+#applicationManagementSave:hover {
+    box-shadow: 0 17px 42px rgba(0, 132, 239, .30), inset 0 1px 0 rgba(255,255,255,.40) !important;
+}
+
+.navbar-actions .btn.secondary:hover,
+.btn.secondary:hover,
+.creators-secondary-button:hover,
+.apply-secondary-button:hover,
+.discipline-secondary-button:hover {
+    border-color: rgba(46, 169, 255, .34) !important;
+    background: rgba(46, 169, 255, .08) !important;
+}
+
+input,
+select,
+textarea {
+    background: #061522 !important;
+    border-color: rgba(91, 184, 255, .15) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.staff-topbar-actions input:focus {
+    border-color: rgba(46, 169, 255, .58) !important;
+    box-shadow: 0 0 0 3px rgba(46, 169, 255, .09) !important;
+}
+
+option {
+    background: #061522 !important;
+}
+
+footer:not(.district-footer) {
+    background: #04111d !important;
+    border-top-color: rgba(46, 169, 255, .12) !important;
+}
+
+/* ---------- Homepage / public site ---------- */
+.district-hero {
+    background:
+        radial-gradient(circle at 14% 18%, rgba(46, 169, 255, .12), transparent 30%),
+        linear-gradient(180deg, #071b2b 0%, #04111d 72%, #04111d 100%) !important;
+}
+
+.district-hero::after {
+    border-color: rgba(46, 169, 255, .10) !important;
+    box-shadow: inset 0 0 120px rgba(46, 169, 255, .035) !important;
+}
+
+.district-signal-pill,
+.district-command-card,
+.district-feature-card,
+.district-experience-panel,
+.district-event-card,
+.district-join-card {
+    border-color: rgba(46, 169, 255, .18) !important;
+}
+
+.district-signal-pill {
+    background: rgba(46, 169, 255, .06) !important;
+    color: #74c8ff !important;
+}
+
+.district-hero h1 em,
+.district-hero-proof strong,
+.district-overline strong,
+.district-kicker strong,
+.district-section-head > span,
+.district-feature-card > span,
+.district-event-card > span,
+.district-join-card > span {
+    color: #43b5ff !important;
+    text-shadow: 0 0 36px rgba(46, 169, 255, .13) !important;
+}
+
+.district-command-card {
+    background:
+        linear-gradient(180deg, rgba(46, 169, 255, .045), transparent 27%),
+        #061522 !important;
+}
+
+.district-command-card::before {
+    border-top-color: #2ea9ff !important;
+    border-left-color: #2ea9ff !important;
+}
+
+.district-command-card::after {
+    border-right-color: rgba(46, 169, 255, .62) !important;
+    border-bottom-color: rgba(46, 169, 255, .62) !important;
+}
+
+/* Live / open indicators are blue now, not green. */
+.district-signal-pill span,
+.district-command-live i,
+.district-command-footer i.online,
+.staff-sidebar-status-dot,
+.staff-topbar-status > span,
+.staff-dashboard-system > span,
+.staff-sidebar-status > span,
+.application-featured-status > span,
+.application-role-status > span,
+.applications-live-dot,
+.creator-live-dot,
+.creators-live-dot,
+.rules-live-dot,
+.rules-current-dot,
+.rulebook-live-dot,
+.changelog-live-dot,
+.v3-wiki-manager-actions i,
+.staff-sidebar-status-dot,
+.staff-dashboard-system span:first-child {
+    background: #2ea9ff !important;
+    box-shadow: 0 0 10px rgba(46, 169, 255, .48) !important;
+}
+
+/* ---------- Applications ---------- */
+.applications-page,
+.apply-page,
+.application-page {
+    background-color: #04111d !important;
+}
+
+.applications-hero,
+.applications-content {
+    background-color: transparent !important;
+}
+
+.application-featured-card,
+.application-role-card,
+.applications-hero-side,
+.apply-form-shell,
+.apply-main-panel {
+    border-color: rgba(46, 169, 255, .16) !important;
+}
+
+.application-featured-status,
+.application-role-status,
+.application-role-category,
+.application-featured-category,
+.applications-hero-kicker,
+.application-question-number,
+.application-answer-guidance,
+.application-character-check,
+.overall-open,
+.availability-open [data-application-status] {
+    color: #55bdff !important;
+}
+
+.availability-open,
+.application-featured-card.availability-open,
+.application-role-card.availability-open {
+    border-color: rgba(46, 169, 255, .22) !important;
+}
+
+/* ---------- Staff control centre ---------- */
+.staff-shell {
+    background:
+        radial-gradient(circle at 76% 0%, rgba(46, 169, 255, .055), transparent 30%),
+        #04111d !important;
+}
+
+.staff-sidebar {
+    background: linear-gradient(180deg, #061827, #04111d) !important;
+    border-right-color: rgba(46, 169, 255, .12) !important;
+    scrollbar-color: #1976b8 #04111d !important;
+}
+
+.staff-nav-item.active {
+    background: rgba(46, 169, 255, .075) !important;
+}
+
+.staff-nav-item.active::before {
+    background: #2ea9ff !important;
+    box-shadow: 0 0 10px rgba(46, 169, 255, .35) !important;
+}
+
+.staff-nav-item.active .staff-nav-icon,
+.staff-nav-badge.has-applications {
+    color: #7bcaff !important;
+    border-color: rgba(46, 169, 255, .22) !important;
+    background: rgba(46, 169, 255, .08) !important;
+}
+
+.staff-topbar-status,
+.staff-panel-header > div:first-child > span,
+.staff-panel-reference > span,
+.staff-dashboard-intro > div:first-child > span,
+.changelog-section-title,
+.changelog-hero > div:first-child > span,
+.rules-manager-hero > div:first-child > span,
+.application-manager-question-heading span,
+.v3-wiki-manager-hero > div:first-child > span {
+    color: #4bb9ff !important;
+}
+
+.staff-dashboard-panel,
+.changelog-hero,
+.changelog-form-panel,
+.changelog-preview-panel,
+.rules-manager-editor,
+.rules-manager-library,
+.application-management-panel,
+.creator-management-panel,
+.creator-management-roster-panel,
+.discipline-form-panel,
+.discipline-history-panel .staff-dashboard-panel,
+.discipline-records-panel {
+    border-color: rgba(46, 169, 255, .15) !important;
+}
+
+.staff-stat,
+.staff-overview-row,
+.application-management-row,
+.creator-management-card,
+.discipline-global-row {
+    border-color: rgba(46, 169, 255, .13) !important;
+}
+
+.staff-overview-row:hover,
+.application-management-row:hover,
+.creator-management-card:hover,
+.discipline-global-row:hover {
+    border-color: rgba(46, 169, 255, .28) !important;
+    background: rgba(46, 169, 255, .045) !important;
+}
+
+/* ---------- Rules / Wiki ---------- */
+.rules-page-shell,
+.wiki-v2 {
+    background: #04111d !important;
+}
+
+.rules-manager-hero,
+.v3-wiki-manager-hero {
+    border-color: rgba(46, 169, 255, .18) !important;
+    background:
+        radial-gradient(circle at 92% 0%, rgba(46, 169, 255, .13), transparent 34%),
+        linear-gradient(145deg, rgba(7, 28, 46, .97), rgba(4, 17, 29, .99)) !important;
+}
+
+.rules-manager-section-title > span,
+.rules-manager-row-id,
+.v3-wiki-card-id,
+.wiki-card-id,
+.rule-number,
+.rule-section-number {
+    color: #56c1ff !important;
+    border-color: rgba(46, 169, 255, .22) !important;
+    background: rgba(46, 169, 255, .06) !important;
+}
+
+.rules-manager-row:hover,
+.rules-manager-row.selected,
+.v3-managed-wiki-card:hover,
+.wiki-card:hover {
+    border-color: rgba(46, 169, 255, .30) !important;
+    background-color: rgba(46, 169, 255, .04) !important;
+}
+
+/* Public rules accents. Keep warning/ban severity colours intact, but remove green branding. */
+.rules-page-shell .rules-status,
+.rules-page-shell .rules-current,
+.rules-page-shell .rules-kicker,
+.rules-page-shell .rules-eyebrow,
+.rules-page-shell .current-rulebook,
+.rules-page-shell [class*="current-rulebook"],
+.rules-page-shell [class*="live-status"] {
+    color: #55bdff !important;
+}
+
+.rules-page-shell .rules-status::before,
+.rules-page-shell .rules-current::before,
+.rules-page-shell .current-rulebook::before,
+.rules-page-shell [class*="current-rulebook"]::before {
+    background: #2ea9ff !important;
+    box-shadow: 0 0 9px rgba(46, 169, 255, .45) !important;
+}
+
+/* ---------- Generic accent cleanup ---------- */
+.accent,
+.text-accent,
+.status-open,
+.status-live,
+.status-online,
+.live,
+.open {
+    --accent: #2ea9ff;
+}
+
+[style*="#b5ff36" i],
+[style*="#83ff00" i],
+[style*="#22c55e" i] {
+    color: #2ea9ff !important;
+    border-color: rgba(46, 169, 255, .28) !important;
+}
+
+/* Make native scrollbar thumbs in managed lists blue as well. */
+.staff-sidebar,
+.rules-manager-list,
+#wikiManagerLibrary,
+#applicationManagerLibrary {
+    scrollbar-color: #1976b8 #04111d !important;
+}
