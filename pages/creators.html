@@ -1,215 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0b0f0b">
-
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Creators | The District</title>
-
-    <meta
-        name="description"
-        content="Watch and discover official creators from The District FiveM roleplay community."
-    >
-
-    <link
-        rel="icon"
-        type="image/x-icon"
-        href="../favicon.ico"
-    >
-
-    <link
-        rel="stylesheet"
-        href="../css/style.css"
-    >
-
-    <link
-        rel="stylesheet"
-        href="../css/creators.css"
-    >
-
-    <link rel="stylesheet" href="../css/rebrand.css">
-
+    <meta name="description" content="Watch and discover creators from The District FiveM roleplay community.">
+    <meta name="theme-color" content="#07090d">
+    <link rel="icon" href="../favicon.ico"><link rel="stylesheet" href="../css/community-hub.css">
 </head>
-
 <body>
-
-    <div id="navbar"></div>
-
-    <main class="creators-page">
-
-        <section class="creators-hero">
-
-            <div class="creators-container creators-hero-layout">
-
-                <div class="creators-hero-copy">
-
-                    <div class="creators-kicker">
-                        <span></span>
-                        THE DISTRICT CREATOR NETWORK
-                    </div>
-
-                    <h1>
-                        Watch The District
-                        <span>from their point of view.</span>
-                    </h1>
-
-                    <p>
-                        Discover the streamers and creators representing The District.
-                        Catch live roleplay, community moments and content from across the city.
-                    </p>
-
-                    <div class="creators-hero-actions">
-
-                        <a
-                            href="apply.html?type=Streamer%20Application"
-                            class="creators-primary-button"
-                            data-streamer-application-link
-                        >
-                            Apply as a Streamer
-                            <span>→</span>
-                        </a>
-
-                        <a
-                            href="#creatorRoster"
-                            class="creators-secondary-button"
-                        >
-                            Browse Creators
-                        </a>
-
-                    </div>
-
-                </div>
-
-                <aside class="creators-status-panel">
-
-                    <div class="creators-status-header">
-                        <span>NETWORK STATUS</span>
-                        <strong>
-                            <i></i>
-                            ACTIVE
-                        </strong>
-                    </div>
-
-                    <div class="creators-status-grid">
-
-                        <div>
-                            <span>LIVE NOW</span>
-                            <strong id="liveCreatorCount">0</strong>
-                        </div>
-
-                        <div>
-                            <span>CREATORS</span>
-                            <strong id="totalCreatorCount">0</strong>
-                        </div>
-
-                    </div>
-
-                    <div class="creators-status-footer">
-                        <span>CREATOR APPLICATIONS</span>
-                        <strong id="creatorApplicationStatus">OPEN</strong>
-                    </div>
-
-                </aside>
-
+<div id="navbar"></div>
+<main>
+    <section class="hub-page-hero">
+        <div class="hub-shell hub-page-hero-grid">
+            <div>
+                <span class="hub-eyebrow">DISTRICT CREATORS</span>
+                <h1>See the city<span>through their eyes.</span></h1>
+                <p>Streams, clips and stories from the people who create content inside The District. No creator application portal — this page is purely here to showcase the community.</p>
             </div>
-
-        </section>
-
-
-        <section class="creators-content">
-
-            <div class="creators-container">
-
-                <section class="creator-section">
-
-                    <div class="creator-section-heading">
-
-                        <div>
-                            <span>LIVE NOW</span>
-                            <h2>Currently streaming</h2>
-                        </div>
-
-                        <p>
-                            Jump straight into live roleplay from The District.
-                        </p>
-
-                    </div>
-
-                    <div
-                        class="creator-live-grid"
-                        id="liveCreators"
-                    ></div>
-
-                </section>
-
-
-                <section
-                    class="creator-section creator-roster-section"
-                    id="creatorRoster"
-                >
-
-                    <div class="creator-section-heading">
-
-                        <div>
-                            <span>CREATOR ROSTER</span>
-                            <h2>Official creators</h2>
-                        </div>
-
-                        <p>
-                            Approved streamers and content creators representing the community.
-                        </p>
-
-                    </div>
-
-                    <div
-                        class="creator-roster-grid"
-                        id="creatorRosterGrid"
-                    ></div>
-
-                </section>
-
-
-                <section class="creators-application-cta">
-
-                    <div class="creators-application-mark">
-                        SR
-                    </div>
-
-                    <div class="creators-application-copy">
-                        <span>JOIN THE NETWORK</span>
-                        <h2>Want to create content in The District?</h2>
-                        <p>
-                            Apply to become an official streamer and represent The District
-                            across Twitch, YouTube, Kick or TikTok.
-                        </p>
-                    </div>
-
-                    <a
-                        href="apply.html?type=Streamer%20Application"
-                        data-streamer-application-link
-                    >
-                        Start Application
-                        <span>→</span>
-                    </a>
-
-                </section>
-
+            <div class="hub-hero-statbox">
+                <div><strong id="liveCreatorCount">0</strong><span>Live now</span></div>
+                <div><strong id="totalCreatorCount">0</strong><span>Creators</span></div>
+                <div><strong>LIVE</strong><span>Community content</span></div>
+                <div><strong>24/7</strong><span>Discoverable here</span></div>
             </div>
+        </div>
+    </section>
 
-        </section>
+    <section class="hub-section">
+        <div class="hub-shell">
+            <div class="hub-section-head">
+                <div><span class="hub-kicker">LIVE NOW</span><h2 class="hub-title">Currently streaming.</h2></div>
+                <p>If an official District creator is live, their stream appears here first.</p>
+            </div>
+            <div class="creator-live-grid" id="liveCreators"></div>
+        </div>
+    </section>
 
-    </main>
+    <section class="hub-section">
+        <div class="hub-shell">
+            <div class="hub-section-head">
+                <div><span class="hub-kicker">CREATOR ROSTER</span><h2 class="hub-title">The people behind the content.</h2></div>
+                <p>Creators who regularly share roleplay, events and moments from The District.</p>
+            </div>
+            <div class="creator-roster-grid" id="creatorRosterGrid"></div>
+        </div>
+    </section>
 
-    <script src="../js/auth.js"></script>
-    <script src="../js/creators.js"></script>
-    <script src="../js/components.js"></script>
-
-<script src="../js/rebrand.js"></script>
-
+    <section class="hub-section">
+        <div class="hub-shell">
+            <div class="hub-join-panel" data-reveal>
+                <div><span class="hub-kicker">CREATE YOUR OWN MOMENTS</span><h2>Every good story starts in the city.</h2><p>Join the community, build your character and see where the story goes.</p></div>
+                <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer" class="hub-button primary">Join Discord <span>↗</span></a>
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="hub-footer">
+    <div class="hub-shell">
+        <div class="hub-footer-main">
+            <div class="hub-footer-brand"><img src="../assets/images/logo.png" alt="The District"><div><strong>THE DISTRICT</strong><span>LOS SANTOS COMMUNITY</span></div></div>
+            <div class="hub-footer-links"><a href="../index.html">Home</a><a href="about.html">About</a><a href="community.html">Community</a><a href="../rules.html">Rules</a><a href="creators.html">Creators</a><a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer">Discord</a></div>
+        </div>
+        <div class="hub-footer-bottom"><span>© 2026 The District. All rights reserved.</span><span>16+ British FiveM Roleplay • Los Santos</span></div>
+    </div>
+</footer>
+<script src="../js/components.js"></script><script src="../js/community-hub.js"></script><script src="../js/creators.js"></script>
 </body>
-
 </html>
