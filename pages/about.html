@@ -1,52 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="member-gated">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>About | The District</title>
-    <meta name="description" content="Learn what The District community is about and the kind of roleplay experience it is building.">
+    <meta name="description" content="The District member overview, live server status and gameplay.">
     <meta name="theme-color" content="#07090d">
     <link rel="icon" href="../favicon.ico"><link rel="stylesheet" href="../css/community-hub.css">
 </head>
 <body>
 <div id="navbar"></div>
 <main>
-    <section class="hub-page-hero">
-        <div class="hub-shell hub-page-hero-grid">
-            <div>
-                <span class="hub-eyebrow">ABOUT THE DISTRICT</span>
-                <h1>Built for the<span>people playing it.</span></h1>
-                <p>The District is a 16+ British FiveM roleplay community set in Los Santos. The aim is simple: give people a city where interaction matters, characters have room to grow and the community shapes what happens next.</p>
+    <section class="member-about-hero">
+        <div class="hub-shell member-about-grid">
+            <div class="member-about-copy">
+                <span class="hub-eyebrow">WELCOME TO THE DISTRICT</span>
+                <h1>More than a server.<span>A city with people in it.</span></h1>
+                <p>The District is a 16+ British FiveM roleplay community set in Los Santos. We focus on long-term characters, proper interaction and a city where businesses, public services, civilians and criminals all feed into each other's stories.</p>
+                <div class="member-about-actions">
+                    <a href="community.html" class="hub-button primary">Open Community Dashboard <span>→</span></a>
+                    <a href="fivem://connect/185.223.29.112:30120" class="hub-button">Connect to Server</a>
+                </div>
             </div>
-            <div class="hub-hero-statbox">
-                <div><strong>16+</strong><span>Minimum age</span></div>
-                <div><strong>UK</strong><span>British style RP</span></div>
-                <div><strong>RP</strong><span>Story first</span></div>
-                <div><strong>LIVE</strong><span>Always evolving</span></div>
-            </div>
+
+            <aside class="about-live-card" data-server-status>
+                <div class="about-live-head">
+                    <span class="hub-status" data-server-status><i></i><span id="hubServerLabel">CHECKING</span></span>
+                    <small>LIVE SERVER</small>
+                </div>
+                <div class="about-live-count"><strong id="hubPlayers">--</strong><span>/ <b id="hubMaxPlayers">230</b></span></div>
+                <p>players currently in Los Santos</p>
+                <div class="hub-capacity"><span id="hubCapacityFill"></span></div>
+                <div class="about-live-meta">
+                    <div><strong>16+</strong><span>Community age</span></div>
+                    <div><strong>UK</strong><span>British style</span></div>
+                    <div><strong>RP</strong><span>Story focused</span></div>
+                </div>
+            </aside>
         </div>
     </section>
 
     <section class="hub-section">
-        <div class="hub-shell hub-content-grid">
-            <div class="hub-sticky-copy">
-                <span class="hub-kicker">OUR DIRECTION</span>
-                <h2>Good roleplay comes from people.</h2>
-                <p>Scripts can create opportunities, but players create the moments people remember. The District is designed around giving those moments room to happen.</p>
+        <div class="hub-shell">
+            <div class="hub-section-head">
+                <div><span class="hub-kicker">ABOUT US</span><h2 class="hub-title">What we're building.</h2></div>
+                <p>The District is designed to feel connected. What one group does should create roleplay for somebody else rather than happening in isolation.</p>
             </div>
-            <div class="hub-stack">
-                <article class="hub-info-card" data-reveal><span class="number">01 / COMMUNITY FIRST</span><h3>People before systems.</h3><p>The server should help people meet, create scenes and keep stories moving. Features are there to support roleplay rather than replace it.</p></article>
-                <article class="hub-info-card" data-reveal><span class="number">02 / CONSEQUENCE</span><h3>Stories should carry forward.</h3><p>Characters, businesses, careers, relationships and rivalries should mean something beyond a single session. Choices should create new roleplay rather than end it.</p></article>
-                <article class="hub-info-card" data-reveal><span class="number">03 / VARIETY</span><h3>There is more than one way to play.</h3><p>Public services, businesses, civilian life, crime, events and content creation all form part of the same city rather than feeling like separate game modes.</p></article>
-                <article class="hub-info-card" data-reveal><span class="number">04 / EVOLUTION</span><h3>The city changes with the community.</h3><p>Feedback, events, new content and changing stories should keep The District moving instead of locking it into one version forever.</p></article>
+            <div class="about-detail-grid">
+                <article class="hub-info-card" data-reveal><span class="number">01 / CHARACTERS</span><h3>Stories that continue.</h3><p>Your character should have somewhere to go. Careers, friendships, businesses, rivalries and consequences are supposed to build over time.</p></article>
+                <article class="hub-info-card" data-reveal><span class="number">02 / COMMUNITY</span><h3>People make the server.</h3><p>Scripts support roleplay, but the actual experience comes from the people you meet and the scenes you create together.</p></article>
+                <article class="hub-info-card" data-reveal><span class="number">03 / CITY LIFE</span><h3>More than crime and police.</h3><p>Businesses, events, civilian jobs, emergency services, content creators and everyday interactions all matter to the city.</p></article>
+                <article class="hub-info-card" data-reveal><span class="number">04 / DEVELOPMENT</span><h3>Always moving.</h3><p>The District continues to change through community feedback, new features, events and the stories players create.</p></article>
             </div>
         </div>
     </section>
 
     <section class="hub-section">
         <div class="hub-shell">
-            <div class="hub-join-panel" data-reveal>
-                <div><span class="hub-kicker">MEET THE COMMUNITY</span><h2>See what The District is like.</h2><p>The quickest way to understand the server is to meet the people already in it.</p></div>
-                <a href="community.html" class="hub-button primary">Explore Community <span>→</span></a>
+            <div class="hub-section-head">
+                <div><span class="hub-kicker">GAMEPLAY</span><h2 class="hub-title">See The District in action.</h2></div>
+                <p>This space is built for your own FiveM gameplay reel, so the site can show the actual server rather than a generic trailer.</p>
+            </div>
+
+            <div class="district-gameplay-frame" id="districtGameplayFrame" data-reveal>
+                <video id="districtGameplayVideo" controls playsinline preload="metadata" poster="https://images.unsplash.com/photo-1752560937193-218c47323b73?auto=format&fit=crop&fm=jpg&q=85&w=2200">
+                    <source src="../assets/gameplay.mp4" type="video/mp4">
+                </video>
+                <div class="district-gameplay-fallback" id="districtGameplayFallback" hidden>
+                    <span>GAMEPLAY VIDEO</span>
+                    <h3>Your FiveM footage will play here.</h3>
+                    <p>The player is ready for <strong>assets/gameplay.mp4</strong>. Once your own gameplay file is added, this automatically becomes the video section.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -54,25 +77,15 @@
 <footer class="hub-footer">
     <div class="hub-shell">
         <div class="hub-footer-main">
-            <div class="hub-footer-brand">
-                <img src="../assets/images/logo.png" alt="The District">
-                <div><strong>THE DISTRICT</strong><span>LOS SANTOS COMMUNITY</span></div>
-            </div>
-            <div class="hub-footer-links">
-                <a href="../index.html">Home</a>
-                <a href="../pages/about.html">About</a>
-                <a href="../pages/community.html">Community</a>
-                <a href="../rules.html">Rules</a>
-                <a href="../pages/creators.html">Creators</a>
-                <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer">Discord</a>
-            </div>
+            <div class="hub-footer-brand"><img src="../assets/images/logo.png" alt="The District"><div><strong>THE DISTRICT</strong><span>MEMBER HUB</span></div></div>
+            <div class="hub-footer-links"><a href="about.html">About</a><a href="community.html">Community</a><a href="../rules.html">Rules</a><a href="creators.html">Creators</a><a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer">Discord</a></div>
         </div>
-        <div class="hub-footer-bottom">
-            <span>© 2026 The District. All rights reserved.</span>
-            <span>16+ British FiveM Roleplay • Los Santos</span>
-        </div>
+        <div class="hub-footer-bottom"><span>© 2026 The District. All rights reserved.</span><span>16+ British FiveM Roleplay • Los Santos</span></div>
     </div>
 </footer>
-<script src="../js/components.js"></script><script src="../js/community-hub.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/member-gate.js"></script>
+<script src="../js/components.js"></script>
+<script src="../js/community-hub.js"></script>
 </body>
 </html>
