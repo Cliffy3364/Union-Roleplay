@@ -143,7 +143,7 @@ const RULEBOOK = [
             },
 
             {
-                id: "01.9",
+                id: "01.8",
 
                 title:
                     "Common Sense",
@@ -159,7 +159,7 @@ const RULEBOOK = [
             },
 
             {
-                id: "01.10",
+                id: "01.9",
 
                 title:
                     "Real Money Trading",
@@ -175,7 +175,7 @@ const RULEBOOK = [
             },
 
             {
-                id: "01.11",
+                id: "01.10",
 
                 title:
                     "Infrastructure Abuse",
@@ -191,7 +191,7 @@ const RULEBOOK = [
             },
 
             {
-                id: "01.12",
+                id: "01.11",
 
                 title:
                     "Contacting Staff & Developers",
@@ -207,7 +207,7 @@ const RULEBOOK = [
             },
 
             {
-                id: "01.13",
+                id: "01.12",
 
                 title:
                     "Spray Paint & Custom Images",
@@ -223,7 +223,7 @@ const RULEBOOK = [
             },
 
             {
-                id: "01.14",
+                id: "01.13",
 
                 title:
                     "Character Names",
@@ -239,7 +239,7 @@ const RULEBOOK = [
             },
 
             {
-                id: "01.15",
+                id: "01.14",
 
                 title:
                     "Sexual & Explicit Roleplay",
@@ -255,7 +255,7 @@ const RULEBOOK = [
             },
 
             {
-                id: "01.16",
+                id: "01.15",
 
                 title:
                     "Account Sharing",
