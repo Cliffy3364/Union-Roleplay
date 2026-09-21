@@ -77,3 +77,19 @@
         window.setInterval(loadServerStatus, 30000);
     });
 })();
+
+/* Gameplay slot gracefully falls back until the server's own MP4 is added. */
+document.addEventListener("DOMContentLoaded", () => {
+    const video = document.getElementById("districtGameplayVideo");
+    const fallback = document.getElementById("districtGameplayFallback");
+    if (!video || !fallback) return;
+
+    const showFallback = () => {
+        video.hidden = true;
+        fallback.hidden = false;
+    };
+
+    video.addEventListener("error", showFallback);
+    const source = video.querySelector("source");
+    if (source) source.addEventListener("error", showFallback);
+});
