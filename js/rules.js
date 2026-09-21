@@ -143,22 +143,6 @@ const RULEBOOK = [
             },
 
             {
-                id: "01.8",
-
-                title:
-                    "Age Requirement",
-
-                punishment:
-                    "Bannable",
-
-                description:
-                    "Players must meet The District's minimum age requirement. Providing a false age may result in removal from the community.",
-
-                enforcement:
-                    "Underage players may be banned until they meet the required age. Deliberate deception may result in additional sanctions."
-            },
-
-            {
                 id: "01.9",
 
                 title:
