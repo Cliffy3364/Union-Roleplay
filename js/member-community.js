@@ -166,24 +166,20 @@
         const embedded = normalizeProfile({}, user);
         if (embedded.characters.length) return embedded;
 
-        const candidates = [
-            "/api/community/member",
-            "/api/community/profile",
-            "/api/community/me"
-        ];
+        try {
+            const response = await fetch("/api/community/member", {
+                headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
+                cache: "no-store"
+            });
 
-        for (const path of candidates) {
-            try {
-                const response = await fetch(`${API}${path}`, {
-                    headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
-                    cache: "no-store"
-                });
-                if (!response.ok) continue;
+            if (response.ok) {
                 const data = await response.json();
-                if (data?.success === false) continue;
-                const normalized = normalizeProfile(data, user);
-                if (normalized.characters.length || normalized.vehicles.length) return normalized;
-            } catch {}
+                if (data?.success !== false) {
+                    return normalizeProfile(data, user);
+                }
+            }
+        } catch (error) {
+            console.warn("Member game profile unavailable:", error);
         }
 
         return embedded;
@@ -222,7 +218,7 @@
 
     async function loadLeaderboards() {
         try {
-            const response = await fetch(`${API}/api/community/leaderboards`, {
+            const response = await fetch("/api/community/leaderboards", {
                 headers: { Authorization: `Bearer ${DistrictAuth.getToken()}`, Accept: "application/json" },
                 cache: "no-store"
             });
