@@ -30,6 +30,7 @@ async function handleLogin() {
         const data = await response.json();
         if (!response.ok || !data.success || !data.token) throw new Error(data.error || "Login failed.");
         localStorage.setItem("district_session", data.token);
+        document.cookie = `district_session=${encodeURIComponent(data.token)}; Path=/; Max-Age=604800; Secure; SameSite=Lax`;
 
         const returnPath = sessionStorage.getItem("district_return_path");
         sessionStorage.removeItem("district_return_path");
