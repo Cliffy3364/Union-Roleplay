@@ -3,300 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>The District | 16+ British FiveM Roleplay</title>
-    <meta name="description" content="The District is a 16+ British FiveM roleplay community built around serious roleplay, player-led stories, public services, businesses and long-term progression.">
-    <meta name="theme-color" content="#04111d">
+    <title>The District | Community</title>
+    <meta name="description" content="The District is a British FiveM roleplay community built around people, stories, events and a living Los Santos.">
+    <meta name="theme-color" content="#07090d">
     <link rel="icon" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/rebrand.css">
-    <link rel="stylesheet" href="css/district-v2.css">
-    <link rel="stylesheet" href="css/district-v3.css">
-    <link rel="stylesheet" href="css/district-v4.css">
+    <link rel="stylesheet" href="css/community-hub.css">
 </head>
-<body class="district-v4-home">
+<body>
     <div id="navbar"></div>
 
     <main>
-        <section class="v4-hero">
-            <div class="v4-shell v4-hero-inner">
-                <div class="v4-hero-grid">
-                    <div class="v4-hero-copy">
-                        <span class="v4-eyebrow">THE DISTRICT // LOS SANTOS LIVES HERE</span>
-                        <h1>More Than a Server.<span>A Community.</span></h1>
+        <section class="hub-hero">
+            <div class="hub-shell">
+                <div class="hub-hero-grid">
+                    <div class="hub-hero-copy">
+                        <span class="hub-eyebrow">LOS SANTOS • COMMUNITY DRIVEN</span>
+                        <h1>Your city.<span>Your people.</span></h1>
                         <p>
-                            The District is a 16+ British FiveM roleplay community built around immersive roleplay,
-                            unique stories and a city that gives your choices weight. Build your identity, find your people
-                            and create something that lasts longer than one session.
+                            The District is a 16+ British FiveM community built around the people inside it.
+                            Meet characters, build stories, join events, create content and make Los Santos feel alive.
                         </p>
-
-                        <div class="v4-hero-actions">
-                            <a href="pages/applications.html" class="btn primary">Apply Now <span>→</span></a>
-                            <a href="#about" class="btn secondary">Learn More</a>
-                            <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer" class="btn secondary">Join Discord</a>
-                        </div>
-
-                        <div class="v4-hero-micro">
-                            <div><i></i><span>Real people. Real stories.</span></div>
-                            <div><i></i><span>16+ UK community</span></div>
-                            <div><i></i><span>Whitelisted serious RP</span></div>
-                            <div><i></i><span id="v4ReleaseLine">Preparing release...</span></div>
+                        <div class="hub-hero-actions">
+                            <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer" class="hub-button primary">Join the Community <span>↗</span></a>
+                            <a href="pages/community.html" class="hub-button">See what's happening <span>→</span></a>
                         </div>
                     </div>
 
-                    <aside class="v4-status-card" aria-label="The District live server status">
-                        <div class="v4-status-head">
-                            <span class="v4-status-live" id="v4StatusLive"><i></i><span id="v4OnlineLabel">CHECKING</span></span>
-                            <small>LOS SANTOS, SAN ANDREAS</small>
+                    <aside class="hub-pulse-card" data-server-status>
+                        <div class="hub-pulse-top">
+                            <span class="hub-status" data-server-status><i></i><span id="hubServerLabel">CHECKING</span></span>
+                            <small>COMMUNITY PULSE</small>
                         </div>
-
-                        <div class="v4-player-count">
-                            <div>
-                                <strong><span id="v4Players">--</span><span> / <span id="v4MaxPlayers">230</span></span></strong>
-                                <small>Players Online</small>
-                            </div>
-                            <div class="v4-player-bars" aria-hidden="true">
-                                <span></span><span></span><span></span><span></span>
-                            </div>
+                        <div class="hub-player-number">
+                            <strong><span id="hubPlayers">--</span><span> / <span id="hubMaxPlayers">230</span></span></strong>
+                            <small>Players currently in the city</small>
                         </div>
-
-                        <div class="v4-status-tags">
-                            <span><b>16+</b> 16+ Only</span>
-                            <span><b>✓</b> Whitelisted</span>
-                            <span><b>UK</b> British Style</span>
-                            <span><b>RP</b> Serious Roleplay</span>
+                        <div class="hub-capacity"><span id="hubCapacityFill"></span></div>
+                        <div class="hub-pulse-grid">
+                            <div><strong>16+</strong><span>Community</span></div>
+                            <div><strong>UK</strong><span>British RP</span></div>
+                            <div><strong>LIVE</strong><span>Ongoing updates</span></div>
+                            <div><strong>24/7</strong><span>Discord access</span></div>
                         </div>
-
-                        <a href="fivem://connect/185.223.29.112:30120" class="btn primary v4-connect">Connect to Server <span>→</span></a>
-                        <div class="v4-status-foot">A HIGHER STANDARD OF ROLEPLAY</div>
+                        <a href="fivem://connect/185.223.29.112:30120" class="hub-button primary">Connect to Server <span>→</span></a>
                     </aside>
                 </div>
 
-                <div class="v4-feature-rail" aria-label="Explore The District">
-                    <a href="pages/wiki.html#wiki-tdps" class="v4-feature-card" style="--feature-image:var(--v4-police-image)">
-                        <span class="v4-feature-icon">PD</span>
-                        <h3>The District<br>Police Service</h3>
-                        <p>Protect, serve and build a career through British-inspired policing.</p>
-                        <span class="v4-feature-arrow">→</span>
+                <div class="hub-dashboard-strip">
+                    <a href="pages/about.html" class="hub-dashboard-tile">
+                        <small>01 / DISCOVER</small>
+                        <strong>About The District</strong>
+                        <span>What we are, what we value and the kind of community we're building.</span>
                     </a>
-
-                    <a href="pages/wiki.html" class="v4-feature-card" style="--feature-image:var(--v4-ems-image)">
-                        <span class="v4-feature-icon">EMS</span>
-                        <h3>Health &<br>Emergency</h3>
-                        <p>Respond to incidents and create proper medical roleplay.</p>
-                        <span class="v4-feature-arrow">→</span>
+                    <a href="pages/community.html" class="hub-dashboard-tile">
+                        <small>02 / COMMUNITY</small>
+                        <strong>What's happening</strong>
+                        <span>Events, city activity and the quickest routes into the community.</span>
                     </a>
-
-                    <a href="pages/community.html" class="v4-feature-card" style="--feature-image:var(--v4-hero-image)">
-                        <span class="v4-feature-icon">CV</span>
-                        <h3>Civilian Life</h3>
-                        <p>Jobs, vehicles, friendships, events and everyday stories.</p>
-                        <span class="v4-feature-arrow">→</span>
+                    <a href="rules.html" class="hub-dashboard-tile">
+                        <small>03 / GUIDELINES</small>
+                        <strong>Know the rules</strong>
+                        <span>A clean, searchable rulebook without the clutter.</span>
                     </a>
-
-                    <a href="pages/wiki.html#wiki-business" class="v4-feature-card" style="--feature-image:var(--v4-business-image)">
-                        <span class="v4-feature-icon">BZ</span>
-                        <h3>Businesses</h3>
-                        <p>Build, employ, advertise and make your business part of the city.</p>
-                        <span class="v4-feature-arrow">→</span>
-                    </a>
-
-                    <a href="pages/wiki.html#wiki-crime" class="v4-feature-card" style="--feature-image:var(--v4-car-image)">
-                        <span class="v4-feature-icon">CR</span>
-                        <h3>Criminal RP</h3>
-                        <p>Risk, planning, contacts and consequences that actually matter.</p>
-                        <span class="v4-feature-arrow">→</span>
-                    </a>
-
-                    <a href="pages/wiki.html" class="v4-feature-card" style="--feature-image:var(--v4-street-image)">
-                        <span class="v4-feature-icon">WK</span>
-                        <h3>The District<br>Wiki</h3>
-                        <p>Your guide to the city, systems, jobs, rules and common questions.</p>
-                        <span class="v4-feature-arrow">→</span>
+                    <a href="pages/creators.html" class="hub-dashboard-tile">
+                        <small>04 / WATCH</small>
+                        <strong>District Creators</strong>
+                        <span>Find the people streaming and sharing stories from the city.</span>
                     </a>
                 </div>
             </div>
         </section>
 
-        <section class="v4-section">
-            <div class="v4-shell">
-                <div class="v4-city-banner">
-                    <div class="v4-city-banner-content">
-                        <span class="v4-eyebrow">A CITY OF OPPORTUNITY</span>
-                        <h2>Los Santos<span>Awaits.</span></h2>
-                        <p>
-                            From public services and businesses to quiet civilian life and high-risk criminal stories,
-                            The District gives you room to choose a direction and actually build on it.
-                        </p>
-                        <a href="pages/community.html" class="btn primary">Explore The City <span>→</span></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="v4-section" id="about">
-            <div class="v4-shell v4-about-grid">
-                <div class="v4-about-copy">
-                    <span class="v4-eyebrow">ABOUT THE DISTRICT</span>
-                    <h2>Built by roleplayers.<br>For roleplayers.</h2>
-                    <p>
-                        We are building The District around quality, immersion and stories that continue instead of resetting
-                        every time a scene ends. The city should feel connected: businesses need customers, police need genuine
-                        incidents, civilians need reasons to leave their apartments and criminals need more than a menu to press.
-                    </p>
-                    <p>
-                        The minimum age is 16. Mature does not mean humourless — it means respecting scenes, other players and the
-                        fact that sometimes losing creates better roleplay than winning.
-                    </p>
-                </div>
-
-                <div class="v4-info-cards">
-                    <article class="v4-info-card">
-                        <span class="v4-info-icon">01</span>
-                        <h3>Quality-First Roleplay</h3>
-                        <p>Clear standards, believable character choices, serious scenes and an active staff team supporting the community.</p>
-                    </article>
-                    <article class="v4-info-card">
-                        <span class="v4-info-icon">02</span>
-                        <h3>A Thriving Community</h3>
-                        <p>Meet people through businesses, public services, events, Discord and the everyday life of the city.</p>
-                    </article>
-                    <article class="v4-info-card">
-                        <span class="v4-info-icon">03</span>
-                        <h3>Long-Term Stories</h3>
-                        <p>Build a reputation, career, business, relationship or criminal network and give your character somewhere to go.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="v4-section">
-            <div class="v4-shell">
-                <div class="v4-discord-panel">
-                    <div class="v4-discord-copy">
-                        <span class="v4-eyebrow">JOIN OUR COMMUNITY</span>
-                        <h2>Everything starts in Discord.</h2>
-                        <p>
-                            Meet the community, follow announcements, get support, find recruitment and take the next step
-                            towards your first proper story in The District.
-                        </p>
-                        <div class="v4-hero-actions">
-                            <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer" class="btn primary">Join Our Discord <span>→</span></a>
-                            <a href="pages/community.html" class="btn secondary">See Community</a>
-                        </div>
-                    </div>
-
-                    <div class="v4-discord-stats">
-                        <article class="v4-stat-card"><strong>16+</strong><span>Community Age</span></article>
-                        <article class="v4-stat-card"><strong>UK</strong><span>British Roleplay</span></article>
-                        <article class="v4-stat-card"><strong>24/7</strong><span>Community Access</span></article>
-                        <article class="v4-stat-card"><strong>LIVE</strong><span>Ongoing Development</span></article>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="v4-section">
-            <div class="v4-shell">
-                <div class="v4-wiki-panel">
-                    <div class="v4-wiki-copy">
-                        <span class="v4-eyebrow">KNOWLEDGE BUILDS BETTER ROLEPLAY</span>
-                        <h2>The District Wiki</h2>
-                        <p>
-                            Everything you need to get started and keep moving: joining, City Hall, licences, PDM, businesses,
-                            public services, common roleplay terms, support routes and where things are in the city.
-                        </p>
-                        <a href="pages/wiki.html" class="btn primary">Visit The Wiki <span>→</span></a>
-                    </div>
-
-                    <div class="v4-wiki-links">
-                        <a href="pages/wiki.html#wiki-join"><span>How to join The District</span><b>→</b></a>
-                        <a href="pages/wiki.html#wiki-locations"><span>Where things are</span><b>→</b></a>
-                        <a href="pages/wiki.html#wiki-driving"><span>Driving licence guide</span><b>→</b></a>
-                        <a href="pages/wiki.html#wiki-rp-terms"><span>Roleplay terminology</span><b>→</b></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="v4-section">
-            <div class="v4-shell">
-                <div class="v4-section-head">
+        <section class="hub-section">
+            <div class="hub-shell">
+                <div class="hub-section-head">
                     <div>
-                        <span class="v4-eyebrow">UPCOMING EVENTS</span>
-                        <h2>What's coming up.</h2>
+                        <span class="hub-kicker">INSIDE THE DISTRICT</span>
+                        <h2 class="hub-title">More than logging on.</h2>
                     </div>
-                    <p>
-                        Release is only the start. The opening month is built around giving players reasons to meet,
-                        recruit, compete, explore and get involved with different parts of the city.
-                    </p>
+                    <p>The website is now centred on the community itself: what people can do, who they can meet and what is happening next.</p>
                 </div>
 
-                <div class="v4-events-grid">
-                    <article class="v4-event-card" style="--event-image:var(--v4-hero-image)">
-                        <div class="v4-event-date"><strong>18</strong><span>SEP</span></div>
-                        <small>Major Event</small>
-                        <h3>Server Release</h3>
-                        <p>The District opens. Be there from day one.</p>
+                <div class="hub-feature-grid">
+                    <a href="pages/community.html" class="hub-feature large" style="--feature-image:var(--hub-city-image)" data-reveal>
+                        <span class="hub-feature-tag">COMMUNITY</span>
+                        <h3>A city built around interaction.</h3>
+                        <p>Events, businesses, public services, civilian life and the stories between them.</p>
+                    </a>
+                    <a href="pages/creators.html" class="hub-feature" style="--feature-image:var(--hub-car-image)" data-reveal>
+                        <span class="hub-feature-tag">CREATORS</span>
+                        <h3>Watch the city.</h3>
+                        <p>See The District from the community's point of view.</p>
+                    </a>
+                    <a href="rules.html" class="hub-feature" data-reveal>
+                        <span class="hub-feature-tag">RULES</span>
+                        <h3>Keep RP fair.</h3>
+                        <p>Simple standards that protect everyone's scenes.</p>
+                    </a>
+                    <a href="pages/about.html" class="hub-feature" data-reveal>
+                        <span class="hub-feature-tag">ABOUT</span>
+                        <h3>Why The District?</h3>
+                        <p>The ideas behind the server and where the community is going.</p>
+                    </a>
+                    <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer" class="hub-feature" data-reveal>
+                        <span class="hub-feature-tag">DISCORD</span>
+                        <h3>Meet everyone.</h3>
+                        <p>Announcements, support, conversations and everything between sessions.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="hub-section">
+            <div class="hub-shell">
+                <div class="hub-section-head">
+                    <div>
+                        <span class="hub-kicker">UP NEXT</span>
+                        <h2 class="hub-title">Community calendar.</h2>
+                    </div>
+                    <p>Different reasons to get into the city, meet players and try parts of the server you might not normally touch.</p>
+                </div>
+                <div class="hub-event-grid">
+                    <article class="hub-event" data-reveal>
+                        <div class="hub-event-date"><strong>23</strong><span>SEP</span></div>
+                        <small>Recruitment</small><h3>Business Recruitment</h3>
+                        <p>Meet business owners and find your next role in the city.</p>
                     </article>
-                    <article class="v4-event-card" style="--event-image:var(--v4-car-image)">
-                        <div class="v4-event-date"><strong>20</strong><span>SEP</span></div>
-                        <small>Community Event</small>
-                        <h3>Race Night</h3>
-                        <p>Cars, competition and a reason for the city to gather.</p>
+                    <article class="hub-event" data-reveal>
+                        <div class="hub-event-date"><strong>26</strong><span>SEP</span></div>
+                        <small>TDPS Event</small><h3>Police Ride-Along</h3>
+                        <p>See frontline policing and spend an evening with TDPS.</p>
                     </article>
-                    <article class="v4-event-card" style="--event-image:var(--v4-business-image)">
-                        <div class="v4-event-date"><strong>23</strong><span>SEP</span></div>
-                        <small>Recruitment</small>
-                        <h3>Business Recruitment</h3>
-                        <p>Meet owners, find work and build your next opportunity.</p>
+                    <article class="hub-event" data-reveal>
+                        <div class="hub-event-date"><strong>30</strong><span>SEP</span></div>
+                        <small>City Event</small><h3>Treasure Hunt</h3>
+                        <p>Follow clues across Los Santos and hunt down the prize.</p>
                     </article>
-                    <article class="v4-event-card" style="--event-image:var(--v4-police-image)">
-                        <div class="v4-event-date"><strong>26</strong><span>SEP</span></div>
-                        <small>TDPS Event</small>
-                        <h3>Police Ride-Along Night</h3>
-                        <p>Experience frontline policing and see how TDPS operates.</p>
+                    <article class="hub-event" data-reveal>
+                        <div class="hub-event-date"><strong>OCT</strong><span>SOON</span></div>
+                        <small>Community</small><h3>More to come</h3>
+                        <p>New events and activities will continue throughout the month.</p>
                     </article>
-                    <article class="v4-event-card" style="--event-image:var(--v4-street-image)">
-                        <div class="v4-event-date"><strong>30</strong><span>SEP</span></div>
-                        <small>City Event</small>
-                        <h3>Treasure Hunt</h3>
-                        <p>Clues, locations and rewards hidden across Los Santos.</p>
+                    <article class="hub-event" data-reveal>
+                        <div class="hub-event-date"><strong>24/7</strong><span>LIVE</span></div>
+                        <small>Every day</small><h3>Your own stories</h3>
+                        <p>The best events are often the ones the community creates itself.</p>
                     </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="hub-section">
+            <div class="hub-shell">
+                <div class="hub-join-panel" data-reveal>
+                    <div>
+                        <span class="hub-kicker">THE COMMUNITY STARTS HERE</span>
+                        <h2>Come and be part of it.</h2>
+                        <p>Join the Discord, meet the community and get involved. No account portal, no application dashboard — just The District.</p>
+                    </div>
+                    <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer" class="hub-button primary">Join Discord <span>↗</span></a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="v4-footer">
-        <div class="v4-shell">
-            <div class="v4-footer-main">
-                <div class="v4-footer-brand">
-                    <img src="assets/images/logo.png" alt="The District">
-                    <div><strong>THE DISTRICT</strong><span>LOS SANTOS ROLEPLAY</span></div>
-                </div>
-
-                <div class="v4-footer-links">
-                    <a href="index.html">Home</a>
-                    <a href="pages/wiki.html">Wiki</a>
-                    <a href="pages/community.html">Community</a>
-                    <a href="pages/applications.html">Applications</a>
-                    <a href="pages/creators.html">Creators</a>
-                    <a href="rules.html">Rules</a>
-                    <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer">Discord</a>
-                </div>
-
-                <div class="v4-footer-note">MORE THAN A SERVER.<br>A COMMUNITY.</div>
+    <footer class="hub-footer">
+    <div class="hub-shell">
+        <div class="hub-footer-main">
+            <div class="hub-footer-brand">
+                <img src="assets/images/logo.png" alt="The District">
+                <div><strong>THE DISTRICT</strong><span>LOS SANTOS COMMUNITY</span></div>
             </div>
-
-            <div class="v4-footer-bottom">
-                <span>© 2026 The District. All rights reserved.</span>
-                <span>16+ British FiveM Roleplay • Los Santos</span>
+            <div class="hub-footer-links">
+                <a href="index.html">Home</a>
+                <a href="pages/about.html">About</a>
+                <a href="pages/community.html">Community</a>
+                <a href="rules.html">Rules</a>
+                <a href="pages/creators.html">Creators</a>
+                <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer">Discord</a>
             </div>
         </div>
-    </footer>
-
-    <script src="js/auth.js"></script>
+        <div class="hub-footer-bottom">
+            <span>© 2026 The District. All rights reserved.</span>
+            <span>16+ British FiveM Roleplay • Los Santos</span>
+        </div>
+    </div>
+</footer>
     <script src="js/components.js"></script>
-    <script src="js/district-v4-home.js"></script>
+    <script src="js/community-hub.js"></script>
 </body>
 </html>
