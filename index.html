@@ -3,193 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>The District | Community</title>
-    <meta name="description" content="The District is a British FiveM roleplay community built around people, stories, events and a living Los Santos.">
+    <title>Sign In | The District</title>
+    <meta name="description" content="Sign in with Discord to access The District member hub.">
     <meta name="theme-color" content="#07090d">
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="css/community-hub.css">
 </head>
-<body>
-    <div id="navbar"></div>
+<body class="district-login-page">
+    <main class="district-login-shell">
+        <section class="district-login-panel">
+            <div class="district-login-brand">
+                <img src="assets/images/logo.png" alt="The District">
+                <span>THE DISTRICT</span>
+            </div>
 
-    <main>
-        <section class="hub-hero">
-            <div class="hub-shell">
-                <div class="hub-hero-grid">
-                    <div class="hub-hero-copy">
-                        <span class="hub-eyebrow">LOS SANTOS • COMMUNITY DRIVEN</span>
-                        <h1>Your city.<span>Your people.</span></h1>
-                        <p>
-                            The District is a 16+ British FiveM community built around the people inside it.
-                            Meet characters, build stories, join events, create content and make Los Santos feel alive.
-                        </p>
-                        <div class="hub-hero-actions">
-                            <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer" class="hub-button primary">Join the Community <span>↗</span></a>
-                            <a href="pages/community.html" class="hub-button">See what's happening <span>→</span></a>
-                        </div>
-                    </div>
+            <div class="district-login-copy">
+                <span class="hub-eyebrow">MEMBERS ONLY</span>
+                <h1>Your District.<span>All in one place.</span></h1>
+                <p>Sign in with Discord to access server information, your characters, vehicles, money, community leaderboards, rules and creators.</p>
+            </div>
 
-                    <aside class="hub-pulse-card" data-server-status>
-                        <div class="hub-pulse-top">
-                            <span class="hub-status" data-server-status><i></i><span id="hubServerLabel">CHECKING</span></span>
-                            <small>COMMUNITY PULSE</small>
-                        </div>
-                        <div class="hub-player-number">
-                            <strong><span id="hubPlayers">--</span><span> / <span id="hubMaxPlayers">230</span></span></strong>
-                            <small>Players currently in the city</small>
-                        </div>
-                        <div class="hub-capacity"><span id="hubCapacityFill"></span></div>
-                        <div class="hub-pulse-grid">
-                            <div><strong>16+</strong><span>Community</span></div>
-                            <div><strong>UK</strong><span>British RP</span></div>
-                            <div><strong>LIVE</strong><span>Ongoing updates</span></div>
-                            <div><strong>24/7</strong><span>Discord access</span></div>
-                        </div>
-                        <a href="fivem://connect/185.223.29.112:30120" class="hub-button primary">Connect to Server <span>→</span></a>
-                    </aside>
-                </div>
+            <button type="button" class="district-discord-login" id="districtDiscordLogin">
+                <span class="district-discord-mark">D</span>
+                <span><strong>Continue with Discord</strong><small>Secure member sign-in</small></span>
+                <b>→</b>
+            </button>
 
-                <div class="hub-dashboard-strip">
-                    <a href="pages/about.html" class="hub-dashboard-tile">
-                        <small>01 / DISCOVER</small>
-                        <strong>About The District</strong>
-                        <span>What we are, what we value and the kind of community we're building.</span>
-                    </a>
-                    <a href="pages/community.html" class="hub-dashboard-tile">
-                        <small>02 / COMMUNITY</small>
-                        <strong>What's happening</strong>
-                        <span>Events, city activity and the quickest routes into the community.</span>
-                    </a>
-                    <a href="rules.html" class="hub-dashboard-tile">
-                        <small>03 / GUIDELINES</small>
-                        <strong>Know the rules</strong>
-                        <span>A clean, searchable rulebook without the clutter.</span>
-                    </a>
-                    <a href="pages/creators.html" class="hub-dashboard-tile">
-                        <small>04 / WATCH</small>
-                        <strong>District Creators</strong>
-                        <span>Find the people streaming and sharing stories from the city.</span>
-                    </a>
-                </div>
+            <div class="district-login-note">
+                <i></i>
+                <span>Your Discord account is used to identify your District profile.</span>
             </div>
         </section>
 
-        <section class="hub-section">
-            <div class="hub-shell">
-                <div class="hub-section-head">
-                    <div>
-                        <span class="hub-kicker">INSIDE THE DISTRICT</span>
-                        <h2 class="hub-title">More than logging on.</h2>
-                    </div>
-                    <p>The website is now centred on the community itself: what people can do, who they can meet and what is happening next.</p>
-                </div>
-
-                <div class="hub-feature-grid">
-                    <a href="pages/community.html" class="hub-feature large" style="--feature-image:var(--hub-city-image)" data-reveal>
-                        <span class="hub-feature-tag">COMMUNITY</span>
-                        <h3>A city built around interaction.</h3>
-                        <p>Events, businesses, public services, civilian life and the stories between them.</p>
-                    </a>
-                    <a href="pages/creators.html" class="hub-feature" style="--feature-image:var(--hub-car-image)" data-reveal>
-                        <span class="hub-feature-tag">CREATORS</span>
-                        <h3>Watch the city.</h3>
-                        <p>See The District from the community's point of view.</p>
-                    </a>
-                    <a href="rules.html" class="hub-feature" data-reveal>
-                        <span class="hub-feature-tag">RULES</span>
-                        <h3>Keep RP fair.</h3>
-                        <p>Simple standards that protect everyone's scenes.</p>
-                    </a>
-                    <a href="pages/about.html" class="hub-feature" data-reveal>
-                        <span class="hub-feature-tag">ABOUT</span>
-                        <h3>Why The District?</h3>
-                        <p>The ideas behind the server and where the community is going.</p>
-                    </a>
-                    <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer" class="hub-feature" data-reveal>
-                        <span class="hub-feature-tag">DISCORD</span>
-                        <h3>Meet everyone.</h3>
-                        <p>Announcements, support, conversations and everything between sessions.</p>
-                    </a>
-                </div>
+        <aside class="district-login-visual">
+            <div class="district-login-visual-copy">
+                <span>THE DISTRICT MEMBER HUB</span>
+                <strong>Characters. Community. Competition.</strong>
+                <p>One place for everything connected to your life in Los Santos.</p>
             </div>
-        </section>
-
-        <section class="hub-section">
-            <div class="hub-shell">
-                <div class="hub-section-head">
-                    <div>
-                        <span class="hub-kicker">UP NEXT</span>
-                        <h2 class="hub-title">Community calendar.</h2>
-                    </div>
-                    <p>Different reasons to get into the city, meet players and try parts of the server you might not normally touch.</p>
-                </div>
-                <div class="hub-event-grid">
-                    <article class="hub-event" data-reveal>
-                        <div class="hub-event-date"><strong>23</strong><span>SEP</span></div>
-                        <small>Recruitment</small><h3>Business Recruitment</h3>
-                        <p>Meet business owners and find your next role in the city.</p>
-                    </article>
-                    <article class="hub-event" data-reveal>
-                        <div class="hub-event-date"><strong>26</strong><span>SEP</span></div>
-                        <small>TDPS Event</small><h3>Police Ride-Along</h3>
-                        <p>See frontline policing and spend an evening with TDPS.</p>
-                    </article>
-                    <article class="hub-event" data-reveal>
-                        <div class="hub-event-date"><strong>30</strong><span>SEP</span></div>
-                        <small>City Event</small><h3>Treasure Hunt</h3>
-                        <p>Follow clues across Los Santos and hunt down the prize.</p>
-                    </article>
-                    <article class="hub-event" data-reveal>
-                        <div class="hub-event-date"><strong>OCT</strong><span>SOON</span></div>
-                        <small>Community</small><h3>More to come</h3>
-                        <p>New events and activities will continue throughout the month.</p>
-                    </article>
-                    <article class="hub-event" data-reveal>
-                        <div class="hub-event-date"><strong>24/7</strong><span>LIVE</span></div>
-                        <small>Every day</small><h3>Your own stories</h3>
-                        <p>The best events are often the ones the community creates itself.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="hub-section">
-            <div class="hub-shell">
-                <div class="hub-join-panel" data-reveal>
-                    <div>
-                        <span class="hub-kicker">THE COMMUNITY STARTS HERE</span>
-                        <h2>Come and be part of it.</h2>
-                        <p>Join the Discord, meet the community and get involved. No account portal, no application dashboard — just The District.</p>
-                    </div>
-                    <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer" class="hub-button primary">Join Discord <span>↗</span></a>
-                </div>
-            </div>
-        </section>
+        </aside>
     </main>
 
-    <footer class="hub-footer">
-    <div class="hub-shell">
-        <div class="hub-footer-main">
-            <div class="hub-footer-brand">
-                <img src="assets/images/logo.png" alt="The District">
-                <div><strong>THE DISTRICT</strong><span>LOS SANTOS COMMUNITY</span></div>
-            </div>
-            <div class="hub-footer-links">
-                <a href="index.html">Home</a>
-                <a href="pages/about.html">About</a>
-                <a href="pages/community.html">Community</a>
-                <a href="rules.html">Rules</a>
-                <a href="pages/creators.html">Creators</a>
-                <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer">Discord</a>
-            </div>
-        </div>
-        <div class="hub-footer-bottom">
-            <span>© 2026 The District. All rights reserved.</span>
-            <span>16+ British FiveM Roleplay • Los Santos</span>
-        </div>
-    </div>
-</footer>
-    <script src="js/components.js"></script>
-    <script src="js/community-hub.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        (async () => {
+            const button = document.getElementById("districtDiscordLogin");
+            if (button) button.addEventListener("click", () => DistrictAuth.login());
+
+            const token = DistrictAuth.getToken();
+            if (!token) return;
+
+            const user = await DistrictAuth.getCurrentUser();
+            if (!user) return;
+
+            const returnPath = sessionStorage.getItem("district_return_path");
+            sessionStorage.removeItem("district_return_path");
+            window.location.replace(returnPath || "/pages/about.html");
+        })();
+    </script>
 </body>
 </html>
