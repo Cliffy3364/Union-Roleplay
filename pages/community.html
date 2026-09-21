@@ -1,73 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="member-gated">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Community | The District</title>
-    <meta name="description" content="See what's happening across The District community, upcoming events and ways to get involved.">
+    <meta name="description" content="Your District characters, vehicles, money and community leaderboards.">
     <meta name="theme-color" content="#07090d">
     <link rel="icon" href="../favicon.ico"><link rel="stylesheet" href="../css/community-hub.css">
 </head>
 <body>
 <div id="navbar"></div>
 <main>
-    <section class="hub-page-hero">
-        <div class="hub-shell hub-page-hero-grid">
-            <div>
-                <span class="hub-eyebrow">THE DISTRICT COMMUNITY</span>
-                <h1>This is where<span>the city lives.</span></h1>
-                <p>Events, creators, conversations and the people behind the characters. This page is the community dashboard — a quick look at what is happening and where to jump in.</p>
-            </div>
-            <div class="hub-hero-statbox">
-                <div><strong id="communityPlayers">--</strong><span>Players in city</span></div>
-                <div><strong id="communityMaxPlayers">230</strong><span>Server capacity</span></div>
-                <div><strong>3</strong><span>Upcoming events</span></div>
-                <div><strong>24/7</strong><span>Discord community</span></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="hub-section">
+    <section class="member-dashboard-head">
         <div class="hub-shell">
-            <div class="hub-section-head">
-                <div><span class="hub-kicker">COMMUNITY PULSE</span><h2 class="hub-title">Jump straight in.</h2></div>
-                <p>No portal to learn. These are the main places members actually need.</p>
-            </div>
-            <div class="community-pulse-grid">
-                <article class="community-status-card" data-server-status data-reveal>
-                    <span class="hub-status" data-server-status><i></i> LIVE SERVER</span>
-                    <div class="big"><div><strong id="hubPlayers">--</strong><small>PLAYERS ONLINE</small></div><a href="fivem://connect/185.223.29.112:30120" class="hub-button primary">Connect <span>→</span></a></div>
-                </article>
-                <div class="community-links-card" data-reveal>
-                    <a class="community-quick-link" href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer"><span>Join the Discord</span><span>↗</span></a>
-                    <a class="community-quick-link" href="../rules.html"><span>Read the rules</span><span>→</span></a>
-                    <a class="community-quick-link" href="creators.html"><span>Watch District creators</span><span>→</span></a>
-                    <a class="community-quick-link" href="about.html"><span>Learn about the server</span><span>→</span></a>
+            <div class="member-welcome">
+                <div>
+                    <span class="hub-eyebrow">YOUR DISTRICT</span>
+                    <h1>Your characters.<span>Your progress.</span></h1>
+                    <p id="memberDashboardIntro">Loading your connected District profile...</p>
+                </div>
+                <div class="member-summary-chips">
+                    <div><strong id="memberCharacterCount">--</strong><span>Characters</span></div>
+                    <div><strong id="memberVehicleCount">--</strong><span>Vehicles</span></div>
+                    <div><strong id="memberTotalMoney">--</strong><span>Total Money</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="hub-section">
+    <section class="member-character-section">
         <div class="hub-shell">
             <div class="hub-section-head">
-                <div><span class="hub-kicker">UPCOMING EVENTS</span><h2 class="hub-title">What's next.</h2></div>
-                <p>The opening weeks are built around giving everyone a reason to meet people and try new parts of the city.</p>
+                <div><span class="hub-kicker">YOUR CHARACTERS</span><h2 class="hub-title">Life in Los Santos.</h2></div>
+                <p>Money, job and vehicles are grouped by character so you can see your city life at a glance.</p>
             </div>
-            <div class="hub-event-grid">
-                <article class="hub-event" data-reveal><div class="hub-event-date"><strong>23</strong><span>SEP</span></div><small>Recruitment</small><h3>Business Recruitment</h3><p>Meet owners, discover businesses and find work in character.</p></article>
-                <article class="hub-event" data-reveal><div class="hub-event-date"><strong>26</strong><span>SEP</span></div><small>TDPS</small><h3>Police Ride-Along</h3><p>Spend time with frontline officers and see the service from inside.</p></article>
-                <article class="hub-event" data-reveal><div class="hub-event-date"><strong>30</strong><span>SEP</span></div><small>City Event</small><h3>Treasure Hunt</h3><p>Clues, locations and rewards hidden around Los Santos.</p></article>
+            <div class="member-character-list" id="memberCharacterList">
+                <div class="member-data-loading"><i></i><strong>Loading character data</strong><span>Checking your linked District profile...</span></div>
             </div>
         </div>
     </section>
 
-    <section class="hub-section">
-        <div class="hub-shell hub-content-grid">
-            <div class="hub-sticky-copy"><span class="hub-kicker">GET INVOLVED</span><h2>There is no single way to belong here.</h2><p>You do not need a badge, staff role or application to be part of the community. Showing up and creating good RP is enough.</p></div>
-            <div class="hub-stack">
-                <article class="hub-info-card" data-reveal><span class="number">01 / PLAY</span><h3>Build a character.</h3><p>Start small, meet people and let your character develop naturally through the city.</p></article>
-                <article class="hub-info-card" data-reveal><span class="number">02 / EVENTS</span><h3>Turn up to community nights.</h3><p>Race nights, recruitment events, ride-alongs and seasonal activities create easy ways to meet new players.</p></article>
-                <article class="hub-info-card" data-reveal><span class="number">03 / CREATE</span><h3>Share what happens.</h3><p>Stream, clip, screenshot or tell people about the stories you are creating. The Creators page puts community content in one place.</p></article>
+    <section class="hub-section member-leaderboard-section">
+        <div class="hub-shell">
+            <div class="hub-section-head">
+                <div><span class="hub-kicker">COMMUNITY LEADERBOARDS</span><h2 class="hub-title">Who's leading the city?</h2></div>
+                <p>Four different measures of progress and activity across The District.</p>
+            </div>
+
+            <div class="member-leaderboard-grid">
+                <article class="member-leaderboard-card" data-reveal>
+                    <div class="member-board-head"><div><span>WEALTH</span><h3>Most Money</h3></div><b>£</b></div>
+                    <div class="member-board-list" id="moneyLeaderboard"><div class="leaderboard-empty">Loading leaderboard...</div></div>
+                </article>
+                <article class="member-leaderboard-card" data-reveal>
+                    <div class="member-board-head"><div><span>GARAGE VALUE</span><h3>Most Expensive Car Collection</h3></div><b>CAR</b></div>
+                    <div class="member-board-list" id="vehicleLeaderboard"><div class="leaderboard-empty">Loading leaderboard...</div></div>
+                </article>
+                <article class="member-leaderboard-card" data-reveal>
+                    <div class="member-board-head"><div><span>EMERGENCY SERVICES</span><h3>Most Active Representative</h3></div><b>ES</b></div>
+                    <div class="member-board-list" id="emergencyLeaderboard"><div class="leaderboard-empty">Loading leaderboard...</div></div>
+                </article>
+                <article class="member-leaderboard-card" data-reveal>
+                    <div class="member-board-head"><div><span>PLAYTIME</span><h3>Longest Gameplay</h3></div><b>HR</b></div>
+                    <div class="member-board-list" id="playtimeLeaderboard"><div class="leaderboard-empty">Loading leaderboard...</div></div>
+                </article>
             </div>
         </div>
     </section>
@@ -75,25 +70,16 @@
 <footer class="hub-footer">
     <div class="hub-shell">
         <div class="hub-footer-main">
-            <div class="hub-footer-brand">
-                <img src="../assets/images/logo.png" alt="The District">
-                <div><strong>THE DISTRICT</strong><span>LOS SANTOS COMMUNITY</span></div>
-            </div>
-            <div class="hub-footer-links">
-                <a href="../index.html">Home</a>
-                <a href="../pages/about.html">About</a>
-                <a href="../pages/community.html">Community</a>
-                <a href="../rules.html">Rules</a>
-                <a href="../pages/creators.html">Creators</a>
-                <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer">Discord</a>
-            </div>
+            <div class="hub-footer-brand"><img src="../assets/images/logo.png" alt="The District"><div><strong>THE DISTRICT</strong><span>MEMBER HUB</span></div></div>
+            <div class="hub-footer-links"><a href="about.html">About</a><a href="community.html">Community</a><a href="../rules.html">Rules</a><a href="creators.html">Creators</a><a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer">Discord</a></div>
         </div>
-        <div class="hub-footer-bottom">
-            <span>© 2026 The District. All rights reserved.</span>
-            <span>16+ British FiveM Roleplay • Los Santos</span>
-        </div>
+        <div class="hub-footer-bottom"><span>© 2026 The District. All rights reserved.</span><span>16+ British FiveM Roleplay • Los Santos</span></div>
     </div>
 </footer>
-<script src="../js/components.js"></script><script src="../js/community-hub.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/member-gate.js"></script>
+<script src="../js/components.js"></script>
+<script src="../js/community-hub.js"></script>
+<script src="../js/member-community.js"></script>
 </body>
 </html>
