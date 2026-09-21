@@ -1,14 +1,10 @@
 <div class="hub-nav-inner">
-    <a href="/index.html" class="hub-brand" aria-label="The District home">
+    <a href="/pages/about.html" class="hub-brand" aria-label="The District about">
         <img src="/assets/images/logo.png" alt="" class="hub-brand-logo">
-        <span>
-            <strong>THE DISTRICT</strong>
-            <small>COMMUNITY</small>
-        </span>
+        <span><strong>THE DISTRICT</strong><small>MEMBER HUB</small></span>
     </a>
 
     <nav class="hub-nav-links" id="hubNavLinks" aria-label="Main navigation">
-        <a href="/index.html" class="hub-nav-link">Home</a>
         <a href="/pages/about.html" class="hub-nav-link">About</a>
         <a href="/pages/community.html" class="hub-nav-link">Community</a>
         <a href="/rules.html" class="hub-nav-link">Rules</a>
@@ -16,11 +12,12 @@
     </nav>
 
     <div class="hub-nav-actions">
-        <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer" class="hub-discord-button">
-            Join Discord <span>↗</span>
-        </a>
-        <button class="hub-nav-toggle" id="hubNavToggle" type="button" aria-label="Open navigation" aria-expanded="false">
-            <span></span><span></span>
-        </button>
+        <a href="https://discord.gg/qyUKU9HtyN" target="_blank" rel="noopener noreferrer" class="hub-discord-mini">Discord ↗</a>
+        <div class="hub-member-chip" id="hubMemberChip">
+            <span class="hub-member-avatar" id="hubMemberAvatar">D</span>
+            <span class="hub-member-copy"><strong id="hubMemberName">District Member</strong><small>CONNECTED</small></span>
+        </div>
+        <button type="button" class="hub-logout-button" id="hubLogoutButton">Logout</button>
+        <button class="hub-nav-toggle" id="hubNavToggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
     </div>
 </div>
