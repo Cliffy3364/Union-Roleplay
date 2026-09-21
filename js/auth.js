@@ -1,88 +1,43 @@
-const API_URL =
-    "https://the-district-api.danielclifford2808.workers.dev";
-
+const API_URL = "https://the-district-api.danielclifford2808.workers.dev";
 
 async function getCurrentUser() {
-
-    const token =
-        localStorage.getItem(
-            "district_session"
-        );
-
-    if (!token) {
-        return null;
-    }
+    const token = localStorage.getItem("district_session");
+    if (!token) return null;
 
     try {
+        const response = await fetch(`${API_URL}/api/auth/me`, {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` },
+            cache: "no-store"
+        });
+        const data = await response.json();
 
-        const response =
-            await fetch(
-                `${API_URL}/api/auth/me`,
-                {
-                    method: "GET",
-
-                    headers: {
-                        "Authorization":
-                            `Bearer ${token}`
-                    }
-                }
-            );
-
-        const data =
-            await response.json();
-
-
-        if (
-            !response.ok ||
-            !data.success ||
-            !data.user
-        ) {
-
-            localStorage.removeItem(
-                "district_session"
-            );
-
+        if (!response.ok || !data.success || !data.user) {
+            localStorage.removeItem("district_session");
             return null;
         }
 
-
-        const user =
-            data.user;
-
-
-        user.is_staff =
-            data.is_staff === true;
-
-
+        const user = data.user;
+        user.is_staff = data.is_staff === true;
         return user;
-
-
     } catch (error) {
-
-        console.error(
-            "Failed to load current user:",
-            error
-        );
-
+        console.error("Failed to load current user:", error);
         return null;
     }
 }
 
-
-function logout() {
-
-    localStorage.removeItem(
-        "district_session"
-    );
-
-    window.location.href =
-        "/index.html";
+function getToken() {
+    return localStorage.getItem("district_session") || "";
 }
 
+function login() {
+    window.location.href = `${API_URL}/api/auth/discord`;
+}
 
-window.DistrictAuth = {
+function logout() {
+    localStorage.removeItem("district_session");
+    sessionStorage.removeItem("district_return_path");
+    window.location.href = "/index.html";
+}
 
-    getCurrentUser,
-
-    logout
-};
+window.DistrictAuth = { API_URL, getCurrentUser, getToken, login, logout };
