@@ -34,10 +34,20 @@ function login() {
     window.location.href = `${API_URL}/api/auth/discord`;
 }
 
+function persistSessionCookie(token) {
+    if (!token) return;
+    document.cookie = `district_session=${encodeURIComponent(token)}; Path=/; Max-Age=604800; Secure; SameSite=Lax`;
+}
+
+function clearSessionCookie() {
+    document.cookie = "district_session=; Path=/; Max-Age=0; Secure; SameSite=Lax";
+}
+
 function logout() {
     localStorage.removeItem("district_session");
     sessionStorage.removeItem("district_return_path");
+    clearSessionCookie();
     window.location.href = "/index.html";
 }
 
-window.DistrictAuth = { API_URL, getCurrentUser, getToken, login, logout };
+window.DistrictAuth = { API_URL, getCurrentUser, getToken, login, logout, persistSessionCookie, clearSessionCookie };
